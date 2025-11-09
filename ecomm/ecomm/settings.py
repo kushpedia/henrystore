@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     # custom apps
     'core',
     'userauths',
+	# payments integrations
+	'paypal.standard.ipn',
 
 	
 ]
@@ -126,6 +128,10 @@ USE_I18N = True
 USE_TZ = True
 
 
+LOGIN_URL = "userauths:sign-in"
+
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
@@ -145,3 +151,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'userauths.User'
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
+PAYPAL_RECEIVER_EMAIL = 'kushpedia@business.example.com'
+PAYPAL_TEST = True

@@ -211,9 +211,10 @@ class CartOrder(models.Model):
     
     class Meta:
         verbose_name_plural = "Cart Order"
-        
+    
 class CartOrderItems(models.Model):
     order = models.ForeignKey(CartOrder, on_delete=models.CASCADE)
+    invoice_no = models.CharField(max_length=200)
     product_status = models.CharField(max_length=200)
     item = models.CharField(max_length=200)
     image = models.CharField(max_length=200)
@@ -226,7 +227,9 @@ class CartOrderItems(models.Model):
         verbose_name_plural = "Cart Order Item"
         
     def order_img(self):
-        return mark_safe('<img src="/media/%s" width="50" height="50" />' % (self.image))
+        return mark_safe('<img src="%s" width="50" height="50" />' % (self.image))
+        
+    
     
 
 ############################################## Product Revew, wishlists, Address ##################################

@@ -107,6 +107,7 @@ $(document).ready(function () {
 
         let quantity = $(".product-quantity-" + index).val()
         let product_title = $(".product-title-" + index).val()
+        let product_sku = $(".product-sku-" + index).val()
 
         let product_id = $(".product-id-" + index).val()
         let product_price = $(".current-product-price-" + index).text()
@@ -133,6 +134,7 @@ $(document).ready(function () {
                 'qty': quantity,
                 'title': product_title,
                 'price': product_price,
+                'sku':product_sku
             },
             dataType: 'json',
             beforeSend: function () {

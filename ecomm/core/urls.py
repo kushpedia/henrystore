@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from . import views
 app_name = 'core'
 urlpatterns = [
@@ -29,5 +29,9 @@ urlpatterns = [
 	path("update-cart/", views.update_cart, name="update-cart"),
 	# checkout
 	path("checkout/", views.checkout, name="checkout"),
-	
+	# paypal urls
+	path('paypal/', include('paypal.standard.ipn.urls')),
+	# payment process urls
+	path("payment-completed/", views.payment_completed_view, name="payment-completed"),
+	path("payment-failed/", views.payment_failed_view, name="payment-failed"),
     ]

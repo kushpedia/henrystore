@@ -20,12 +20,12 @@ class VendorAdmin(admin.ModelAdmin):
 
 
 class CartOrderAdmin(admin.ModelAdmin):
-    list_editable = ['paid_status', 'product_status', 'sku']
+    list_editable = ['paid_status', 'product_status']
     list_display = ['user',  'price', 'paid_status', 'order_date','product_status', 'sku']
 
 
 class CartOrderItemsAdmin(admin.ModelAdmin):
-    list_display = ['order','item', 'image','qty', 'price', 'total']
+    list_display = ['order','item', 'order_img','qty', 'price', 'total']
 
 
 class ProductReviewAdmin(admin.ModelAdmin):
