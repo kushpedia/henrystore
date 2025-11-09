@@ -61,7 +61,7 @@
 										</div>
 										<div class="clearfix product-price-cover">
 											<div class="product-price primary-color float-left">
-												<span class="current-price text-brand" id="current-product-price">{{p.price}}</span>
+												<span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price }}</span>
 												<span>
 													<span class="save-price font-md color3 ml-15">{{p.get_precentage|floatformat:0}}% Off</span>
 												<span class="old-price font-md ml-15">{{p.old_price}}</span>
@@ -71,37 +71,21 @@
 										<div class="short-desc mb-30">
 											<p class="font-lg">{{p.description|truncatechars:150|safe}}</p>
 										</div>
-										<!-- <div class="attr-detail attr-size mb-30">
-											<strong class="mr-10">Size / Weight: </strong>
-											<ul class="list-filter size-filter font-small">
-												<li><a href="#">50g</a></li>
-												<li class="active"><a href="#">60g</a></li>
-												<li><a href="#">80g</a></li>
-												<li><a href="#">100g</a></li>
-												<li><a href="#">150g</a></li>
-											</ul>
-										</div> -->
+										
 										<div class="detail-extralink mb-50">
-											<!-- <div class="detail-qty border radius">
-												<a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-												<span class="qty-val">1</span>
-												<a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-											</div> -->
+											
 											<br>
                                                     <input type="number" value="1" name="" id="product-quantity" class="w-25 mb-10 product-quantity-{{ p.id }}">
                                                     <br>
 											<div class="product-extra-link2">
 
-												<!-- <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}">
+												<!-- <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.id }}"> -->
+                                                <input type="hidden" class="product-pid-{{ p.id }}" value="{{ p.pid }}">
                                                 <input type="hidden" class="product-image-{{ p.id }}" value="{{ p.image.url }}">
                                                 <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}">
-                                                <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}"> -->
+                                                <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}">
 
-
-												<input type="hidden" class="product-pid" value="{{ p.pid }}">
-                                                <input type="hidden" class="product-image" value="{{ p.image.url }}">
-                                                <input type="hidden" class="product-id" value="{{ p.id }}">
-                                                <input type="hidden" class="product-title" id="product-title" value="{{ p.title }}">
+												
 
 												<button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{ p.id }}" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
 												<a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
