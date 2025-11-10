@@ -34,4 +34,9 @@ urlpatterns = [
 	# payment process urls
 	path("payment-completed/", views.payment_completed_view, name="payment-completed"),
 	path("payment-failed/", views.payment_failed_view, name="payment-failed"),
+
+	# dashboard
+	path("dashboard/", views.customer_dashboard, name="dashboard"),
+	# order deatails
+	path("dashboard/order/<int:id>", views.order_detail, name="order-detail"),
     ]
