@@ -313,8 +313,12 @@ def checkout(request):
     # if 'cart_data_obj' in request.session:
     #     for p_id, item in request.session['cart_data_obj'].items():
     #         cart_total_amount += int(item['qty']) * float(item['price'])
-            
-    return render(request, "core/checkout.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount,'payment_button_form':payment_button_form})
+    
+    try:
+        active_address = Address.objects.filter(user=request.user, status=True).first()       
+    except:
+        messages.warning(request, "Only one active address allowed. Please set an address as default.")
+    return render(request, "core/checkout.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount,'payment_button_form':payment_button_form,'active_address':active_address})
     
 
     return render(request, "core/checkout.html")
@@ -335,10 +339,39 @@ def payment_failed_view(request):
 @login_required
 def customer_dashboard(request):
     orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
+    address = Address.objects.filter(user=request.user)
+    if request.method == "POST":
+        address_new = request.POST.get("address")
+        mobile = request.POST.get("mobile")
+
+        new_address = Address.objects.create(
+            user=request.user,
+            address=address_new,
+            mobile=mobile,
+        )
+        messages.success(request, "Address Added Successfully.")
+        return redirect("core:dashboard")
+
+
     context = {
         "orders": orders_list,
+        'addresses': address,
     }
     return render(request, 'core/dashboard.html', context)
+
+# update default address
+@login_required
+def make_address_default(request):
+    id = request.GET['id']
+    user = request.user
+
+
+    Address.objects.filter(user=user).update(status=False)
+    Address.objects.filter(id=id, user=user).update(status=True)
+    return JsonResponse({"boolean": True})
+
+
+
 
 def order_detail(request, id):
     order = CartOrder.objects.get(user=request.user, id=id)

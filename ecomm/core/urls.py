@@ -39,4 +39,7 @@ urlpatterns = [
 	path("dashboard/", views.customer_dashboard, name="dashboard"),
 	# order deatails
 	path("dashboard/order/<int:id>", views.order_detail, name="order-detail"),
+	# make-default-address
+    path("make-default-address/", views.make_address_default, name="make-default-address"),
+
     ]
