@@ -1,4 +1,4 @@
-console.log("working fine")
+// console.log("working fine")
 
 const monthNames = ["Jan", "Feb", "Mar", "April", "May", "June",
     "July", "Aug", "Sept", "Oct", "Nov", "Dec"
@@ -82,7 +82,7 @@ $(document).ready(function () {
                 return element.value
             })
         })
-        console.log("Filter Object is: ", filter_object);
+        // console.log("Filter Object is: ", filter_object);
         $.ajax({
             url: '/filter-products',
             data: filter_object,
@@ -91,7 +91,7 @@ $(document).ready(function () {
                 console.log("Trying to filter product...");
             },
             success: function (response) {
-                console.log(response.length);
+                // console.log(response.length);
                 console.log("Data filtred successfully...");
                 $(".totall-product").hide()
                 $("#filtered-product").html(response.data)
@@ -116,14 +116,14 @@ $(document).ready(function () {
         let product_image = $(".product-image-" + index).val()
 
 
-        console.log("Quantity:", quantity);
-        console.log("Title:", product_title);
-        console.log("Price:", product_price);
-        console.log("ID:", product_id);
-        console.log("PID:", product_pid);
-        console.log("Image:", product_image);
-        console.log("Index:", index);
-        console.log("Currrent Element:", this_val);
+        // console.log("Quantity:", quantity);
+        // console.log("Title:", product_title);
+        // console.log("Price:", product_price);
+        // console.log("ID:", product_id);
+        // console.log("PID:", product_pid);
+        // console.log("Image:", product_image);
+        // console.log("Index:", index);
+        // console.log("Currrent Element:", this_val);
 
         $.ajax({
             url: '/add-to-cart',
@@ -184,8 +184,8 @@ $(document).ready(function () {
         let this_val = $(this)
         let product_quantity = $(".product-qty-" + product_id).val()
 
-        console.log("PRoduct ID:", product_id);
-        console.log("PRoduct QTY:", product_quantity);
+        // console.log("PRoduct ID:", product_id);
+        // console.log("PRoduct QTY:", product_quantity);
 
         $.ajax({
             url: "/update-cart",
@@ -214,8 +214,8 @@ $(document).ready(function () {
         let id = $(this).attr("data-address-id")
         let this_val = $(this)
 
-        console.log("ID is:", id);
-        console.log("Element is:", this_val);
+        // console.log("ID is:", id);
+        // console.log("Element is:", this_val);
 
         $.ajax({
             url: "/make-default-address",
@@ -236,9 +236,65 @@ $(document).ready(function () {
                 }
             }
         })
+    });
+
+
+
+    // add to Wishlist Functionality
+    $(document).on("click", ".add-to-wishlist", function () {
+        let product_id = $(this).attr("data-product-item")
+        let this_val = $(this)
+
+
+        // console.log("PRoduct ID is", product_id);
+        $.ajax({
+            url: "/add-to-wishlist",
+            data: {
+                "id": product_id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                console.log("Adding to wishlist...")
+            },
+            success: function (response) {
+                // this_val.html("✓")
+                this_val.html("<i class='fas fa-heart text-danger'></i>")
+                if (response.bool === true) {
+                    console.log("Added to wishlist...");
+                }
+            }
+        })
+
+
+
+
+    });
+    // remove from Wishlist Functionality
+    $(document).on("click", ".delete-wishlist-product", function () {
+        let wishlist_id = $(this).attr("data-wishlist-product")
+        let this_val = $(this)
+
+        // console.log("wishlist id is:", wishlist_id);
+
+        $.ajax({
+            url: "/remove-from-wishlist",
+            data: {
+                "id": wishlist_id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                console.log("Deleting product from wishlist...");
+            },
+            success: function (response) {
+                $("#wishlist-list").html(response.data)
+                console.log("Deleted from wishlist...");
+            }
+        })
     })
 
 });
+
+
 
 
 

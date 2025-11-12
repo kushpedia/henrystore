@@ -42,4 +42,9 @@ urlpatterns = [
 	# make-default-address
     path("make-default-address/", views.make_address_default, name="make-default-address"),
 
+	# wishlist
+	path("wishlist/", views.wishlist_view, name="wishlist"),
+	path("add-to-wishlist/", views.add_to_wishlist, name="add-to-wishlist"),
+	path("remove-from-wishlist/", views.remove_wishlist, name="remove-from-wishlist"),
+
     ]

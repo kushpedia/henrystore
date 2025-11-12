@@ -12,6 +12,8 @@ from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from paypal.standard.forms import PayPalPaymentsForm
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
+
 
 def index(request):
 	# products = Product.objects.all().order_by('-id')
@@ -382,3 +384,59 @@ def order_detail(request, id):
         "order_items": order_items,
     }
     return render(request, 'core/order-detail.html', context)
+
+
+# wishlist view
+@login_required
+def wishlist_view(request):
+    wishlist = wishlist_model.objects.filter(user=request.user)
+    context = {
+        "w":wishlist
+    }
+    return render(request, "core/wishlist.html", context)
+
+
+
+    # add to wishlist
+@login_required
+def add_to_wishlist(request):
+    product_id = request.GET['id']
+    product = Product.objects.get(id=product_id)
+    # print("product id isssssssssssss:" + product_id)
+
+    context = {}
+
+    wishlist_count = wishlist_model.objects.filter(product=product, user=request.user).count()
+    print(wishlist_count)
+
+    if wishlist_count > 0:
+        context = {
+            "bool": True
+        }
+    else:
+        new_wishlist = wishlist_model.objects.create(
+            user=request.user,
+            product=product,
+        )
+        context = {
+            "bool": True
+        }
+
+    return JsonResponse(context)  
+
+
+# remove from wishlist
+
+def remove_wishlist(request):
+    pid = request.GET['id']
+    wishlist = wishlist_model.objects.filter(user=request.user)
+    wishlist_d = wishlist_model.objects.get(id=pid)
+    delete_product = wishlist_d.delete()
+    
+    context = {
+        "bool":True,
+        "w":wishlist
+    }
+    wishlist_json = serializers.serialize('json', wishlist)
+    t = render_to_string('core/async/wishlist-list.html', context)
+    return JsonResponse({'data':t,'w':wishlist_json})

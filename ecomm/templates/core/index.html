@@ -55,7 +55,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                    <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
+                                    <li><a href="{% url 'core:wishlist' %}">Shop – Wishlist</a></li>
                                     <li><a href="shop-cart.html">Shop – Cart</a></li>
                                     <li><a href="shop-checkout.html">Shop – Checkout</a></li>
                                     <li><a href="shop-compare.html">Shop – Compare</a></li>
@@ -262,9 +262,10 @@
                                                         <img class="hover-img" src="{{ p.image.url }}" alt="" />
                                                     </a>
                                                 </div>
-                                                <div class="product-action-1">
-                                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                                <div class="product-action-1">                                                    
+                                                    <button style="border: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i
+                                                        class="fi-rs-heart" style="fill: aqua;"></i></button>
+                                                    <!-- <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
                                                     <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                                 </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
@@ -297,8 +298,14 @@
                                                         <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}">
                                                         <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}">
                                                         <input type="hidden" class="product-sku-{{ p.id }}" value="{{ p.sku }}">
+                                                        
+                                                        <div class="d-flex">
                                                         <button class="add add-to-cart-btn" data-index="{{ p.id }}" style="border: none;" id="add-to-cart-btn"><i class="fi-rs-shopping-cart mr-5"></i>Add</button>
-                                                    </div>
+                                                        <button style="border: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i
+                                                            class="fi-rs-heart" style="fill: aqua;"></i></button>
+                                                            </div>
+                                                    
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
