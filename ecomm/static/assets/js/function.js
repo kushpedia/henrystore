@@ -101,6 +101,7 @@ $(document).ready(function () {
 
     // Add to cart functionality
     $(".add-to-cart-btn").on("click", function () {
+        console.log("Add to cart button clicked");
 
         let this_val = $(this)
         let index = this_val.attr("data-index")
@@ -116,14 +117,14 @@ $(document).ready(function () {
         let product_image = $(".product-image-" + index).val()
 
 
-        // console.log("Quantity:", quantity);
-        // console.log("Title:", product_title);
-        // console.log("Price:", product_price);
-        // console.log("ID:", product_id);
-        // console.log("PID:", product_pid);
-        // console.log("Image:", product_image);
-        // console.log("Index:", index);
-        // console.log("Currrent Element:", this_val);
+        console.log("Quantity:", quantity);
+        console.log("Title:", product_title);
+        console.log("Price:", product_price);
+        console.log("ID:", product_id);
+        console.log("PID:", product_pid);
+        console.log("Image:", product_image);
+        console.log("Index:", index);
+        console.log("Currrent Element:", this_val);
 
         $.ajax({
             url: '/add-to-cart',

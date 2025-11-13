@@ -391,7 +391,7 @@ def order_detail(request, id):
 def wishlist_view(request):
     wishlist = wishlist_model.objects.filter(user=request.user)
     context = {
-        "w":wishlist
+        "wishlist":wishlist
     }
     return render(request, "core/wishlist.html", context)
 

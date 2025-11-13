@@ -3186,63 +3186,15 @@
                     <div class="sidebar-widget widget-category-2 mb-30">
                         <h5 class="section-title style-1 mb-30">Category</h5>
                         <ul>
+                            {% for c in categories %}
                             <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt="" />Milks & Dairies</a><span class="count">30</span>
+                                <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.category.count}}</span>
                             </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-2.svg' %}" alt="" />Clothing</a><span class="count">35</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-3.svg' %}" alt="" />Pet Foods </a><span class="count">42</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-4.svg' %}" alt="" />Baking material</a><span class="count">68</span>
-                            </li>
-                            <li>
-                                <a href="shop-grid-right.html"> <img src="{% static 'assets/imgs/theme/icons/category-5.svg' %}" alt="" />Fresh Fruit</a><span class="count">87</span>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
-                    <!-- Fillter By Price -->
-                    <div class="sidebar-widget price_range range mb-30">
-                        <h5 class="section-title style-1 mb-30">Fill by price</h5>
-                        <div class="price-filter">
-                            <div class="price-filter-inner">
-                                <div id="slider-range" class="mb-20"></div>
-                                <div class="d-flex justify-content-between">
-                                    <div class="caption">From: <strong id="slider-range-value1" class="text-brand"></strong></div>
-                                    <div class="caption">To: <strong id="slider-range-value2" class="text-brand"></strong></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group">
-                            <div class="list-group-item mb-10 mt-10">
-                                <label class="fw-900">Color</label>
-                                <div class="custome-checkbox">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
-                                    <label class="form-check-label" for="exampleCheckbox1"><span>Red (56)</span></label>
-                                    <br />
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2" value="" />
-                                    <label class="form-check-label" for="exampleCheckbox2"><span>Green (78)</span></label>
-                                    <br />
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3" value="" />
-                                    <label class="form-check-label" for="exampleCheckbox3"><span>Blue (54)</span></label>
-                                </div>
-                                <label class="fw-900 mt-15">Item Condition</label>
-                                <div class="custome-checkbox">
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox11" value="" />
-                                    <label class="form-check-label" for="exampleCheckbox11"><span>New (1506)</span></label>
-                                    <br />
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox21" value="" />
-                                    <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished (27)</span></label>
-                                    <br />
-                                    <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox31" value="" />
-                                    <label class="form-check-label" for="exampleCheckbox31"><span>Used (45)</span></label>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="shop-grid-right.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</a>
-                    </div>
+                    
+                    
                     <!-- Product sidebar Widget -->
                     <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
                         <h5 class="section-title style-1 mb-30">New products</h5>
@@ -3300,7 +3252,7 @@
                 <div class="section-title">
                     <div class="title">
                         <h3>Shop by Categories</h3>
-                        <a class="show-all" href="shop-grid-right.html">
+                        <a class="show-all" href="{% url 'core:category-list' %}">
                             All Categories
                             <i class="fi-rs-angle-right"></i>
                         </a>
@@ -3309,91 +3261,22 @@
                 </div>
                 <div class="carausel-8-columns-cover position-relative">
                     <div class="carausel-8-columns" id="carausel-8-columns">
+                        {% for c in categories %}
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt="" /></a>
+                                <a href="{% url 'core:category-product-list' c.cid %}"><img src="{{c.image.url}}" alt="" /></a>
                             </figure>
                             <h6>
-                                <a href="shop-grid-right.html">Milks and <br />Dairies</a>
+                                <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
                             </h6>
                         </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-2.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Wines & <br />
-                                    Alcohol</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-3.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Clothing & <br />Beauty</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-4.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Pet Foods <br />& Toy</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-5.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Packaged <br />fast food</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-6.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Baking <br />material</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-7.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Vegetables <br />& tubers</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-8.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Fresh <br />Seafood</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-9.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6>
-                                <a href="shop-grid-right.html">Noodles <br />Rice</a>
-                            </h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-10.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Fastfood</a></h6>
-                        </div>
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="shop-grid-right.html"><img src="{% static 'assets/imgs/theme/icons/category-11.svg' %}" alt="" /></a>
-                            </figure>
-                            <h6><a href="shop-grid-right.html">Ice cream</a></h6>
-                        </div>
+                        {% endfor %}
+                        
+
+
+
+
+
                     </div>
                 </div>
             </div>
