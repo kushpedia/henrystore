@@ -3,7 +3,6 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 from taggit.models import Tag
 from core.models import CartOrderItems, Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address
-from django.db.models import Count, Avg
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -13,6 +12,9 @@ from django.views.decorators.csrf import csrf_exempt
 from paypal.standard.forms import PayPalPaymentsForm
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
+import calendar
+from django.db.models.functions import ExtractMonth
+from django.db.models import Count, Avg
 
 
 def index(request):
@@ -342,6 +344,14 @@ def payment_failed_view(request):
 def customer_dashboard(request):
     orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
     address = Address.objects.filter(user=request.user)
+    orders = CartOrder.objects.annotate(month=ExtractMonth("order_date")).values("month").annotate(count=Count("id")).values("month", "count")
+    month = []
+    total_orders = []
+
+    for i in orders:
+        month.append(calendar.month_name[i["month"]])
+        total_orders.append(i["count"])
+
     if request.method == "POST":
         address_new = request.POST.get("address")
         mobile = request.POST.get("mobile")
@@ -356,8 +366,11 @@ def customer_dashboard(request):
 
 
     context = {
-        "orders": orders_list,
+        "orders_list": orders_list,
         'addresses': address,
+        "orders": orders,
+        "month": month,
+        "total_orders": total_orders,
     }
     return render(request, 'core/dashboard.html', context)
 
