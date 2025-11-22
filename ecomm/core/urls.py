@@ -28,6 +28,7 @@ urlpatterns = [
 	# update cart
 	path("update-cart/", views.update_cart, name="update-cart"),
 	# checkout
+	path("new_checkout/<oid>/", views.newCheckout, name="new_checkout"),
 	path("checkout/", views.checkout, name="checkout"),
 	# paypal urls
 	path('paypal/', include('paypal.standard.ipn.urls')),
@@ -50,6 +51,8 @@ urlpatterns = [
 	# other pages
 	path("contact/", views.contact, name="contact"),
 	path("ajax-contact-form/", views.ajax_contact_form, name="ajax-contact-form"),
+
+	path("save_checkout_info/", views.save_checkout_info, name="save_checkout_info"),
 
 
     ]

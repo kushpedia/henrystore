@@ -281,7 +281,7 @@ class Address(models.Model):
 
 class Coupon(models.Model):
     code = models.CharField(max_length=1000)
-    discount = models.IntegerField(default=1)
+    discount = models.IntegerField(default=0)
     active = models.BooleanField(default=True)
 
     def __str__(self):

@@ -117,14 +117,14 @@ $(document).ready(function () {
         let product_image = $(".product-image-" + index).val()
 
 
-        console.log("Quantity:", quantity);
-        console.log("Title:", product_title);
-        console.log("Price:", product_price);
-        console.log("ID:", product_id);
-        console.log("PID:", product_pid);
-        console.log("Image:", product_image);
-        console.log("Index:", index);
-        console.log("Currrent Element:", this_val);
+        // console.log("Quantity:", quantity);
+        // console.log("Title:", product_title);
+        // console.log("Price:", product_price);
+        // console.log("ID:", product_id);
+        // console.log("PID:", product_pid);
+        // console.log("Image:", product_image);
+        // console.log("Index:", index);
+        // console.log("Currrent Element:", this_val);
 
         $.ajax({
             url: '/add-to-cart',
@@ -173,6 +173,7 @@ $(document).ready(function () {
                 this_val.show()
                 $(".cart-items-count").text(response.totalcartitems)
                 $("#cart-list").html(response.data)
+                window.location.reload()
             }
         })
 
@@ -185,8 +186,8 @@ $(document).ready(function () {
         let this_val = $(this)
         let product_quantity = $(".product-qty-" + product_id).val()
 
-        // console.log("PRoduct ID:", product_id);
-        // console.log("PRoduct QTY:", product_quantity);
+        console.log("PRoduct ID:", product_id);
+        console.log("PRoduct QTY:", product_quantity);
 
         $.ajax({
             url: "/update-cart",
