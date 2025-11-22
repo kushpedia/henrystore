@@ -16,6 +16,7 @@ import calendar
 from django.db.models.functions import ExtractMonth
 from django.db.models import Count, Avg
 from userauths.models import ContactUs
+from userauths.models import Profile
 
 
 def index(request):
@@ -364,9 +365,12 @@ def customer_dashboard(request):
         )
         messages.success(request, "Address Added Successfully.")
         return redirect("core:dashboard")
-
+    else:
+        print("error")
+    user_profile = Profile.objects.get(user=request.user)
 
     context = {
+        "user_profile":user_profile,
         "orders_list": orders_list,
         'addresses': address,
         "orders": orders,
