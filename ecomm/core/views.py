@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
+import stripe
 from taggit.models import Tag
 from core.models import CartOrderItems, Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address,Coupon
 from core.forms import ProductReviewForm
@@ -360,10 +361,42 @@ def newCheckout(request, oid):
     context = {
         "order": order,
         "order_items": order_items,
-        # "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
+        "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
 
     }
     return render(request, "core/new_checkout.html", context)
+
+@csrf_exempt
+def create_checkout_session(request, oid):
+    order = CartOrder.objects.get(oid=oid)
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+
+    checkout_session = stripe.checkout.Session.create(
+        customer_email = order.email,
+        payment_method_types=['card'],
+        line_items = [
+            {
+                'price_data': {
+                    'currency': 'USD',
+                    'product_data': {
+                        'name': order.full_name
+                    },
+                    'unit_amount': int(order.price * 100)
+                },
+                'quantity': 1
+            }
+        ],
+        mode = 'payment',
+        success_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid])) + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid]))
+    )
+
+    order.paid_status = False
+    order.stripe_payment_intent = checkout_session['id']
+    order.save()
+
+    print("checkkout session", checkout_session)
+    return JsonResponse({"sessionId": checkout_session.id})
 
 
 
@@ -435,12 +468,18 @@ def save_checkout_info(request):
 
 
 @login_required
-def payment_completed_view(request):
-    cart_total_amount = 0
-    if 'cart_data_obj' in request.session:
-        for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
-    return render(request, "core/payment-completed.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
+def payment_completed_view(request,oid):
+    order = CartOrder.objects.get(oid=oid)
+    
+    if order.paid_status == False:
+        order.paid_status = True
+        order.save()
+        
+    context = {
+        "order": order,
+
+    }
+    return render(request, "core/payment-completed.html", context)
 
 
 def payment_failed_view(request):
