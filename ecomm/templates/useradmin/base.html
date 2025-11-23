@@ -53,20 +53,20 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a class="menu-link" href="">
+                        <a class="menu-link" href="{% url 'useradmin:shop_page' %}">
                             <i class="icon material-icons md-store"></i>
                             <span class="text">Shop Page</span>
                         </a>
                     </li>
                     <li class="menu-item ">
-                        <a class="menu-link" href="">
+                        <a class="menu-link" href="{% url 'useradmin:dashboard-add-products' %}">
                             <i class="icon material-icons md-add_box"></i>
                             <span class="text">Add product</span>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a class="menu-link" href="">
+                        <a class="menu-link" href="{% url 'useradmin:reviews' %}">
                             <i class="icon material-icons md-comment"></i>
                             <span class="text">Reviews</span>
                         </a>
@@ -75,20 +75,20 @@
                 <hr />
                 <ul class="menu-aside">
                     <li class="menu-item">
-                        <a class="menu-link" href="">
+                        <a class="menu-link" href="{% url 'useradmin:settings' %}">
                             <i class="icon material-icons md-settings"></i>
                             <span class="text">Settings</span>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a class="menu-link" href="">
+                        <a class="menu-link" href="{% url 'useradmin:change_password' %}">
                             <i class="icon material-icons md-lock"></i>
                             <span class="text"> Change Password </span>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a class="menu-link" href="">
+                        <a class="menu-link" href="{% url 'userauths:sign-out' %}">
                             <i class="icon material-icons md-arrow_forward"></i>
                             <span class="text">Logout</span>
                         </a>
@@ -128,7 +128,7 @@
                                 <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
                                 <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
+                                <a class="dropdown-item text-danger" href="{% url 'userauths:sign-out' %}"><i class="material-icons md-exit_to_app"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -156,10 +156,11 @@
             <footer class="main-footer font-xs">
                 <div class="row pb-30 pt-15">
                     <div class="col-sm-6">
+                        
+                        K-Stores &copy; 
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
-                        &copy; E-commerce - HTML Ecommerce Template .
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end">All rights reserved</div>

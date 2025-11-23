@@ -33,7 +33,7 @@
 </head>
             <section class="content-main">
                 <form method="POST" enctype="multipart/form-data">
-					{% csrf_token %	}
+					{% csrf_token %}
 
                 <div class="row">
                     <div class="col-9">
@@ -59,7 +59,7 @@
                                     <strong>{{ form.errors }}</strong>
                                 </div>
                                 {% endif %}
-                                    {% csrf_token %}
+                                    
                                     <div class="mb-4">
                                         <label for="product_name" class="form-label">Product title</label>
                                         {{form.title}}
