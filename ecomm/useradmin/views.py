@@ -87,3 +87,33 @@ def delete_product(request, pid):
     product = Product.objects.get(pid=pid)
     product.delete()
     return redirect("useradmin:dashboard-products")
+
+
+
+def orders(request):
+    orders = CartOrder.objects.all()
+    context = {
+        'orders':orders,
+    }
+    return render(request, "useradmin/orders.html", context)
+
+def order_detail(request, id):
+    order = CartOrder.objects.get(id=id)
+    order_items = CartOrderItems.objects.filter(order=order)
+    context = {
+        'order':order,
+        'order_items':order_items
+    }
+    return render(request, "useradmin/order_detail.html", context)
+
+
+@csrf_exempt
+def change_order_status(request, oid):
+    order = CartOrder.objects.get(oid=oid)
+    if request.method == "POST":
+        status = request.POST.get("status")
+        messages.success(request, f"Order status changed to {status}")
+        order.product_status = status
+        order.save()
+    
+    return redirect("useradmin:order_detail", order.id)

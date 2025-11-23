@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="menu-item {% if '/useradmin/orders/' in request.path %}active{% endif %}">
-                        <a class="menu-link" href="">
+                        <a class="menu-link" href="{% url 'useradmin:orders' %}">
                             <i class="icon material-icons md-shopping_cart"></i>
                             <span class="text">Orders</span>
                         </a>
