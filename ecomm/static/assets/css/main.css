@@ -4920,8 +4920,9 @@ table .product-thumbnail img {
 }
 
 .product-list .product-cart-wrap {
-    border: 0;
-    border-radius: 0;
+    border: 1;
+    border-radius: 20;
+    border-color: #1a8e8c;
     overflow: unset;
     display: -webkit-box;
     display: -ms-flexbox;

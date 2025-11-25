@@ -7,7 +7,8 @@ from django.contrib import messages
 def default(request):
     categories = Category.objects.all()
     vendors = Vendor.objects.all()
-
+    new_products = Product.objects.all().order_by("-id")[:4]
+    
     min_max_price = Product.objects.aggregate(Min("price"), Max("price"))
 
     if request.user.is_authenticated:
@@ -32,4 +33,5 @@ def default(request):
         'address':address,
         'vendors':vendors,
         'min_max_price':min_max_price,
+        'new_products':new_products,
     }

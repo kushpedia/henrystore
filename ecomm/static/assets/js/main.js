@@ -695,12 +695,6 @@
         demo.toggleClass("demo-open");
     });
 
-    /*-----More Menu Open----*/
-    $(".more_slide_open").slideUp();
-    $(".more_categories").on("click", function() {
-        $(this).toggleClass("show");
-        $(".more_slide_open").slideToggle();
-    });
 
     /*-----Modal----*/
 

@@ -52,20 +52,20 @@
                             <span class="text">Orders</span>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {% if '/useradmin/shop_page/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:shop_page' %}">
                             <i class="icon material-icons md-store"></i>
                             <span class="text">Shop Page</span>
                         </a>
                     </li>
-                    <li class="menu-item ">
+                    <li class="menu-item {% if '/useradmin/add-products/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:dashboard-add-products' %}">
                             <i class="icon material-icons md-add_box"></i>
                             <span class="text">Add product</span>
                         </a>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item {% if '/useradmin/reviews/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:reviews' %}">
                             <i class="icon material-icons md-comment"></i>
                             <span class="text">Reviews</span>
@@ -74,13 +74,13 @@
                 </ul>
                 <hr />
                 <ul class="menu-aside">
-                    <li class="menu-item">
+                    <li class="menu-item {% if '/useradmin/settings/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:settings' %}">
                             <i class="icon material-icons md-settings"></i>
                             <span class="text">Settings</span>
                         </a>
                     </li>
-                    <li class="menu-item">
+                    <li class="menu-item {% if '/useradmin/change_password/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:change_password' %}">
                             <i class="icon material-icons md-lock"></i>
                             <span class="text"> Change Password </span>

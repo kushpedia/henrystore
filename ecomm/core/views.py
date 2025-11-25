@@ -21,8 +21,8 @@ from userauths.models import Profile
 
 
 def index(request):
-	# products = Product.objects.all().order_by('-id')
 	products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
+	
 	context = {'products': products}
 
 	return render(request, 'core/index.html', context)
@@ -395,7 +395,7 @@ def create_checkout_session(request, oid):
     order.stripe_payment_intent = checkout_session['id']
     order.save()
 
-    print("checkkout session", checkout_session)
+    # print("checkkout session", checkout_session)
     return JsonResponse({"sessionId": checkout_session.id})
 
 
@@ -569,7 +569,7 @@ def add_to_wishlist(request):
     context = {}
 
     wishlist_count = wishlist_model.objects.filter(product=product, user=request.user).count()
-    print(wishlist_count)
+    # print(wishlist_count)
 
     if wishlist_count > 0:
         context = {
