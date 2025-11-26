@@ -20,7 +20,7 @@ def dashboard(request):
     all_products = Product.objects.all()
     all_categories = Category.objects.all()
     new_customers = User.objects.all().order_by("-id")[:6]
-    latest_orders = CartOrder.objects.all()
+    latest_orders = CartOrder.objects.all().order_by("-date")[:5]
 
     this_month = datetime.datetime.now().month
     monthly_revenue = CartOrder.objects.filter(paid_status=True,order_date__month=this_month).aggregate(price=Sum("price"))

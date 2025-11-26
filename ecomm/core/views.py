@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 import calendar
 from django.db.models.functions import ExtractMonth
-from django.db.models import Count, Avg
+from django.db.models import Count, Avg, Q
 from userauths.models import ContactUs
 from userauths.models import Profile
 
@@ -161,7 +161,10 @@ def ajax_add_review(request, pid):
 def search_view(request):
     query = request.GET.get("q")
 
-    products = Product.objects.filter(title__icontains=query).order_by("-date")
+    products = Product.objects.filter(
+    Q(title__icontains=query) |
+    Q(category__title__icontains=query)
+    ).order_by("-date")
 
     context = {
         "products": products,
@@ -226,6 +229,7 @@ def add_to_cart(request):
 
 def cart_view(request):
     cart_total_amount = 0
+    print("cart data obj session:", request.session.get('cart_data_obj'))
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])

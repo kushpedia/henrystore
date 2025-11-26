@@ -101,7 +101,7 @@ class Product(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True, related_name="category")
+        Category, on_delete=models.CASCADE, null=True, related_name="category")
     vendor = models.ForeignKey(
         Vendor, on_delete=models.SET_NULL, null=True, related_name="product")
 
@@ -132,7 +132,7 @@ class Product(models.Model):
     # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
 
     product_status = models.CharField(
-        choices=STATUS, max_length=10, default="in_review")
+        choices=STATUS, max_length=10, default="published")
 
     status = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)

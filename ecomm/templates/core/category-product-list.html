@@ -1,4 +1,5 @@
 {% extends 'partials/base.html' %}
+{% load humanize %}
 {% load static %}
 {% block content %}
 
@@ -125,8 +126,9 @@
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
-                                            <span>$</span> <span class="current-product-price-{{ p.id }}">{{p.price}}</span>
-                                            <span class="old-price">${{p.old_price}}</span>
+                                            <span>Ksh </span> <span class="current-product-price-{{ p.id }}">{{p.price}}</span>
+                                            <br/>
+											<span class="old-price">Ksh {{p.old_price|floatformat:0|intcomma}}</span>
                                         </div>
                                         <div class="add-cart">
                                             <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.id }}">
