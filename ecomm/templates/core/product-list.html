@@ -289,7 +289,7 @@
                                             <div class="deals-countdown" data-countdown='{{ d.deal_end_date|date:"Y/m/d H:i:s" }}''></div>
                                         </div>
                                         <div class="deals-content">
-                                            <h2><a href="shop-product-right.html">{{d.title}}</a></h2>
+                                            <h2><a href="{% url 'core:product-detail' d.pid %}">{{d.title}}</a></h2>
                                             
                                             <div class="product-rate-cover">
                                                 <div class="product-rate d-inline-block">
