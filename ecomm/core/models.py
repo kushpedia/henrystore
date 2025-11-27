@@ -144,7 +144,8 @@ class Product(models.Model):
 
     date = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(null=True, blank=True)
-
+    deal_end_date = models.DateTimeField(blank=True, null=True)
+    has_deal = models.BooleanField(default=False)
     class Meta:
         verbose_name_plural = "Products"
 
@@ -156,7 +157,7 @@ class Product(models.Model):
 
     def get_precentage(self):
         if self.old_price and self.old_price > 0:
-            return int((self.price / self.old_price) * 100)
+            return int(((self.old_price - self.price)/(self.old_price)) * 100)
         return 0
 
 class ProductImages(models.Model):

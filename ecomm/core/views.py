@@ -229,7 +229,7 @@ def add_to_cart(request):
 
 def cart_view(request):
     cart_total_amount = 0
-    print("cart data obj session:", request.session.get('cart_data_obj'))
+    # print("cart data obj session:", request.session.get('cart_data_obj'))
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
