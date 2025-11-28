@@ -45,20 +45,85 @@ class Tags(models.Model):
 class Category(models.Model):
     cid = ShortUUIDField(unique=True, length=10, max_length=200,
                         prefix="cat", alphabet="abcdefgh12345")
-    title = models.CharField(max_length=100, default="Food")
+    title = models.CharField(max_length=100, default="Electronics")
     image = models.ImageField(upload_to="category", default="category.jpg")
+    description = models.TextField(blank=True, null=True)
+    
     class Meta:
         verbose_name_plural = "Categories"
     
     def category_image(self):
         return mark_safe('<img src="%s" width="50" height="50" />' % (self.image.url))
-	
+    
     def product_count(self):
-        return Product.objects.filter(category=self).count()
-
+        # Count products through all subcategories and mini-subcategories
+        count = 0
+        for subcategory in self.subcategories.all():
+            count += subcategory.product_count()
+        return count
+    
     def __str__(self):
         return self.title
-        
+    
+
+class SubCategory(models.Model):
+    cid = ShortUUIDField(unique=True, length=10, max_length=200,
+                        prefix="sub", alphabet="abcdefgh12345")
+    title = models.CharField(max_length=100, default="Mobile Phones & Accessories")
+    image = models.ImageField(upload_to="subcategory", default="subcategory.jpg")
+    category = models.ForeignKey(
+        Category, 
+        on_delete=models.CASCADE, 
+        related_name="subcategories"
+    )
+    description = models.TextField(blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = "Sub Categories"
+        unique_together = ['category', 'title']  # Prevent duplicate subcategories in same category
+    
+    def category_image(self):
+        return mark_safe('<img src="%s" width="50" height="50" />' % (self.image.url))
+    
+    def product_count(self):
+        # Count products through all mini-subcategories
+        count = 0
+        for mini_subcategory in self.mini_subcategories.all():
+            count += mini_subcategory.product_count()
+        return count
+    
+    def __str__(self):
+        return f"{self.category.title} - {self.title}"
+
+class MiniSubCategory(models.Model):
+    cid = ShortUUIDField(unique=True, length=10, max_length=200,
+                        prefix="mini", alphabet="abcdefgh12345")
+    title = models.CharField(max_length=100, default="Smartphones")
+    image = models.ImageField(upload_to="mini_subcategory", default="mini_subcategory.jpg")
+    subcategory = models.ForeignKey(
+        SubCategory, 
+        on_delete=models.CASCADE, 
+        related_name="mini_subcategories"
+    )
+    description = models.TextField(blank=True, null=True)
+    
+    class Meta:
+        verbose_name_plural = "Mini Sub Categories"
+        unique_together = ['subcategory', 'title']  # Prevent duplicate mini-subcategories in same subcategory
+    
+    def category_image(self):
+        return mark_safe('<img src="%s" width="50" height="50" />' % (self.image.url))
+    
+    def product_count(self):
+        return Product.objects.filter(mini_subcategory=self).count()
+    
+    def get_full_path(self):
+        return f"{self.subcategory.category.title} > {self.subcategory.title} > {self.title}"
+    
+    def __str__(self):
+        return self.title
+
+
 class Vendor(models.Model):
     vid = ShortUUIDField(unique=True, length=10, max_length=20,
                     prefix="ven", alphabet="abcdefgh12345")
@@ -100,8 +165,16 @@ class Product(models.Model):
                         max_length=20, alphabet="abcdefgh12345")
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, null=True, related_name="category")
+
+    mini_subcategory = models.ForeignKey(
+        MiniSubCategory, 
+        on_delete=models.CASCADE, 
+        null=True, 
+        related_name="products"
+    )
+    
+    
+
     vendor = models.ForeignKey(
         Vendor, on_delete=models.SET_NULL, null=True, related_name="product")
 
@@ -148,6 +221,26 @@ class Product(models.Model):
     has_deal = models.BooleanField(default=False)
     class Meta:
         verbose_name_plural = "Products"
+
+
+    def get_category(self):
+        """Get the top-level category"""
+        if self.mini_subcategory:
+            return self.mini_subcategory.subcategory.category
+        return None
+    
+    def get_subcategory(self):
+        """Get the subcategory"""
+        if self.mini_subcategory:
+            return self.mini_subcategory.subcategory
+        return None
+    
+    def get_full_category_path(self):
+        """Get full category path as string"""
+        if self.mini_subcategory:
+            return self.mini_subcategory.get_full_path()
+        return "No category assigned"
+    
 
     def product_image(self):
         return mark_safe('<img src="%s" width="50" height="50" />' % (self.image.url))

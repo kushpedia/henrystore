@@ -7,7 +7,7 @@
 	<div class="page-header breadcrumb-wrap">
 		<div class="container">
 			<div class="breadcrumb">
-				<a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+				<a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
 				<span></span> Store <span></span> Nest Food
 			</div>
 		</div>
@@ -159,7 +159,7 @@
 						</div>
 						<div class="product-content-wrap">
 							<div class="product-category">
-								<a href="{% url 'core:category-product-list' p.category.cid %}">{{p.category}}</a>
+								<a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
 							</div>
 							<h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
 							<div class="product-rate-cover">
@@ -280,10 +280,10 @@
 					<h5 class="section-title style-1 mb-30">Category</h5>
 					<ul>
 						{% for c in categories %}
-						<li>
-							<a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.category.count}}</span>
-						</li>
-						{% endfor %}
+                            <li>
+                                <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.product_count}}</span>
+                            </li>
+                            {% endfor %}
 					</ul>
 				</div>
 				<!-- Fillter By Price -->

@@ -51,8 +51,16 @@ def category_list_view(request):
 
 def category_product_list__view(request, cid):
 
-    category = Category.objects.get(cid=cid) 
-    products = Product.objects.filter(product_status="published", category=category)
+    category = get_object_or_404(
+        Category.objects.annotate(
+            product_count=Count('subcategories__mini_subcategories__products')
+        ),
+        cid=cid
+    ) 
+    products = Product.objects.filter(
+    product_status="published",
+    mini_subcategory__subcategory__category=category
+    ).order_by("-id")
 
     context = {
         "category":category,
@@ -81,7 +89,9 @@ def vendor_detail_view(request, vid):
 def product_detail_view(request, pid):
     product = Product.objects.get(pid=pid)
     product_images = product.p_images.all()
-    related_products = Product.objects.filter(category=product.category).exclude(pid=pid)
+    related_products = Product.objects.filter(
+    mini_subcategory__subcategory=product.mini_subcategory.subcategory
+        ).exclude(pid=product.pid).filter(product_status="published")
     review = ProductReview.objects.filter(product=product).order_by("-id")
 
     # Getting average review

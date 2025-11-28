@@ -35,7 +35,7 @@ class AddProductForm(forms.ModelForm):
             'life',
             'mfd',
             'digital',
-            'category',
+            'mini_subcategory',
         ]
 
         widgets = {

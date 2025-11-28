@@ -1,11 +1,13 @@
 from ast import Add
 from core.models import Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address
-from django.db.models import Min, Max
+from django.db.models import Min, Max, Count
 from django.contrib import messages
 from django.utils import timezone
 
 def default(request):
-    categories = Category.objects.all()
+    categories = Category.objects.annotate(
+        product_count=Count('subcategories__mini_subcategories__products')
+    ).all()
     vendors = Vendor.objects.all()
     new_products = Product.objects.all().order_by("-id")[:4]
     deals_products = Product.objects.filter(has_deal=True).order_by("-deal_end_date")[:4]

@@ -286,7 +286,7 @@
                                             </div>
                                             <div class="product-content-wrap">
                                                 <div class="product-category">
-                                                    <a href="{% url 'core:category-product-list' p.category.cid %}">{{p.category.title}}</a>
+                                                    <a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
                                                 </div>
                                                 <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title}}</a></h2>
                                                 <div class="product-rate-cover">
@@ -1987,7 +1987,7 @@
                                             </div>
                                             <div class="product-card-bottom">
                                                 <div class="product-price">
-                                                    <span>Ksh {{d.price}}</span>
+                                                    <span>Ksh </span><span class="current-product-price-{{ d.id }}">  {{d.price }}</span>
                                                     <br/>
 
                                                     <span class="old-price">Ksh {{d.old_price}}</span>
@@ -2061,7 +2061,7 @@
                         <ul>
                             {% for c in categories %}
                             <li>
-                                <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.category.count}}</span>
+                                <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.product_count}}</span>
                             </li>
                             {% endfor %}
                         </ul>
@@ -2077,7 +2077,7 @@
                                 <img src="{{p.image.url}}" alt="#" />
                             </div>
                             <div class="content pt-10">
-                                <h5><a href="{% url 'core:product-detail' p.pid %}">{{p.title}}</a></h5>
+                                <h5><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:20}}</a></h5>
                                 <p class="price mb-0 mt-5">Ksh {{p.price|floatformat:0|intcomma}}</p>
                                 <div class="product-rate">
                                     <div class="product-rating" style="width: 90%"></div>

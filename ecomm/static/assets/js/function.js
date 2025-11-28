@@ -117,9 +117,9 @@ $(document).ready(function () {
         let product_image = $(".product-image-" + index).val()
 
 
-        // console.log("Quantity:", quantity);
-        // console.log("Title:", product_title);
-        // console.log("Price:", product_price);
+        console.log("Quantity:", quantity);
+        console.log("Title:", product_title);
+        console.log("Price:", product_price);
         // console.log("ID:", product_id);
         // console.log("PID:", product_pid);
         // console.log("Image:", product_image);
