@@ -8,6 +8,13 @@ urlpatterns = [
     path("product/<pid>/", views.product_detail_view, name="product-detail"),
     path("category/", views.category_list_view, name="category-list"),
 	path("category/<cid>/", views.category_product_list__view, name="category-product-list"),
+	# subcategory
+	path('subcategory/<cid>/', views.sub_category_product_list_view, name='subcategory-products'),
+	path('minicategory/<cid>/', views.mini_category_product_list_view, name='minicategory-products'),
+
+
+
+
 	path("vendors/", views.vendor_list_view, name="vendor-list"),
 	path("vendor/<vid>/", views.vendor_detail_view, name="vendor-detail"),
 	# tagged products

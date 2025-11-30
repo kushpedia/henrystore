@@ -13,7 +13,12 @@
 			<div class="breadcrumb">
 
 				<a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-				<span></span> <a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a> <span></span><a href="#">{{p.mini_subcategory.subcategory.title}}</a><span></span> {{p.mini_subcategory.title}}
+				<span></span> <a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a> 
+				<span></span><a href="{%url 'core:subcategory-products' p.mini_subcategory.subcategory.cid %}">{{p.mini_subcategory.subcategory.title}}</a>
+				<span></span><a href="{%url 'core:minicategory-products' p.mini_subcategory.cid %}">{{p.mini_subcategory.title}}</a> 
+				
+				
+				
 			</div>
 		</div>
 	</div>
@@ -87,10 +92,12 @@
                                                 <input type="hidden" class="product-id-{{ p.id }}" value="{{ p.id }}">
                                                 <input type="hidden" class="product-title-{{ p.id }}" value="{{ p.title }}">
 												<input type="hidden" class="product-sku-{{ p.id }}" value="{{ p.sku }}">
-					
-												<button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{ p.id }}" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-												<a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-												<a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+												<div class="d-flex ">
+													<button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{ p.id }}" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+													<button style="border: none; margin-left: 20px; border-radius: 4px;" class="add-to-wishlist" data-product-item="{{p.id}}"><i
+                                                        class="fi-rs-heart" style="fill: aqua;"></i></button>
+												</div>
+												
 											</div>
 										</div>
 										<div class="font-xs">
@@ -451,40 +458,7 @@
 						</div>
 					</div>
 					<div class="col-xl-3 primary-sidebar sticky-sidebar mt-30">
-						<div class="sidebar-widget widget-delivery mb-30 bg-grey-9 box-shadow-none">
-							<h5 class="section-title style-3 mb-20">Delivery</h5>
-							<ul>
-								<li>
-									<i class="fi fi-rs-marker mr-10 text-brand"></i>
-									<span>
-										{{ address.address }} <br />
-										<br/>
-										{% if address.status == True  %}
-										<span class="text-success">Verified Address </span>
-										{% else %}
-										<span class="text-danger">Unverified Address </span>
-										{% endif %}
-									</span>
-									<a href="#" class="change float-end">Change</a>
-								</li>
-								<li class="hr"><span></span></li>
-							</ul>
-							<h5 class="section-title style-3 mb-20">Return & Warranty</h5>
-							<ul>
-								<li>
-									<i class="fi fi-rs-shield-check mr-10 text-brand"></i>
-									<span> {{p.vendor.authentic_rating}}% Authentic </span>
-								</li>
-								<li>
-									<i class="fi fi-rs-time-forward-ten mr-10 text-brand"></i>
-									<span> {{p.vendor.days_return}} Days Return </span>
-								</li>
-								<li>
-									<i class="fi fi-rs-diploma mr-10 text-brand"></i>
-									<span>  {{p.vendor.warranty_period}} Months Warranty </span>
-								</li>
-							</ul>
-						</div>
+						
 						<div class="sidebar-widget widget-vendor mb-30 bg-grey-9 box-shadow-none">
 							<h5 class="section-title style-3 mb-20">Vendor</h5>
 							<div class="vendor-logo d-flex mb-30">

@@ -3,7 +3,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 import stripe
 from taggit.models import Tag
-from core.models import CartOrderItems, Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address,Coupon
+from core.models import CartOrderItems, Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address,Coupon,SubCategory,MiniSubCategory
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -18,7 +18,6 @@ from django.db.models.functions import ExtractMonth
 from django.db.models import Count, Avg, Q
 from userauths.models import ContactUs
 from userauths.models import Profile
-
 
 def index(request):
 	products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
@@ -50,23 +49,85 @@ def category_list_view(request):
 
 
 def category_product_list__view(request, cid):
+    try:
+        category = get_object_or_404(
+            Category.objects.annotate(
+                product_count=Count('subcategories__mini_subcategories__products')
+            ),
+            cid=cid
+        ) 
+        products = Product.objects.filter(
+        product_status="published",
+        mini_subcategory__subcategory__category=category
+        ).order_by("-id")
 
-    category = get_object_or_404(
-        Category.objects.annotate(
-            product_count=Count('subcategories__mini_subcategories__products')
-        ),
-        cid=cid
-    ) 
-    products = Product.objects.filter(
-    product_status="published",
-    mini_subcategory__subcategory__category=category
-    ).order_by("-id")
-
-    context = {
-        "category":category,
-        "products":products,
-    }
+        context = {
+            "category":category,
+            "products":products,
+        }
+    except:
+        messages.warning(request, "Error Occurred. Please try again.")
+        return redirect("core:index")
     return render(request, "core/category-product-list.html", context)
+
+
+# items per sub category
+def sub_category_product_list_view(request, cid):
+    try:
+        sub_category = get_object_or_404(
+            SubCategory.objects.annotate(
+                product_count=Count('mini_subcategories__products')
+            ),
+            cid=cid
+        ) 
+        
+        products = Product.objects.filter(
+            product_status="published",
+            mini_subcategory__subcategory=sub_category  
+        ).order_by("-id")
+
+        context = {
+            "category":sub_category,
+            "products":products,
+        }
+    except:
+        messages.warning(request, "Error Occurred. Please try again.")
+        return redirect("core:index")
+    return render(request, "core/sub-category-product-list.html", context)
+
+# items per mini category
+def mini_category_product_list_view(request, cid):
+    try:
+        mini_category = get_object_or_404(
+            MiniSubCategory.objects.annotate(
+                product_count=Count('products')
+            ),
+            cid=cid
+        ) 
+        
+        products = Product.objects.filter(
+            product_status="published",
+            mini_subcategory=mini_category  
+        ).order_by("-id")
+
+        context = {
+            "category":mini_category,
+            "products":products,
+        }
+    except:
+        messages.warning(request, "Error Occurred. Please try again.")
+        return redirect("core:index")
+    return render(request, "core/mini-category-product-list.html", context)
+
+
+
+
+
+
+
+
+
+
 
 def vendor_list_view(request):
     vendors = Vendor.objects.all()
