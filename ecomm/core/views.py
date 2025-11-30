@@ -138,9 +138,12 @@ def vendor_list_view(request):
 
 
 def vendor_detail_view(request, vid):
-    vendor = Vendor.objects.get(vid=vid)
-    products = Product.objects.filter(vendor=vendor, product_status="published").order_by("-id")
-
+    try:
+        vendor = Vendor.objects.get(vid=vid)
+        products = Product.objects.filter(vendor=vendor, product_status="published").order_by("-id")
+    except:
+        messages.warning(request, "Error Occurred. Please try again.")
+        return redirect("core:index")
     context = {
         "vendor": vendor,
         "products": products,
@@ -230,12 +233,36 @@ def ajax_add_review(request, pid):
 
 
 def search_view(request):
-    query = request.GET.get("q")
-
+    query = request.GET.get("q", "").strip()
+    
+    if not query:
+        # Return empty results if no query
+        context = {
+            "products": Product.objects.none(),
+            "query": "",
+        }
+        return render(request, "core/search.html", context)
+    
+    # Search across multiple fields and relationships
     products = Product.objects.filter(
-    Q(title__icontains=query) |
-    Q(category__title__icontains=query)
-    ).order_by("-date")
+        Q(title__icontains=query) |
+        Q(description__icontains=query) |
+        Q(tags__name__icontains=query) |
+        Q(vendor__title__icontains=query) |
+        # Search through category hierarchy
+        Q(mini_subcategory__title__icontains=query) |
+        Q(mini_subcategory__subcategory__title__icontains=query) |
+        Q(mini_subcategory__subcategory__category__title__icontains=query) |
+        Q(specifications__icontains=query) |
+        Q(type__icontains=query)
+    ).filter(
+        product_status="published"
+    ).select_related(
+        'vendor',
+        'mini_subcategory__subcategory__category'
+    ).prefetch_related(
+        'tags'
+    ).distinct().order_by("-date")
 
     context = {
         "products": products,

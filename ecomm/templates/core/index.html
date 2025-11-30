@@ -220,19 +220,19 @@
                     <!--End hero-->
                     <section class="product-tabs section-padding position-relative">
                         <div class="section-title style-2">
-                            <h3>Popular Products</h3>
+                            <h2>Popular Products</h2>
                             <ul class="nav nav-tabs links" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">All</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Computer & Accessories</button>
+                                    <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Electronics</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Cook Ware</button>
+                                    <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Home & Living</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="nav-tab-four" data-bs-toggle="tab" data-bs-target="#tab-four" type="button" role="tab" aria-controls="tab-four" aria-selected="false">Watches & Jewellery</button>
+                                    <button class="nav-link" id="nav-tab-four" data-bs-toggle="tab" data-bs-target="#tab-four" type="button" role="tab" aria-controls="tab-four" aria-selected="false">Fashion</button>
                                 </li>
                                 
                             </ul>
@@ -328,9 +328,9 @@
                                     {% for c in categories %}
 
                                 
-                                    {% if c.title == "Computers and Accessories" %}
-                                    
-                                    {% for p in c.category.all %}
+                                    {% if c.title == "Electronics" %}
+                                    <h4>{{c.title}}</h4>
+                                    {% for p in c.get_published_products %}
                                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
@@ -367,7 +367,7 @@
                                             </div>
                                             <div class="product-content-wrap">
                                                 <div class="product-category">
-                                                    <a href="{% url 'core:category-product-list' p.category.cid %}">{{p.category.title}}</a>
+                                                    <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
                                                 </div>
                                                 <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title}}</a></h2>
                                                 <div class="product-rate-cover">
@@ -421,9 +421,9 @@
                                     {% for c in categories %}
 
                                 
-                                    {% if c.title == "Cook Ware" %}
-                                    
-                                    {% for p in c.category.all %}
+                                    {% if c.title == "Home & Living" %}
+                                    <h4>{{c.title}}</h4>
+                                    {% for p in c.get_published_products %}
                                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
@@ -460,7 +460,7 @@
                                             </div>
                                             <div class="product-content-wrap">
                                                 <div class="product-category">
-                                                    <a href="{% url 'core:category-product-list' p.category.cid %}">{{p.category.title}}</a>
+                                                    <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
                                                 </div>
                                                 <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title}}</a></h2>
                                                 <div class="product-rate-cover">
@@ -514,9 +514,9 @@
                                     {% for c in categories %}
 
                                 
-                                    {% if c.title == "Watches And Jewellery" %}
-                                    
-                                    {% for p in c.category.all %}
+                                    {% if c.title == "Fashion" %}
+                                    <h4>{{c.title}}</h4>
+                                    {% for p in c.get_published_products %}
                                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
@@ -553,7 +553,7 @@
                                             </div>
                                             <div class="product-content-wrap">
                                                 <div class="product-category">
-                                                    <a href="{% url 'core:category-product-list' p.category.cid %}">{{p.category.title}}</a>
+                                                    <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
                                                 </div>
                                                 <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title}}</a></h2>
                                                 <div class="product-rate-cover">

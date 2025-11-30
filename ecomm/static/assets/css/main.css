@@ -8731,17 +8731,17 @@ span.fi-rs-apps {
     top: 100%;
     background-color: #ffffff;
     width: 100%;
-    padding: 35px 25px 35px 35px;
+    padding: 15px 5px 15px 5px;
     -webkit-transition: all .25s ease 0s;
     transition: all .25s ease 0s;
     opacity: 0;
     visibility: hidden;
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 0 0 10px 10px;
     z-index: 999;
     border: 1px solid #ececec;
-    -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.08);
 }
 
 .main-menu>nav>ul>li ul.mega-menu li {
@@ -8765,13 +8765,13 @@ span.fi-rs-apps {
 }
 
 .main-menu>nav>ul>li ul.mega-menu li a.menu-title {
-    font-size: 19px;
-    font-weight: 700;
+    font-size: 24px;
+    font-weight: 900;
     display: block;
 }
 
 .main-menu>nav>ul>li ul.mega-menu li ul {
-    margin-top: 28px;
+    margin-top: 16px;
 }
 
 .main-menu>nav>ul>li ul.mega-menu li ul li {
@@ -8791,6 +8791,8 @@ span.fi-rs-apps {
     display: block;
     line-height: 1.4;
 }
+
+
 
 .main-menu>nav>ul>li ul.mega-menu li ul li a:hover {
     color: #3BB77E;

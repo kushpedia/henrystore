@@ -62,6 +62,13 @@ class Category(models.Model):
             count += subcategory.product_count()
         return count
     
+    def get_published_products(self, limit=8):
+        """Get published products for this category"""
+        return Product.objects.filter(
+            mini_subcategory__subcategory__category=self,
+            product_status="published"
+        )[:limit]
+    
     def __str__(self):
         return self.title
     
@@ -176,7 +183,7 @@ class Product(models.Model):
     
 
     vendor = models.ForeignKey(
-        Vendor, on_delete=models.SET_NULL, null=True, related_name="product")
+        Vendor, on_delete=models.CASCADE, null=True, related_name="product")
 
     title = models.CharField(max_length=100, default="Fresh Pear")
     image = models.ImageField(
