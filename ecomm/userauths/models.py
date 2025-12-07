@@ -44,12 +44,30 @@ class Profile(models.Model):
         return f"{self.user.username} - {self.full_name} - {self.bio}"
     
 
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
+# login attempts
+class LoginAttempt(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='loginattempt')
+    attempts = models.IntegerField(default=0)
+    lockout_until = models.DateTimeField(null=True, blank=True)
+    last_attempt = models.DateTimeField(auto_now=True)
 
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+    def __str__(self):
+        return f"{self.user.username} - {self.attempts} attempts"
+
+
+
+
+
+
+
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
     
-# post_save.connect(create_user_profile, sender=User)
-# post_save.connect(save_user_profile, sender=User)
+post_save.connect(create_user_profile, sender=User)
+post_save.connect(save_user_profile, sender=User)
