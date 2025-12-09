@@ -274,7 +274,7 @@ def filter_product(request):
     categories = request.GET.getlist("category[]")
     vendors = request.GET.getlist("vendor[]")
 
-
+    # print("Categories Selected:", categories)
     min_price = request.GET['min_price']
     max_price = request.GET['max_price']
 
@@ -285,7 +285,7 @@ def filter_product(request):
 
 
     if len(categories) > 0:
-        products = products.filter(category__id__in=categories)
+        products = products.filter(mini_subcategory__subcategory__category__id__in=categories)
 
     if len(vendors) > 0:
         products = products.filter(vendor__id__in=vendors)
@@ -573,9 +573,21 @@ def save_checkout_info(request):
 def payment_completed_view(request,oid):
     order = CartOrder.objects.get(oid=oid)
     
+
+
     if order.paid_status == False:
         order.paid_status = True
         order.save()
+    else:
+        messages.warning(request, "Payment already completed for this order.")
+        return redirect("core:index")
+
+    
+
+    # Clear the cart session after successful payment
+    if 'cart_data_obj' in request.session:
+        del request.session['cart_data_obj']
+        messages.success(request, "Payment completed successfully")
         
     context = {
         "order": order,

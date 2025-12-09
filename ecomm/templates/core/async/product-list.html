@@ -1,3 +1,4 @@
+{% load humanize %}
 {% for p in products %}
 <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
     <div class="product-cart-wrap mb-30">
@@ -35,8 +36,9 @@
             </div>
             <div class="product-card-bottom">
                 <div class="product-price">
-                    <span>$</span> <span class="current-product-price-{{ p.id }}">{{p.price}}</span>
-                    <span class="old-price">${{p.old_price}}</span>
+                    <span>Ksh </span> <span class="current-product-price-{{ p.id }}">{{p.price}}</span>
+                    <br/>
+                    <span class="old-price">Ksh {{p.old_price|floatformat:0|intcomma}}</span>
                 </div>
                 <div class="add-cart">
                     <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.id }}">

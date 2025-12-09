@@ -75,8 +75,8 @@ $(document).ready(function () {
             let filter_value = $(this).val()
             let filter_key = $(this).data("filter") // vendor, category
 
-            // console.log("Filter value is:", filter_value);
-            // console.log("Filter key is:", filter_key);
+            console.log("Filter value is:", filter_value);
+            console.log("Filter key is:", filter_key);
 
             filter_object[filter_key] = Array.from(document.querySelectorAll('input[data-filter=' + filter_key + ']:checked')).map(function (element) {
                 return element.value
