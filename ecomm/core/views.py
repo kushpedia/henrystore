@@ -374,62 +374,62 @@ def update_cart(request):
     context = render_to_string("core/async/cart-list.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
     return JsonResponse({"data": context, 'totalcartitems': len(request.session['cart_data_obj'])})
 
-@login_required
-def checkout(request):
-    cart_total_amount = 0
-    total_amount = 0
-    if 'cart_data_obj' in request.session:
-        for p_id, item in request.session['cart_data_obj'].items():
-            total_amount += int(item['qty']) * float(item['price'])
-    ############ Create Order ################
-        order = CartOrder.objects.create(user=request.user,
-                price=total_amount,)
+# @login_required
+# def checkout(request):
+#     cart_total_amount = 0
+#     total_amount = 0
+#     if 'cart_data_obj' in request.session:
+#         for p_id, item in request.session['cart_data_obj'].items():
+#             total_amount += int(item['qty']) * float(item['price'])
+#     ############ Create Order ################
+#         order = CartOrder.objects.create(user=request.user,
+#                 price=total_amount,)
         
     
 
-        for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
+#         for p_id, item in request.session['cart_data_obj'].items():
+#             cart_total_amount += int(item['qty']) * float(item['price'])
 
-            ############ Create Order Items ################
-            items = CartOrderItems.objects.create(
-            order=order,
-            invoice_no='INV-'+str(order.id),
-            item=item['title'],
-            image=item['image'],
-            qty=item['qty'],
-            price=item['price'],
-            total=float(item['qty']) * float(item['price'])
-        )
+#             ############ Create Order Items ################
+#             items = CartOrderItems.objects.create(
+#             order=order,
+#             invoice_no='INV-'+str(order.id),
+#             item=item['title'],
+#             image=item['image'],
+#             qty=item['qty'],
+#             price=item['price'],
+#             total=float(item['qty']) * float(item['price'])
+#         )
 
 
 
-    host = request.get_host()
-    paypal_dict={
-        'business':settings.PAYPAL_RECEIVER_EMAIL,
-        'amount':cart_total_amount,
-        'item_name':'ORDER-ITEM-NO'+str(order.id),
-        'invoice':"INVOICE-"+str(order.id),
-        'currency_code':'USD',
-        'notify_url': 'http://{}{}'.format(host,reverse('core:paypal-ipn')),
-        'return_url': 'http://{}{}'.format(host,reverse('core:payment-completed')),
-        'cancel_return': 'http://{}{}'.format(host,reverse('core:payment-failed')),
-    }
-    # Form to render the paypal button
-    payment_button_form = PayPalPaymentsForm(initial=paypal_dict)
+#     host = request.get_host()
+#     paypal_dict={
+#         'business':settings.PAYPAL_RECEIVER_EMAIL,
+#         'amount':cart_total_amount,
+#         'item_name':'ORDER-ITEM-NO'+str(order.id),
+#         'invoice':"INVOICE-"+str(order.id),
+#         'currency_code':'USD',
+#         'notify_url': 'http://{}{}'.format(host,reverse('core:paypal-ipn')),
+#         'return_url': 'http://{}{}'.format(host,reverse('core:payment-completed')),
+#         'cancel_return': 'http://{}{}'.format(host,reverse('core:payment-failed')),
+#     }
+#     # Form to render the paypal button
+#     payment_button_form = PayPalPaymentsForm(initial=paypal_dict)
 
-    # cart_total_amount = 0
-    # if 'cart_data_obj' in request.session:
-    #     for p_id, item in request.session['cart_data_obj'].items():
-    #         cart_total_amount += int(item['qty']) * float(item['price'])
+#     # cart_total_amount = 0
+#     # if 'cart_data_obj' in request.session:
+#     #     for p_id, item in request.session['cart_data_obj'].items():
+#     #         cart_total_amount += int(item['qty']) * float(item['price'])
     
-    try:
-        active_address = Address.objects.filter(user=request.user, status=True).first()       
-    except:
-        messages.warning(request, "Only one active address allowed. Please set an address as default.")
-    return render(request, "core/checkout.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount,'payment_button_form':payment_button_form,'active_address':active_address})
+#     try:
+#         active_address = Address.objects.filter(user=request.user, status=True).first()       
+#     except:
+#         messages.warning(request, "Only one active address allowed. Please set an address as default.")
+#     return render(request, "core/checkout.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount,'payment_button_form':payment_button_form,'active_address':active_address})
     
 
-    return render(request, "core/checkout.html")
+#     return render(request, "core/checkout.html")
 
 
 @login_required
@@ -463,42 +463,42 @@ def newCheckout(request, oid):
     context = {
         "order": order,
         "order_items": order_items,
-        "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
+        # "stripe_publishable_key": settings.STRIPE_PUBLIC_KEY,
 
     }
     return render(request, "core/new_checkout.html", context)
 
-@csrf_exempt
-def create_checkout_session(request, oid):
-    order = CartOrder.objects.get(oid=oid)
-    stripe.api_key = settings.STRIPE_SECRET_KEY
+# @csrf_exempt
+# def create_checkout_session(request, oid):
+#     order = CartOrder.objects.get(oid=oid)
+#     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    checkout_session = stripe.checkout.Session.create(
-        customer_email = order.email,
-        payment_method_types=['card'],
-        line_items = [
-            {
-                'price_data': {
-                    'currency': 'USD',
-                    'product_data': {
-                        'name': order.full_name
-                    },
-                    'unit_amount': int(order.price * 100)
-                },
-                'quantity': 1
-            }
-        ],
-        mode = 'payment',
-        success_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid])) + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid]))
-    )
+#     checkout_session = stripe.checkout.Session.create(
+#         customer_email = order.email,
+#         payment_method_types=['card'],
+#         line_items = [
+#             {
+#                 'price_data': {
+#                     'currency': 'USD',
+#                     'product_data': {
+#                         'name': order.full_name
+#                     },
+#                     'unit_amount': int(order.price * 100)
+#                 },
+#                 'quantity': 1
+#             }
+#         ],
+#         mode = 'payment',
+#         success_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid])) + "?session_id={CHECKOUT_SESSION_ID}",
+#         cancel_url = request.build_absolute_uri(reverse("core:payment-completed", args=[order.oid]))
+#     )
 
-    order.paid_status = False
-    order.stripe_payment_intent = checkout_session['id']
-    order.save()
+#     order.paid_status = False
+#     order.stripe_payment_intent = checkout_session['id']
+#     order.save()
 
-    # print("checkkout session", checkout_session)
-    return JsonResponse({"sessionId": checkout_session.id})
+#     # print("checkkout session", checkout_session)
+#     return JsonResponse({"sessionId": checkout_session.id})
 
 
 

@@ -10,6 +10,7 @@ urlpatterns = [
     path('users/', include('userauths.urls')),
     path("useradmin/", include("useradmin.urls")),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('payments/', include('payments.urls')),
 
 ]
 if settings.DEBUG:

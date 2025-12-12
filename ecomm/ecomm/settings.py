@@ -26,6 +26,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = env("EMAIL_ID")
 EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 
+# mpesa credentials
+MPESA_CONSUMER_KEY = env.str("MPESA_CONSUMER_KEY")
+MPESA_CONSUMER_SECRET = env.str("MPESA_CONSUMER_SECRET")
+MPESA_PASS_KEY = env.str("MPESA_PASS_KEY")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -33,14 +38,13 @@ EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 SECRET_KEY = 'django-insecure-mfvte4i@l!m)ly9#%rqo^j7d8*0*z#tjw)qd^+(7220z#7mbwi'
 
 # stripe keys
-STRIPE_SECRET_KEY = env.str("STRIPE_SECRET_KEY")
-STRIPE_PUBLIC_KEY = env.str("STRIPE_PUBLIC_KEY")
+# STRIPE_SECRET_KEY = env.str("STRIPE_SECRET_KEY")
+# STRIPE_PUBLIC_KEY = env.str("STRIPE_PUBLIC_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["92f845f06b16.ngrok-free.app","localhost","192.168.100.57","192.168.8.165","127.0.0.1"]
 
 # Application definition
 
@@ -61,7 +65,8 @@ INSTALLED_APPS = [
     'core',
     'userauths',
 	# payments integrations
-	'paypal.standard.ipn',
+	# 'paypal.standard.ipn',
+	'payments',
 
 	
 ]
@@ -167,5 +172,5 @@ AUTH_USER_MODEL = 'userauths.User'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
-PAYPAL_RECEIVER_EMAIL = 'kushpedia@business.example.com'
-PAYPAL_TEST = True
+# PAYPAL_RECEIVER_EMAIL = 'kushpedia@business.example.com'
+# PAYPAL_TEST = True

@@ -36,14 +36,14 @@ urlpatterns = [
 	path("update-cart/", views.update_cart, name="update-cart"),
 	# checkout
 	path("new_checkout/<oid>/", views.newCheckout, name="new_checkout"),
-	path("checkout/", views.checkout, name="checkout"),
+	# path("checkout/", views.checkout, name="checkout"),
 	# paypal urls
-	path('paypal/', include('paypal.standard.ipn.urls')),
+	# path('paypal/', include('paypal.standard.ipn.urls')),
 	# payment process urls
 	path("payment-completed/<oid>/", views.payment_completed_view, name="payment-completed"),
 	path("payment-failed/", views.payment_failed_view, name="payment-failed"),
 	# stripe payment
-	path("api/create_checkout_session/<oid>/", views.create_checkout_session, name="api_checkout_session"),
+	# path("api/create_checkout_session/<oid>/", views.create_checkout_session, name="api_checkout_session"),
 	# dashboard
 	path("dashboard/", views.customer_dashboard, name="dashboard"),
 	# order deatails
