@@ -37,14 +37,12 @@ MPESA_PASS_KEY = env.str("MPESA_PASS_KEY")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-mfvte4i@l!m)ly9#%rqo^j7d8*0*z#tjw)qd^+(7220z#7mbwi'
 
-# stripe keys
-# STRIPE_SECRET_KEY = env.str("STRIPE_SECRET_KEY")
-# STRIPE_PUBLIC_KEY = env.str("STRIPE_PUBLIC_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["92f845f06b16.ngrok-free.app","localhost","192.168.100.57","192.168.8.165","127.0.0.1"]
+ALLOWED_HOSTS = ["afe0fec84b71.ngrok-free.app","localhost","192.168.100.57","192.168.8.165","127.0.0.1"]
 
 # Application definition
 
@@ -63,9 +61,7 @@ INSTALLED_APPS = [
 	'ckeditor',
     # custom apps
     'core',
-    'userauths',
-	# payments integrations
-	# 'paypal.standard.ipn',
+    'userauths',	
 	'payments',
 
 	
@@ -172,5 +168,28 @@ AUTH_USER_MODEL = 'userauths.User'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
-# PAYPAL_RECEIVER_EMAIL = 'kushpedia@business.example.com'
-# PAYPAL_TEST = True
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+        },
+        'yourapp': {  # Replace with your app name
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
