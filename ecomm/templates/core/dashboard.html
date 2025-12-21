@@ -1,6 +1,7 @@
 
 
 {% extends 'partials/base.html' %}
+{% load humanize %}
 {% load static %}
 {% block content %}
 <main class="main pages">
@@ -133,7 +134,7 @@
 															<td class="text-danger"><b><span>X</span></b></td>
 
 															{% endif %}
-															<td>${{o.price}}</td>
+															<td>Ksh {{o.price|floatformat:2|intcomma}}</td>
 															<td><a href="{% url 'core:order-detail' o.id %}" class="btn-small d-block">View</a></td>
 														</tr>
 														{% endfor %}

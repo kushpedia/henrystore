@@ -413,9 +413,9 @@
 												</div>
 												<div class="product-content-wrap">
 													<div class="product-category">
-														<a href="{% url 'core:product-detail' p.pid %}">{{ p.category.title }}</a>
+														<a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{ p.mini_subcategory.subcategory.category.title }}</a>
 													</div>
-													<h2><a href="shop-product-right.html">{{ p.title }}</a></h2>
+													<h2><a href="shop-product-right.html">{{ p.title|truncatewords:3 }}</a></h2>
 													<div class="product-rate-cover">
 														<i class="fas fa-star text-warning"></i>
 														<span class="font-small ml-5 text-muted"> ({{ p.reviews.all.count }})</span>
@@ -423,10 +423,9 @@
 													</div>
 													<div>
 														{% if p.vendor %}
-														<span class="font-small text-muted">By <a href="
-															">{{p.vendor.title}}</a></span>
+														<span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor.title}}</a></span>
 														{% else %}  
-														<span class="font-small text-muted">By <a href="">Destiny Franks</a></span>
+														<span class="font-small text-muted">By <a href="#">Kushpedia</a></span>
 														{% endif %}
 													</div>
 													<div class="product-card-bottom">

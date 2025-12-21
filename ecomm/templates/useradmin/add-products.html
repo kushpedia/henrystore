@@ -151,14 +151,27 @@
                             <div class="card-header">
                                 <h4>Others</h4>
                             </div>
-                            <div class="card-body">
-                                <div class="row gx-2">
-                                    <div class="col-sm-6 mb-3">
-                                        <label class="form-label">Category</label>
-                                        {{form.category}}
-                                    </div>
-                                    
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4>Category</h4>
                                 </div>
+                                <div class="card-body">
+                                    <div class="row gx-2">
+                                        <div class="col-sm-12 mb-3">
+                                            <label class="form-label">Product Category</label>
+                                            {{form.mini_subcategory}}
+                                            <small class="text-muted">Format: Main Category > Subcategory > Mini Subcategory</small>
+                                            {% if form.mini_subcategory.errors %}
+                                                <div class="text-danger">
+                                                    {% for error in form.mini_subcategory.errors %}
+                                                        {{ error }}
+                                                    {% endfor %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                 <!-- row.// -->
                             </div>
                             <br>
@@ -170,5 +183,52 @@
                 </div>
                 </form>
             </section>
-            <!-- content-main end// -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // When category changes, load subcategories
+    $('#id_category').change(function() {
+        var categoryId = $(this).val();
+        if (categoryId) {
+            $.ajax({
+                url: '/useradmin/get-subcategories/',  // You need to create this URL
+                data: {
+                    'category_id': categoryId
+                },
+                success: function(data) {
+                    $('#id_subcategory').html('<option value="">Select Subcategory</option>');
+                    $.each(data, function(key, value) {
+                        $('#id_subcategory').append('<option value="' + key + '">' + value + '</option>');
+                    });
+                    $('#id_mini_subcategory').html('<option value="">Select Mini Subcategory</option>');
+                }
+            });
+        } else {
+            $('#id_subcategory').html('<option value="">Select Category First</option>');
+            $('#id_mini_subcategory').html('<option value="">Select Subcategory First</option>');
+        }
+    });
+
+    // When subcategory changes, load mini subcategories
+    $('#id_subcategory').change(function() {
+        var subcategoryId = $(this).val();
+        if (subcategoryId) {
+            $.ajax({
+                url: '/useradmin/get-mini-subcategories/',  // You need to create this URL
+                data: {
+                    'subcategory_id': subcategoryId
+                },
+                success: function(data) {
+                    $('#id_mini_subcategory').html('<option value="">Select Mini Subcategory</option>');
+                    $.each(data, function(key, value) {
+                        $('#id_mini_subcategory').append('<option value="' + key + '">' + value + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('#id_mini_subcategory').html('<option value="">Select Subcategory First</option>');
+        }
+    });
+});
+</script>
             {% endblock content %}

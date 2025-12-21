@@ -164,10 +164,15 @@
                                             <li><a href="{% url 'core:wishlist' %}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a></li>
                                             <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
                                             {% if request.user.is_authenticated %}
+                                            {% if request.user.is_superuser  %}
+                                            <li><a href="{% url 'useradmin:dashboard' %}"><i class="fi fi-rs-sign-in mr-10"></i>Admin Dashboard</a></li>
+                                            {% endif %}
                                             <li><a href="{% url 'userauths:sign-out' %}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
+                                            
                                             {% else %}
                                             
                                             <li><a href="{% url 'userauths:sign-in' %}"><i class="fi fi-rs-sign-in mr-10"></i>Sign in</a></li>
+                                            
                                             {% endif %}
                                         </ul>
                                     </div>

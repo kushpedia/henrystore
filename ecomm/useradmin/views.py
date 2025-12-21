@@ -6,12 +6,16 @@ from django.db.models import Sum
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
-from core.models import CartOrder, CartOrderItems, Product, Category, ProductReview
+from core.models import CartOrder, CartOrderItems, MiniSubCategory, Product, Category, ProductReview
 from userauths.models import Profile, User
 import datetime
 from useradmin.forms import AddProductForm
 from django.contrib.auth.decorators import login_required
 from useradmin.decorators import admin_required
+from django.http import JsonResponse
+from core.models import SubCategory, MiniSubCategory
+
+
 
 @admin_required
 def dashboard(request):
@@ -56,17 +60,22 @@ def add_product(request):
         if form.is_valid():
             new_form = form.save(commit=False)
             new_form.user = request.user
+            
+            # Check if mini_subcategory is selected
+            if not new_form.mini_subcategory:
+                form.add_error('mini_subcategory', 'Please select a category')
+                return render(request, "useradmin/add-products.html", {'form': form})
+            
             new_form.save()
-            form.save_m2m()
+            # form.save_m2m()  # Only needed if you have ManyToMany fields
             return redirect("useradmin:dashboard-products")
     else:
         form = AddProductForm()
+    
     context = {
-        'form':form
+        'form': form
     }
     return render(request, "useradmin/add-products.html", context)
-
-
 
 @admin_required
 def edit_product(request, pid):
@@ -202,3 +211,17 @@ def change_password(request):
             return redirect("useradmin:change_password")
     
     return render(request, "useradmin/change_password.html")
+
+
+
+def get_subcategories(request):
+    category_id = request.GET.get('category_id')
+    subcategories = SubCategory.objects.filter(category_id=category_id)
+    data = {sub.id: sub.title for sub in subcategories}
+    return JsonResponse(data)
+
+def get_mini_subcategories(request):
+    subcategory_id = request.GET.get('subcategory_id')
+    mini_subcategories = MiniSubCategory.objects.filter(subcategory_id=subcategory_id)
+    data = {mini.id: mini.title for mini in mini_subcategories}
+    return JsonResponse(data)

@@ -41,6 +41,12 @@
         font-size: 0.9rem;
         color: #6c757d;
     }
+    #whatsapp-button:hover {
+    background-color: #128C7E !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+}
 </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -118,6 +124,7 @@
                         </div>
                     </div>
 
+
                     <!-- M-Pesa Payment Section -->
                     <div class="border p-4 mb-3 rounded" style="border-color: #00a651 !important;">
                         <h5 class="mb-3" style="color: #00a651;"><i class="fas fa-mobile-alt me-2"></i>Pay with M-Pesa</h5>
@@ -177,10 +184,127 @@
                             </button>
                         </div>
                     </div>
+                    <div class="position-relative my-4">
+                        <hr style="border: none; height: 1px; background: linear-gradient(90deg, #bd8b8b, #25D366, #c69494);">
+                        <div class="position-absolute top-50 start-50 translate-middle bg-white px-3" style="color: #25D366;">
+                            <i class="fas fa-circle fa-xs"></i>
+                            <i class="fas fa-circle fa-xs mx-1"></i>
+                            <i class="fas fa-circle fa-xs"></i>
+                        </div>
+                    </div>
+                    <!-- WhatsApp Order Placement Section -->
+<div class="border p-4 mb-4 rounded shadow-sm" style="border: 2px dashed #25D366 !important; background: linear-gradient(135deg, rgba(37, 211, 102, 0.05) 0%, rgba(37, 211, 102, 0.02) 100%);">
+    <div class="d-flex align-items-center mb-3">
+        <div class="me-3" style="background-color: #25D366; border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+            <i class="fab fa-whatsapp fa-lg text-white"></i>
+        </div>
+        <div>
+            <h5 class="mb-0" style="color: #075E54; font-weight: 700;">Place Order via WhatsApp</h5>
+            <small class="text-muted">Quick & Personal Service</small>
+        </div>
+    </div>
+    
+    <!-- Info Card -->
+    <div class="alert alert-light border mb-3" style="background-color: #f8fff9; border-color: #25D36640 !important;">
+        <div class="d-flex">
+            <i class="fas fa-info-circle me-2" style="color: #25D366;"></i>
+            <div class="small">
+                <strong>How it works:</strong> Click below to send your order details via WhatsApp. Our team will contact you to complete the order.
+            </div>
+        </div>
+    </div>
 
-                    <!-- Existing Payment Buttons -->
-                    <!-- <button type="button" class="btn w-100" id="checkout-button" style="background-color: blueviolet;">Pay With Stripe (Credit or Debit Card)</button>
-                    <div id="paypal-button-container" class="mt-3"></div> -->
+    <!-- Step-by-step Guide -->
+    <div class="mb-3">
+        <div class="d-flex align-items-center mb-2">
+            <span class="badge rounded-circle me-2" style="background-color: #25D366; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">1</span>
+            <span class="small">Enter your WhatsApp number (optional)</span>
+        </div>
+        <div class="d-flex align-items-center mb-2">
+            <span class="badge rounded-circle me-2" style="background-color: #25D366; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">2</span>
+            <span class="small">Click "Send Order via WhatsApp"</span>
+        </div>
+        <div class="d-flex align-items-center">
+            <span class="badge rounded-circle me-2" style="background-color: #25D366; color: white; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;">3</span>
+            <span class="small">We'll contact you to complete payment & delivery</span>
+        </div>
+    </div>
+
+    <!-- Phone Input with Card Style -->
+    <div class="card mb-3 border-0" style="background-color: #f8fff9;">
+        <div class="card-body p-3">
+            <label class="form-label small fw-bold mb-2" style="color: #075E54;">
+                <i class="fas fa-mobile-alt me-1"></i>Your WhatsApp Number (Optional)
+            </label>
+            <div class="input-group input-group-sm">
+                <span class="input-group-text" style="background-color: #e8f5e9; color: #075E54; font-weight: 600;">+254</span>
+                <input type="text" 
+                        class="form-control form-control-sm" 
+                        id="whatsapp-phone" 
+                        name="whatsapp_phone" 
+                        value="{% if user_profile.phone %}{{ user_profile.phone|slice:'3:' }}{% endif %}" 
+                        placeholder="7XX XXX XXX" 
+                        pattern="[0-9]{9}" 
+                        maxlength="9"
+                        style="border-color: #25D36640;">
+                <button type="button" class="btn btn-sm" id="use-profile-phone-whatsapp" 
+                        style="background-color: #e8f5e9; color: #075E54; border: 1px solid #25D36640;">
+                    <i class="fas fa-user"></i>
+                </button>
+            </div>
+            <small class="text-muted mt-1 d-block">
+                <i class="fas fa-shield-alt me-1"></i>We'll only use this to contact you
+            </small>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button with Icon Badge -->
+    <button type="button" class="btn w-100 mb-3 position-relative" id="whatsapp-button" 
+            style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); 
+                    color: white; 
+                    border: none;
+                    padding: 12px;
+                    border-radius: 12px;
+                    font-weight: 700;
+                    letter-spacing: 0.5px;
+                    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);">
+        <i class="fab fa-whatsapp fa-lg me-2"></i>
+        Send Order via WhatsApp
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill" 
+            style="background-color: #FF9800; font-size: 0.6em;">
+            Recommended
+        </span>
+    </button>
+    
+    <!-- Benefits -->
+    <div class="text-center">
+        <div class="row g-2 mb-2">
+            <div class="col-4">
+                <div class="p-1 rounded" style="background-color: #f0f9ff;">
+                    <i class="fas fa-clock fa-xs me-1" style="color: #128C7E;"></i>
+                    <span class="small">Fast Response</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-1 rounded" style="background-color: #f0f9ff;">
+                    <i class="fas fa-question-circle fa-xs me-1" style="color: #128C7E;"></i>
+                    <span class="small">Ask Questions</span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="p-1 rounded" style="background-color: #f0f9ff;">
+                    <i class="fas fa-shield-alt fa-xs me-1" style="color: #128C7E;"></i>
+                    <span class="small">Secure</span>
+                </div>
+            </div>
+        </div>
+        <small class="text-muted">
+            <i class="fas fa-bolt me-1" style="color: #FF9800;"></i>
+            <strong>Average response time:</strong> Under 30 minutes
+        </small>
+    </div>
+</div>
+                    
                 </div>
             </div>
         </div>
@@ -654,6 +778,246 @@
     });
 </script>
 
+
+
+<!-- WhatsApp Order Script -->
+<script>
+    $(document).ready(function() {
+        console.log("✅ WhatsApp order system loading...");
+        
+        // WhatsApp phone number formatter
+        function formatWhatsAppPhone(phone) {
+            phone = phone.replace(/\D/g, '');
+            if (phone.startsWith('0')) {
+                phone = '254' + phone.substring(1);
+            } else if (phone.startsWith('7') || phone.startsWith('1')) {
+                phone = '254' + phone;
+            }
+            return phone;
+        }
+        
+        // Generate WhatsApp message with order details
+        function generateWhatsAppMessage() {
+            const orderId = "{{ order.oid }}";
+            const totalAmount = {{ order.price }};
+            const orderItems = [
+                {% for o in order_items %}
+                {
+                    name: "{{ o.item|escapejs }}",
+                    quantity: {{ o.qty }},
+                    price: {{ o.price }},
+                    total: {{ o.total }}
+                }{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            ];
+            
+            // Build item list
+            let itemsText = '';
+            orderItems.forEach(item => {
+                itemsText += `• ${item.name} (Qty: ${item.quantity}) - Ksh ${item.total.toLocaleString()}\n`;
+            });
+            
+            // Compose message with emojis
+            const message = `🛒 *NEW ORDER REQUEST* 🛒\n\n` +
+                        `*Order ID:* ${orderId}\n` +
+                        `*Order Details:*\n${itemsText}\n` +
+                        `*Total Amount:* Ksh ${totalAmount.toLocaleString()}\n\n` +
+                        `📞 *Contact me to complete this order.*`;
+            
+            return encodeURIComponent(message);
+        }
+        
+        // Use profile phone for WhatsApp
+        $('#use-profile-phone-whatsapp').on('click', function() {
+            const $btn = $(this);
+            
+            // Add animation
+            $btn.html('<i class="fas fa-spinner fa-spin"></i>');
+            $btn.css({
+                'background-color': '#25D366',
+                'color': 'white'
+            });
+            
+            setTimeout(() => {
+                {% if user.profile.phone %}
+                    let profilePhone = '{{ user.profile.phone }}';
+                    if (profilePhone.startsWith('+254')) {
+                        profilePhone = profilePhone.substring(4);
+                    } else if (profilePhone.startsWith('254')) {
+                        profilePhone = profilePhone.substring(3);
+                    } else if (profilePhone.startsWith('0')) {
+                        profilePhone = profilePhone.substring(1);
+                    }
+                    $('#whatsapp-phone').val(profilePhone);
+                    
+                    // Show success feedback
+                    $btn.html('<i class="fas fa-check"></i>');
+                    setTimeout(() => {
+                        $btn.html('<i class="fas fa-user"></i>');
+                        $btn.css({
+                            'background-color': '#e8f5e9',
+                            'color': '#075E54'
+                        });
+                    }, 1000);
+                {% else %}
+                    $btn.html('<i class="fas fa-times"></i>');
+                    $('#whatsapp-phone').addClass('is-invalid');
+                    setTimeout(() => {
+                        $btn.html('<i class="fas fa-user"></i>');
+                        $btn.css({
+                            'background-color': '#e8f5e9',
+                            'color': '#075E54'
+                        });
+                        $('#whatsapp-phone').removeClass('is-invalid');
+                    }, 1500);
+                {% endif %}
+            }, 500);
+        });
+        
+        // WhatsApp button click handler
+        $('#whatsapp-button').on('click', function() {
+            const $btn = $(this);
+            const originalHtml = $btn.html();
+            
+            console.log("WhatsApp button clicked");
+            
+            // Button animation
+            $btn.css({
+                'transform': 'scale(0.98)',
+                'box-shadow': '0 2px 8px rgba(37, 211, 102, 0.5)'
+            });
+            
+            // Get WhatsApp number (optional)
+            const whatsappPhone = $('#whatsapp-phone').val().trim();
+            let phoneNumber = '';
+            
+            if (whatsappPhone && whatsappPhone.length === 9 && /^\d+$/.test(whatsappPhone)) {
+                phoneNumber = formatWhatsAppPhone(whatsappPhone);
+            }
+            
+            // Generate message
+            const message = generateWhatsAppMessage();
+            
+            // WhatsApp business number (replace with your actual WhatsApp business number)
+            const businessWhatsAppNumber = '254703443827'; 
+            
+            // Build WhatsApp URL
+            let whatsappUrl = `https://wa.me/${businessWhatsAppNumber}?text=${message}`;
+            
+            // If user provided their number, add it to the message
+            if (phoneNumber) {
+                const contactInfo = `\n\n📱 *My Contact Number:* ${phoneNumber}`;
+                whatsappUrl += encodeURIComponent(contactInfo);
+            }
+            
+            // Update button to show sending state
+            $btn.html('<i class="fab fa-whatsapp fa-lg me-2"></i>Opening WhatsApp...');
+            $btn.prop('disabled', true);
+            
+            // Add sending animation
+            setTimeout(() => {
+                // Open WhatsApp in new tab
+                const newWindow = window.open(whatsappUrl, '_blank');
+                
+                if (newWindow) {
+                    $btn.html('<i class="fas fa-check-circle fa-lg me-2"></i>WhatsApp Opened!');
+                    $btn.css({
+                        'background': 'linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%)',
+                        'color': 'white'
+                    });
+                    
+                    // Show success indicator
+                    $btn.parent().prepend(`
+                        <div class="alert alert-success alert-dismissible fade show mb-2 p-2 small" role="alert">
+                            <i class="fas fa-check-circle me-1"></i>
+                            WhatsApp opened! Return here if you need assistance.
+                            <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert"></button>
+                        </div>
+                    `);
+                } else {
+                    $btn.html('<i class="fas fa-exclamation-circle fa-lg me-2"></i>Popup Blocked!');
+                    $btn.css({
+                        'background': 'linear-gradient(135deg, #f44336 0%, #d32f2f 100%)',
+                        'color': 'white'
+                    });
+                    
+                    // Show popup blocked message
+                    alert('Please allow popups for this site to open WhatsApp. Or copy this link: ' + whatsappUrl);
+                }
+                
+                // Reset button after 4 seconds
+                setTimeout(() => {
+                    $btn.html(originalHtml);
+                    $btn.prop('disabled', false);
+                    $btn.css({
+                        'transform': 'scale(1)',
+                        'background': 'linear-gradient(135deg, #25D366 0%, #128C7E 100%)',
+                        'box-shadow': '0 4px 12px rgba(37, 211, 102, 0.3)'
+                    });
+                }, 4000);
+            }, 1000);
+            
+            // Optional: Track this action
+            // $.ajax({
+            //     url: '/whatsapp-order/',
+            //     type: 'POST',
+            //     headers: {
+            //         'X-CSRFToken': $('input[name="csrfmiddlewaretoken"]').val()
+            //     },
+            //     data: {
+            //         order_id: "{{ order.oid }}",
+            //         action: 'whatsapp_initiated',
+            //         phone_provided: !!whatsappPhone
+            //     }
+            // });
+        });
+        
+        // Phone input formatting and styling
+        $('#whatsapp-phone').on('input', function() {
+            let value = $(this).val().replace(/\D/g, '');
+            if (value.length > 9) value = value.substring(0, 9);
+            
+            // Format as user types: 7XX XXX XXX
+            if (value.length > 3 && value.length <= 6) {
+                value = value.substring(0, 3) + ' ' + value.substring(3);
+            } else if (value.length > 6) {
+                value = value.substring(0, 3) + ' ' + value.substring(3, 6) + ' ' + value.substring(6);
+            }
+            
+            $(this).val(value);
+            
+            // Add visual feedback
+            if (value.replace(/\s/g, '').length === 9) {
+                $(this).addClass('is-valid');
+                $(this).removeClass('is-invalid');
+            } else if (value.replace(/\s/g, '').length > 0) {
+                $(this).removeClass('is-valid');
+                $(this).addClass('is-invalid');
+            } else {
+                $(this).removeClass('is-valid is-invalid');
+            }
+        });
+        
+        // Hover effects
+        $('#whatsapp-button').hover(
+            function() {
+                $(this).css({
+                    'transform': 'translateY(-2px)',
+                    'box-shadow': '0 6px 16px rgba(37, 211, 102, 0.4)'
+                });
+            },
+            function() {
+                if (!$(this).prop('disabled')) {
+                    $(this).css({
+                        'transform': 'translateY(0)',
+                        'box-shadow': '0 4px 12px rgba(37, 211, 102, 0.3)'
+                    });
+                }
+            }
+        );
+        
+    });
+</script>
 
 
 {% endblock content %}

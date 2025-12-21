@@ -17,4 +17,7 @@ urlpatterns = [
     path("reviews/", views.reviews, name="reviews"),
 	path("settings/", views.settings, name="settings"),
 	path("change_password/", views.change_password, name="change_password"),
+	# select subcategory ajax
+	path('get-subcategories/', views.get_subcategories, name='get_subcategories'),
+path('get-mini-subcategories/', views.get_mini_subcategories, name='get_mini_subcategories'),
 ]
