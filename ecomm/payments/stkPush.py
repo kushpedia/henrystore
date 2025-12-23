@@ -94,7 +94,7 @@ def initiate_stk_push(request):
         
         # M-Pesa API configuration
         process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
-        callback_url = 'https://32d43fee9e8a.ngrok-free.app/payments/callback/'  # Update if needed
+        callback_url = 'https://27328ea08304.ngrok-free.app/payments/callback/'  # Update if needed
         passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
         business_short_code = '174379'
         

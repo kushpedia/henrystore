@@ -116,7 +116,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/kstores3.png' %}" alt="logo" /></a>
+                        <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/kstores4r.png' %}" alt="logo" /></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
@@ -155,7 +155,7 @@
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a href="page-account.html">
-                                        <img class="svgInject" alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-user.svg' %}" />
+                                        <img class="svgInject" alt="Kstores" src="{% static 'assets/imgs/theme/icons/icon-user.svg' %}" />
                                     </a>
                                     <a href="{% url 'core:dashboard' %}"><span class="lable ml-0">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
@@ -187,7 +187,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/kstores3.png' %}" alt="logo" /></a>
+                        <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/kstores4r.png' %}" alt="logo" /></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -256,10 +256,6 @@
                                         <a href="{% url 'core:product-list' %}">Shop</a>
                                     </li>
 
-
-
-
-                                    
                                     <li>
                                         <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
@@ -267,11 +263,6 @@
                                             {% for v in vendors %}
                                             <li><a href="{% url 'core:vendor-detail' v.vid %}">{{v.title}}</a></li>
                                             {% endfor %}
-                                            <!-- <li><a href="vendors-list.html">Vendors List</a></li>
-                                            <li><a href="vendor-details-1.html">Vendor Details 01</a></li>
-                                            <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
-                                            <li><a href="{% url 'useradmin:dashboard' %}">Vendor Dashboard</a></li>
-                                            <li><a href="vendor-guide.html">Vendor Guide</a></li> -->
                                         </ul>
                                     </li>
                                     <li class="position-static">
@@ -373,7 +364,7 @@
                     <script>
                         setTimeout (() => {
                             $(".alert").alert("close");
-                        }, 3000)
+                        }, 5000)
                     </script
 
             </div>
@@ -488,7 +479,7 @@
                     <div class="col">
                         <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
                             <div class="logo mb-30">
-                                <a href="{% url 'core:index' %}" class="mb-15"><img src="{% static 'assets/imgs/page/kstores4.png' %}" alt="logo" style="width:180px; height:100px" /></a>
+                                <a href="{% url 'core:index' %}" class="mb-15"><img src="{% static 'assets/imgs/page/kstores4r.png' %}" alt="logo" style="width:180px; height:100px" /></a>
                                 <p class="font-lg text-heading">Shop Better. Live Better</p>
                             </div>
                             <ul class="contact-infor">
@@ -566,7 +557,17 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
-                    <p class="font-sm mb-0">&copy; 2022, <strong class="text-brand">KStore </strong> -Shop Better. Live Better <br />All rights reserved</p>
+
+                    <div class="site-copyright">Copyright <span id="current-year"></span> © K-Store</div>
+
+                        <script>
+                        // Get the current year
+                        const currentYear = new Date().getFullYear();
+                        
+                        // Insert it into the element with id "current-year"
+                        document.getElementById('current-year').textContent = currentYear;
+                        </script>
+                
                 </div>
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
@@ -632,6 +633,7 @@
                     document.getElementById("modal-vendor").innerHTML = vendor;
                     document.getElementById("modal-percentage").innerHTML = percentage + "% Off";
                     document.getElementById("modal-product-link").href = `/product/${pid}/`;
+                    document.getElementById("modal-title").href = `/product/${pid}/`;
                 });
             });
         

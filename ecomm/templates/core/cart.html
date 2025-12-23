@@ -8,8 +8,8 @@
 	<div class="page-header breadcrumb-wrap">
 		<div class="container">
 			<div class="breadcrumb">
-				<a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-				<span></span> Shop
+				<a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+				<span></span><a href="{% url 'core:product-list' %}">Shop</a> 
 				<span></span> Cart
 			</div>
 		</div>
@@ -45,23 +45,25 @@
                             <tbody>
                                 {% for product_id, item in cart_data.items %}
                                 <tr class="pt-30">
-                                    <td class="image product-thumbnail pt-40"><img src="{{ item.image }}" alt="#"></td>
+                                    <td class="image product-thumbnail pt-40">
+                                        <img src="{{ item.image }}" alt="#" style="width: 100%; height: auto; display: block;">
+                                    </td>
                                     <td class="product-des product-name">
                                         <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="{% url 'core:product-detail' item.pid %}">{{ item.title|truncatechars:20 }}</a></h6>
                                     
                                     </td>
-                                    <td class="price" data-title="Price">
+                                    <td class="price" data-title="UnitPrice">
                                         <h4 class="text-body">Ksh {{item.price|floatformat:0|intcomma}}</h4>
                                     </td>
-                                    <td class="text-center detail-info" data-title="Stock">
+                                    <td class="text-center detail-info" data-title="Quantity">
                                         <div class="mr-15">
                                             <input type="number" placeholder="Qty" class="w-25 product-qty-{{ product_id }}"  name="" value="{{ item.qty }}" id="">
                                         </div>
                                     </td>
-                                    <td class="price" data-title="Price">
+                                    <td class="price" data-title="Subtotal">
                                         <h4 class="text-brand">Ksh {% widthratio item.price 1 item.qty %} </h4>
                                     </td>
-                                    <td class="action text-center" data-title="Remove"><a style="border: none; background: none;"  class="text-body update-product" data-product="{{ product_id }}"><i class="fi-rs-refresh"></i></a></td>
+                                    <td class="action text-center" data-title="Refresh"><a style="border: none; background: none;"  class="text-body update-product" data-product="{{ product_id }}"><i class="fi-rs-refresh"></i></a></td>
                                     <td class="action text-center" data-title="Remove"><a style="border: none; background: none;"  class="text-body delete-product" data-product="{{ product_id }}"><i class="fi-rs-trash"></i></a></td>
                                 </tr>
                                 {% endfor %}

@@ -29,11 +29,9 @@ def index(request):
 
 def product_list_view(request):
     products = Product.objects.filter(product_status="published").order_by("-id")
-    # tags = Tag.objects.all().order_by("-id")[:6]
 
     context = {
         "products":products,
-        # "tags":tags,
     }
 
     return render(request, 'core/product-list.html', context)
@@ -118,15 +116,6 @@ def mini_category_product_list_view(request, cid):
         messages.warning(request, "Error Occurred. Please try again.")
         return redirect("core:index")
     return render(request, "core/mini-category-product-list.html", context)
-
-
-
-
-
-
-
-
-
 
 
 def vendor_list_view(request):

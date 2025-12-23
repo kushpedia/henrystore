@@ -7,7 +7,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo" /></a>
+                    <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/kstores4r.png' %}" alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -25,152 +25,96 @@
                 </div>
                 <div class="mobile-menu-wrap mobile-header-border">
                     <!-- mobile menu start -->
-                    <nav>
-                        <ul class="mobile-menu font-heading">
+<nav>
+    <ul class="mobile-menu font-heading">
+        <li class="hot-deals">
+            <img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals" />
+            <a href="shop-grid-right.html">Deals</a>
+        </li>
+        <li>
+            <a href="{% url 'core:index' %}">Home</a>
+        </li>
+        <li>
+            <a href="page-about.html">About</a>
+        </li>
+        <li class="menu-item-has-children">
+            <a href="#">Category <i class="fi-rs-angle-down"></i></a>
+            <ul class="dropdown">
+                {% for c in categories %}
+                <li><a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a></li>
+                {% endfor %}
+                <li><hr></li>
+                <li><a href="{% url 'core:category-list' %}">All Categories</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="{% url 'core:product-list' %}">Shop</a>
+        </li>
+        <li class="menu-item-has-children">
+            <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
+            <ul class="dropdown">
+                {% for v in vendors %}
+                <li><a href="{% url 'core:vendor-detail' v.vid %}">{{v.title}}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li class="menu-item-has-children">
+            <a href="#">Mega Menu <i class="fi-rs-angle-down"></i></a>
+            <ul class="dropdown">
+                {% for category in categories %}
+                    {% if category.subcategories.all %}
+                    <li class="menu-item-has-children">
+                        <a href="{% url 'core:category-product-list' category.cid %}">
+                            <span class="category-icon">🛒</span>
+                            {{ category.title }}
+                            <span class="product-count">({{ category.product_count }})</span>
+                        </a>
+                        <ul class="dropdown">
+                            {% for subcategory in category.subcategories.all %}
                             <li class="menu-item-has-children">
-                                <a href="index.html">Home</a>
+                                <a href="{%url 'core:subcategory-products' subcategory.cid %}">
+                                    <span class="subcategory-title" style="color: #0e5a64; font-size: 20px;">🧩{{ subcategory.title }}</span>
+                                </a>
                                 <ul class="dropdown">
-                                    <li><a href="index.html">Home 1</a></li>
-                                    <li><a href="index-2.html">Home 2</a></li>
-                                    <li><a href="index-3.html">Home 3</a></li>
-                                    <li><a href="index-4.html">Home 4</a></li>
-                                    <li><a href="index-5.html">Home 5</a></li>
-                                    <li><a href="index-6.html">Home 6</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="shop-grid-right.html">shop</a>
-                                <ul class="dropdown">
-                                    <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                    <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                    <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                    <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                    <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Single Product</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
-                                            <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                            <li><a href="shop-product-full.html">Product – No sidebar</a></li>
-                                            <li><a href="shop-product-vendor.html">Product – Vendor Infor</a></li>
-                                        </ul>
+                                    {% for mini in subcategory.mini_subcategories.all %}
+                                    <li>
+                                        <a href="{%url 'core:minicategory-products' mini.cid %}">
+                                            {{ mini.title }}
+                                            <span class="mini-count">({{ mini.product_count }})</span>
+                                        </a>
                                     </li>
-                                    <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                    <li><a href="{% url 'core:wishlist' %}">Shop – Wishlist</a></li>
-                                    <li><a href="shop-cart.html">Shop – Cart</a></li>
-                                    <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                    <li><a href="shop-compare.html">Shop – Compare</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Shop Invoice</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-invoice-1.html">Shop Invoice 1</a></li>
-                                            <li><a href="shop-invoice-2.html">Shop Invoice 2</a></li>
-                                            <li><a href="shop-invoice-3.html">Shop Invoice 3</a></li>
-                                            <li><a href="shop-invoice-4.html">Shop Invoice 4</a></li>
-                                            <li><a href="shop-invoice-5.html">Shop Invoice 5</a></li>
-                                            <li><a href="shop-invoice-6.html">Shop Invoice 6</a></li>
-                                        </ul>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Vendors</a>
-                                <ul class="dropdown">
-                                    <li><a href="vendors-grid.html">Vendors Grid</a></li>
-                                    <li><a href="vendors-list.html">Vendors List</a></li>
-                                    <li><a href="vendor-details-1.html">Vendor Details 01</a></li>
-                                    <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
-                                    <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
-                                    <li><a href="vendor-guide.html">Vendor Guide</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Mega menu</a>
-                                <ul class="dropdown">
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Women's Fashion</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Dresses</a></li>
-                                            <li><a href="shop-product-right.html">Blouses & Shirts</a></li>
-                                            <li><a href="shop-product-right.html">Hoodies & Sweatshirts</a></li>
-                                            <li><a href="shop-product-right.html">Women's Sets</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Men's Fashion</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Jackets</a></li>
-                                            <li><a href="shop-product-right.html">Casual Faux Leather</a></li>
-                                            <li><a href="shop-product-right.html">Genuine Leather</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Technology</a>
-                                        <ul class="dropdown">
-                                            <li><a href="shop-product-right.html">Gaming Laptops</a></li>
-                                            <li><a href="shop-product-right.html">Ultraslim Laptops</a></li>
-                                            <li><a href="shop-product-right.html">Tablets</a></li>
-                                            <li><a href="shop-product-right.html">Laptop Accessories</a></li>
-                                            <li><a href="shop-product-right.html">Tablet Accessories</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="blog-category-fullwidth.html">Blog</a>
-                                <ul class="dropdown">
-                                    <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                    <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                    <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                    <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Single Product Layout</a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                            <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                            <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="page-about.html">About Us</a></li>
-                                    <li><a href="page-contact.html">Contact</a></li>
-                                    <li><a href="page-account.html">My Account</a></li>
-                                    <li><a href="page-login.html">Login</a></li>
-                                    <li><a href="page-register.html">Register</a></li>
-                                    <li><a href="page-forgot-password.html">Forgot password</a></li>
-                                    <li><a href="page-reset-password.html">Reset password</a></li>
-                                    <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
-                                    <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="page-terms.html">Terms of Service</a></li>
-                                    <li><a href="page-404.html">404 Page</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Language</a>
-                                <ul class="dropdown">
-                                    <li><a href="#">English</a></li>
-                                    <li><a href="#">French</a></li>
-                                    <li><a href="#">German</a></li>
-                                    <li><a href="#">Spanish</a></li>
-                                </ul>
-                            </li>
+                            {% endfor %}
                         </ul>
-                    </nav>
-                    <!-- mobile menu end -->
+                    </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+        <li>
+            <a href="{% url 'core:contact' %}">Contact</a>
+        </li>
+    </ul>
+</nav>
+<!-- mobile menu end -->
+                    
                 </div>
                 <div class="mobile-header-info-wrap">
                     <div class="single-mobile-header-info">
-                        <a href="page-contact.html"><i class="fi-rs-marker"></i> Our location </a>
+                        <a href="{% url 'core:dashboard' %}"><i class="fi-rs-marker"></i> Our location </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="page-login.html"><i class="fi-rs-user"></i>Log In / Sign Up </a>
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'userauths:sign-out' %}"><i class="fi-rs-user"></i>Log Out</a>
+                        {% else %}
+                        <a href="{% url 'userauths:sign-in' %}"><i class="fi-rs-user"></i>Sign Up </a>
+                        {% endif %}
+
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="#"><i class="fi-rs-headphones"></i>(+01) - 2345 - 6789 </a>
+                        <a href="{% url 'core:contact' %}"><i class="fi-rs-headphones"></i>(+254) 703443827 </a>
                     </div>
                 </div>
                 <div class="mobile-social-icon mb-50">
@@ -181,7 +125,15 @@
                     <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-pinterest-white.svg' %}" alt="" /></a>
                     <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-youtube-white.svg' %}" alt="" /></a>
                 </div>
-                <div class="site-copyright">Copyright 2025 © K-Store </div>
+                <div class="site-copyright">Copyright <span id="current-year"></span> © K-Store</div>
+
+<script>
+  // Get the current year
+    const currentYear = new Date().getFullYear();
+
+  // Insert it into the element with id "current-year"
+    document.getElementById('current-year').textContent = currentYear;
+</script>
             </div>
         </div>
     </div>
@@ -436,7 +388,7 @@
                                                 <div class="product-action-1">                                                    
                                                     <button style="border: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i
                                                         class="fi-rs-heart" style="fill: aqua;"></i></button>
-                                                    <!-- <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
+                                                    
                                                     <a aria-label="Quick view"
                                                         class="action-btn quick-view-btn"
                                                         data-bs-toggle="modal"
