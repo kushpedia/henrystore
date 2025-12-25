@@ -183,12 +183,11 @@
                 </div>
             </div>
         </div>
+        
         <div class="header-bottom header-bottom-bg-color sticky-bar">
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
-                    <!-- <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/Hlogo.png' %}" alt="logo" /></a>
-                    </div> -->
+                
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categories-button-active" href="#">
@@ -365,12 +364,138 @@
                         setTimeout (() => {
                             $(".alert").alert("close");
                         }, 5000)
-                    </script
+                    </script>
 
             </div>
         </div>
     </header>
+    <!-- Add Mobile Navbar Here -->
+    <div class="mobile-header-active mobile-header-wrapper-style">
+        <div class="mobile-header-wrapper-inner">
+            <div class="mobile-header-top">
+                <div class="mobile-header-logo">
+                    <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/Hlogo.png' %}" alt="logo"  style="height: 100px; width: 100px;"/></a>
+                </div>
+                <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
+                    <button class="close-style search-close">
+                        <i class="icon-top"></i>
+                        <i class="icon-bottom"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-header-content-area">
+                <div class="mobile-search search-style-3 mobile-header-border">
+                    <form action="{% url 'core:search' %}" method="GET">
+                        <input type="text" placeholder="Search for items…" name="q"/>
+                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form>
+                </div>
+                <div class="mobile-menu-wrap mobile-header-border">
+                    <!-- mobile menu start -->
+                    <nav>
+                        <ul class="mobile-menu font-heading">
+                            <li class="hot-deals">
+                                <img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals" />
+                                <a href="shop-grid-right.html">Deals</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'core:index' %}">Home</a>
+                            </li>
+                            <li>
+                                <a href="page-about.html">About</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="">Category <i class="fi-rs-angle-down"></i></a>
+                                <ul class="dropdown">
+                                    {% for c in categories %}
+                                    <li><a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a></li>
+                                    {% endfor %}
+                                    <li><hr></li>
+                                    <li><a href="{% url 'core:category-list' %}">All Categories</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{% url 'core:product-list' %}">Shop</a>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
+                                <ul class="dropdown">
+                                    {% for v in vendors %}
+                                    <li><a href="{% url 'core:vendor-detail' v.vid %}">{{v.title}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children">
+                                <a href="">Mega Menu <i class="fi-rs-angle-down"></i></a>
+                                <ul class="dropdown">
+                                    {% for category in categories %}
+                                        {% if category.subcategories.all %}
+                                        <li class="menu-item-has-children">
+                                            <a href="{% url 'core:category-product-list' category.cid %}">
+                                                <span class="category-icon">🛒</span>
+                                                {{ category.title }}
+                                                <span class="product-count">({{ category.product_count }})</span>
+                                            </a>
+                                            <ul class="dropdown">
+                                                {% for subcategory in category.subcategories.all %}
+                                                <li class="menu-item-has-children">
+                                                    <a href="{%url 'core:subcategory-products' subcategory.cid %}">
+                                                        <span class="subcategory-title" style="color: #0e5a64; font-size: 20px;">🧩{{ subcategory.title }}</span>
+                                                    </a>
+                                                    <ul class="dropdown">
+                                                        {% for mini in subcategory.mini_subcategories.all %}
+                                                        <li>
+                                                            <a href="{%url 'core:minicategory-products' mini.cid %}">
+                                                                {{ mini.title }}
+                                                                <span class="mini-count">({{ mini.product_count }})</span>
+                                                            </a>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{% url 'core:contact' %}">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- mobile menu end -->
+                    
+                </div>
+                <div class="mobile-header-info-wrap">
+                    <div class="single-mobile-header-info">
+                        <a href="{% url 'core:dashboard' %}"><i class="fi-rs-marker"></i> Our location </a>
+                    </div>
+                    <div class="single-mobile-header-info">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'userauths:sign-out' %}"><i class="fi-rs-user"></i>Log Out</a>
+                        {% else %}
+                        <a href="{% url 'userauths:sign-in' %}"><i class="fi-rs-user"></i>Sign Up </a>
+                        {% endif %}
 
+                    </div>
+                    <div class="single-mobile-header-info">
+                        <a href="{% url 'core:contact' %}"><i class="fi-rs-headphones"></i>(+254) 703443827 </a>
+                    </div>
+                </div>
+                <div class="mobile-social-icon mb-50">
+                    <h6 class="mb-15">Follow Us</h6>
+                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-facebook-white.svg' %}" alt="" /></a>
+                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-twitter-white.svg' %}" alt="" /></a>
+                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-instagram-white.svg' %}" alt="" /></a>
+                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-pinterest-white.svg' %}" alt="" /></a>
+                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-youtube-white.svg' %}" alt="" /></a>
+                </div>
+                <div class="site-copyright">Copyright <span id="current-year"></span> © KStores</div>
+            </div>
+        </div>
+    </div>
 	
     {% block content %}
 	{% endblock content %}
@@ -483,7 +608,7 @@
                                 
                             </div>
                             <ul class="contact-infor">
-                                <li><img src="{% static 'assets/imgs/theme/icons/icon-location.svg' %}" alt="" /><strong>Address: </strong> <span>RNG Plaza Nairobi,Kenya Africa</span></li>
+                                <li><img src="{% static 'assets/imgs/theme/icons/icon-location.svg' %}" alt="" /><strong>Address: </strong> <span>Nairobi,Kenya Africa</span></li>
                                 <li><img src="{% static 'assets/imgs/theme/icons/icon-contact.svg' %}" alt="" /><strong>Call Us:</strong><span>(+254) 707485760</span></li>
                                 <li><img src="{% static 'assets/imgs/theme/icons/icon-email-2.svg' %}" alt="" /><strong>Email:</strong><span>support@Kstores.co.ke</span></li>
                                 <li><img src="{% static 'assets/imgs/theme/icons/icon-clock.svg' %}" alt="" /><strong>Hours: </strong><span>10:00hr - 18:00hr, Mon - Sat</span></li>
@@ -558,14 +683,14 @@
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
 
-                    <div class="site-copyright">Copyright <span id="current-year"></span> © KStores</div>
+                    <div class="site-copyright">Copyright <span id="current-years"></span> © KStores</div>
 
                         <script>
                         // Get the current year
-                        const currentYear = new Date().getFullYear();
+                        const currentYears = new Date().getFullYear();
                         
                         // Insert it into the element with id "current-year"
-                        document.getElementById('current-year').textContent = currentYear;
+                        document.getElementById('current-years').textContent = currentYears;
                         </script>
                 
                 </div>
@@ -671,6 +796,13 @@
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script src="{% static 'assets/js/shop.js' %}"></script>
     <script src="{% static 'assets/js/function.js' %}"></script>
+    <script>
+        // Get the current year
+        const currentYear = new Date().getFullYear();
+    
+        // Insert it into the element with id "current-year"
+        document.getElementById('current-year').textContent = currentYear;
+    </script>
 </body>
 
 </html>

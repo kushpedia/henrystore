@@ -3,141 +3,6 @@
 {% load static %}
 {% block content %}
 	
-	<div class="mobile-header-active mobile-header-wrapper-style">
-        <div class="mobile-header-wrapper-inner">
-            <div class="mobile-header-top">
-                <div class="mobile-header-logo">
-                    <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/Hlogo.png' %}" alt="logo"  style="height: 100px; width: 100px;"/></a>
-                </div>
-                <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
-                    <button class="close-style search-close">
-                        <i class="icon-top"></i>
-                        <i class="icon-bottom"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="mobile-header-content-area">
-                <div class="mobile-search search-style-3 mobile-header-border">
-                    <form action="#">
-                        <input type="text" placeholder="Search for items…" />
-                        <button type="submit"><i class="fi-rs-search"></i></button>
-                    </form>
-                </div>
-                <div class="mobile-menu-wrap mobile-header-border">
-                    <!-- mobile menu start -->
-<nav>
-    <ul class="mobile-menu font-heading">
-        <li class="hot-deals">
-            <img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals" />
-            <a href="shop-grid-right.html">Deals</a>
-        </li>
-        <li>
-            <a href="{% url 'core:index' %}">Home</a>
-        </li>
-        <li>
-            <a href="page-about.html">About</a>
-        </li>
-        <li class="menu-item-has-children">
-            <a href="#">Category <i class="fi-rs-angle-down"></i></a>
-            <ul class="dropdown">
-                {% for c in categories %}
-                <li><a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a></li>
-                {% endfor %}
-                <li><hr></li>
-                <li><a href="{% url 'core:category-list' %}">All Categories</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="{% url 'core:product-list' %}">Shop</a>
-        </li>
-        <li class="menu-item-has-children">
-            <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
-            <ul class="dropdown">
-                {% for v in vendors %}
-                <li><a href="{% url 'core:vendor-detail' v.vid %}">{{v.title}}</a></li>
-                {% endfor %}
-            </ul>
-        </li>
-        <li class="menu-item-has-children">
-            <a href="#">Mega Menu <i class="fi-rs-angle-down"></i></a>
-            <ul class="dropdown">
-                {% for category in categories %}
-                    {% if category.subcategories.all %}
-                    <li class="menu-item-has-children">
-                        <a href="{% url 'core:category-product-list' category.cid %}">
-                            <span class="category-icon">🛒</span>
-                            {{ category.title }}
-                            <span class="product-count">({{ category.product_count }})</span>
-                        </a>
-                        <ul class="dropdown">
-                            {% for subcategory in category.subcategories.all %}
-                            <li class="menu-item-has-children">
-                                <a href="{%url 'core:subcategory-products' subcategory.cid %}">
-                                    <span class="subcategory-title" style="color: #0e5a64; font-size: 20px;">🧩{{ subcategory.title }}</span>
-                                </a>
-                                <ul class="dropdown">
-                                    {% for mini in subcategory.mini_subcategories.all %}
-                                    <li>
-                                        <a href="{%url 'core:minicategory-products' mini.cid %}">
-                                            {{ mini.title }}
-                                            <span class="mini-count">({{ mini.product_count }})</span>
-                                        </a>
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </li>
-        <li>
-            <a href="{% url 'core:contact' %}">Contact</a>
-        </li>
-    </ul>
-</nav>
-<!-- mobile menu end -->
-                    
-                </div>
-                <div class="mobile-header-info-wrap">
-                    <div class="single-mobile-header-info">
-                        <a href="{% url 'core:dashboard' %}"><i class="fi-rs-marker"></i> Our location </a>
-                    </div>
-                    <div class="single-mobile-header-info">
-                        {% if request.user.is_authenticated %}
-                        <a href="{% url 'userauths:sign-out' %}"><i class="fi-rs-user"></i>Log Out</a>
-                        {% else %}
-                        <a href="{% url 'userauths:sign-in' %}"><i class="fi-rs-user"></i>Sign Up </a>
-                        {% endif %}
-
-                    </div>
-                    <div class="single-mobile-header-info">
-                        <a href="{% url 'core:contact' %}"><i class="fi-rs-headphones"></i>(+254) 703443827 </a>
-                    </div>
-                </div>
-                <div class="mobile-social-icon mb-50">
-                    <h6 class="mb-15">Follow Us</h6>
-                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-facebook-white.svg' %}" alt="" /></a>
-                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-twitter-white.svg' %}" alt="" /></a>
-                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-instagram-white.svg' %}" alt="" /></a>
-                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-pinterest-white.svg' %}" alt="" /></a>
-                    <a href="#"><img src="{% static 'assets/imgs/theme/icons/icon-youtube-white.svg' %}" alt="" /></a>
-                </div>
-                <div class="site-copyright">Copyright <span id="current-year"></span> © K-Store</div>
-
-<script>
-  // Get the current year
-    const currentYear = new Date().getFullYear();
-
-  // Insert it into the element with id "current-year"
-    document.getElementById('current-year').textContent = currentYear;
-</script>
-            </div>
-        </div>
-    </div>
-    <!--End header-->
     <main class="main">
         <div class="container mb-30">
             <div class="row flex-row-reverse">
@@ -145,10 +10,10 @@
                     <section class="home-slider position-relative mb-30">
                         <div class="home-slide-cover mt-30">
                             <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
-                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/slider-15.png' %})">
+                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/slider17.png' %})">
                                     <div class="slider-content">
                                         <h1 class="display-2 mb-40 text-red-100">
-                                            Don’t miss <br /> Amazing<br /> Offer deals
+                                            Don’t miss <br /> Amazing Deals
                                         </h1>
                                         
                                     </div>
@@ -159,10 +24,7 @@
                                             Great Deals<br /> Big discount
                                         </h1>
                                         <p class="mb-65">Save up to 50% off on your first order</p>
-                                        <!-- <form class="form-subcriber d-flex">
-                                            <input type="email" placeholder="Your emaill address" />
-                                            <button class="btn" type="submit">Subscribe</button>
-                                        </form> -->
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -1004,4 +866,5 @@
         </section>
         <!--End 4 columns-->
     </main>
+
 {% endblock content %}
