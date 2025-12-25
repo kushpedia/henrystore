@@ -17,6 +17,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{% static 'assets/css/plugins/slider-range.css' %}" />
     <link rel="stylesheet" href="{% static '/assets/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static '/assets/css/custom.css' %}" />
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
@@ -37,7 +38,7 @@
                     <!-- LEFT SIDE IMAGES -->
                     <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                         <div class="detail-gallery">
-                            <span class="zoom-icon"><i class="fi-rs-search"></i></span>
+                            
 
                             <!-- MAIN IMAGE -->
                             <div class="product-image-slider">
@@ -108,9 +109,6 @@
 </div>
 
     <header class="header-area header-style-1 header-height-2">
-        <div class="mobile-promotion">
-            <span>Great Deals, <strong>up to 15%</strong> off all items.<strong>For Orders</strong> above 25,000 Ksh</span>
-        </div>
         
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
@@ -183,6 +181,7 @@
                 </div>
             </div>
         </div>
+
         
         <div class="header-bottom header-bottom-bg-color sticky-bar">
             <div class="container">
@@ -323,8 +322,19 @@
                             <span class="burger-icon-bottom"></span>
                         </div>
                     </div>
+                    <div class="d-block d-lg-none">
+                        <div class="mobile_logo mobile_logo-width-1">
+                            <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/page/Hlogo.png' %}" alt="logo" style="height: 80px; align-items: left;"/></a>
+                        </div>
+                    </div>
+
+
+
                     <div class="header-action-right d-block d-lg-none">
+
                         <div class="header-action-2">
+
+                        
                             <div class="header-action-icon-2">
                                 <a href="{% url 'core:wishlist' %}">
                                 
@@ -346,19 +356,58 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="header-action-icon-2">
+                                <span>
+                                    <img class="svgInject" alt="Kstores" src="{% static 'assets/imgs/theme/icons/icon-user.svg' %}" />
+                                </span>
+                                <a href="{% url 'core:dashboard' %}"><span class="lable ml-0">Account</span></a>
+                                <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                    <ul>
+                                        <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-user mr-10"></i>My Account</a></li>
+                                        <li><a href="{% url 'core:wishlist' %}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a></li>
+                                        <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
+                                        {% if request.user.is_authenticated %}
+                                        {% if request.user.is_superuser  %}
+                                        <li><a href="{% url 'useradmin:dashboard' %}"><i class="fi fi-rs-sign-in mr-10"></i>Admin Dashboard</a></li>
+                                        {% endif %}
+                                        <li><a href="{% url 'userauths:sign-out' %}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
+                                        
+                                        {% else %}
+                                        
+                                        <li><a href="{% url 'userauths:sign-in' %}"><i class="fi fi-rs-sign-in mr-10"></i>Sign in</a></li>
+                                        
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+
+
+
+
+
                         </div>
                     </div>
                 </div>
+
+                <div class="search-style-2">
+                    <form action="{% url 'core:search' %}" method="GET">
+                        
+                        <input type="text" placeholder="Search for categories or products...." name="q" />
+                        <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form>
+                </div>
+
+
+
                 {% if messages %}
-                <!-- <div class="row">
-                    <div class="col-12"> -->
+                
                         {% for message in messages %}
                         <div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-3" role="alert">
                         <strong>{{ message }}</strong>
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
-                        <!-- </div> -->
+                            
                         {% endfor %}
-                    <!-- </div> -->
+                    
                     {% endif %}
                     <script>
                         setTimeout (() => {

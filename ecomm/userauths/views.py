@@ -13,6 +13,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.conf import settings
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
 
 def register_view(request):    
@@ -162,7 +163,7 @@ def reset_password(request, uidb64, token):
     return render(request, 'userauths/reset_password.html', {'uidb64': uidb64, 'token': token})
 
 
-
+@csrf_exempt
 def login_view(request):
     """Handle user login with security features including login attempts tracking"""
     

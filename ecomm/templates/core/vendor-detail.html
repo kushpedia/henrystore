@@ -27,7 +27,7 @@
 						<div class="product-rate d-inline-block">
 							<div class="product-rating" style="width: 90%"></div>
 						</div>
-						<span class="font-small ml-5 text-muted"> (4.0)</span>
+						<span class="font-small ml-5 text-muted"> {{vendor.get_average_rating}} ({{vendor.get_total_reviews_count}} Reviews)</span>
 					</div>
 					<div class="row">
 						<div class="col-lg-4">
@@ -166,8 +166,8 @@
 								<div class="product-rate d-inline-block">
 									<div class="product-rating" style="width: 90%"></div>
 								</div>
-								<span class="font-small ml-5 text-muted"> (4.0)</span>
-								<span class="ml-30">500g</span>
+								<span class="font-small ml-5 text-muted"> {{p.get_average_rating}} ({{p.get_total_ratings}} Reviews) </span>
+								<span class="ml-30"></span>
 							</div>
 							<p class="mt-15 mb-15">{{p.description|truncatechars:50|safe}}</p>
 							<div class="product-price">
