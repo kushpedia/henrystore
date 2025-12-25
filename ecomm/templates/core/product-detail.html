@@ -62,8 +62,8 @@
 											<div class="product-rate-cover text-end">
 												<div class="product-rate d-inline-block">
 													<div class="product-rating" style="width: 90%"></div>
-												</div>
-												<span class="font-small ml-5 text-muted"> (32 reviews)</span>
+												</div> {{average_rating.rating|floatformat:1}}
+												<span class="font-small ml-5 text-muted"> ({{ reviews.count}} Reviews)</span>
 											</div>
 										</div>
 										<div class="clearfix product-price-cover">
@@ -271,14 +271,14 @@
 											<div class="comments-area">
 												<div class="row">
 													<div class="col-lg-8">
-														<h4 class="mb-30">Customer questions & answers</h4>
+														<h4 class="mb-30">Customer Reviews</h4>
 														<div class="comment-list">
 															{% for r in reviews %}
 															<div class="single-comment justify-content-between d-flex mb-30">
 																<div class="user justify-content-between d-flex">
 																	<div class="thumb text-center">
 																		<img src="https://t3.ftcdn.net/jpg/07/24/59/76/360_F_724597608_pmo5BsVumFcFyHJKlASG2Y2KpkkfiYUU.jpg" alt="" />
-																		<a href="#" class="font-heading text-brand">{{r.user.username|title}}</a>
+																		<p class="font-heading text-brand" >{{r.user.username|title}}</p>
 																	</div>
 																	<div class="desc">
 																		<div class="d-flex justify-content-between mb-10">
@@ -291,7 +291,9 @@
 																				{% endfor %}
 																			</div>
 																		</div>
-																		<p class="mb-10">{{r.review}} <a href="#" class="reply">Reply</a></p>
+																		<p class="mb-10">{{r.review}} 
+																			
+																		</p>
 																	</div>
 																</div>
 															</div>
@@ -300,79 +302,62 @@
 														
 													</div>
 													<div class="col-lg-4">
-														<h4 class="mb-30">Customer reviews</h4>
+														<h4 class="mb-30">Average reviews</h4>
 														<div class="d-flex mb-30">
-															<!-- <div class="product-rate d-inline-block mr-15">
+															<div class="product-rate d-inline-block mr-15">
 																<div class="product-rating" style="width: 90%"></div>
-															</div> -->
+															</div>
 															<h6>{{ average_rating.rating|floatformat:1}} out of 5</h6>
 														</div>
-														<div class="progress">
-															<span>5 star</span>
-															<div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-														</div>
-														<div class="progress">
-															<span>4 star</span>
-															<div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-														</div>
-														<div class="progress">
-															<span>3 star</span>
-															<div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-														</div>
-														<div class="progress">
-															<span>2 star</span>
-															<div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-														</div>
-														<div class="progress mb-30">
-															<span>1 star</span>
-															<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-														</div>
-														<a href="#" class="font-xs text-muted">How are ratings calculated?</a>
+														
 													</div>
 												</div>
 											</div>
 											<!--comment form-->
 											<div class="comment-form">
 												{% if request.user.is_authenticated %}	
-												<h4 class="mb-15 add-review">Add a review</h4>
-												<strong class="text-success" id="review-res"> </strong>
-												<!-- <div class="product-rate d-inline-block mb-30"></div> -->
-												<div class="row">
-													<div class="col-lg-8 col-md-12">
-
-														{% if make_review %}	
-																											
-																<form class="form-contact comment_form hide-comment-form" action="{% url 'core:ajax-add-review' p.id %}" id="commentForm" method="POST">
+													<h4 class="mb-15 add-review">Add a review</h4>
+													<strong class="text-success" id="review-res"> </strong>
+													
+													<div class="row">
+														<div class="col-lg-8 col-md-12">
+															{% if make_review %}	
+																<form class="form-contact comment_form hide-comment-form" 
+																	action="{% url 'core:ajax-add-review' p.id %}" 
+																	id="commentForm" method="POST">
 																	{% csrf_token %}
 																	<div class="row">
 																		<div class="col-12">
 																			<div class="form-group">
 																				{{review_form.review}}
 																			</div>
-																		</div><div class="col-12">
+																		</div>
+																		<div class="col-12">
 																			<div class="form-group">
 																				{{review_form.rating}}
 																			</div>
 																		</div>
-																		
-																		
 																	</div>
 																	<div class="form-group">
 																		<button type="submit" class="button button-contactForm">Submit Review</button>
 																	</div>
 																</form>
-															
-
-														{% else %}
-
-															<h5 class="text-success">You have already submitted a review for this product.</h5>
-														{% endif %}
-
-
+															{% else %}
+																{% if has_ordered_product %}
+																	<h5 class="text-success">You have already submitted a review for this product.</h5>
+																{% else %}
+																	<h5 class="text-warning">
+																		You need to purchase and receive this product before leaving a review.
+																		{% if has_pending_order %}
+																			Your order is still being processed. You can review once it's delivered.
+																		{% endif %}
+																	</h5>
+																{% endif %}
+															{% endif %}
+														</div>
 													</div>
-												</div>
 												{% else %}
-												<h5 class="text-danger">Please <a href="{% url 'userauths:sign-in' %}">login</a> to add a review.</h5>
+													<h5 class="text-danger">Please <a href="{% url 'userauths:sign-in' %}">login</a> to add a review.</h5>
 												{% endif %}
 											</div>
 										</div>
@@ -470,7 +455,7 @@
 										<div class="product-rate d-inline-block">
 											<div class="product-rating" style="width: 90%"></div>
 										</div>
-										<span class="font-small ml-5 text-muted"> (32 reviews)</span>
+										<span class="font-small ml-5 text-muted"> {{p.vendor.get_average_rating}} </span><br/><span> ({{p.vendor.get_total_reviews_count}} Reviews)</span>
 									</div>
 								</div>
 							</div>

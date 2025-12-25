@@ -1,4 +1,3 @@
-
 from django.db import models
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
@@ -6,7 +5,7 @@ from userauths.models import User
 from taggit.managers import TaggableManager
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
-
+from django.db.models import Avg
 
 
 STATUS_CHOICE = (
@@ -162,6 +161,24 @@ class Vendor(models.Model):
 
     def vendor_image(self):
         return mark_safe('<img src="%s" width="50" height="50" />' % (self.image.url))
+    
+    def get_average_rating(self):
+        """Calculate average rating for all products from this vendor"""
+        # Get all products of this vendor
+        products = self.product.all()  # using related_name="product"
+        
+        # Get all reviews for these products
+        from django.db.models import Avg
+        average = ProductReview.objects.filter(
+            product__in=products
+        ).aggregate(average_rating=Avg('rating'))
+        
+        return average['average_rating'] if average['average_rating'] else 0
+    
+    def get_total_reviews_count(self):
+        """Get total number of reviews for all products from this vendor"""
+        products = self.product.all()
+        return ProductReview.objects.filter(product__in=products).count()
 
     def __str__(self):
         return self.title
@@ -209,7 +226,6 @@ class Product(models.Model):
 
     tags = TaggableManager(blank=True)
 
-    # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
 
     product_status = models.CharField(
         choices=STATUS, max_length=10, default="published")
@@ -229,6 +245,15 @@ class Product(models.Model):
     class Meta:
         verbose_name_plural = "Products"
 
+    def get_average_rating(self):
+        """Get the average rating score for this product"""
+        
+        average = self.reviews.aggregate(average_rating=Avg('rating'))
+        return average['average_rating'] if average['average_rating'] else 0
+    
+    def get_total_ratings(self):
+        """Get the total number of ratings/reviews for this product"""
+        return self.reviews.count()
 
     def get_category(self):
         """Get the top-level category"""

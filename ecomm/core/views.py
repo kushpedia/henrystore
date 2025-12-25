@@ -152,13 +152,26 @@ def product_detail_view(request, pid):
     # Product Review form
     review_form = ProductReviewForm()
 
-    make_review = True 
+    make_review = False
     if request.user.is_authenticated:
-        # address = Address.objects.get(status=True, user=request.user)
-        user_review_count = ProductReview.objects.filter(user=request.user, product=product).count()
+        # Check if user has ordered this product
+        has_ordered_product = CartOrderItems.objects.filter(
+            order__user=request.user,
+            order__product_status="delivered",  # Order must be delivered
+            item=product.title  # Assuming 'item' stores product title
+        ).exists()
 
-        if user_review_count > 0:
-            make_review = False
+        # Check if user has already reviewed this product
+        has_reviewed = ProductReview.objects.filter(
+            user=request.user, 
+            product=product
+        ).exists()
+
+
+
+        # User can make review if they've ordered AND haven't reviewed yet
+        make_review = has_ordered_product and not has_reviewed
+
     context = {
         "p": product,
         "review_form": review_form,
@@ -193,8 +206,36 @@ def tag_list(request, tag_slug=None):
 
 
 def ajax_add_review(request, pid):
+    if not request.user.is_authenticated:
+        return JsonResponse({'bool': False, 'error': 'Please login to submit a review'})
+    
     product = Product.objects.get(pk=pid)
-    user = request.user 
+    user = request.user
+    
+    # Check if user has ordered this product AND it's delivered
+
+    has_ordered = CartOrderItems.objects.filter(
+        order__user=user,
+        order__product_status="delivered",
+        item=product.title
+    ).exists()
+
+    if not has_ordered:
+        return JsonResponse({
+            'bool': False, 
+            'error': 'You can only review products you have purchased and received.'
+        })
+    # Check if user has already reviewed this product
+    existing_review = ProductReview.objects.filter(
+        user=user,
+        product=product
+    ).exists()
+    
+    if existing_review:
+        return JsonResponse({
+            'bool': False, 
+            'error': 'You have already reviewed this product.'
+        })
 
     review = ProductReview.objects.create(
         user=user,
@@ -209,13 +250,14 @@ def ajax_add_review(request, pid):
         'rating': request.POST['rating'],
     }
 
-    average_reviews = ProductReview.objects.filter(product=product).aggregate(rating=Avg("rating"))
-
+    average_reviews = ProductReview.objects.filter(product=product).aggregate(
+        rating=Avg("rating")
+    )
     return JsonResponse(
         {
             'bool': True,
             'context': context,
-            'average_reviews': average_reviews
+            'average_reviews': average_reviews['rating'] or 0
         }
     )
 
