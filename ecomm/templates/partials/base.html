@@ -390,7 +390,7 @@
                     </div>
                 </div>
 
-                <div class="search-style-2">
+                <div class="search-style-2 d-lg-none d-block">
                     <form action="{% url 'core:search' %}" method="GET">
                         
                         <input type="text" placeholder="Search for categories or products...." name="q" />
@@ -454,7 +454,7 @@
                                 <a href="page-about.html">About</a>
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="">Category <i class="fi-rs-angle-down"></i></a>
+                                <span>Category </span>
                                 <ul class="dropdown">
                                     {% for c in categories %}
                                     <li><a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a></li>
@@ -467,7 +467,7 @@
                                 <a href="{% url 'core:product-list' %}">Shop</a>
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
+                                <span>Vendors </span>
                                 <ul class="dropdown">
                                     {% for v in vendors %}
                                     <li><a href="{% url 'core:vendor-detail' v.vid %}">{{v.title}}</a></li>
@@ -475,7 +475,7 @@
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
-                                <a href="">Mega Menu <i class="fi-rs-angle-down"></i></a>
+                                <span>Mega Menu</span>
                                 <ul class="dropdown">
                                     {% for category in categories %}
                                         {% if category.subcategories.all %}

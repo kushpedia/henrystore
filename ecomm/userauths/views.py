@@ -15,7 +15,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-
+@csrf_exempt
 def register_view(request):    
     if request.method == "POST":
         form = UserRegisterForm(request.POST or None)
@@ -31,7 +31,7 @@ def register_view(request):
             messages.success(request, f"Hey {username}, You account was created successfully.")
 
             # Welcome Email
-            subject = "Welcome to KenyaPro by Kushpedia"
+            subject = "Welcome to KStores by Kushpedia"
             message = "Hello " + new_user.username + "!! \n" + "Welcome to KStores!! \nThank you for visiting our website\n. We have also sent you a confirmation email, please confirm your email address. \n\nThanking You\nHenry Kuria \nCEO @Kstores Kenya"        
             from_email = settings.EMAIL_HOST_USER
             to_list = [new_user.email]
@@ -72,6 +72,7 @@ def register_view(request):
     return render(request, "userauths/sign-up.html", context)
 
 #activate user through email link
+@csrf_exempt
 def activate(request,uidb64,token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -89,6 +90,7 @@ def activate(request,uidb64,token):
         return render(request,'userauths/activation_failed.html')
 
 #forgotten password
+@csrf_exempt
 def forgot_password(request):
     if request.method == "POST":
         email = request.POST.get('email')
@@ -120,6 +122,7 @@ def forgot_password(request):
     return render(request, 'userauths/forgot_password.html')
 
 # reset password
+@csrf_exempt
 def reset_password(request, uidb64, token):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
@@ -303,7 +306,7 @@ def logout_view(request):
     return redirect("userauths:sign-in")
 
 
-
+@csrf_exempt
 def profile_update(request):
     profile = Profile.objects.get(user=request.user)
     if request.method == "POST":

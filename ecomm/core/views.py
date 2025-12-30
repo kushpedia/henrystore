@@ -15,16 +15,28 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 import calendar
 from django.db.models.functions import ExtractMonth
-from django.db.models import Count, Avg, Q
+from django.db.models import Count, Avg, Q,Sum
 from userauths.models import ContactUs
 from userauths.models import Profile
 
 def index(request):
-	products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
-	
-	context = {'products': products}
+    products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
+    top_sold_products = Product.objects.filter(
+        product_status="published",
+        cartorderitems__order__paid_status=True,
+        cartorderitems__order__product_status="delivered"
+    ).annotate(
+        total_sold=Sum('cartorderitems__qty')
+    ).filter(
+        total_sold__gt=0  # Only include products that have actually been sold
+    ).order_by('-total_sold')[:10]
+    # print(top_sold_products)
+    context = {
+        'products': products,
+        'top_sold_products': top_sold_products,
+    }
 
-	return render(request, 'core/index.html', context)
+    return render(request, 'core/index.html', context)
 
 
 def product_list_view(request):
@@ -336,6 +348,7 @@ def add_to_cart(request):
         'price': request.GET['price'],
         'image': request.GET['image'],
         'pid': request.GET['pid'],
+        'product_id': request.GET['id'],
     }
 
     if 'cart_data_obj' in request.session:
@@ -468,7 +481,7 @@ def save_checkout_info(request):
         request.session['country'] = country
 
         if 'cart_data_obj' in request.session:
-
+            print(request.session['cart_data_obj'])
             for p_id, item in request.session['cart_data_obj'].items():
                 total_amount += int(item['qty']) * float(item['price'])
 
@@ -496,11 +509,15 @@ def save_checkout_info(request):
             # Getting total amount for The Cart
             for p_id, item in request.session['cart_data_obj'].items():
                 cart_total_amount += int(item['qty']) * float(item['price'])
-
+                try:
+                    product = Product.objects.get(id=item['product_id'])
+                except Product.DoesNotExist:
+                    product = None
                 cart_order_products = CartOrderItems.objects.create(
                     order=order,
                     invoice_no="INVOICE_NO-" + str(order.id), # INVOICE_NO-5,
                     item=item['title'],
+                    product_id=product,
                     image=item['image'],
                     qty=item['qty'],
                     price=item['price'],
@@ -610,6 +627,7 @@ def order_detail(request, id):
 
 
 # wishlist view
+@csrf_exempt
 @login_required
 def wishlist_view(request):
     wishlist = wishlist_model.objects.filter(user=request.user)
@@ -621,6 +639,7 @@ def wishlist_view(request):
 
 
     # add to wishlist
+@csrf_exempt
 @login_required
 def add_to_wishlist(request):
     product_id = request.GET['id']
