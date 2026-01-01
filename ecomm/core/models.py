@@ -25,11 +25,11 @@ STATUS = (
 
 
 RATING = (
-    (1,  "★☆☆☆☆"),
-    (2,  "★★☆☆☆"),
-    (3,  "★★★☆☆"),
-    (4,  "★★★★☆"),
     (5,  "★★★★★"),
+    (4,  "★★★★☆"),
+    (3,  "★★★☆☆"),
+    (2,  "★★☆☆☆"),
+    (1,  "★☆☆☆☆"),    
 )
 
 
@@ -202,7 +202,7 @@ class Product(models.Model):
     vendor = models.ForeignKey(
         Vendor, on_delete=models.CASCADE, null=True, related_name="product")
 
-    title = models.CharField(max_length=100, default="Fresh Pear")
+    title = models.CharField(max_length=100, default="Sample Product")
     image = models.ImageField(
         upload_to=user_directory_path, default="product.jpg")
     # description = models.TextField(null=True, blank=True, default="This is the product")
@@ -210,18 +210,18 @@ class Product(models.Model):
     # description = CKEditor5Field(config_name='extends', null=True, blank=True)
 
     price = models.DecimalField(
-        max_digits=12, decimal_places=2, default="0.00")
+        max_digits=12, decimal_places=2, default="0")
     old_price = models.DecimalField(
-        max_digits=12, decimal_places=2, default="10000.00")
+        max_digits=12, decimal_places=2, default="10000")
 
     # specifications = CKEditor5Field(config_name='extends', null=True, blank=True)
     specifications = models.TextField(null=True, blank=True)
     type = models.CharField(
-        max_length=100, default="Organic", null=True, blank=True)
+        max_length=100, default="Generic", null=True, blank=True)
     stock_count = models.CharField(
-        max_length=100, default="10", null=True, blank=True)
+        max_length=100, default="100", null=True, blank=True)
     life = models.CharField(
-        max_length=100, default="100 Days", null=True, blank=True)
+        max_length=100, default="365 Days", null=True, blank=True)
     mfd = models.DateTimeField(auto_now_add=False, null=True, blank=True)
 
     tags = TaggableManager(blank=True)

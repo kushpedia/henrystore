@@ -231,8 +231,7 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
                                 <ul>
-                                    <li class="hot-deals"><img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals" /><a href="shop-grid-right.html">Deals</a></li>
-                                    <li>
+                                    
                                         <a class="active" href="{% url 'core:index' %}">Home </a>
                                         
                                     </li>
@@ -443,10 +442,7 @@
                     <!-- mobile menu start -->
                     <nav>
                         <ul class="mobile-menu font-heading">
-                            <li class="hot-deals">
-                                <img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals" />
-                                <a href="shop-grid-right.html">Deals</a>
-                            </li>
+                            
                             <li>
                                 <a href="{% url 'core:index' %}">Home</a>
                             </li>
@@ -550,7 +546,7 @@
 	{% endblock content %}
 
 	<footer class="main">
-        <section class="newsletter mb-15">
+        <section class="newsletter mb-15 d-md-block d-none">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -696,32 +692,12 @@
                             <li><a href="#">Farm Business</a></li>
                             <li><a href="#">Farm Careers</a></li>
                             <li><a href="#">Our Suppliers</a></li>
-                            <li><a href="#">Accessibility</a></li>
+                            <li><a href="#">Accessibility</a></li>  
                             <li><a href="#">Promotions</a></li>
                         </ul>
                     </div>
-                    <div class="footer-link-widget col">
-                        <h4 class="widget-title">Popular</h4>
-                        <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">Milk & Flavoured Milk</a></li>
-                            <li><a href="#">Butter and Margarine</a></li>
-                            <li><a href="#">Eggs Substitutes</a></li>
-                            <li><a href="#">Marmalades</a></li>
-                            <li><a href="#">Sour Cream and Dips</a></li>
-                            <li><a href="#">Tea & Kombucha</a></li>
-                            <li><a href="#">Cheese</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-link-widget widget-install-app col">
-                        <h4 class="widget-title">Install App</h4>
-                        <p class="wow fadeIn animated">From App Store or Google Play</p>
-                        <div class="download-app">
-                            <a href="#" class="hover-up mb-sm-2 mb-lg-0"><img class="active" src="{% static 'assets/imgs/theme/app-store.jpg' %}" alt="" /></a>
-                            <a href="#" class="hover-up mb-sm-2"><img src="{% static 'assets/imgs/theme/google-play.jpg' %}" alt="" /></a>
-                        </div>
-                        <p class="mb-20">Secured Payment Gateways</p>
-                        <img class="wow fadeIn animated" src="{% static 'assets/imgs/theme/payment-method.png' %}" alt="" />
-                    </div>
+                    
+                    
                 </div>
             </div>
         </section>

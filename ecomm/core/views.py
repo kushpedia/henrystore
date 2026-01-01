@@ -29,11 +29,26 @@ def index(request):
         total_sold=Sum('cartorderitems__qty')
     ).filter(
         total_sold__gt=0  # Only include products that have actually been sold
-    ).order_by('-total_sold')[:10]
+    ).order_by('-total_sold')[:5]
     # print(top_sold_products)
+
+    # Show top rated even with fewer reviews but high rating
+    top_rated_products = Product.objects.filter(
+        product_status="published"
+    ).annotate(
+        avg_rating=Avg('reviews__rating'),
+        review_count=Count('reviews')
+    ).filter(
+        review_count__gte=1,  # Minimum 3 reviews to qualify
+        avg_rating__gte=3.0  # Only products with 4+ average rating
+    ).order_by('-avg_rating', '-review_count')[:10]
+
+
+
     context = {
         'products': products,
         'top_sold_products': top_sold_products,
+        'top_rated_products': top_rated_products,
     }
 
     return render(request, 'core/index.html', context)
@@ -173,6 +188,13 @@ def product_detail_view(request, pid):
             item=product.title  # Assuming 'item' stores product title
         ).exists()
 
+        # check the ordered product is not delivered yet
+        has_undelivered_product = CartOrderItems.objects.filter(
+            order__user=request.user,
+            order__product_status__in=["processing", "shipped"],  # Un Delivered Orders
+            item=product.title  
+        ).exists()
+
         # Check if user has already reviewed this product
         has_reviewed = ProductReview.objects.filter(
             user=request.user, 
@@ -192,7 +214,9 @@ def product_detail_view(request, pid):
 
         "related_products":related_products,
         "average_rating": average_rating,
-        "reviews": review,       
+        "reviews": review,
+        "has_undelivered_product": has_undelivered_product if request.user.is_authenticated else False,
+        "has_reviewed": has_reviewed if request.user.is_authenticated else False,
 
     }
     return render(request, "core/product-detail.html", context)

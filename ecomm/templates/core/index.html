@@ -37,13 +37,13 @@
                         <div class="slider">
                             <div class="slides">
                                 <div class="slide">
-                                <img src="https://ke.jumia.is/cms/2025/W52/Vivi/KE_ONS_Vivi_Spotight_Day_1225_S.gif" alt="Slide 1">
+                                <img src="{% static 'assets/imgs/slider/img1.png' %}" alt="Slide 1">
                                 </div>
                                 <div class="slide">
-                                <img src="https://ke.jumia.is/cms/2025/W52/New/_SPhones.gif" alt="Slide 2">
+                                <img src="{% static 'assets/imgs/slider/img4.png' %}" alt="Slide 2">
                                 </div>
                                 <div class="slide">
-                                <img src="https://ke.jumia.is/cms/2025/W52/New/_SHome.gif" alt="Slide 3">
+                                    <img src="{% static 'assets/imgs/slider/img3.png' %}" alt="Slide 1">
                                 </div>
                             </div>
                             </div>
@@ -488,7 +488,7 @@
                                                 <div class="product-rate d-inline-block">
                                                     <div class="product-rating" style="width: 90%"></div>
                                                 </div>
-                                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                                <span class="font-small ml-5 text-muted"> {{d.get_average_rating|floatformat:1}} ({{d.get_total_ratings}} Reviews)</span>
                                             </div>
                                             <div>
                                                 <span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' d.vendor.vid %}">{{d.vendor.title}}</a></span>
@@ -528,34 +528,39 @@
                     <!--End Deals-->
                     <section class="banners">
                         <div class="row">
+                            <!-- Electronic Category -->
                             <div class="col-lg-4 col-md-6">
                                 <div class="banner-img">
-                                    <img src="{% static 'assets/imgs/banner/banner-1.png' %}" alt="" />
+                                    <img src="{% static 'assets/imgs/banner/banner-1.png' %}" alt="Latest Electronics" />
                                     <div class="banner-text">
                                         <h4>
-                                            Everyday Fresh & <br />Clean with Our<br /> Products
+                                            Latest Tech Gadgets <br />& Smart Devices<br /> Collection
                                         </h4>
-                                        <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                        <a href="{% url 'core:category-list' %}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Cookware Category -->
                             <div class="col-lg-4 col-md-6">
                                 <div class="banner-img">
-                                    <img src="{% static 'assets/imgs/banner/banner-2.png' %}" alt="" />
+                                    <img src="{% static 'assets/imgs/banner/banner-2.png' %}" alt="Premium Cookware" />
                                     <div class="banner-text">
                                         <h4>
-                                            Make your Breakfast<br /> Healthy and Easy
+                                            Premium Kitchen<br /> Essentials & Cookware
                                         </h4>
-                                        <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                        <a href="{% url 'core:category-list' %}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- Fashion Category -->
                             <div class="col-lg-4 d-md-none d-lg-flex">
                                 <div class="banner-img mb-sm-0">
-                                    <img src="{% static 'assets/imgs/banner/banner-3.png' %}" alt="" />
+                                    <img src="{% static 'assets/imgs/banner/banner-3.png' %}" alt="Trendy Fashion" />
                                     <div class="banner-text">
-                                        <h4>The best Organic <br />Products Online</h4>
-                                        <a href="shop-grid-right.html" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
+                                        <h4>Trendy Fashion &<br />Style Collection</h4>
+                                        <a href="{% url 'core:category-list' %}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -577,7 +582,7 @@
                     
                     
                     <!-- Product sidebar Widget -->
-                    <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10">
+                    <div class="sidebar-widget product-sidebar mb-30 p-30 bg-grey border-radius-10 d-md-block d-none">
                         <h5 class="section-title style-1 mb-30">New products</h5>
                         {% for p in new_products %}
                         <div class="single-post clearfix">
@@ -599,11 +604,22 @@
         <section class="popular-categories section-padding">
             <div class="container">
                 <div class="section-title">
-                    <div class="title">
-                        <h3>Shop by Categories</h3>
-                        <a class="show-all" href="{% url 'core:category-list' %}">
-                            All Categories
-                            <i class="fi-rs-angle-right"></i>
+                    <div class="title d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-th-large me-2 text-primary" style="font-size: 1.5rem;"></i>
+                            <h3 class="fw-bold mb-0" style="
+                                font-size: clamp(1.3rem, 6vw, 2rem);
+                                background: linear-gradient(90deg, #3fb84d 0%, #078825 100%);
+                                -webkit-background-clip: text;
+                                -webkit-text-fill-color: transparent;
+                                background-clip: text;">
+                                Shop by Categories
+                            </h3>
+                        </div>
+                        <a class="show-all align-items-center" 
+                            href="{% url 'core:category-list' %}">
+                            View All
+                            <i class="fi-rs-angle-right ms-1"></i>
                         </a>
                     </div>
                     <div class="slider-arrow slider-arrow-2 flex-right carausel-8-columns-arrow" id="carausel-8-columns-arrows"></div>
@@ -613,7 +629,7 @@
                         {% for c in categories %}
                         <div class="card-1">
                             <figure class="img-hover-scale overflow-hidden">
-                                <a href="{% url 'core:category-product-list' c.cid %}"><img src="{{c.image.url}}" alt="" /></a>
+                                <a href="{% url 'core:category-product-list' c.cid %}"><img src="{{c.image.url}}" alt="Category Image"/></a>
                             </figure>
                             <h6>
                                 <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
@@ -633,168 +649,337 @@
         <!--End category slider-->
         <section class="section-padding mb-30">
             <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0">
-                        <h4 class="section-title style-1 mb-30 animated animated">Top Selling</h4>
-                        <div class="product-list-small animated animated">
-
-
-{% for product in top_sold_products %}
-                            <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
-                                    <a href="{% url 'core:product-detail' product.pid %}"><img src="{{ product.image.url }}" alt="" /></a>
-                                </figure>
-
-                                <div class="col-md-8 mb-0">
-                                    <h6>
-                                        <a href="{% url 'core:product-detail' product.pid %}">{{ product.title }}</a>
-                                    </h6>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
-                                        </div>
-                                        <span class="font-small ml-5 text-muted"> {{product.get_average_rating|floatformat:1}}({{product.get_total_ratings}})</span>
-                                    </div>
-                                    <div class="product-price">
-                                        <span>Ksh {{ product.price|floatformat:2|intcomma }}</span>
-                                        <span class="old-price">{{ product.old_price|floatformat:2|intcomma }}</span>
-                                    </div>
-                                </div>
-                            </article>
-                            
-                            {% endfor %}
-                        </div>
-                    </div>
+                <div class="row d-none d-md-flex">
                     
-                    <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-lg-block">
-                        <h4 class="section-title style-1 mb-30 animated animated">Recently added</h4>
-                        <div class="product-list-small animated animated">
-                            {% for p in new_products %}
-                            <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
-                                    <a href="{% url 'core:product-detail' p.pid %}"><img src="{{ p.image.url }}" alt="" /></a>
-                                </figure>
-                                <div class="col-md-8 mb-0">
-                                    <h6>
-                                        <a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a>
-                                    </h6>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
+                        {%  if top_sold_products %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0">
+                            <h4 class="section-title style-1 mb-30 animated animated">Top Selling</h4>
+                            <div class="product-list-small animated animated">
+    
+    
+    {% for product in top_sold_products %}
+                                <article class="row align-items-center hover-up">
+                                    <figure class="col-md-4 mb-0">
+                                        <a href="{% url 'core:product-detail' product.pid %}"><img src="{{ product.image.url }}" alt="" /></a>
+                                    </figure>
+    
+                                    <div class="col-md-8 mb-0">
+                                        <h6>
+                                            <a href="{% url 'core:product-detail' product.pid %}">{{ product.title }}</a>
+                                        </h6>
+                                        <div class="product-rate-cover">
+                                            <div class="product-rate d-inline-block">
+                                                <div class="product-rating" style="width: 90%"></div>
+                                            </div>
+                                            <span class="font-small ml-5 text-muted"> {{product.get_average_rating|floatformat:1}}({{product.get_total_ratings}})</span>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> ({{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</span>
+                                        <div class="product-price">
+                                            <span>Ksh {{ product.price|floatformat:2|intcomma }}</span>
+                                            <span class="old-price">{{ product.old_price|floatformat:2|intcomma }}</span>
+                                        </div>
                                     </div>
-                                    <div class="product-price">
-                                        <span>Ksh {{ p.price|floatformat:2|intcomma }}</span>
-                                        <span class="old-price">Ksh {{ p.old_price|floatformat:2|intcomma }}</span>
-                                    </div>
-                                </div>
-                            </article>
-                            {%endfor %}
+                                </article>
+                                
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-xl-block">
-                        <h4 class="section-title style-1 mb-30 animated animated">Top Rated</h4>
-                        <div class="product-list-small animated animated">
-                            <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
-                                    <a href="shop-product-right.html"><img src="{% static 'assets/imgs/shop/thumbnail-10.jpg' %}" alt="" /></a>
-                                </figure>
-                                <div class="col-md-8 mb-0">
-                                    <h6>
-                                        <a href="shop-product-right.html">Foster Farms Takeout Crispy Classic Buffalo Wings</a>
-                                    </h6>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
+                        
+                        {% endif %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-lg-block">
+                            <h4 class="section-title style-1 mb-30 animated animated">Recently added</h4>
+                            <div class="product-list-small animated animated">
+                                {% for p in new_products %}
+                                <article class="row align-items-center hover-up">
+                                    <figure class="col-md-4 mb-0">
+                                        <a href="{% url 'core:product-detail' p.pid %}"><img src="{{ p.image.url }}" alt="" /></a>
+                                    </figure>
+                                    <div class="col-md-8 mb-0">
+                                        <h6>
+                                            <a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a>
+                                        </h6>
+                                        <div class="product-rate-cover">
+                                            <div class="product-rate d-inline-block">
+                                                <div class="product-rating" style="width: 90%"></div>
+                                            </div>
+                                            <span class="font-small ml-5 text-muted"> ({{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</span>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                    </div>
-                                    <div class="product-price">
-                                        <span>$32.85</span>
-                                        <span class="old-price">$33.8</span>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
-                                    <a href="shop-product-right.html"><img src="{% static 'assets/imgs/shop/thumbnail-11.jpg' %}" alt="" /></a>
-                                </figure>
-                                <div class="col-md-8 mb-0">
-                                    <h6>
-                                        <a href="shop-product-right.html">Angie’s Boomchickapop Sweet & Salty Kettle Corn</a>
-                                    </h6>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
+                                        <div class="product-price">
+                                            <span>Ksh {{ p.price|floatformat:2|intcomma }}</span>
+                                            <span class="old-price">Ksh {{ p.old_price|floatformat:2|intcomma }}</span>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     </div>
-                                    <div class="product-price">
-                                        <span>$32.85</span>
-                                        <span class="old-price">$33.8</span>
-                                    </div>
-                                </div>
-                            </article>
-                            <article class="row align-items-center hover-up">
-                                <figure class="col-md-4 mb-0">
-                                    <a href="shop-product-right.html"><img src="{% static 'assets/imgs/shop/thumbnail-12.jpg' %}" alt="" /></a>
-                                </figure>
-                                <div class="col-md-8 mb-0">
-                                    <h6>
-                                        <a href="shop-product-right.html">All Natural Italian-Style Chicken Meatballs</a>
-                                    </h6>
-                                    <div class="product-rate-cover">
-                                        <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
+                                </article>
+                                {%endfor %}
+                            </div>
+                        </div>
+                        {% if top_rated_products %}
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-sm-5 mb-md-0 d-none d-xl-block">
+                            <h4 class="section-title style-1 mb-30 animated animated">Top Rated</h4>
+                            <div class="product-list-small animated animated">
+                                {% for p in top_rated_products%}
+                                <article class="row align-items-center hover-up">
+                                    <figure class="col-md-4 mb-0">
+                                        <a href="{% url 'core:product-detail' p.pid %}"><img src="{{ p.image.url }}" alt="" /></a>
+                                    </figure>
+                                    <div class="col-md-8 mb-0">
+                                        <h6>
+                                            <a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a>
+                                        </h6>
+                                        <div class="product-rate-cover">
+                                            <div class="product-rate d-inline-block">
+                                                <div class="product-rating" style="width: 90%"></div>
+                                            </div>
+                                            <span class="font-small ml-5 text-muted"> ({{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</span>
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        <div class="product-price">
+                                            <span>Ksh {{ p.price|floatformat:2|intcomma }}</span>
+                                            <span class="old-price">Ksh {{ p.old_price|floatformat:2|intcomma }}</span>
+                                        </div>
                                     </div>
-                                    <div class="product-price">
-                                        <span>$32.85</span>
-                                        <span class="old-price">$33.8</span>
-                                    </div>
+                                </article>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    
+                </div>
+                <!-- Mobile View - Tabbed Interface -->
+                <div class="d-block d-md-none">
+                    <div class="mobile-product-sections">
+                        <!-- Section Tabs -->
+                        <div class="section-tabs mb-4">
+                            <nav>
+                                <div class="nav nav-tabs" id="mobileProductTabs" role="tablist">
+                                    {% if top_sold_products %}
+                                    <button class="nav-link active" id="top-selling-tab" data-bs-toggle="tab" data-bs-target="#top-selling" type="button" role="tab">
+                                        <i class="fas fa-fire me-1"></i> Top Selling
+                                    </button>
+                                    {% endif %}
+                                    
+                                    <button class="nav-link" id="new-products-tab" data-bs-toggle="tab" data-bs-target="#new-products" type="button" role="tab">
+                                        <i class="fas fa-newspaper me-1"></i> New
+                                    </button>
+                                    
+                                    {% if top_rated_products %}
+                                    <button class="nav-link" id="top-rated-tab" data-bs-toggle="tab" data-bs-target="#top-rated" type="button" role="tab">
+                                        <i class="fas fa-star me-1"></i> Top Rated
+                                    </button>
+                                    {% endif %}
                                 </div>
-                            </article>
+                            </nav>
+                        </div>
+                        
+                        <!-- Tab Content -->
+                        <div class="tab-content" id="mobileProductTabsContent">
+                            {% if top_sold_products %}
+                            <div class="tab-pane fade show active" id="top-selling" role="tabpanel">
+                                <div class="mobile-product-list">
+                                    {% for product in top_sold_products %}
+                                    <div class="mobile-product-item">
+                                        <a href="{% url 'core:product-detail' product.pid %}" class="row g-2 align-items-center">
+                                            <div class="col-4">
+                                                <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.title }}">
+                                            </div>
+                                            <div class="col-8">
+                                                <h6 class="mb-1 text-truncate">{{ product.title|truncatechars:20 }}</h6>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <div class="small-ratings">
+                                                        {% with rating=product.get_average_rating|default:0 %}
+                                                            {% for i in "12345" %}
+                                                                {% if forloop.counter <= rating %}
+                                                                    <i class="fa fa-star text-warning"></i>
+                                                                {% else %}
+                                                                    {% if forloop.counter|add:"-0.5" <= rating %}
+                                                                        <i class="fa fa-star-half-alt text-warning"></i>
+                                                                    {% else %}
+                                                                        <i class="fa fa-star text-muted"></i>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endwith %}
+                                                    </div>
+                                                    <small class="text-muted ms-1">({{product.get_average_rating|floatformat:1}}({{product.get_total_ratings}}))</small>
+                                                </div>
+                                                <div class="product-price">
+                                                    <strong class="text-primary">Ksh {{ product.price|floatformat:2|intcomma }}</strong>
+                                                    {% if product.old_price %}
+                                                    <small class="text-muted text-decoration-line-through ms-1">
+                                                        Ksh {{ product.old_price|floatformat:2|intcomma }}
+                                                    </small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            
+                            <!-- New Products Tab -->
+                            <div class="tab-pane fade" id="new-products" role="tabpanel">
+                                <div class="mobile-product-list">
+                                    {% for p in new_products %}
+                                    <div class="mobile-product-item">
+                                        <a href="{% url 'core:product-detail' p.pid %}" class="row g-2 align-items-center">
+                                            <div class="col-4">
+                                                <img src="{{ p.image.url }}" class="img-fluid rounded" alt="{{ p.title }}">
+                                            </div>
+                                            <div class="col-8">
+                                                <h6 class="mb-1 text-truncate">{{ p.title|truncatechars:20 }}</h6>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <div class="small-ratings">
+                                                        {% with rating=p.get_average_rating|default:0 %}
+                                                            {% for i in "12345" %}
+                                                                {% if forloop.counter <= rating %}
+                                                                    <i class="fa fa-star text-warning"></i>
+                                                                {% else %}
+                                                                    {% if forloop.counter|add:"-0.5" <= rating %}
+                                                                        <i class="fa fa-star-half-alt text-warning"></i>
+                                                                    {% else %}
+                                                                        <i class="fa fa-star text-muted"></i>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endwith %}
+                                                    </div>
+                                                    <small class="text-muted ms-1">({{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</small>
+                                                </div>
+                                                <div class="product-price">
+                                                    <strong class="text-primary">Ksh {{ p.price|floatformat:2|intcomma }}</strong>
+                                                    {% if p.old_price %}
+                                                    <small class="text-muted text-decoration-line-through ms-1">
+                                                        Ksh {{ p.old_price|floatformat:2|intcomma }}
+                                                    </small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <!-- Top Rated Tab -->
+                            {% if top_rated_products %}
+                            <div class="tab-pane fade" id="top-rated" role="tabpanel">
+                                <div class="mobile-product-list">
+                                    {% for p in top_rated_products %}
+                                    <div class="mobile-product-item">
+                                        <a href="{% url 'core:product-detail' p.pid %}" class="row g-2 align-items-center">
+                                            <div class="col-4">
+                                                <img src="{{ p.image.url }}" class="img-fluid rounded" alt="{{ p.title }}">
+                                            </div>
+                                            <div class="col-8">
+                                                <h6 class="mb-1 text-truncate">{{ p.title|truncatechars:20 }}</h6>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <div class="small-ratings">
+                                                        {% with rating=p.get_average_rating|default:0 %}
+                                                            {% for i in "12345" %}
+                                                                {% if forloop.counter <= rating %}
+                                                                    <i class="fa fa-star text-warning"></i>
+                                                                {% else %}
+                                                                    {% if forloop.counter|add:"-0.5" <= rating %}
+                                                                        <i class="fa fa-star-half-alt text-warning"></i>
+                                                                    {% else %}
+                                                                        <i class="fa fa-star text-muted"></i>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endwith %}
+                                                    </div>
+                                                    <small class="text-muted ms-1">({{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</small>
+                                                </div>
+                                                <div class="product-price">
+                                                    <strong class="text-primary">Ksh {{ p.price|floatformat:2|intcomma }}</strong>
+                                                    {% if p.old_price %}
+                                                    <small class="text-muted text-decoration-line-through ms-1">
+                                                        Ksh {{ p.old_price|floatformat:2|intcomma }}
+                                                    </small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
+            
             </div>
         </section>
         <script>
             const slidesContainer = document.querySelector('.slides');
             const slides = document.querySelectorAll('.slide');
-          
-            let currentIndex = 0;
-            const slideInterval = 3000; // 3 seconds
-            let autoSlide;
-          
-            function goToSlide(index) {
-              slidesContainer.scrollTo({
-                left: slides[index].offsetLeft,
-                behavior: 'smooth'
-              });
+            
+                let currentIndex = 0;
+                const slideInterval = 3000; // 3 seconds
+                let autoSlide;
+            
+                function goToSlide(index) {
+                slidesContainer.scrollTo({
+                    left: slides[index].offsetLeft,
+                    behavior: 'smooth'
+                });
+                }
+            
+                function startAutoSlide() {
+                autoSlide = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % slides.length;
+                    goToSlide(currentIndex);
+                }, slideInterval);
+                }
+            
+                function stopAutoSlide() {
+                clearInterval(autoSlide);
             }
-          
-            function startAutoSlide() {
-              autoSlide = setInterval(() => {
-                currentIndex = (currentIndex + 1) % slides.length;
-                goToSlide(currentIndex);
-              }, slideInterval);
+            
+                // Start auto sliding
+                startAutoSlide();
+            
+                // Pause when user interacts
+                slidesContainer.addEventListener('touchstart', stopAutoSlide);
+                slidesContainer.addEventListener('touchend', startAutoSlide);
+            </script>
+            <script>
+                // Optional: Make tabs swipeable
+document.addEventListener('DOMContentLoaded', function() {
+    const tabContent = document.querySelector('#mobileProductTabsContent');
+    if (tabContent && 'ontouchstart' in window) {
+        let startX = 0;
+        let currentTab = 0;
+        
+        tabContent.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        
+        tabContent.addEventListener('touchend', function(e) {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                const tabs = document.querySelectorAll('#mobileProductTabs .nav-link');
+                if (diff > 0 && currentTab < tabs.length - 1) {
+                    // Swipe left, go to next tab
+                    currentTab++;
+                } else if (diff < 0 && currentTab > 0) {
+                    // Swipe right, go to previous tab
+                    currentTab--;
+                }
+                const tab = tabs[currentTab];
+                if (tab) {
+                    const bsTab = new bootstrap.Tab(tab);
+                    bsTab.show();
+                }
             }
-          
-            function stopAutoSlide() {
-              clearInterval(autoSlide);
-            }
-          
-            // Start auto sliding
-            startAutoSlide();
-          
-            // Pause when user interacts
-            slidesContainer.addEventListener('touchstart', stopAutoSlide);
-            slidesContainer.addEventListener('touchend', startAutoSlide);
-          </script>
-          
+        });
+    }
+});
+            </script>
+            
 
     </main>
 
