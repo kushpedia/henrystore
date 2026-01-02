@@ -298,7 +298,7 @@ def login_view(request):
 
 
 
-
+@csrf_exempt
 def logout_view(request):
 
     logout(request)

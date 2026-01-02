@@ -2,10 +2,12 @@
 from django.http import JsonResponse
 from .models import Transaction
 import logging
+from django.views.decorators.csrf import csrf_exempt
+
 
 logger = logging.getLogger(__name__)
 
-
+@csrf_exempt
 def check_payment_status(request, order_id):
     """Check payment status with error details"""
     try:
@@ -47,6 +49,7 @@ def check_payment_status(request, order_id):
             'action': 'retry'
         }, status=500)
 
+@csrf_exempt
 def get_transaction_response(transaction):
     """Format transaction data for frontend"""
     
@@ -90,6 +93,8 @@ def get_transaction_response(transaction):
     
     return JsonResponse(response)
 
+
+@csrf_exempt
 def get_user_friendly_error(result_code, result_desc):
     """Convert error code to user-friendly message"""
     error_map = {
@@ -112,6 +117,8 @@ def get_user_friendly_error(result_code, result_desc):
     
     return error_map.get(result_code, result_desc or "Payment failed. Please try again.")
 
+
+@csrf_exempt
 def get_suggested_action(result_code):
     """Get suggested action based on error"""
     action_map = {

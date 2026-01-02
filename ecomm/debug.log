@@ -18546,3 +18546,2727 @@ D:\ecommerce\ecomm\core\models.py changed, reloading.
 Watching for file changes with StatReloader
 D:\ecommerce\ecomm\core\models.py changed, reloading.
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\ecomm\settings.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /product/515d353hdb/ HTTP/1.1" 200 116216
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /media/user_1/phone_case_r35JNl8.jpg HTTP/1.1" 200 21377
+"GET /media/product-images/phone_case_side_b_1TMDt8l.jpg HTTP/1.1" 200 10191
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /users/sign-in/ HTTP/1.1" 200 91404
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+- Broken pipe from ('127.0.0.1', 52164)
+- Broken pipe from ('127.0.0.1', 52150)
+- Broken pipe from ('127.0.0.1', 52155)
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /users/sign-up/ HTTP/1.1" 200 93975
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+- Broken pipe from ('127.0.0.1', 52176)
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/logo-google.svg HTTP/1.1" 404 2057
+"GET /static/assets/imgs/theme/icons/logo-apple.svg HTTP/1.1" 404 2054
+"GET /static/assets/imgs/theme/icons/logo-facebook.svg HTTP/1.1" 404 2063
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"POST /users/sign-up/ HTTP/1.1" 200 94385
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/logo-facebook.svg HTTP/1.1" 404 2063
+"GET /static/assets/imgs/theme/icons/logo-google.svg HTTP/1.1" 404 2057
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/logo-apple.svg HTTP/1.1" 404 2054
+"POST /users/sign-up/ HTTP/1.1" 302 0
+"GET /users/sign-in/ HTTP/1.1" 200 91735
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/page/login-1.png HTTP/1.1" 200 270812
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /admin/ HTTP/1.1" 200 44068
+"GET /admin/userauths/user/ HTTP/1.1" 200 24294
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/userauths/user/20/change/ HTTP/1.1" 200 42522
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /admin/userauths/user/20/change/ HTTP/1.1" 200 42891
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /users/sign-in/ HTTP/1.1" 302 0
+"GET /users/sign-in/ HTTP/1.1" 200 91787
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /admin/userauths/user/20/change/ HTTP/1.1" 302 0
+"GET /admin/userauths/user/ HTTP/1.1" 200 24855
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /users/sign-in/ HTTP/1.1" 302 0
+Internal Server Error: /
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 57, in index
+    return render(request, 'core/index.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\defaulttags.py", line 327, in render
+    return nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\defaulttags.py", line 243, in render
+    nodelist.append(node.render_annotated(context))
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\defaulttags.py", line 480, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'vendor-detail' with arguments '('',)' not found. 1 pattern(s) tried: ['vendor/(?P<vid>[^/]+)/\\Z']
+"GET / HTTP/1.1" 500 256268
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 11056
+"GET /admin/core/product/ HTTP/1.1" 200 50855
+"GET /media/user_1/www.kstores.com.png HTTP/1.1" 200 200312
+"GET /media/user_1/Untitled_design_2_FOTH9HZ.png HTTP/1.1" 200 226173
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /media/user_1/Untitled_design.png HTTP/1.1" 200 231082
+"GET /media/user_1/Untitled_design_2.png HTTP/1.1" 304 0
+"GET /media/user_1/2_14.jpg HTTP/1.1" 304 0
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 304 0
+"GET /media/user_1/3_12.jpg HTTP/1.1" 304 0
+"GET /media/user_1/1_18.jpg HTTP/1.1" 304 0
+"GET /media/user_1/1_17.jpg HTTP/1.1" 304 0
+"GET /media/user_1/1_16.jpg HTTP/1.1" 304 0
+"GET /media/user_1/Untitled_design_1.png HTTP/1.1" 200 231886
+"POST /admin/core/product/ HTTP/1.1" 200 19501
+"GET /static/admin/js/cancel.js HTTP/1.1" 304 0
+"POST /admin/core/product/ HTTP/1.1" 302 0
+"GET /admin/core/product/ HTTP/1.1" 200 44340
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /media/user_1/1_16.jpg HTTP/1.1" 200 22836
+"GET /static/assets/imgs/banner/banner-1.png HTTP/1.1" 200 50119
+"GET /static/assets/imgs/slider/img1.png HTTP/1.1" 200 231082
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /media/user_1/3_12.jpg HTTP/1.1" 200 17289
+"GET /media/user_1/1_17.jpg HTTP/1.1" 200 23715
+"GET /static/assets/imgs/banner/banner-2.png HTTP/1.1" 200 38339
+"GET /static/assets/imgs/banner/banner-3.png HTTP/1.1" 200 65066
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /static/assets/imgs/slider/img4.png HTTP/1.1" 200 200312
+"GET /static/assets/imgs/slider/img3.png HTTP/1.1" 200 226173
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /product/515d353hdb/ HTTP/1.1" 200 116765
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/banner/banner-11.png HTTP/1.1" 200 190175
+"GET /media/user_1/pp1.png HTTP/1.1" 200 193871
+"GET /add-to-cart?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 301 0
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 240
+"GET /cart/ HTTP/1.1" 200 96580
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+Forbidden (Origin checking failed - https://508f4d016e3c.ngrok-free.app does not match any trusted origins.): /save_checkout_info/
+"POST /save_checkout_info/ HTTP/1.1" 403 2568
+D:\ecommerce\ecomm\userauths\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Forbidden (Origin checking failed - https://508f4d016e3c.ngrok-free.app does not match any trusted origins.): /save_checkout_info/
+"POST /save_checkout_info/ HTTP/1.1" 403 2568
+"GET /cart/ HTTP/1.1" 200 96580
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+Forbidden (Origin checking failed - https://508f4d016e3c.ngrok-free.app does not match any trusted origins.): /save_checkout_info/
+"POST /save_checkout_info/ HTTP/1.1" 403 2568
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /cart/ HTTP/1.1" 200 96580
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /save_checkout_info/ HTTP/1.1" 302 0
+"GET /new_checkout/02527942/ HTTP/1.1" 200 130320
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/coupon.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+Forbidden (Origin checking failed - https://508f4d016e3c.ngrok-free.app does not match any trusted origins.): /payments/initiate/
+"POST /payments/initiate/ HTTP/1.1" 403 2568
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\mpesaPayCallback.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\query.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\genrateMpesaAcesstoken.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /new_checkout/02527942/ HTTP/1.1" 200 130320
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/coupon.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /payments/initiate/ HTTP/1.1" 200 140
+"GET /payments/check-status/02527942/?checkout_id=ws_CO_02012026112340637703443827 HTTP/1.1" 200 167
+"GET /payments/check-status/02527942/?checkout_id=ws_CO_02012026112340637703443827 HTTP/1.1" 200 167
+"POST /payments/callback/ HTTP/1.1" 200 53
+"GET /payments/check-status/02527942/?checkout_id=ws_CO_02012026112340637703443827 HTTP/1.1" 200 247
+"GET /payment-completed/02527942/?method=mpesa&code=UA2C02LODT HTTP/1.1" 200 89608
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /products/ HTTP/1.1" 200 129445
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /add-to-cart?id=39&pid=e3b5122ehd&image=%2Fmedia%2Fuser_18%2FWhatsApp_Image_2025-12-24_at_16.12.05.jpeg&qty=1&title=Rechargeable%20electric%20Citrus%20Juicer&price=%20%202000.00%20%202000.00&sku=sku8416 HTTP/1.1" 301 0
+"GET /add-to-cart/?id=39&pid=e3b5122ehd&image=%2Fmedia%2Fuser_18%2FWhatsApp_Image_2025-12-24_at_16.12.05.jpeg&qty=1&title=Rechargeable%20electric%20Citrus%20Juicer&price=%20%202000.00%20%202000.00&sku=sku8416 HTTP/1.1" 200 259
+"GET /add-to-cart/?id=39&pid=e3b5122ehd&image=%2Fmedia%2Fuser_18%2FWhatsApp_Image_2025-12-24_at_16.12.05.jpeg&qty=1&title=Rechargeable%20electric%20Citrus%20Juicer&price=%20%202000.00%20%202000.00&sku=sku8416 HTTP/1.1" 200 257
+"GET /products/ HTTP/1.1" 200 129445
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249742
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 11056
+"GET /product/515d353hdb/ HTTP/1.1" 200 116948
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /product/3c1gh31d5d/ HTTP/1.1" 200 112162
+Not Found: /product/3c1gh31d5d/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/3c1gh31d5d/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /media/product-images/5_4.jpg HTTP/1.1" 200 30472
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /media/product-images/4_9.jpg HTTP/1.1" 200 24278
+"GET /media/product-images/7_3.jpg HTTP/1.1" 200 18031
+"GET /add-to-cart?id=37&pid=3c1gh31d5d&image=%2Fmedia%2Fuser_1%2F3_12.jpg&qty=1&title=Em%20Aluminium%20Pressure%20Cooker&price=%20%202800.00&sku=sku3659 HTTP/1.1" 301 0
+"GET /add-to-cart/?id=37&pid=3c1gh31d5d&image=%2Fmedia%2Fuser_1%2F3_12.jpg&qty=1&title=Em%20Aluminium%20Pressure%20Cooker&price=%20%202800.00&sku=sku3659 HTTP/1.1" 200 434
+"GET /add-to-cart/?id=37&pid=3c1gh31d5d&image=%2Fmedia%2Fuser_1%2F3_12.jpg&qty=1&title=Em%20Aluminium%20Pressure%20Cooker&price=%20%202800.00&sku=sku3659 HTTP/1.1" 200 432
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 404, in cart_view
+    cart_total_amount += int(item['qty']) * float(item['price'])
+                                            ^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '  2000.00  2000.00'
+"GET /cart/ HTTP/1.1" 500 75943
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /product/515d353hdb/ HTTP/1.1" 200 116948
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 643
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 641
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /add-to-cart/?id=39&pid=e3b5122ehd&image=%2Fmedia%2Fuser_18%2FWhatsApp_Image_2025-12-24_at_16.12.05.jpeg&qty=1&title=Rechargeable%20electric%20Citrus%20Juicer&price=%20%202000.00%20%202000.00&sku=sku8416 HTTP/1.1" 200 641
+"GET /add-to-cart/?id=39&pid=e3b5122ehd&image=%2Fmedia%2Fuser_18%2FWhatsApp_Image_2025-12-24_at_16.12.05.jpeg&qty=1&title=Rechargeable%20electric%20Citrus%20Juicer&price=%20%202000.00%20%202000.00&sku=sku8416 HTTP/1.1" 200 641
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 404, in cart_view
+    cart_total_amount += int(item['qty']) * float(item['price'])
+                                            ^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '  2000.00  2000.00'
+"GET /cart/ HTTP/1.1" 500 75924
+"GET /users/sign-out/ HTTP/1.1" 302 0
+"GET /users/sign-in/ HTTP/1.1" 200 91703
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /users/sign-up/ HTTP/1.1" 200 93975
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/logo-facebook.svg HTTP/1.1" 404 2063
+"GET /static/assets/imgs/theme/icons/logo-google.svg HTTP/1.1" 404 2057
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/logo-apple.svg HTTP/1.1" 404 2054
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /media/user_1/phone_case_r35JNl8.jpg HTTP/1.1" 200 21377
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/imgs/banner/banner-3.png HTTP/1.1" 200 65066
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /media/user_1/1_16.jpg HTTP/1.1" 200 22836
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /media/user_1/3_12.jpg HTTP/1.1" 200 17289
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/banner/banner-1.png HTTP/1.1" 200 50119
+"GET /static/assets/imgs/banner/banner-2.png HTTP/1.1" 200 38339
+"GET /static/assets/imgs/slider/img1.png HTTP/1.1" 200 231082
+"GET /static/assets/imgs/slider/img4.png HTTP/1.1" 200 200312
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff HTTP/1.1" 404 2084
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /admin/userauths/user/ HTTP/1.1" 200 24295
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /product/515d353hdb/ HTTP/1.1" 200 116338
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /media/product-images/phone_case_side_b_1TMDt8l.jpg HTTP/1.1" 200 10191
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /media/user_1/1_17.jpg HTTP/1.1" 200 23715
+"GET /media/user_1/pp1.png HTTP/1.1" 200 193871
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /static/assets/imgs/banner/banner-11.png HTTP/1.1" 200 190175
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /add-to-cart?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 301 0
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /cart/ HTTP/1.1" 200 96541
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /admin/userauths/user/ HTTP/1.1" 200 24295
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/userauths/profile/ HTTP/1.1" 200 23394
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/userauths/user/ HTTP/1.1" 200 24295
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /save_checkout_info/ HTTP/1.1" 302 0
+"GET /users/sign-in/?next=/save_checkout_info/ HTTP/1.1" 200 91404
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/page/login-1.png HTTP/1.1" 200 270812
+"GET /users/sign-up/ HTTP/1.1" 200 93975
+"GET /static/assets/imgs/theme/icons/logo-google.svg HTTP/1.1" 404 2057
+"GET /static/assets/imgs/theme/icons/logo-facebook.svg HTTP/1.1" 404 2063
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/logo-apple.svg HTTP/1.1" 404 2054
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+Not Found: /users/sign-up/page-privacy-policy.html
+"GET /users/sign-up/page-privacy-policy.html HTTP/1.1" 404 12934
+"POST /users/sign-up/ HTTP/1.1" 302 0
+"GET /users/sign-up/ HTTP/1.1" 200 94325
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/logo-google.svg HTTP/1.1" 404 2057
+"GET /static/assets/imgs/theme/icons/logo-apple.svg HTTP/1.1" 404 2054
+"GET /static/assets/imgs/theme/icons/logo-facebook.svg HTTP/1.1" 404 2063
+- Broken pipe from ('127.0.0.1', 62675)
+"GET /users/sign-in/ HTTP/1.1" 200 91404
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"POST /users/sign-in/ HTTP/1.1" 302 0
+"GET /users/sign-in/ HTTP/1.1" 200 91787
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /admin/userauths/user/ HTTP/1.1" 200 24741
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/userauths/user/21/change/ HTTP/1.1" 200 42522
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /users/activate/MjE/d1s43u-7917c74518a531f4f07b26d3a322fd2e HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 250067
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/slider/img3.png HTTP/1.1" 200 226173
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /product/515d353hdb/ HTTP/1.1" 200 116765
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /cart/ HTTP/1.1" 200 96580
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /admin/userauths/user/21/change/ HTTP/1.1" 200 42566
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"POST /save_checkout_info/ HTTP/1.1" 302 0
+"GET /new_checkout/19587267/ HTTP/1.1" 200 130320
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/coupon.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /new_checkout/19587267/ HTTP/1.1" 302 0
+"GET /users/sign-in/?next=/new_checkout/19587267/ HTTP/1.1" 200 91404
+"GET /users/sign-in/?next=/new_checkout/19587267/ HTTP/1.1" 200 91404
+"GET /users/sign-in/?next=/new_checkout/19587267/ HTTP/1.1" 200 91404
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"POST /payments/initiate/ HTTP/1.1" 200 140
+"GET /payments/check-status/19587267/?checkout_id=ws_CO_02012026130117331716694939 HTTP/1.1" 200 167
+"GET /payments/check-status/19587267/?checkout_id=ws_CO_02012026130117331716694939 HTTP/1.1" 200 167
+"GET /payments/check-status/19587267/?checkout_id=ws_CO_02012026130117331716694939 HTTP/1.1" 200 167
+"POST /payments/callback/ HTTP/1.1" 200 53
+"GET /payments/check-status/19587267/?checkout_id=ws_CO_02012026130117331716694939 HTTP/1.1" 200 247
+"GET /payment-completed/19587267/?method=mpesa&code=UA2O32SW9L HTTP/1.1" 200 89608
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /payment-completed/19587267/?method=mpesa&code=UA2O32SW9L HTTP/1.1" 302 0
+"GET /users/sign-in/?next=/payment-completed/19587267/%3Fmethod%3Dmpesa%26code%3DUA2O32SW9L HTTP/1.1" 200 91404
+"GET /users/sign-in/?next=/payment-completed/19587267/?method%3Dmpesa%26code%3DUA2O32SW9L HTTP/1.1" 200 91404
+"GET /users/sign-in/?next=/payment-completed/19587267/?method%3Dmpesa%26code%3DUA2O32SW9L HTTP/1.1" 200 91404
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"POST /users/sign-in/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 250060
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /product/515d353hdb/ HTTP/1.1" 200 116338
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /dashboard/ HTTP/1.1" 200 99523
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /dashboard/order/168 HTTP/1.1" 200 96643
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+Internal Server Error: /dashboard/order/168
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\__init__.py", line 2128, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 649, in order_detail
+    order = CartOrder.objects.get(user=request.user, id=id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 619, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1493, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1511, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1518, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1646, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1678, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1588, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1415, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\lookups.py", line 38, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\related_lookups.py", line 112, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\__init__.py", line 2130, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x0000018F40EC5370>>.
+"GET /dashboard/order/168 HTTP/1.1" 500 145424
+Internal Server Error: /dashboard/order/168
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\__init__.py", line 2128, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 649, in order_detail
+    order = CartOrder.objects.get(user=request.user, id=id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 619, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1493, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1511, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1518, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1646, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1678, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1588, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1415, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\lookups.py", line 38, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\related_lookups.py", line 112, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\__init__.py", line 2130, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x0000018F40F7D2E0>>.
+"GET /dashboard/order/168 HTTP/1.1" 500 145956
+Internal Server Error: /dashboard/order/168
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\__init__.py", line 2128, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+TypeError: int() argument must be a string, a bytes-like object or a real number, not 'SimpleLazyObject'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 649, in order_detail
+    order = CartOrder.objects.get(user=request.user, id=id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 619, in get
+    clone = self._chain() if self.query.combinator else self.filter(*args, **kwargs)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1493, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1511, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1518, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1646, in add_q
+    clause, _ = self._add_q(q_object, can_reuse)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1678, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1588, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\query.py", line 1415, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\lookups.py", line 38, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\related_lookups.py", line 112, in get_prep_lookup
+    self.rhs = target_field.get_prep_value(self.rhs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\fields\__init__.py", line 2130, in get_prep_value
+    raise e.__class__(
+TypeError: Field 'id' expected a number but got <SimpleLazyObject: <django.contrib.auth.models.AnonymousUser object at 0x0000018F40F62000>>.
+"GET /dashboard/order/168 HTTP/1.1" 500 145956
+"GET /users/sign-out/ HTTP/1.1" 302 0
+"GET /users/sign-in/ HTTP/1.1" 200 91703
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /users/forgot-password/ HTTP/1.1" 200 90233
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/page/logo.png HTTP/1.1" 200 34492
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /users/forgot-password/ HTTP/1.1" 302 0
+"GET /users/sign-in/ HTTP/1.1" 200 91738
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /users/reset-password/MjE/d1s5bg-d43ba7b7f5901c7a275c93b1d7d2f8da/ HTTP/1.1" 200 90469
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /users/reset-password/MjE/d1s5bg-d43ba7b7f5901c7a275c93b1d7d2f8da/ HTTP/1.1" 302 0
+"GET /users/reset-password/MjE/d1s5bg-d43ba7b7f5901c7a275c93b1d7d2f8da/ HTTP/1.1" 200 90873
+"POST /users/reset-password/MjE/d1s5bg-d43ba7b7f5901c7a275c93b1d7d2f8da/ HTTP/1.1" 302 0
+"GET /users/reset-password/MjE/d1s5bg-d43ba7b7f5901c7a275c93b1d7d2f8da/ HTTP/1.1" 200 91170
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /users/reset-password/MjE/d1s5bg-d43ba7b7f5901c7a275c93b1d7d2f8da/ HTTP/1.1" 302 0
+"GET /users/sign-in/ HTTP/1.1" 200 91750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /cart/ HTTP/1.1" 200 96541
+"GET /cart/ HTTP/1.1" 200 96541
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /save_checkout_info/ HTTP/1.1" 302 0
+"GET /users/sign-in/?next=/save_checkout_info/ HTTP/1.1" 200 91404
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /users/sign-in/?next=/save_checkout_info/ HTTP/1.1" 302 0
+Internal Server Error: /save_checkout_info/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 557, in save_checkout_info
+    return redirect("core:new_checkout", order.oid)
+                                         ^^^^^
+UnboundLocalError: cannot access local variable 'order' where it is not associated with a value
+"GET /save_checkout_info/ HTTP/1.1" 500 84697
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 11056
+"GET /cart/ HTTP/1.1" 200 96896
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /save_checkout_info/ HTTP/1.1" 302 0
+"GET /new_checkout/29168799/ HTTP/1.1" 200 131182
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/coupon.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+Not Found: /new_checkout/29168799/index.html
+"GET /new_checkout/29168799/index.html HTTP/1.1" 404 11119
+"GET /new_checkout/29168799/ HTTP/1.1" 200 131173
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/coupon.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /dashboard/ HTTP/1.1" 200 120150
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /media/image/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_2.jpg HTTP/1.1" 200 689208
+"GET /cart/ HTTP/1.1" 200 96589
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 200 659
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /search/?q= HTTP/1.1" 200 91912
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 304 0
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/blog/header-bg.png HTTP/1.1" 200 16995
+"GET /search/?q= HTTP/1.1" 200 91912
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /search/?q= HTTP/1.1" 200 91912
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /search/?q=Shirt HTTP/1.1" 200 96485
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /add-to-wishlist?id=36 HTTP/1.1" 301 0
+"GET /add-to-wishlist?id=36&title=Men%27S%20Button%20Shirt%20Men%20Casual%20Print%20Shirt%20Long%20Sleeved%20Shirts&price=900.00&image=%2Fmedia%2Fuser_1%2F1_18.jpg&sku=sku8696&pid=dg5hdc3311 HTTP/1.1" 301 0
+"GET /add-to-wishlist/?id=36 HTTP/1.1" 200 14
+"GET /add-to-wishlist/?id=36&title=Men%27S%20Button%20Shirt%20Men%20Casual%20Print%20Shirt%20Long%20Sleeved%20Shirts&price=900.00&image=%2Fmedia%2Fuser_1%2F1_18.jpg&sku=sku8696&pid=dg5hdc3311 HTTP/1.1" 200 14
+"GET /vendor/venfgh31f3gh1/ HTTP/1.1" 200 103651
+"GET /media/user_18/LNRS_Provider-Circle_png.png HTTP/1.1" 200 163824
+"GET /static/assets/imgs/theme/icons/social-tw.svg HTTP/1.1" 200 1362
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/social-fb.svg HTTP/1.1" 200 577
+"GET /static/assets/imgs/theme/icons/social-insta.svg HTTP/1.1" 200 3332
+"GET /media/user_18/download.jpg HTTP/1.1" 200 4768
+"GET /static/assets/imgs/banner/banner-10.jpg HTTP/1.1" 200 47850
+"GET /static/assets/imgs/theme/icons/social-pin.svg HTTP/1.1" 200 1606
+"GET /product/dg5hdc3311/ HTTP/1.1" 200 108948
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+Not Found: /product/dg5hdc3311/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/dg5hdc3311/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /product/e3b5122ehd/ HTTP/1.1" 200 112819
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+Not Found: /product/e3b5122ehd/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/e3b5122ehd/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /media/product-images/WhatsApp_Image_2025-12-24_at_16.13.00.jpeg HTTP/1.1" 200 84593
+"GET /media/product-images/WhatsApp_Image_2025-12-24_at_16.11.46.jpeg HTTP/1.1" 200 231493
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /media/product-images/WhatsApp_Image_2025-12-24_at_16.12.41.jpeg HTTP/1.1" 200 38467
+"GET /wishlist/ HTTP/1.1" 200 101075
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /remove-from-wishlist?id=154 HTTP/1.1" 301 0
+"GET /remove-from-wishlist/?id=154 HTTP/1.1" 200 10802
+"GET /remove-from-wishlist?id=155 HTTP/1.1" 301 0
+"GET /remove-from-wishlist/?id=155 HTTP/1.1" 200 7915
+"GET /remove-from-wishlist?id=128 HTTP/1.1" 301 0
+"GET /remove-from-wishlist/?id=128 HTTP/1.1" 200 5017
+"GET /remove-from-wishlist?id=152 HTTP/1.1" 301 0
+"GET /remove-from-wishlist/?id=152 HTTP/1.1" 200 2323
+"GET /wishlist/ HTTP/1.1" 200 91045
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249750
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 250098
+"GET /static/assets/css/custom.css HTTP/1.1" 304 0
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 304 0
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/js/function.js HTTP/1.1" 304 0
+"GET /media/category/1_3.jpg HTTP/1.1" 304 0
+"GET /static/assets/imgs/slider/img1.png HTTP/1.1" 304 0
+"GET /static/assets/imgs/slider/img3.png HTTP/1.1" 304 0
+"GET /static/assets/imgs/slider/img4.png HTTP/1.1" 304 0
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 304 0
+"GET /static/assets/imgs/slider/slider17.png HTTP/1.1" 304 0
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /useradmin/ HTTP/1.1" 200 17721
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /useradmin/order_detail/168/ HTTP/1.1" 200 16172
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"POST /useradmin/change_order_status/19587267/ HTTP/1.1" 302 0
+"GET /useradmin/order_detail/168/ HTTP/1.1" 200 16398
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /useradmin/reviews/ HTTP/1.1" 200 11829
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /useradmin/add-products/ HTTP/1.1" 200 20645
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /useradmin/settings/ HTTP/1.1" 200 12278
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /useradmin/orders/ HTTP/1.1" 200 65825
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /useradmin/products/ HTTP/1.1" 200 21110
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /admin/taggit/tag/ HTTP/1.1" 200 28352
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/core/wishlist_model/ HTTP/1.1" 200 22800
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /admin/core/address/ HTTP/1.1" 200 28519
+"GET /admin/jsi18n/ HTTP/1.1" 200 3342
+"GET /useradmin/shop_page/ HTTP/1.1" 200 14947
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET /useradmin/orders/ HTTP/1.1" 200 65825
+"GET /static/assets/imgs/page/kstores3.png HTTP/1.1" 404 2014
+"GET /static/assets2/js/main.js%3Fv%3D1.1 HTTP/1.1" 404 2003
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET / HTTP/1.1" 200 249742
+"GET /product/515d353hdb/ HTTP/1.1" 200 116338
+"GET / HTTP/1.1" 200 249742
+"GET / HTTP/1.1" 200 249742
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /users/sign-in/ HTTP/1.1" 200 91404
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /users/sign-in/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 250053
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /product/515d353hdb/ HTTP/1.1" 200 117791
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/css/prism.css HTTP/1.1" 404 2000
+"GET /static/assets/js/prism.js HTTP/1.1" 404 1994
+Not Found: /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js
+"GET /product/515d353hdb/cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js HTTP/1.1" 404 11281
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"POST /ajax-add-review/31/ HTTP/1.1" 200 177
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 240
+"GET /cart/ HTTP/1.1" 200 96580
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\query.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\ecomm\settings.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\ecomm\settings.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\ecomm\settings.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+- Broken pipe from ('127.0.0.1', 53489)
+- Broken pipe from ('127.0.0.1', 53496)
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+- Broken pipe from ('127.0.0.1', 52347)
+- Broken pipe from ('127.0.0.1', 52339)
+- Broken pipe from ('127.0.0.1', 52327)
+- Broken pipe from ('127.0.0.1', 52349)
+- Broken pipe from ('127.0.0.1', 52348)
+- Broken pipe from ('127.0.0.1', 52352)
+- Broken pipe from ('127.0.0.1', 52318)
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+- Broken pipe from ('127.0.0.1', 52337)
+- Broken pipe from ('127.0.0.1', 52351)
+- Broken pipe from ('127.0.0.1', 52325)
+- Broken pipe from ('127.0.0.1', 52330)
+- Broken pipe from ('127.0.0.1', 52350)
+- Broken pipe from ('127.0.0.1', 52338)
+- Broken pipe from ('127.0.0.1', 52360)
+- Broken pipe from ('127.0.0.1', 52328)
+- Broken pipe from ('127.0.0.1', 52361)
+- Broken pipe from ('127.0.0.1', 52357)
+- Broken pipe from ('127.0.0.1', 52340)
+- Broken pipe from ('127.0.0.1', 51569)
+- Broken pipe from ('127.0.0.1', 52369)
+- Broken pipe from ('127.0.0.1', 52363)
+- Broken pipe from ('127.0.0.1', 52367)
+- Broken pipe from ('127.0.0.1', 52370)
+- Broken pipe from ('127.0.0.1', 52366)
+- Broken pipe from ('127.0.0.1', 52368)
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+- Broken pipe from ('127.0.0.1', 52379)
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+- Broken pipe from ('127.0.0.1', 52378)
+- Broken pipe from ('127.0.0.1', 52384)
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+- Broken pipe from ('127.0.0.1', 52388)
+- Broken pipe from ('127.0.0.1', 52386)
+- Broken pipe from ('127.0.0.1', 52380)
+- Broken pipe from ('127.0.0.1', 52381)
+- Broken pipe from ('127.0.0.1', 52382)
+- Broken pipe from ('127.0.0.1', 52392)
+- Broken pipe from ('127.0.0.1', 52394)
+- Broken pipe from ('127.0.0.1', 52377)
+- Broken pipe from ('127.0.0.1', 52390)
+- Broken pipe from ('127.0.0.1', 52415)
+- Broken pipe from ('127.0.0.1', 52414)
+- Broken pipe from ('127.0.0.1', 52420)
+- Broken pipe from ('127.0.0.1', 52418)
+- Broken pipe from ('127.0.0.1', 52421)
+- Broken pipe from ('127.0.0.1', 52422)
+- Broken pipe from ('127.0.0.1', 52425)
+- Broken pipe from ('127.0.0.1', 52426)
+- Broken pipe from ('127.0.0.1', 52423)
+- Broken pipe from ('127.0.0.1', 52413)
+"GET / HTTP/1.1" 200 249742
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+- Broken pipe from ('127.0.0.1', 52445)
+- Broken pipe from ('127.0.0.1', 52447)
+- Broken pipe from ('127.0.0.1', 52458)
+- Broken pipe from ('127.0.0.1', 52449)
+- Broken pipe from ('127.0.0.1', 52451)
+- Broken pipe from ('127.0.0.1', 52460)
+- Broken pipe from ('127.0.0.1', 52457)
+- Broken pipe from ('127.0.0.1', 52461)
+- Broken pipe from ('127.0.0.1', 52459)
+- Broken pipe from ('127.0.0.1', 52424)
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /media/user_1/3_12.jpg HTTP/1.1" 200 17289
+"GET /media/user_1/1_17.jpg HTTP/1.1" 200 23715
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /media/user_1/phone_case_r35JNl8.jpg HTTP/1.1" 200 21377
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /static/assets/imgs/slider/img4.png HTTP/1.1" 200 200312
+"GET /static/assets/imgs/slider/img1.png HTTP/1.1" 200 231082
+"GET /static/assets/imgs/slider/img3.png HTTP/1.1" 200 226173
+"GET /media/user_1/1_16.jpg HTTP/1.1" 200 22836
+"GET /static/assets/imgs/banner/banner-1.png HTTP/1.1" 200 50119
+"GET /static/assets/imgs/banner/banner-2.png HTTP/1.1" 200 38339
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/imgs/banner/banner-3.png HTTP/1.1" 200 65066
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+- Broken pipe from ('127.0.0.1', 56264)
+- Broken pipe from ('127.0.0.1', 62703)
+- Broken pipe from ('127.0.0.1', 62705)
+- Broken pipe from ('127.0.0.1', 62710)
+- Broken pipe from ('127.0.0.1', 56280)
+- Broken pipe from ('127.0.0.1', 62706)
+- Broken pipe from ('127.0.0.1', 62707)
+- Broken pipe from ('127.0.0.1', 57959)
+- Broken pipe from ('127.0.0.1', 62708)
+- Broken pipe from ('127.0.0.1', 57823)
+- Broken pipe from ('127.0.0.1', 57948)
+- Broken pipe from ('127.0.0.1', 62704)
+- Broken pipe from ('127.0.0.1', 57957)
+- Broken pipe from ('127.0.0.1', 57949)
+- Broken pipe from ('127.0.0.1', 60878)
+- Broken pipe from ('127.0.0.1', 56281)
+- Broken pipe from ('127.0.0.1', 56283)
+- Broken pipe from ('127.0.0.1', 53850)
+- Broken pipe from ('127.0.0.1', 60879)
+- Broken pipe from ('127.0.0.1', 56276)
+- Broken pipe from ('127.0.0.1', 56279)
+- Broken pipe from ('127.0.0.1', 52154)
+- Broken pipe from ('127.0.0.1', 54560)
+- Broken pipe from ('127.0.0.1', 54557)
+- Broken pipe from ('127.0.0.1', 54558)
+- Broken pipe from ('127.0.0.1', 54559)
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /media/user_1/1_16.jpg HTTP/1.1" 200 22836
+"GET /static/assets/imgs/banner/banner-1.png HTTP/1.1" 200 50119
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/banner/banner-2.png HTTP/1.1" 200 38339
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/banner/banner-3.png HTTP/1.1" 200 65066
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+- Broken pipe from ('127.0.0.1', 55203)
+- Broken pipe from ('127.0.0.1', 55212)
+- Broken pipe from ('127.0.0.1', 55213)
+- Broken pipe from ('127.0.0.1', 55209)
+- Broken pipe from ('127.0.0.1', 55216)
+- Broken pipe from ('127.0.0.1', 55215)
+- Broken pipe from ('127.0.0.1', 55208)
+- Broken pipe from ('127.0.0.1', 55207)
+- Broken pipe from ('127.0.0.1', 55206)
+- Broken pipe from ('127.0.0.1', 55214)
+- Broken pipe from ('127.0.0.1', 56585)
+- Broken pipe from ('127.0.0.1', 55204)
+- Broken pipe from ('127.0.0.1', 56584)
+- Broken pipe from ('127.0.0.1', 56588)
+- Broken pipe from ('127.0.0.1', 56583)
+- Broken pipe from ('127.0.0.1', 56571)
+- Broken pipe from ('127.0.0.1', 56570)
+- Broken pipe from ('127.0.0.1', 56567)
+- Broken pipe from ('127.0.0.1', 56569)
+- Broken pipe from ('127.0.0.1', 56586)
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/banner/banner-2.png HTTP/1.1" 200 38339
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /static/assets/imgs/banner/banner-3.png HTTP/1.1" 200 65066
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+- Broken pipe from ('127.0.0.1', 63451)
+- Broken pipe from ('127.0.0.1', 63476)
+- Broken pipe from ('127.0.0.1', 62067)
+- Broken pipe from ('127.0.0.1', 63484)
+- Broken pipe from ('127.0.0.1', 63479)
+- Broken pipe from ('127.0.0.1', 63478)
+- Broken pipe from ('127.0.0.1', 63481)
+- Broken pipe from ('127.0.0.1', 62059)
+- Broken pipe from ('127.0.0.1', 63483)
+- Broken pipe from ('127.0.0.1', 62060)
+- Broken pipe from ('127.0.0.1', 62062)
+- Broken pipe from ('127.0.0.1', 62064)
+- Broken pipe from ('127.0.0.1', 62061)
+- Broken pipe from ('127.0.0.1', 62063)
+- Broken pipe from ('127.0.0.1', 62065)
+- Broken pipe from ('127.0.0.1', 62069)
+- Broken pipe from ('127.0.0.1', 63482)
+- Broken pipe from ('127.0.0.1', 63477)
+- Broken pipe from ('127.0.0.1', 62066)
+- Broken pipe from ('127.0.0.1', 63480)
+- Broken pipe from ('127.0.0.1', 62057)
+- Broken pipe from ('127.0.0.1', 62058)
+- Broken pipe from ('127.0.0.1', 63440)
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+- Broken pipe from ('127.0.0.1', 64599)
+- Broken pipe from ('127.0.0.1', 64576)
+- Broken pipe from ('127.0.0.1', 64596)
+- Broken pipe from ('127.0.0.1', 64578)
+- Broken pipe from ('127.0.0.1', 64595)
+- Broken pipe from ('127.0.0.1', 64571)
+- Broken pipe from ('127.0.0.1', 64597)
+- Broken pipe from ('127.0.0.1', 64593)
+- Broken pipe from ('127.0.0.1', 64558)
+- Broken pipe from ('127.0.0.1', 64594)
+- Broken pipe from ('127.0.0.1', 64583)
+- Broken pipe from ('127.0.0.1', 64548)
+- Broken pipe from ('127.0.0.1', 61969)
+- Broken pipe from ('127.0.0.1', 64568)
+"GET / HTTP/1.1" 200 249742
+- Broken pipe from ('127.0.0.1', 53786)
+"GET / HTTP/1.1" 200 250098
+"GET /static/assets/css/main.css HTTP/1.1" 304 0
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 304 0
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 304 0
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /add-to-cart/?id=36&pid=dg5hdc3311&image=%2Fmedia%2Fuser_1%2F1_18.jpg&qty=1&title=Men%27S%20Button%20Shirt%20Men%20Casual%20Print%20Shirt%20Long%20Sleeved%20Shirts&price=%20%20900.00&sku=sku8696 HTTP/1.1" 200 459
+"GET /add-to-cart/?id=36&pid=dg5hdc3311&image=%2Fmedia%2Fuser_1%2F1_18.jpg&qty=1&title=Men%27S%20Button%20Shirt%20Men%20Casual%20Print%20Shirt%20Long%20Sleeved%20Shirts&price=%20%20900.00&sku=sku8696 HTTP/1.1" 200 457
+"GET /cart/ HTTP/1.1" 200 98880
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET / HTTP/1.1" 200 250098
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /add-to-cart/?id=39&pid=e3b5122ehd&image=%2Fmedia%2Fuser_18%2FWhatsApp_Image_2025-12-24_at_16.12.05.jpeg&qty=1&title=Rechargeable%20electric%20Citrus%20Juicer&price=%20%202000.00%20%202000.00&sku=sku8416 HTTP/1.1" 200 455
+"GET /add-to-cart/?id=39&pid=e3b5122ehd&image=%2Fmedia%2Fuser_18%2FWhatsApp_Image_2025-12-24_at_16.12.05.jpeg&qty=1&title=Rechargeable%20electric%20Citrus%20Juicer&price=%20%202000.00%20%202000.00&sku=sku8416 HTTP/1.1" 200 455
+"GET /add-to-cart?id=35&pid=hdehfab5hg&image=%2Fmedia%2Fuser_1%2F1_17.jpg&qty=1&title=Samsung%20Galaxy%20A07%204G%2C%206.7%22%2C%2064GB%20%2B%204GB%20RAM%20(Dual%20SIM)%2C%205000mAh%2C%20Black&price=%20%2011500.00%20%2011500.00&sku=sku8611 HTTP/1.1" 301 0
+"GET /add-to-cart/?id=35&pid=hdehfab5hg&image=%2Fmedia%2Fuser_1%2F1_17.jpg&qty=1&title=Samsung%20Galaxy%20A07%204G%2C%206.7%22%2C%2064GB%20%2B%204GB%20RAM%20(Dual%20SIM)%2C%205000mAh%2C%20Black&price=%20%2011500.00%20%2011500.00&sku=sku8611 HTTP/1.1" 200 686
+"GET /add-to-cart/?id=35&pid=hdehfab5hg&image=%2Fmedia%2Fuser_1%2F1_17.jpg&qty=1&title=Samsung%20Galaxy%20A07%204G%2C%206.7%22%2C%2064GB%20%2B%204GB%20RAM%20(Dual%20SIM)%2C%205000mAh%2C%20Black&price=%20%2011500.00%20%2011500.00&sku=sku8611 HTTP/1.1" 200 684
+Internal Server Error: /cart/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 404, in cart_view
+    cart_total_amount += int(item['qty']) * float(item['price'])
+                                            ^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '  11500.00  11500.00'
+"GET /cart/ HTTP/1.1" 500 75335
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 11043
+"GET / HTTP/1.1" 200 249742
+"GET /category/cata13f4fa213/ HTTP/1.1" 200 106688
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /static/assets/imgs/slider/img4.png HTTP/1.1" 200 200312
+"GET /static/assets/imgs/slider/img3.png HTTP/1.1" 200 226173
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /static/assets/imgs/slider/img1.png HTTP/1.1" 200 231082
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /static/assets/imgs/banner/banner-1.png HTTP/1.1" 200 50119
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /products/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 77, in product_list_view
+    return render(request, 'core/product-list.html', context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loader.py", line 62, in render_to_string
+    return template.render(context, request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loader_tags.py", line 199, in render
+    template = context.template.engine.select_template(template_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\engine.py", line 208, in select_template
+    return self.get_template(template_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+           ^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+               ^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\defaulttags.py", line 962, in do_if
+    nodelist = parser.parse(("elif", "else", "endif"))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "D:\ecommerce\env\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\library.py", line 130, in compile_func
+    args, kwargs = parse_bits(
+                   ^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\template\library.py", line 423, in parse_bits
+    raise TemplateSyntaxError(
+django.template.exceptions.TemplateSyntaxError: 'url_replace' received unexpected keyword argument 'page'
+"GET /products/ HTTP/1.1" 500 277475
+D:\ecommerce\ecomm\core\templatetags\url_replace.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /products/ HTTP/1.1" 200 108361
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /products/?page=2 HTTP/1.1" 200 109054
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=3 HTTP/1.1" 200 110962
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=4 HTTP/1.1" 200 104861
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=1 HTTP/1.1" 200 108361
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=2 HTTP/1.1" 200 109054
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /filter-products?min_price=1.00&max_price=15750.00&category%5B%5D=16 HTTP/1.1" 301 0
+"GET /filter-products/?min_price=1.00&max_price=15750.00&category%5B%5D=16 HTTP/1.1" 200 12
+"GET /filter-products/?min_price=1.00&max_price=15750.00 HTTP/1.1" 200 34665
+"GET /products/?page=2 HTTP/1.1" 200 114790
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /media/user_1/3_12.jpg HTTP/1.1" 200 17289
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /products/?page=1 HTTP/1.1" 200 114510
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=4 HTTP/1.1" 200 111010
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=1 HTTP/1.1" 200 114510
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /products/?page=1 HTTP/1.1" 200 121952
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /media/user_1/3_12.jpg HTTP/1.1" 200 17289
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /products/?page=2 HTTP/1.1" 200 120360
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /search/?q=phone HTTP/1.1" 200 106044
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /search/?q=phone HTTP/1.1" 200 103560
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /media/user_1/1_17.jpg HTTP/1.1" 200 23715
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/blog/header-bg.png HTTP/1.1" 200 16995
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /search/?q=phone&page=2 HTTP/1.1" 200 103507
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /search/?q=phone&page=3 HTTP/1.1" 200 103545
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /search/?q=phone&page=3 HTTP/1.1" 200 103227
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/blog/header-bg.png HTTP/1.1" 200 16995
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /media/user_1/phone_case_r35JNl8.jpg HTTP/1.1" 200 21377
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /search/?q=phone&page=1 HTTP/1.1" 200 107830
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /add-to-wishlist?id=34&title=XIAOMI%20Redmi%2015C%2C%204G%2C%206.9%22%2C%208GB%20RAM%20%2B%20256GB%2C%206000mAh%2C%20Black&price=15750.00&image=%2Fmedia%2Fuser_1%2F1_16.jpg&sku=sku8497&pid=b1chb1h1eb HTTP/1.1" 301 0
+"GET /add-to-wishlist/?id=34&title=XIAOMI%20Redmi%2015C%2C%204G%2C%206.9%22%2C%208GB%20RAM%20%2B%20256GB%2C%206000mAh%2C%20Black&price=15750.00&image=%2Fmedia%2Fuser_1%2F1_16.jpg&sku=sku8497&pid=b1chb1h1eb HTTP/1.1" 200 14
+"GET /add-to-wishlist/?id=34 HTTP/1.1" 200 14
+"GET /add-to-wishlist?id=35&title=Samsung%20Galaxy%20A07%204G%2C%206.7%22%2C%2064GB%20%2B%204GB%20RAM%20(Dual%20SIM)%2C%205000mAh%2C%20Black&price=11500.00&image=%2Fmedia%2Fuser_1%2F1_17.jpg&sku=sku8611&pid=hdehfab5hg HTTP/1.1" 301 0
+"GET /add-to-wishlist?id=35 HTTP/1.1" 301 0
+"GET /add-to-wishlist/?id=35&title=Samsung%20Galaxy%20A07%204G%2C%206.7%22%2C%2064GB%20%2B%204GB%20RAM%20(Dual%20SIM)%2C%205000mAh%2C%20Black&price=11500.00&image=%2Fmedia%2Fuser_1%2F1_17.jpg&sku=sku8611&pid=hdehfab5hg HTTP/1.1" 200 14
+"GET /add-to-wishlist/?id=35 HTTP/1.1" 200 14
+"GET /search/?q=phone&page=2 HTTP/1.1" 200 103227
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /search/?q=phone&page=1 HTTP/1.1" 200 107830
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /search/?q=phone&page=2 HTTP/1.1" 200 103227
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /search/?q=phone&page=1 HTTP/1.1" 200 107830
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/ HTTP/1.1" 200 121952
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=2 HTTP/1.1" 200 120360
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /products/?page=1 HTTP/1.1" 200 121952
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /products/?page=1 HTTP/1.1" 200 121952
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /media/user_1/3_12.jpg HTTP/1.1" 200 17289
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /search/?q=phone HTTP/1.1" 200 105312
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /search/?q=phone HTTP/1.1" 200 105312
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /media/user_1/1_17.jpg HTTP/1.1" 200 23715
+"GET /media/user_1/1_16.jpg HTTP/1.1" 200 22836
+"GET /media/user_1/phone_case_r35JNl8.jpg HTTP/1.1" 200 21377
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/blog/header-bg.png HTTP/1.1" 200 16995
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /products/ HTTP/1.1" 200 129056
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /filter-products?min_price=1.00&max_price=15441 HTTP/1.1" 301 0
+"GET /filter-products/?min_price=1.00&max_price=15441 HTTP/1.1" 200 29874
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 250098
+"GET /static/assets/css/main.css HTTP/1.1" 304 0
+"GET /static/assets/imgs/slider/img1.png HTTP/1.1" 304 0
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/slider/img4.png HTTP/1.1" 304 0
+"GET /static/assets/imgs/slider/img3.png HTTP/1.1" 304 0
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/ HTTP/1.1" 200 129056
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /products/ HTTP/1.1" 200 129056
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /media/user_1/phone_case_r35JNl8.jpg HTTP/1.1" 200 21377
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /media/user_1/1_16.jpg HTTP/1.1" 200 22836
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /media/user_1/3_12.jpg HTTP/1.1" 200 17289
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /media/user_1/1_17.jpg HTTP/1.1" 200 23715
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /products/ HTTP/1.1" 200 114510
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/rating-stars.png HTTP/1.1" 200 3095
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /media/user_1/2_14.jpg HTTP/1.1" 200 33133
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /media/user_18/WhatsApp_Image_2025-12-24_at_16.12.05.jpeg HTTP/1.1" 200 141028
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /products/?page=2 HTTP/1.1" 200 114790
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=3 HTTP/1.1" 200 116698
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=4 HTTP/1.1" 200 111010
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=3 HTTP/1.1" 200 116698
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=2 HTTP/1.1" 200 114790
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=1 HTTP/1.1" 200 114510
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=4 HTTP/1.1" 200 111010
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /filter-products?min_price=1.00&max_price=5849 HTTP/1.1" 301 0
+"GET /filter-products/?min_price=1.00&max_price=5849 HTTP/1.1" 200 23351
+"GET /products/?page=2 HTTP/1.1" 200 114790
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /filter-products?min_price=1.00&max_price=1208 HTTP/1.1" 301 0
+"GET /filter-products/?min_price=1.00&max_price=1208 HTTP/1.1" 200 14316
+"GET /filter-products/?min_price=1.00&max_price=1208 HTTP/1.1" 200 14316
+"GET /filter-products/?min_price=1.00&max_price=1208 HTTP/1.1" 200 14316
+"GET /products/?page=4 HTTP/1.1" 200 111010
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=1 HTTP/1.1" 200 114510
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /products/?page=2 HTTP/1.1" 200 114790
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /category/cat15h13b3hb3/ HTTP/1.1" 200 97497
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+"GET /category/cat15h13b3hb3/ HTTP/1.1" 200 97496
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /media/user_1/1_18.jpg HTTP/1.1" 200 75436
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/blog/header-bg.png HTTP/1.1" 200 16995
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /category/cata13f4fa213/ HTTP/1.1" 200 102101
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /category/cata13f4fa213/ HTTP/1.1" 200 108438
+"GET /static/assets/css/plugins/slider-range.css HTTP/1.1" 200 2718
+"GET /static/assets/imgs/theme/icons/icon-heart.svg HTTP/1.1" 200 1322
+"GET /static/assets/css/custom.css HTTP/1.1" 200 5210
+"GET /static/assets/css/main.css HTTP/1.1" 200 245854
+"GET /static/assets/imgs/page/Hlogo.png HTTP/1.1" 200 165299
+"GET /static/assets/css/vendors/normalize.css HTTP/1.1" 200 6371
+"GET /static/assets/css/plugins/magnific-popup.css HTTP/1.1" 200 7306
+"GET /static/assets/css/vendors/uicons-regular-straight.css HTTP/1.1" 200 18701
+"GET /static/assets/css/plugins/perfect-scrollbar.css HTTP/1.1" 200 2702
+"GET /static/assets/css/plugins/select2.min.css HTTP/1.1" 200 10532
+"GET /static/assets/css/plugins/slick.css HTTP/1.1" 200 1949
+"GET /static/assets/imgs/theme/icons/icon-cart.svg HTTP/1.1" 200 1378
+"GET /static/assets/imgs/theme/icons/icon-user.svg HTTP/1.1" 200 1771
+"GET /static/assets/css/vendors/bootstrap.min.css HTTP/1.1" 200 204203
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.30.50.jpeg HTTP/1.1" 200 207988
+"GET /static/assets/js/vendor/modernizr-3.6.0.min.js HTTP/1.1" 200 17315
+"GET /static/assets/js/vendor/jquery-3.6.0.min.js HTTP/1.1" 200 154196
+"GET /static/assets/js/vendor/jquery-migrate-3.3.0.min.js HTTP/1.1" 200 16151
+"GET /static/assets/js/plugins/slick.js HTTP/1.1" 200 55958
+"GET /static/assets/js/vendor/bootstrap.bundle.min.js HTTP/1.1" 200 138686
+"GET /static/assets/js/plugins/wow.js HTTP/1.1" 200 12009
+"GET /static/assets/js/plugins/jquery.syotimer.min.js HTTP/1.1" 200 9981
+"GET /static/assets/js/plugins/perfect-scrollbar.js HTTP/1.1" 200 45974
+"GET /static/assets/js/plugins/slider-range.js HTTP/1.1" 200 76783
+"GET /static/assets/js/plugins/magnific-popup.js HTTP/1.1" 200 34782
+"GET /static/assets/js/plugins/waypoints.js HTTP/1.1" 200 12878
+"GET /static/assets/js/plugins/select2.min.js HTTP/1.1" 200 131250
+"GET /static/assets/js/plugins/counterup.js HTTP/1.1" 200 2034
+"GET /static/assets/js/plugins/jquery.countdown.min.js HTTP/1.1" 200 7241
+"GET /static/assets/js/plugins/images-loaded.js HTTP/1.1" 200 7454
+"GET /static/assets/js/plugins/isotope.js HTTP/1.1" 200 50244
+"GET /static/assets/js/plugins/scrollup.js HTTP/1.1" 200 2761
+"GET /static/assets/js/plugins/jquery.vticker-min.js HTTP/1.1" 200 4028
+"GET /static/assets/js/plugins/jquery.theia.sticky.js HTTP/1.1" 200 16507
+"GET /static/assets/js/plugins/jquery.elevatezoom.js HTTP/1.1" 200 78877
+"GET /static/assets/js/main.js HTTP/1.1" 200 22863
+"GET /static/assets/js/shop.js HTTP/1.1" 200 3918
+"GET /static/assets/js/function.js HTTP/1.1" 200 22934
+"GET /media/category/Lucid_Origin_A_highquality_vibrant_realistic_photo_of_a_joyful_1.jpg HTTP/1.1" 200 729996
+"GET /media/category/WhatsApp_Image_2025-09-27_at_14.31.54.jpeg HTTP/1.1" 200 50353
+"GET /media/category/1_12.jpg HTTP/1.1" 200 58025
+"GET /media/category/Leonardo_Phoenix_10_A_modern_welcoming_home_environment_with_a_3.jpg HTTP/1.1" 200 511504
+"GET /media/category/1_3.jpg HTTP/1.1" 200 52038
+"GET /static/assets/imgs/theme/icons/icon-1.svg HTTP/1.1" 200 5445
+"GET /static/assets/imgs/theme/icons/icon-2.svg HTTP/1.1" 200 11526
+"GET /static/assets/imgs/theme/icons/icon-3.svg HTTP/1.1" 200 3073
+"GET /static/assets/imgs/theme/icons/icon-4.svg HTTP/1.1" 200 5390
+"GET /static/assets/imgs/theme/icons/icon-headphone.svg HTTP/1.1" 200 1251
+"GET /static/assets/imgs/theme/icons/icon-facebook-white.svg HTTP/1.1" 200 495
+"GET /static/assets/imgs/theme/icons/icon-twitter-white.svg HTTP/1.1" 200 1507
+"GET /static/assets/imgs/theme/icons/icon-instagram-white.svg HTTP/1.1" 200 743
+"GET /static/assets/imgs/theme/icons/icon-pinterest-white.svg HTTP/1.1" 200 539
+"GET /static/assets/imgs/theme/icons/icon-youtube-white.svg HTTP/1.1" 200 379
+"GET /media/user_1/1_17.jpg HTTP/1.1" 200 23715
+"GET /media/user_1/1_16.jpg HTTP/1.1" 200 22836
+"GET /static/assets/imgs/banner/banner-22.png HTTP/1.1" 200 940183
+"GET /static/assets/imgs/theme/icons/icon-5.svg HTTP/1.1" 200 4089
+"GET /static/assets/imgs/theme/icons/icon-6.svg HTTP/1.1" 200 6940
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /static/assets/imgs/theme/icons/icon-location.svg HTTP/1.1" 200 1935
+"GET /static/assets/imgs/theme/icons/icon-contact.svg HTTP/1.1" 200 1550
+"GET /static/assets/imgs/theme/icons/icon-email-2.svg HTTP/1.1" 200 977
+"GET /static/assets/imgs/theme/icons/icon-clock.svg HTTP/1.1" 200 1241
+"GET /static/assets/imgs/theme/icons/phone-call.svg HTTP/1.1" 200 2918
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/blog/header-bg.png HTTP/1.1" 200 16995
+"GET /static/assets/imgs/theme/icons/icon-plane.png HTTP/1.1" 200 3150
+"GET /static/assets/imgs/banner/banner-10.png HTTP/1.1" 200 28409
+"GET /static/assets/fonts/uicons/uicons-regular-straight.woff2 HTTP/1.1" 200 31072
+"GET /static/assets/imgs/page/Flogo.png HTTP/1.1" 200 130746
+"GET /category/cata13f4fa213/?page=2 HTTP/1.1" 200 103847
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /category/cata13f4fa213/?page=1 HTTP/1.1" 200 108438
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /category/cata13f4fa213/?page=2 HTTP/1.1" 200 103847
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2113
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET / HTTP/1.1" 200 249742
+"GET /static/assets/css/main.css HTTP/1.1" 304 0
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /products/ HTTP/1.1" 200 114154
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /products/?page=2 HTTP/1.1" 200 114434
+- Broken pipe from ('127.0.0.1', 61453)
+"GET /products/?page=2 HTTP/1.1" 200 114434
+- Broken pipe from ('127.0.0.1', 61456)
+"GET /products/ HTTP/1.1" 200 114154
+- Broken pipe from ('127.0.0.1', 61460)
+- Broken pipe from ('127.0.0.1', 61463)
+"GET /products/?page=2 HTTP/1.1" 200 114434
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/banner/banner-29.jpg HTTP/1.1" 200 349792
+"GET /products/?page=3 HTTP/1.1" 200 116342
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /products/?page=4 HTTP/1.1" 200 110654
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /filter-products?min_price=1.00&max_price=3528 HTTP/1.1" 301 0
+"GET /filter-products/?min_price=1.00&max_price=3528 HTTP/1.1" 200 23351
+"GET /products/?page=1 HTTP/1.1" 200 114154
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /filter-products?min_price=1.00&max_price=15750.00&vendor%5B%5D=2 HTTP/1.1" 301 0
+"GET /filter-products/?min_price=1.00&max_price=15750.00&vendor%5B%5D=2 HTTP/1.1" 200 23350
+"GET /filter-products?min_price=1.00&max_price=15750.00 HTTP/1.1" 301 0
+"GET /filter-products?min_price=1.00&max_price=15750.00&vendor%5B%5D=4 HTTP/1.1" 301 0
+"GET /filter-products/?min_price=1.00&max_price=15750.00 HTTP/1.1" 200 34665
+"GET /filter-products/?min_price=1.00&max_price=15750.00&vendor%5B%5D=4 HTTP/1.1" 200 11327
+"GET /products/?page=4 HTTP/1.1" 200 110654
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /add-to-cart?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 301 0
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /add-to-cart/?id=31&pid=515d353hdb&image=%2Fmedia%2Fuser_1%2Fphone_case_r35JNl8.jpg&qty=1&title=Ink%20Butterfly%20Cover%20For%20Samsung%20S23%20S22%20S21%20S20%20S24&price=%20%201.00&sku=sku6619 HTTP/1.1" 200 242
+"GET /cart/ HTTP/1.1" 200 96541
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /users/sign-in/ HTTP/1.1" 200 91404
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126
+"GET /static/assets/imgs/page/login-1.png HTTP/1.1" 200 270812
+"POST /users/sign-in/ HTTP/1.1" 302 0
+"GET / HTTP/1.1" 200 250057
+"GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2042
+"GET /static/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js HTTP/1.1" 404 2126

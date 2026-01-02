@@ -5,7 +5,15 @@ import base64
 from django.http import JsonResponse
 from .genrateMpesaAcesstoken import get_access_token
 from .models import Transaction
+from django.views.decorators.csrf import csrf_exempt
 
+
+
+
+
+
+
+@csrf_exempt
 def initiate_stk_push(request):
     if request.method != 'POST':
         return JsonResponse({
@@ -94,7 +102,7 @@ def initiate_stk_push(request):
         
         # M-Pesa API configuration
         process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
-        callback_url = 'https://a32837e6add4.ngrok-free.app/payments/callback/'  # Update if needed
+        callback_url = 'https://8806dc7bfa49.ngrok-free.app/payments/callback/'  # Update if needed
         passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
         business_short_code = '174379'
         

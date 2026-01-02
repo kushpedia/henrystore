@@ -103,7 +103,7 @@ def payment_callback(request):
             "ResultCode": 1,
             "ResultDesc": f"Server error: {str(e)}"
         }, status=500)
-
+@csrf_exempt
 def handle_success_callback(stk_callback, transaction):
     """Handle successful payment"""
     try:
@@ -147,7 +147,7 @@ def handle_success_callback(stk_callback, transaction):
             "ResultCode": 1,
             "ResultDesc": f"Error processing success: {str(e)}"
         })
-
+@csrf_exempt
 def handle_error_callback(result_code, result_desc, checkout_id, transaction):
     """Handle failed payment with detailed error info"""
     
@@ -209,7 +209,7 @@ def handle_error_callback(result_code, result_desc, checkout_id, transaction):
         "ErrorCode": result_code,
         "ErrorCategory": error_category
     })
-
+@csrf_exempt
 def categorize_error(result_code):
     """Categorize the error for better handling"""
     user_errors = [1032, 2001]  # Cancelled, wrong PIN
@@ -230,7 +230,7 @@ def categorize_error(result_code):
         return "system_error"
     else:
         return "unknown_error"
-
+@csrf_exempt
 def update_order_status(order_id, status, transaction_code=None):
     """Update order after payment"""
     try:

@@ -1,6 +1,15 @@
 import requests
 from django.http import JsonResponse
 from ecomm import settings
+from django.views.decorators.csrf import csrf_exempt
+
+
+
+
+
+
+
+@csrf_exempt
 def get_access_token(request):
     consumer_key = settings.MPESA_CONSUMER_KEY
     consumer_secret = settings.MPESA_CONSUMER_SECRET

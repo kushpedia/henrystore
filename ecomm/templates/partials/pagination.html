@@ -1,0 +1,306 @@
+<!-- templates/partials/pagination.html -->
+{% load url_replace %}
+
+{% if page_obj.has_other_pages %}
+<style>
+    .pagination-wrapper {
+        position: relative;
+        padding: 20px 0;
+    }
+    
+    .pagination-area {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 12px;
+        padding: 25px 30px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(59, 183, 126, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .pagination-area::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #3bb77e, #2a9d68, #1a7c52);
+        z-index: 1;
+    }
+    
+    .pagination {
+        margin: 0;
+    }
+    
+    .page-item {
+        margin: 0 3px;
+        transition: all 0.3s ease;
+    }
+    
+    .page-item:hover {
+        transform: translateY(-2px);
+    }
+    
+    .page-item:first-child,
+    .page-item:last-child {
+        margin: 0 8px;
+    }
+    
+    .page-link {
+        min-width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border: 2px solid #e9ecef;
+        color: #495057;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 10px !important;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .page-link i {
+        font-size: 16px;
+        transition: transform 0.3s ease;
+    }
+    
+    .page-link:hover {
+        background: linear-gradient(135deg, #3bb77e, #2a9d68);
+        border-color: #3bb77e;
+        color: white !important;
+        box-shadow: 0 5px 15px rgba(59, 183, 126, 0.3);
+        transform: translateY(-2px);
+    }
+    
+    .page-link:hover i {
+        transform: scale(1.2);
+    }
+    
+    .page-item.active .page-link {
+        background: linear-gradient(135deg, #3bb77e, #2a9d68);
+        border-color: #3bb77e;
+        color: white;
+        box-shadow: 0 5px 15px rgba(59, 183, 126, 0.4);
+        position: relative;
+    }
+    
+    .page-item.active .page-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        right: 10%;
+        height: 3px;
+        background: white;
+        border-radius: 2px;
+    }
+    
+    .page-item.disabled .page-link {
+        background: #f8f9fa;
+        border-color: #e9ecef;
+        color: #adb5bd;
+        cursor: not-allowed;
+        opacity: 0.6;
+        transform: none !important;
+        box-shadow: none;
+    }
+    
+    .page-item.disabled .page-link:hover {
+        background: #f8f9fa;
+        border-color: #e9ecef;
+        color: #adb5bd;
+        box-shadow: none;
+        transform: none;
+    }
+    
+    /* Double arrow styles */
+    .page-item:first-child .page-link,
+    .page-item:last-child .page-link {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-color: #dee2e6;
+        min-width: 55px;
+    }
+    
+    .page-item:first-child .page-link:hover,
+    .page-item:last-child .page-link:hover {
+        background: linear-gradient(135deg, #3bb77e, #2a9d68);
+        border-color: #3bb77e;
+    }
+    
+    /* Page info display */
+    .page-info-display {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        padding: 12px 20px;
+        background: rgba(59, 183, 126, 0.08);
+        border-radius: 8px;
+        font-size: 14px;
+        color: #495057;
+    }
+    
+    .page-info-display strong {
+        color: #3bb77e;
+        margin: 0 5px;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .pagination-area {
+            padding: 20px 15px;
+        }
+        
+        .page-link {
+            min-width: 40px;
+            height: 40px;
+            font-size: 14px;
+        }
+        
+        .page-link i {
+            font-size: 14px;
+        }
+        
+        .page-item:first-child .page-link,
+        .page-item:last-child .page-link {
+            min-width: 45px;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .page-item {
+            margin: 0 2px;
+        }
+        
+        .page-link {
+            min-width: 35px;
+            height: 35px;
+            font-size: 13px;
+        }
+        
+        .page-link i {
+            font-size: 12px;
+        }
+        
+        .page-item:first-child,
+        .page-item:last-child {
+            margin: 0 4px;
+        }
+    }
+</style>
+
+<div class="pagination-wrapper">
+    <div class="pagination-area mt-20 mb-20">
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <!-- First Page -->
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% url_replace request page=1 %}" aria-label="First Page" title="First Page">
+                        <i class="fi-rs-angle-double-left"></i>
+                    </a>
+                </li>
+                <!-- Previous Page -->
+                <li class="page-item">
+                    <a class="page-link" href="?{% url_replace request page=page_obj.previous_page_number %}" aria-label="Previous Page" title="Previous Page">
+                        <i class="fi-rs-arrow-small-left"></i>
+                    </a>
+                </li>
+                {% else %}
+                <!-- Disabled First Page -->
+                <li class="page-item disabled">
+                    <span class="page-link" aria-label="First Page" title="First Page">
+                        <i class="fi-rs-angle-double-left"></i>
+                    </span>
+                </li>
+                <!-- Disabled Previous Page -->
+                <li class="page-item disabled">
+                    <span class="page-link" aria-label="Previous Page" title="Previous Page">
+                        <i class="fi-rs-arrow-small-left"></i>
+                    </span>
+                </li>
+                {% endif %}
+
+                <!-- Page Numbers with Smart Range -->
+                {% for i in page_obj.paginator.page_range %}
+                    {% if i == 1 or i == page_obj.paginator.num_pages %}
+                        {% if i == page_obj.number %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ i }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% url_replace request page=i %}">{{ i }}</a>
+                        </li>
+                        {% endif %}
+                        
+                        {% if i == 1 and page_obj.number > 4 %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                        {% endif %}
+                        
+                    {% elif i >= page_obj.number|add:'-2' and i <= page_obj.number|add:'2' %}
+                        {% if i == page_obj.number %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ i }}</span>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% url_replace request page=i %}">{{ i }}</a>
+                        </li>
+                        {% endif %}
+                        
+                        {% if i == page_obj.number|add:'2' and page_obj.number|add:'3' < page_obj.paginator.num_pages %}
+                        <li class="page-item disabled">
+                            <span class="page-link">...</span>
+                        </li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+
+                <!-- Next Page -->
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% url_replace request page=page_obj.next_page_number %}" aria-label="Next Page" title="Next Page">
+                        <i class="fi-rs-arrow-small-right"></i>
+                    </a>
+                </li>
+                <!-- Last Page -->
+                <li class="page-item">
+                    <a class="page-link" href="?{% url_replace request page=page_obj.paginator.num_pages %}" aria-label="Last Page" title="Last Page">
+                        <i class="fi-rs-angle-double-right"></i>
+                    </a>
+                </li>
+                {% else %}
+                <!-- Disabled Next Page -->
+                <li class="page-item disabled">
+                    <span class="page-link" aria-label="Next Page" title="Next Page">
+                        <i class="fi-rs-arrow-small-right"></i>
+                    </span>
+                </li>
+                <!-- Disabled Last Page -->
+                <li class="page-item disabled">
+                    <span class="page-link" aria-label="Last Page" title="Last Page">
+                        <i class="fi-rs-angle-double-right"></i>
+                    </span>
+                </li>
+                {% endif %}
+            </ul>
+            
+            <!-- Page Information -->
+            <div class="page-info-display text-center">
+                <span>Showing <strong>{{ page_obj.start_index }}-{{ page_obj.end_index }}</strong> of <strong>{{ page_obj.paginator.count }}</strong> items</span>
+                <span class="mx-2">•</span>
+                <span>Page <strong>{{ page_obj.number }}</strong> of <strong>{{ page_obj.paginator.num_pages }}</strong></span>
+            </div>
+        </nav>
+    </div>
+</div>
+{% endif %}

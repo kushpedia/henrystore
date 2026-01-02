@@ -19,6 +19,9 @@ from django.db.models import Count, Avg, Q,Sum
 from userauths.models import ContactUs
 from userauths.models import Profile
 
+from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
+
 def index(request):
     products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
     top_sold_products = Product.objects.filter(
@@ -55,10 +58,20 @@ def index(request):
 
 
 def product_list_view(request):
+    page = request.GET.get('page', 1)
     products = Product.objects.filter(product_status="published").order_by("-id")
+    per_page = request.GET.get('per_page', 2)
+    paginator = Paginator(products, per_page)
+
+    try:
+        page_obj = paginator.page(page)
+    except:
+        page_obj = paginator.page(1)
+
 
     context = {
-        "products":products,
+        "products": page_obj,  # Pass the page object instead of queryset
+        "page_obj": page_obj,  # Pass page_obj for pagination template
     }
 
     return render(request, 'core/product-list.html', context)
@@ -86,9 +99,33 @@ def category_product_list__view(request, cid):
         mini_subcategory__subcategory__category=category
         ).order_by("-id")
 
+        # Pagination
+        page = request.GET.get('page', 1)
+        per_page = request.GET.get('per_page', 2)
+        
+        paginator = Paginator(products, per_page)
+        
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        
+        # Get current parameters for pagination (excluding page)
+        current_params = request.GET.copy()
+        if 'page' in current_params:
+            del current_params['page']
+
+
+
+
+
         context = {
-            "category":category,
-            "products":products,
+            "category": category,
+            "products": page_obj,
+            "page_obj": page_obj,
+            "current_params": current_params.urlencode(),
         }
     except:
         messages.warning(request, "Error Occurred. Please try again.")
@@ -240,7 +277,7 @@ def tag_list(request, tag_slug=None):
 
 
 
-
+@csrf_exempt
 def ajax_add_review(request, pid):
     if not request.user.is_authenticated:
         return JsonResponse({'bool': False, 'error': 'Please login to submit a review'})
@@ -331,9 +368,29 @@ def search_view(request):
         'tags'
     ).distinct().order_by("-date")
 
+    page = request.GET.get('page', 1)
+    per_page = request.GET.get('per_page', 2)
+    paginator = Paginator(products, per_page)
+
+
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+    current_params = request.GET.copy()
+    if 'page' in current_params:
+        del current_params['page']
+
+
     context = {
-        "products": products,
+        "products": page_obj,
+        "page_obj": page_obj,
         "query": query,
+        "current_params": current_params.urlencode(),
+        "total_results": paginator.count,
     }
     return render(request, "core/search.html", context)
 
@@ -345,10 +402,22 @@ def filter_product(request):
     min_price = request.GET['min_price']
     max_price = request.GET['max_price']
 
+    page = request.GET.get('page', 1)
+    per_page = request.GET.get('per_page', 2)
+
     products = Product.objects.filter(product_status="published").order_by("-id").distinct()
 
     products = products.filter(price__gte=min_price)
     products = products.filter(price__lte=max_price)
+
+    paginator = Paginator(products, per_page)
+
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
 
 
     if len(categories) > 0:
@@ -445,6 +514,8 @@ def update_cart(request):
 
 
 
+
+@csrf_exempt
 @login_required
 def newCheckout(request, oid):
     order = CartOrder.objects.get(oid=oid)
@@ -481,6 +552,7 @@ def newCheckout(request, oid):
     return render(request, "core/new_checkout.html", context)
 
 
+@csrf_exempt
 @login_required
 def save_checkout_info(request):
     cart_total_amount = 0
@@ -638,7 +710,7 @@ def make_address_default(request):
 
 
 
-
+@csrf_exempt
 def order_detail(request, id):
     order = CartOrder.objects.get(user=request.user, id=id)
     order_items = CartOrderItems.objects.filter(order=order)
@@ -692,7 +764,7 @@ def add_to_wishlist(request):
 
 
 # remove from wishlist
-
+@csrf_exempt
 def remove_wishlist(request):
     pid = request.GET['id']
     wishlist = wishlist_model.objects.filter(user=request.user)
