@@ -118,9 +118,6 @@ def category_product_list__view(request, cid):
             del current_params['page']
 
 
-
-
-
         context = {
             "category": category,
             "products": page_obj,
@@ -148,9 +145,31 @@ def sub_category_product_list_view(request, cid):
             mini_subcategory__subcategory=sub_category  
         ).order_by("-id")
 
+        # Pagination
+        page = request.GET.get('page', 1)
+        per_page = request.GET.get('per_page', 2)
+        
+        paginator = Paginator(products, per_page)
+        
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+
+        # Get current parameters for pagination (excluding page)
+        current_params = request.GET.copy()
+        if 'page' in current_params:
+            del current_params['page']
+
+
+
         context = {
-            "category":sub_category,
-            "products":products,
+            "category": sub_category,
+            "products": page_obj,
+            "page_obj": page_obj,
+            "current_params": current_params.urlencode(),
         }
     except:
         messages.warning(request, "Error Occurred. Please try again.")
@@ -172,9 +191,30 @@ def mini_category_product_list_view(request, cid):
             mini_subcategory=mini_category  
         ).order_by("-id")
 
+        # Pagination
+        page = request.GET.get('page', 1)
+        per_page = request.GET.get('per_page', 1)
+        
+        paginator = Paginator(products, per_page)
+        
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+        
+        # Get current parameters for pagination (excluding page)
+        current_params = request.GET.copy()
+        if 'page' in current_params:
+            del current_params['page']
+
+        
         context = {
-            "category":mini_category,
-            "products":products,
+            "category": mini_category,
+            "products": page_obj,
+            "page_obj": page_obj,
+            "current_params": current_params.urlencode(),
         }
     except:
         messages.warning(request, "Error Occurred. Please try again.")
@@ -802,7 +842,7 @@ def ajax_contact_form(request):
 
     data = {
         "bool": True,
-        "message": "Message Sent Successfully"
+        "message": "Message Sent Successfully, We will get back to you soon."
     }
 
     return JsonResponse({"data":data})

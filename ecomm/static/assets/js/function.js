@@ -17,7 +17,7 @@ $("#commentForm").submit(function (e) {
 
         dataType: "json",
 		success: function (res) {
-            console.log("Comment Saved to DB...");
+            // console.log("Comment Saved to DB...");
 
             if (res.bool == true) {
                 $("#review-res").html("Review added successfully.")
@@ -129,14 +129,14 @@ $(document).ready(function () {
         let product_pid = $(".product-pid-" + index).val();
         let product_image = $(".product-image-" + index).val();
 
-        console.log("Quantity:", quantity);
-        console.log("Title:", product_title);
-        console.log("Price:", product_price);
-        console.log("ID:", product_id);
-        console.log("PID:", product_pid);
-        console.log("Image:", product_image);
-        console.log("Index:", index);
-        console.log("Current Element:", this_val);
+        // console.log("Quantity:", quantity);
+        // console.log("Title:", product_title);
+        // console.log("Price:", product_price);
+        // console.log("ID:", product_id);
+        // console.log("PID:", product_pid);
+        // console.log("Image:", product_image);
+        // console.log("Index:", index);
+        // console.log("Current Element:", this_val);
 
         $.ajax({
             url: '/add-to-cart',
@@ -247,11 +247,11 @@ $(document).ready(function () {
         let sku = $(".product-sku-" + productId).val();
         let pid = $(".product-pid-" + productId).val();
         
-        console.log("Adding to wishlist:", {
-            id: productId,
-            title: title,
-            price: price
-        });
+        // console.log("Adding to wishlist:", {
+        //     id: productId,
+        //     title: title,
+        //     price: price
+        // });
 
         let this_val = $(this);
         let icon = this_val.find('i');
@@ -583,13 +583,13 @@ $(document).ready(function () {
                 },
                 dataType: "json",
                 beforeSend: function () {
-                    console.log("Sending Data to Server...");
+                    // console.log("Sending Data to Server...");
                 },
                 success: function (res) {
-                    console.log("Sent Data to server!");
+                    // console.log("Sent Data to server!");
                     $(".contact_us_p").hide()
                     $("#contact-form-ajax").hide()
-                    $("#message-response").html("Message sent successfully.")
+                    $("#message-response").html("Message sent successfully, we will get back to you soon.")
                 }
             })
         })
@@ -604,9 +604,9 @@ $("#max_price").on("blur", function () {
     let max_price = $(this).attr("max")
     let current_price = $(this).val()
 
-    console.log("Current Price is:", current_price);
-    console.log("Max Price is:", max_price);
-    console.log("Min Price is:", min_price);
+    // console.log("Current Price is:", current_price);
+    // console.log("Max Price is:", max_price);
+    // console.log("Min Price is:", min_price);
 
     if (current_price < parseInt(min_price) || current_price > parseInt(max_price)) {
         // console.log("Price Error Occured");
