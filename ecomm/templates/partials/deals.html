@@ -1,0 +1,137 @@
+{% if deals_products %}
+				<!-- desktop -->
+				<section class="section-padding pb-5 d-none d-lg-block">
+					<div class="section-title">
+						<h3 class="">Deals Of The Day</h3>
+						<a class="show-all" href="{% url 'core:product-list' %}">
+							All Deals
+							<i class="fi-rs-angle-right"></i>
+						</a>
+					</div>
+					<div class="row">
+						{% for d in deals_products %}
+						<div class="col-xl-3 col-lg-4 col-md-6">
+							<div class="product-cart-wrap style-2">
+								
+								<div class="product-img-action-wrap">
+									<div class="product-badges product-badges-position product-badges-mrg">
+										<span class="hot">-{{d.get_precentage|floatformat:0}} %</span>
+									</div>
+									<div class="product-img">
+										<a href="{% url 'core:product-detail' d.pid %}">
+											<img src="{{d.image.url}}" alt="" style="height:350px;" />
+										</a>
+									</div>
+								</div>
+								<div class="product-content-wrap">
+									<div class="deals-countdown-wrap">
+										<div class="deals-countdown" data-countdown='{{ d.deal_end_date|date:"Y/m/d H:i:s" }}''></div>
+									</div>
+									<div class="deals-content">
+										<h2><a href="{% url 'core:product-detail' d.pid %}">{{d.title}}</a></h2>
+										
+										<div class="product-rate-cover">
+											<div class="product-rate d-inline-block">
+												<div class="product-rating" style="width: 90%"></div>
+											</div>
+											<span class="font-small ml-5 text-muted"> {{d.get_average_rating|floatformat:1}} ({{d.get_total_ratings}} Reviews)</span>
+										</div>
+										<div>
+											<span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' d.vendor.vid %}">{{d.vendor.title}}</a></span>
+										</div>
+										<div class="product-card-bottom">
+											<div class="product-price">
+												<span>Ksh </span><span class="current-product-price-{{ d.id }}">  {{d.price }}</span>
+												<br/>
+
+												<span class="old-price">Ksh {{d.old_price}}</span>
+											</div>
+											<div class="add-cart">
+												
+												
+												<div class="d-flex">
+													<a href="{% url 'core:product-detail' d.pid %}"  style="border: none;" class="btn btn-sm btn-primary">
+														<i class="bi bi-amd"></i>View Details
+													</a>
+													
+												</div>
+											
+												</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</section>
+				<!-- mobile -->
+				
+				<section class="section-padding pb-5 d-lg-none d-block">
+					<div class="section-title d-flex justify-content-between align-items-center">
+						<h3 class="m-0">Deals Of The Day</h3>
+						<a class="show-all" href="{% url 'core:product-list' %}">
+							All Deals
+							<i class="fi-rs-angle-right"></i>
+						</a>
+					</div>
+					
+					<div class="deals-scroll-container" style="overflow-x: auto; white-space: nowrap; padding-bottom: 20px;">
+						<div class="d-flex flex-nowrap">
+							{% for d in deals_products %}
+							<div class="deal-item" style="min-width: 300px; max-width: 300px; margin-right: 15px; display: inline-block; white-space: normal;">
+								<div class="product-cart-wrap style-2 h-100">
+									<div class="product-img-action-wrap">
+										<div class="product-badges product-badges-position product-badges-mrg">
+											<span class="hot">{{d.get_precentage|floatformat:0}}% Off</span>
+										</div>
+										<div class="product-img">
+											<a href="{% url 'core:product-detail' d.pid %}">
+												<img src="{{d.image.url}}" alt="deal_image" style="height:200px; width:100%; object-fit:cover;" />
+											</a>
+										</div>
+									</div>
+									<div class="product-content-wrap">
+										<div class="deals-countdown-wrap">
+											<div class="deals-countdown" data-countdown='{{ d.deal_end_date|date:"Y/m/d H:i:s" }}'></div>
+										</div>
+										<div class="deals-content">
+											<h6 class="mb-1"><a href="{% url 'core:product-detail' d.pid %}">{{d.title|truncatechars:40}}</a></h6>
+											
+											<div class="product-rate-cover">
+												<div class="product-rate d-inline-block">
+													<div class="product-rating" style="width: 90%"></div>
+												</div>
+												<span class="font-small ml-2 text-muted"> {{d.get_average_rating|floatformat:1}} ({{d.get_total_ratings}})</span>
+											</div>
+											<div>
+												<span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' d.vendor.vid %}">{{d.vendor.title}}</a></span>
+											</div>
+											<div class="product-card-bottom mt-2">
+												<div class="product-price mb-2">
+													<span>Ksh </span><span class="current-product-price-{{ d.id }}">{{d.price}}</span>
+													<br/>
+													<span class="old-price text-muted">Ksh {{d.old_price}}</span>
+												</div>
+												<div class="add-cart">
+													
+													
+													<div class="d-flex">
+														<a href="{% url 'core:product-detail' d.pid %}"  style="border: none;" class="btn btn-sm btn-primary">
+															<i class="bi bi-amd"></i>View Details
+														</a>
+														
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</section>
+
+
+				{% endif %}

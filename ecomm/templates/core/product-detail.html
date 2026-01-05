@@ -353,9 +353,15 @@
 																	</h5>
 																{% endif %}
 																{% if has_undelivered_product %}
-																	<h5 class="text-info">
-																		You have an undelivered order for this product. You can review once it's delivered.
-																	</h5>
+																		{% if not has_reviewed %}
+																				<h5 class="text-info">
+																				You have a pending order for this product.
+																				</h5>
+																		{% else %}
+																				<h5 class="text-success">
+																				Thanks for your review!
+																				</h5>
+																		{% endif %}
 																	{% endif %}
 
 															{% endif %}
@@ -371,68 +377,77 @@
 							</div>
 							<div class="row mt-60">
 								{% if related_products %}
-                                    <div class="col-12">
-                                        <h2 class="section-title style-1 mb-30">Related products</h2>
-                                    </div>
-									{% else %}
-									<div class="col-12">
-                                        <h2 class="section-title style-1 mb-30">No Related products Yet</h2>
-                                    </div>									
-                                    {% endif %}
 								<div class="col-12">
-									<div class="row related-products">
-										{% for p in related_products %}
-										<div class="col-lg-3 col-md-4 col-12 col-sm-6">
-											<div class="product-cart-wrap mb-30">
-												<div class="product-img-action-wrap">
-													<div class="product-img product-img-zoom">
-														<a href="{% url 'core:product-detail' p.pid %}">
-															<img class="default-img" src="{{ p.image.url }}" alt="" style="height: 280px; width: 280px; object-fit: cover;"   />
-															<img class="hover-img" src="{{ p.image.url }}" alt=""  style="height: 280px; width: 280px; object-fit: cover;"  />
-
-														</a>
-													</div>
-													<div class="product-action-1">
-														<a aria-label="Add To Wishlist"  class="action-btn add-to-wishlist" data-product-item="{{p.id}}"><i class="fi-rs-heart"></i></a>
-														<!-- <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
-														<a href="{% url 'core:product-detail' p.pid %}" class="action-btn"><i class="fi-rs-eye"></i></a>
-													</div>
-													<div class="product-badges product-badges-position product-badges-mrg">
-														<span class="hot">-{{p.get_precentage|floatformat:0}}%</span>
-													</div>
-												</div>
-												<div class="product-content-wrap">
-													<div class="product-category">
-														<a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{ p.mini_subcategory.subcategory.category.title }}</a>
-													</div>
-													<h2><a href="shop-product-right.html">{{ p.title|truncatewords:3 }}</a></h2>
-													<div class="product-rate-cover">
-														<i class="fas fa-star text-warning"></i>
-														<span class="font-small ml-5 text-muted"> {{p.get_average_rating|floatformat:1}} ({{p.get_total_ratings}} Reviews)</span>
-
-													</div>
-													<div>
-														{% if p.vendor %}
-														<span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor.title}}</a></span>
-														{% else %}  
-														<span class="font-small text-muted">By <a href="">Kushpedia</a></span>
-														{% endif %}
-													</div>
-													<div class="product-card-bottom">
-														<div class="product-price">
-															<span>Ksh </span> <span class="current-product-price-{{ p.id }}" style="color: #3BB77E">{{p.price|floatformat|intcomma}}</span>
-															<span class="old-price">Ksh {{p.old_price|floatformat:0|intcomma}}</span>
+									<h2 class="section-title style-1 mb-30">Related products</h2>
+								</div>
+								{% else %}
+								<div class="col-12">
+									<h2 class="section-title style-1 mb-30">No Related products Yet</h2>
+								</div>
+								{% endif %}
+								
+								<div class="col-12">
+									<div class="related-products-scroll" style="overflow-x: auto; white-space: nowrap; padding-bottom: 20px; margin: -10px;">
+										<div class="d-flex flex-nowrap" style="padding: 10px 0;">
+											{% for p in related_products %}
+											<div class="related-item" style="min-width: 280px; max-width: 280px; margin-right: 20px; display: inline-block; white-space: normal;">
+												<div class="product-cart-wrap mb-30 h-100">
+													<div class="product-img-action-wrap">
+														<div class="product-img product-img-zoom">
+															<a href="{% url 'core:product-detail' p.pid %}">
+																<img class="default-img" src="{{ p.image.url }}" alt="" style="height: 280px; width: 100%; object-fit: cover;" />
+																<img class="hover-img" src="{{ p.image.url }}" alt="" style="height: 280px; width: 100%; object-fit: cover;" />
+															</a>
 														</div>
-														<a class="add-cart" href="{% url 'core:product-detail' p.pid %}">
-															
-															<button class="add add-to-cart-btn" style="border: none;" ><i class="fi-rs-shopping-cart mr-5"></i>Add</button>
-														</a>
+														<div class="product-action-1">
+															<a aria-label="Add To Wishlist" class="action-btn add-to-wishlist" data-product-item="{{p.id}}">
+																<i class="fi-rs-heart"></i>
+															</a>
+															<a href="{% url 'core:product-detail' p.pid %}" class="action-btn">
+																<i class="fi-rs-eye"></i>
+															</a>
+														</div>
+														<div class="product-badges product-badges-position product-badges-mrg">
+															<span class="hot">-{{p.get_precentage|floatformat:0}}%</span>
+														</div>
+													</div>
+													<div class="product-content-wrap">
+														<div class="product-category">
+															<a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">
+																{{ p.mini_subcategory.subcategory.category.title }}
+															</a>
+														</div>
+														<h6><a href="{% url 'core:product-detail' p.pid %}">{{ p.title|truncatewords:3 }}</a></h6>
+														<div class="product-rate-cover">
+															<i class="fas fa-star text-warning"></i>
+															<span class="font-small ml-2 text-muted">
+																{{p.get_average_rating|floatformat:1}} ({{p.get_total_ratings}} Reviews)
+															</span>
+														</div>
+														<div>
+															{% if p.vendor %}
+															<span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor.title}}</a></span>
+															{% else %}
+															<span class="font-small text-muted">By <a href="">Kushpedia</a></span>
+															{% endif %}
+														</div>
+														<div class="product-card-bottom">
+															<div class="product-price">
+																<span>Ksh </span>
+																<span class="current-product-price-{{ p.id }}" style="color: #3BB77E">{{p.price|floatformat|intcomma}}</span>
+																<span class="old-price">Ksh {{p.old_price|floatformat:0|intcomma}}</span>
+															</div>
+															<a class="add-cart" href="{% url 'core:product-detail' p.pid %}">
+																<button class="add add-to-cart-btn" style="border: none;">
+																	<i class="fi-rs-shopping-cart mr-2"></i>Add
+																</button>
+															</a>
+														</div>
 													</div>
 												</div>
 											</div>
+											{% endfor %}
 										</div>
-										{% endfor %}
-										
 									</div>
 								</div>
 							</div>

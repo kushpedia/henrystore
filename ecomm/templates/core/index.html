@@ -89,7 +89,7 @@
                             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                                 <div class="row product-grid-4">
                                     {% for p in products %}
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+                                    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
@@ -120,7 +120,7 @@
                                                         <i class="fi-rs-eye"></i></a>
                                                 </div>
                                                 <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">-{{p.get_precentage|floatformat:0}} %</span>
+                                                    <span class="hot">{{p.get_precentage|floatformat:0}}% Off</span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap">
@@ -164,64 +164,8 @@
                                     {% if c.title == "Electronics" %}
                                     <h6>{{c.title}}</h6>
                                     {% for p in c.get_published_products %}
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="{% url 'core:product-detail' p.pid %}">
-                                                        <img class="default-img" src="{{ p.image.url }}" alt="" />
-                                                        <img class="hover-img" src="{{ p.image.url }}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">                                                    
-                                                    <button style="border: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i
-                                                        class="fi-rs-heart" style="fill: aqua;"></i></button>
-                                                    <!-- <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
-                                                <a aria-label="Quick view"
-                                                    class="action-btn quick-view-btn"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#quickViewModal"
-                                                    data-id="{{ p.id }}"
-                                                    data-title="{{ p.title }}"
-                                                    data-price="{{ p.price }}"
-                                                    data-oldprice="{{ p.old_price }}"
-                                                    data-image="{{ p.image.url }}"
-                                                    data-description="{{ p.description }}"
-                                                    data-vendor="{{ p.vendor.title }}"
-                                                    data-percentage="{{ p.get_precentage }}"
-                                                    data-pid="{{ p.pid }}"
-                                                    
-                                                >
-                                                        <i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">-{{p.get_precentage|floatformat:0}} %</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
-                                                </div>
-                                                <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted">{{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor}}</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price|floatformat:0|intcomma }}</span>
-                                                        <span class="old-price">Ksh {{p.old_price|floatformat:0|intcomma }}</span>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% include 'partials/product_card.html' %}
+
                                     {% endfor %}
                                     {% endif %}
                                     
@@ -243,64 +187,8 @@
                                     {% if c.title == "Home & Living" %}
                                     <h6>{{c.title}}</h6>
                                     {% for p in c.get_published_products %}
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="{% url 'core:product-detail' p.pid %}">
-                                                        <img class="default-img" src="{{ p.image.url }}" alt="" />
-                                                        <img class="hover-img" src="{{ p.image.url }}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">                                                    
-                                                    <button style="border: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i
-                                                        class="fi-rs-heart" style="fill: aqua;"></i></button>
-                                                    
-                                                    <a aria-label="Quick view"
-                                                        class="action-btn quick-view-btn"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#quickViewModal"
-                                                        data-id="{{ p.id }}"
-                                                        data-title="{{ p.title }}"
-                                                        data-price="{{ p.price }}"
-                                                        data-oldprice="{{ p.old_price }}"
-                                                        data-image="{{ p.image.url }}"
-                                                        data-description="{{ p.description }}"
-                                                        data-vendor="{{ p.vendor.title }}"
-                                                        data-percentage="{{ p.get_precentage }}"
-                                                        data-pid="{{ p.pid }}"
-                                                        
-                                                    >  
-                                                        <i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">-{{p.get_precentage|floatformat:0}} %</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
-                                                </div>
-                                                <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted">{{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor}}</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price|floatformat:0|intcomma }}</span>
-                                                        <span class="old-price">{{p.old_price|floatformat:0|intcomma }}Ksh</span>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% include 'partials/product_card.html' %}
+
                                     {% endfor %}
                                     {% endif %}
                                     
@@ -322,64 +210,7 @@
                                     {% if c.title == "Fashion" %}
                                     <h6>{{c.title}}</h6>
                                     {% for p in c.get_published_products %}
-                                    <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
-                                        <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
-                                                <div class="product-img product-img-zoom">
-                                                    <a href="{% url 'core:product-detail' p.pid %}">
-                                                        <img class="default-img" src="{{ p.image.url }}" alt="" />
-                                                        <img class="hover-img" src="{{ p.image.url }}" alt="" />
-                                                    </a>
-                                                </div>
-                                                <div class="product-action-1">                                                    
-                                                    <button style="border: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i
-                                                        class="fi-rs-heart" style="fill: aqua;"></i></button>
-                                                    <!-- <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a> -->
-                                                    <a aria-label="Quick view"
-                                                    class="action-btn quick-view-btn"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#quickViewModal"
-                                                    data-id="{{ p.id }}"
-                                                    data-title="{{ p.title }}"
-                                                    data-price="{{ p.price }}"
-                                                    data-oldprice="{{ p.old_price }}"
-                                                    data-image="{{ p.image.url }}"
-                                                    data-description="{{ p.description }}"
-                                                    data-vendor="{{ p.vendor.title }}"
-                                                    data-percentage="{{ p.get_precentage }}"
-                                                    data-pid="{{ p.pid }}"
-                                                    
-                                                >
-                                                        <i class="fi-rs-eye"></i></a>
-                                                </div>
-                                                <div class="product-badges product-badges-position product-badges-mrg">
-                                                    <span class="hot">-{{p.get_precentage|floatformat:0}} %</span>
-                                                </div>
-                                            </div>
-                                            <div class="product-content-wrap">
-                                                <div class="product-category">
-                                                    <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
-                                                </div>
-                                                <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
-                                                <div class="product-rate-cover">
-                                                    <div class="product-rate d-inline-block">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <span class="font-small ml-5 text-muted"> {{p.get_average_rating|floatformat:1}} ({{p.get_total_ratings}} Reviews)</span>
-                                                </div>
-                                                <div>
-                                                    <span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor}}</a></span>
-                                                </div>
-                                                <div class="product-card-bottom">
-                                                    <div class="product-price">
-                                                        <span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price|floatformat:0|intcomma }}</span>
-                                                        <span class="old-price">{{p.old_price|floatformat:0|intcomma }}Ksh</span>
-                                                    </div>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% include 'partials/product_card.html' %}
                                     {% endfor %}
                                     {% endif %}
                                     
@@ -397,77 +228,7 @@
                     </section>
                     <!--Products Tabs-->
 
-                    {% if deals_products %}
-                    <section class="section-padding pb-5">
-                        <div class="section-title">
-                            <h3 class="">Deals Of The Day</h3>
-                            <a class="show-all" href="shop-grid-right.html">
-                                All Deals
-                                <i class="fi-rs-angle-right"></i>
-                            </a>
-                        </div>
-                        <div class="row">
-                            {% for d in deals_products %}
-                            <div class="col-xl-3 col-lg-4 col-md-6">
-                                <div class="product-cart-wrap style-2">
-                                    
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-											<span class="hot">-{{d.get_precentage|floatformat:0}} %</span>
-										</div>
-                                        <div class="product-img">
-                                            <a href="{% url 'core:product-detail' d.pid %}">
-                                                <img src="{{d.image.url}}" alt="" style="height:350px;" />
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <div class="deals-countdown-wrap">
-                                            <div class="deals-countdown" data-countdown='{{ d.deal_end_date|date:"Y/m/d H:i:s" }}''></div>
-                                        </div>
-                                        <div class="deals-content">
-                                            <h2><a href="{% url 'core:product-detail' d.pid %}">{{d.title}}</a></h2>
-                                            
-                                            <div class="product-rate-cover">
-                                                <div class="product-rate d-inline-block">
-                                                    <div class="product-rating" style="width: 90%"></div>
-                                                </div>
-                                                <span class="font-small ml-5 text-muted"> {{d.get_average_rating|floatformat:1}} ({{d.get_total_ratings}} Reviews)</span>
-                                            </div>
-                                            <div>
-                                                <span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' d.vendor.vid %}">{{d.vendor.title}}</a></span>
-                                            </div>
-                                            <div class="product-card-bottom">
-                                                <div class="product-price">
-                                                    <span>Ksh </span><span class="current-product-price-{{ d.id }}">  {{d.price }}</span>
-                                                    <br/>
-
-                                                    <span class="old-price">Ksh {{d.old_price}}</span>
-                                                </div>
-                                                <div class="add-cart">
-                                                    <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ d.id }}">
-                                                    <input type="hidden" class="product-pid-{{ d.id }}" value="{{ d.pid }}">
-                                                    <input type="hidden" class="product-image-{{ d.id }}" value="{{ d.image.url }}">
-                                                    <input type="hidden" class="product-id-{{ d.id }}" value="{{ d.id }}">
-                                                    <input type="hidden" class="product-title-{{ d.id }}" value="{{ d.title }}">
-                                                    <input type="hidden" class="product-sku-{{ d.id }}" value="{{ d.sku }}">
-                                                    
-                                                    <div class="d-flex">
-                                                    <button class="add add-to-cart-btn" data-index="{{ d.id }}" style="border: none;" id="add-to-cart-btn"><i class="fi-rs-shopping-cart mr-5"></i>Add</button>
-                                                    <button style="border: none;" class="add-to-wishlist" data-product-item="{{d.id}}"><i
-                                                        class="fi-rs-heart" style="fill: aqua;"></i></button>
-                                                        </div>
-                                                
-                                                    </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
-                    </section>
-                    {% endif %}
+                    {% include 'partials/deals.html' %}
 
                     <!--End Deals-->
                     <section class="banners">

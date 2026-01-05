@@ -11,7 +11,7 @@ def default(request):
     vendors = Vendor.objects.all()
     new_products = Product.objects.all().order_by("-id")[:4]
     try:
-        deals_products = Product.objects.filter(has_deal=True).order_by("-deal_end_date")[:4]
+        deals_products = Product.objects.filter(has_deal=True).order_by("-deal_end_date")
     except:
         deals_products = []
     min_max_price = Product.objects.aggregate(Min("price"), Max("price"))

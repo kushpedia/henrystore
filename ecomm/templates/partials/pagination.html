@@ -1,7 +1,7 @@
 <!-- templates/partials/pagination.html -->
 {% load url_replace %}
-
-{% if page_obj.has_other_pages %}
+<div class="desktop-pagination">
+    {% if page_obj.has_other_pages %}
 <style>
     .pagination-wrapper {
         position: relative;
@@ -304,3 +304,12 @@
     </div>
 </div>
 {% endif %}
+</div>
+
+<!-- mobile pagination -->
+{% include 'partials/pagination-mobile.html' %}
+
+
+
+
+

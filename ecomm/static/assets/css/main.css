@@ -12586,4 +12586,63 @@ footer .hotline img {
     }
 }
 
-/*# sourceMappingURL=main.css.map */
+/* Smooth scrolling for mobile */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Product card animation for new items */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-item {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Pull to refresh indicator */
+.pull-to-refresh {
+    position: fixed;
+    top: -50px;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: #3bb77e;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: top 0.3s ease;
+}
+
+.pull-to-refresh.active {
+    top: 0;
+}
+
+/* Enhanced mobile product grid */
+@media (max-width: 768px) {
+    .product-grid {
+        margin: 0 -5px;
+    }
+    
+    .product-cart-wrap {
+        margin-bottom: 15px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    }
+    
+    /* Optimize images for mobile */
+    .product-img img {
+        max-height: 200px;
+        object-fit: cover;
+    }
+}

@@ -1,0 +1,102 @@
+
+{% load url_replace %}
+
+{% if page_obj.has_other_pages %}
+<div class="mobile-pagination-wrapper" data-pagination-type="infinite-scroll">
+    <style>
+        .infinite-scroll-indicator {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .infinite-scroll-loader {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3bb77e;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .end-of-content {
+            text-align: center;
+            padding: 30px;
+            color: #6c757d;
+            font-size: 14px;
+            border-top: 1px solid #e9ecef;
+            margin-top: 20px;
+        }
+        
+        .load-more-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #3bb77e, #2a9d68);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .load-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(59, 183, 126, 0.4);
+        }
+        
+        .load-more-btn:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Hide traditional pagination on mobile */
+        @media (max-width: 768px) {
+            .desktop-pagination {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .mobile-pagination-wrapper {
+                display: none !important;
+            }
+        }
+    </style>
+    
+    <!-- Traditional Load More Button (Fallback) -->
+    {% if page_obj.has_next %}
+    <button class="load-more-btn" id="load-more-btn" 
+            data-next-page="{% url_replace request page=page_obj.next_page_number %}">
+        <i class="fi-rs-refresh mr-2"></i>
+        Load More Products
+    </button>
+    {% endif %}
+    
+    <!-- Infinite Scroll Loading Indicator -->
+    <div class="infinite-scroll-indicator" id="infinite-scroll-loader">
+        <div class="infinite-scroll-loader"></div>
+        <p class="mt-3">Loading more products...</p>
+    </div>
+    
+    <!-- End of Content Message -->
+    {% if not page_obj.has_next and page_obj.paginator.count > 0 %}
+    <div class="end-of-content">
+        <i class="fi-rs-check-circle text-success" style="font-size: 32px;"></i>
+        <p class="mt-2">You've reached the end</p>
+        <p class="small text-muted">Showing {{ page_obj.paginator.count }} of {{ page_obj.paginator.count }} products</p>
+    </div>
+    {% endif %}
+</div>
+{% endif %}

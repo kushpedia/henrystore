@@ -58,20 +58,45 @@ def index(request):
 
 
 def product_list_view(request):
-    page = request.GET.get('page', 1)
     products = Product.objects.filter(product_status="published").order_by("-id")
-    per_page = request.GET.get('per_page', 2)
+    # Pagination
+    page = request.GET.get('page', 1)
+    per_page = request.GET.get('per_page', 3)
+        
     paginator = Paginator(products, per_page)
 
     try:
         page_obj = paginator.page(page)
-    except:
+    except PageNotAnInteger:
         page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+        
+        # Get current parameters
+    current_params = request.GET.copy()
+    if 'page' in current_params:
+        del current_params['page']
+
+    # Check if it's an AJAX request for infinite scroll
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            from django.template.loader import render_to_string
+            products_html = render_to_string('core/includes/product-cards.html', {
+                'products': page_obj
+            })
+            return JsonResponse({
+                'products_html': products_html,
+                'has_next': page_obj.has_next(),
+                'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
+                'current_page': page_obj.number,
+                'total_pages': paginator.num_pages,
+            })
+
 
 
     context = {
-        "products": page_obj,  # Pass the page object instead of queryset
-        "page_obj": page_obj,  # Pass page_obj for pagination template
+        "products": page_obj,  
+        "page_obj": page_obj,
+        "current_params": current_params.urlencode(),  
     }
 
     return render(request, 'core/product-list.html', context)
@@ -617,7 +642,7 @@ def save_checkout_info(request):
         request.session['country'] = country
 
         if 'cart_data_obj' in request.session:
-            print(request.session['cart_data_obj'])
+            # print(request.session['cart_data_obj'])
             for p_id, item in request.session['cart_data_obj'].items():
                 total_amount += int(item['qty']) * float(item['price'])
 

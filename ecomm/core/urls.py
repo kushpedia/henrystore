@@ -5,6 +5,8 @@ app_name = 'core'
 urlpatterns = [
 	path('', views.index, name='index'),
 	path("products/", views.product_list_view, name="product-list"),
+	path('products/load-more/', views.product_list_view, name='product-list-ajax'),
+
     path("product/<pid>/", views.product_detail_view, name="product-detail"),
     path("category/", views.category_list_view, name="category-list"),
 	path("category/<cid>/", views.category_product_list__view, name="category-product-list"),
