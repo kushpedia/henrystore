@@ -104,7 +104,7 @@ def delete_product(request, pid):
 
 @admin_required
 def orders(request):
-    orders = CartOrder.objects.all()
+    orders = CartOrder.objects.all().order_by("-date")
     context = {
         'orders':orders,
     }

@@ -61,7 +61,7 @@ def product_list_view(request):
     products = Product.objects.filter(product_status="published").order_by("-id")
     # Pagination
     page = request.GET.get('page', 1)
-    per_page = request.GET.get('per_page', 3)
+    per_page = request.GET.get('per_page', 4)
         
     paginator = Paginator(products, per_page)
 
@@ -110,7 +110,6 @@ def category_list_view(request):
     return render(request, 'core/category-list.html', context)
 
 
-
 def category_product_list__view(request, cid):
     try:
         category = get_object_or_404(
@@ -120,8 +119,8 @@ def category_product_list__view(request, cid):
             cid=cid
         ) 
         products = Product.objects.filter(
-        product_status="published",
-        mini_subcategory__subcategory__category=category
+            product_status="published",
+            mini_subcategory__subcategory__category=category
         ).order_by("-id")
 
         # Pagination
@@ -141,7 +140,20 @@ def category_product_list__view(request, cid):
         current_params = request.GET.copy()
         if 'page' in current_params:
             del current_params['page']
-
+        
+        # Check if it's an AJAX request for infinite scroll
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            from django.template.loader import render_to_string
+            products_html = render_to_string('core/includes/product-cards.html', {
+                'products': page_obj
+            })
+            return JsonResponse({
+                'products_html': products_html,
+                'has_next': page_obj.has_next(),
+                'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
+                'current_page': page_obj.number,
+                'total_pages': paginator.num_pages,
+            })
 
         context = {
             "category": category,
@@ -149,12 +161,12 @@ def category_product_list__view(request, cid):
             "page_obj": page_obj,
             "current_params": current_params.urlencode(),
         }
+        
     except:
         messages.warning(request, "Error Occurred. Please try again.")
         return redirect("core:index")
+    
     return render(request, "core/category-product-list.html", context)
-
-
 # items per sub category
 def sub_category_product_list_view(request, cid):
     try:
@@ -187,8 +199,20 @@ def sub_category_product_list_view(request, cid):
         current_params = request.GET.copy()
         if 'page' in current_params:
             del current_params['page']
-
-
+        
+        # Check if it's an AJAX request for infinite scroll
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            from django.template.loader import render_to_string
+            products_html = render_to_string('core/includes/product-cards.html', {
+                'products': page_obj
+            })
+            return JsonResponse({
+                'products_html': products_html,
+                'has_next': page_obj.has_next(),
+                'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
+                'current_page': page_obj.number,
+                'total_pages': paginator.num_pages,
+            })
 
         context = {
             "category": sub_category,
@@ -196,11 +220,12 @@ def sub_category_product_list_view(request, cid):
             "page_obj": page_obj,
             "current_params": current_params.urlencode(),
         }
+        
     except:
         messages.warning(request, "Error Occurred. Please try again.")
         return redirect("core:index")
+    
     return render(request, "core/sub-category-product-list.html", context)
-
 # items per mini category
 def mini_category_product_list_view(request, cid):
     try:
@@ -233,17 +258,32 @@ def mini_category_product_list_view(request, cid):
         current_params = request.GET.copy()
         if 'page' in current_params:
             del current_params['page']
-
         
+        # Check if it's an AJAX request for infinite scroll
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            from django.template.loader import render_to_string
+            products_html = render_to_string('core/includes/product-cards.html', {
+                'products': page_obj
+            })
+            return JsonResponse({
+                'products_html': products_html,
+                'has_next': page_obj.has_next(),
+                'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
+                'current_page': page_obj.number,
+                'total_pages': paginator.num_pages,
+            })
+
         context = {
             "category": mini_category,
             "products": page_obj,
             "page_obj": page_obj,
             "current_params": current_params.urlencode(),
         }
+        
     except:
         messages.warning(request, "Error Occurred. Please try again.")
         return redirect("core:index")
+    
     return render(request, "core/mini-category-product-list.html", context)
 
 
@@ -434,9 +474,8 @@ def search_view(request):
     ).distinct().order_by("-date")
 
     page = request.GET.get('page', 1)
-    per_page = request.GET.get('per_page', 2)
+    per_page = request.GET.get('per_page', 6)
     paginator = Paginator(products, per_page)
-
 
     try:
         page_obj = paginator.page(page)
@@ -448,7 +487,22 @@ def search_view(request):
     current_params = request.GET.copy()
     if 'page' in current_params:
         del current_params['page']
-
+    
+    # Check if it's an AJAX request for infinite scroll
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        from django.template.loader import render_to_string
+        products_html = render_to_string('core/includes/product-cards.html', {
+            'products': page_obj
+        })
+        return JsonResponse({
+            'products_html': products_html,
+            'has_next': page_obj.has_next(),
+            'next_page_number': page_obj.next_page_number() if page_obj.has_next() else None,
+            'current_page': page_obj.number,
+            'total_pages': paginator.num_pages,
+            'query': query,
+            'total_results': paginator.count,
+        })
 
     context = {
         "products": page_obj,

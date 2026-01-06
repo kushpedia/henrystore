@@ -33,48 +33,69 @@
 		background: transparent;
 		}
 		/* Button loading states */
-.btn-primary {
-    background-color: #3bb77e;
-    border-color: #3bb77e;
-}
+	.btn-primary {
+		background-color: #3bb77e;
+		border-color: #3bb77e;
+	}
 
-.btn-primary:hover {
-    background-color: #2a9d68;
-    border-color: #2a9d68;
-}
+	.btn-primary:hover {
+		background-color: #2a9d68;
+		border-color: #2a9d68;
+	}
 
-.btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-}
+	.btn-success {
+		background-color: #28a745;
+		border-color: #28a745;
+	}
 
-/* Spinner animation */
-.fi-rs-spinner {
-    animation: spin 1s linear infinite;
-}
+	/* Spinner animation */
+	.fi-rs-spinner {
+		animation: spin 1s linear infinite;
+	}
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
 
-/* Notification toast styles */
-.toast-container {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
-}
+	/* Notification toast styles */
+	.toast-container {
+		position: fixed;
+		top: 20px;
+		right: 20px;
+		z-index: 9999;
+	}
 
-/* Wishlist icon animation */
-.add-to-wishlist i {
-    transition: fill 0.3s ease;
-}
+	/* Wishlist icon animation */
+	.add-to-wishlist i {
+		transition: fill 0.3s ease;
+	}
 
-.add-to-wishlist:hover i {
-    transform: scale(1.1);
-}
-	</style>
+	.add-to-wishlist:hover i {
+		transform: scale(1.1);
+	}
+	/* Initially hide filter content */
+	.shop-product-fillter-header {
+		display: none;
+	}
+
+	/* Filter toggle arrow states */
+	.shop-filter-toogle .angle-up {
+		display: none;
+	}
+
+	.shop-filter-toogle .angle-down {
+		display: inline-block;
+	}
+
+	.shop-filter-toogle.active .angle-down {
+		display: none;
+	}
+
+	.shop-filter-toogle.active .angle-up {
+		display: inline-block;
+	}
+</style>
 
 </head>
 <main class="main">
@@ -82,30 +103,30 @@
 		<div class="container">
 			<div class="breadcrumb">
 				<a href="{%url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-				<span></span> Shop <span></span> Fillter
+				<span><a href="{%url 'core:product-list' %}" rel="nofollow"></span> Shop <span></a></span> Fillter
 			</div>
 		</div>
 	</div>
 	<div class="container mb-30 mt-30">
 		<div class="row">
-			<div class="col-lg-12">
-				<a class="shop-filter-toogle" href="#">
-					<span class="fi-rs-filter mr-5"></span>
-					Filters
-					<i class="fi-rs-angle-small-down angle-down"></i>
-					<i class="fi-rs-angle-small-up angle-up"></i>
-				</a>
-				<div class="shop-product-fillter-header">
-					<div class="row">
+				<div class="col-lg-12">
+					<a class="shop-filter-toogle" href="#" id="filter-toggle">
+						<span class="fi-rs-filter mr-5"></span>
+						Filters
+						<i class="fi-rs-angle-small-down angle-down"></i>
+						<i class="fi-rs-angle-small-up angle-up"></i>
+					</a>
+					<div class="shop-product-fillter-header" id="filter-content">
+						<div class="row">
 						<div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-2 mb-sm-2">
 							<div class="card">
-								<h5 class="mb-30">By Categories</h5>
+								<h5 class="mb-4 p-2">By Categories</h5>
 								<div class="categories-dropdown-wrap font-heading">
 									<ul>
 										{% for c in categories %}
                                             <li>
                                                 <input data-filter="category" class="form-check-input filter-checkbox" type="checkbox" name="checkbox" id="exampleCheckbox2" value="{{ c.id }}" />
-                                                &nbsp;&nbsp;
+                                                &nbsp;
                                                 <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{ c.title }}</a>
                                             </li>
                                             {% endfor %}
@@ -115,9 +136,9 @@
 						</div>
 						<div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-2 mb-sm-2">
 							<div class="card">
-								<h5 class="mb-30">By Vendors</h5>
+								<h5 class="mb-4 p-2">By Vendors</h5>
 								<div class="d-flex">
-									<div class="custom-checkbox mr-80">
+									<div class="custom-checkbox mr-20">
 										{% for v in vendors %}
                                             <input class="form-check-input filter-checkbox" data-filter="vendor" type="checkbox" name="checkbox" id="exampleCheckbox1" value="{{ v.id }}" />
                                             <label class="form-check-label" for="exampleCheckbox1"><span>{{v.title}}</span></label>
@@ -130,7 +151,7 @@
 						
 						<div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-5 mb-sm-5">
 							<div class="card">
-								<h5 class="mb-10">By Price</h5>
+								<h5 class="mb-4 p-2">By Price</h5>
 								<div class="sidebar-widget price_range range">
 									<div class="price-filter mb-20">
 										<div class="price-filter-inner">
@@ -242,15 +263,7 @@
 									<a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
 								</div>
 								<h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
-								<div class="product-rate-cover">
-									<div class="product-rate d-inline-block">
-										<div class="product-rating" style="width: 90%"></div>
-									</div>
-									<span class="font-small ml-5 text-muted"> {{p.get_average_rating|floatformat:1}} ({{p.get_total_ratings}})</span>
-								</div>
-								<div>
-									<span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor}}</a></span>
-								</div>
+								
 								<div class="product-card-bottom">
 									<div class="product-price">
 										<span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price }}</span>

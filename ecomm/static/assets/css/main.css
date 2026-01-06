@@ -5620,10 +5620,10 @@ table .product-thumbnail img {
 }
 
 .shop-product-fillter-header .card {
-    border: 1px solid #ececec;
+    border: 1px solid #00ff40;
     border-radius: 20px;
-    margin-bottom: 50px;
-    padding: 30px 40px;
+    margin-bottom: 8px;
+    padding: 10px 8px;
     -webkit-box-shadow: 20px 20px 54px rgba(0, 0, 0, 0.03);
     box-shadow: 20px 20px 54px rgba(0, 0, 0, 0.03);
 }

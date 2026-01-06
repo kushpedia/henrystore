@@ -39,7 +39,73 @@ $(document).ready(function() {
             return (scrollTop + windowHeight) >= (documentHeight - distanceFromBottom);
         }
         
-    
+        function loadMoreProducts() {
+            if (isLoading || !hasNextPage) return;
+            
+            isLoading = true;
+            
+            // Show loader
+            $('#infinite-scroll-loader').fadeIn(300);
+            $('#load-more-btn').prop('disabled', true).html('<i class="fi-rs-refresh mr-2"></i> Loading...');
+            
+            // Get current URL parameters
+            const currentUrl = window.location.pathname;
+            const queryParams = new URLSearchParams(window.location.search);
+            
+            // Update page parameter
+            queryParams.set('page', nextPage);
+            
+            // Build AJAX URL
+            const ajaxUrl = `${currentUrl}?${queryParams.toString()}`;
+            
+            // AJAX request
+            $.ajax({
+                url: ajaxUrl,
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                success: function(response) {
+                    if (response.products_html) {
+                        // Append new products with fade-in animation
+                        const $newProducts = $(response.products_html);
+                        $newProducts.hide();
+                        $('.product-grid').append($newProducts);
+                        $newProducts.fadeIn(500);
+                        
+                        // Update next page
+                        if (response.has_next) {
+                            nextPage = response.next_page_number;
+                            hasNextPage = true;
+                            
+                            // Update button
+                            $('#load-more-btn').prop('disabled', false).html('<i class="fi-rs-refresh mr-2"></i> Load More Products');
+                            
+                            // Show success message
+                            showNotification('New products loaded!', 'success');
+                        } else {
+                            // No more pages
+                            hasNextPage = false;
+                            $('#load-more-btn').hide();
+                            $('#infinite-scroll-loader').hide();
+                            $('.end-of-content').show();
+                        }
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error loading more products:', xhr.responseText || error);
+                    showNotification('Failed to load more products. Please try again.', 'error');
+                    
+                    // Re-enable button on error
+                    $('#load-more-btn').prop('disabled', false).html('<i class="fi-rs-refresh mr-2"></i> Load More Products');
+                },
+                complete: function() {
+                    isLoading = false;
+                    $('#infinite-scroll-loader').fadeOut(300);
+                }
+            });
+        }
         
         function showNotification(message, type) {
             // Remove existing notifications

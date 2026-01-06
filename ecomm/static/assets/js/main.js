@@ -451,13 +451,57 @@
     /*-----------------------
         Shop filter active 
     ------------------------- */
-    $(".shop-filter-toogle").on("click", function(e) {
-        e.preventDefault();
-        $(".shop-product-fillter-header").slideToggle();
-    });
-    var shopFiltericon = $(".shop-filter-toogle");
-    shopFiltericon.on("click", function() {
-        $(".shop-filter-toogle").toggleClass("active");
+    
+    $(document).ready(function() {
+        // Initially collapse filters
+        $(".shop-product-fillter-header").hide();
+        
+        // Toggle filter visibility
+        $(".shop-filter-toogle").on("click", function(e) {
+            e.preventDefault();
+            var $filterHeader = $(".shop-product-fillter-header");
+            var $filterToggle = $(this);
+            
+            $filterHeader.slideToggle(300, function() {
+                // Animation complete
+            });
+            
+            $filterToggle.toggleClass("active");
+            
+            // Optional: Auto-expand if filters are already applied
+            setTimeout(checkAppliedFilters, 100);
+        });
+        
+        // Check if filters are already applied on page load
+        function checkAppliedFilters() {
+            var hasFilters = false;
+            
+            // Check for checked checkboxes
+            if ($('.filter-checkbox:checked').length > 0) {
+                hasFilters = true;
+            }
+            
+            // Check if price range is changed from default
+            var maxPrice = $('#max_price').val();
+            var defaultMaxPrice = $('#max_price').attr('max');
+            if (maxPrice !== defaultMaxPrice) {
+                hasFilters = true;
+            }
+            
+            // If filters are applied, expand the filter section
+            if (hasFilters && !$('.shop-filter-toogle').hasClass('active')) {
+                $(".shop-product-fillter-header").slideDown(300);
+                $('.shop-filter-toogle').addClass('active');
+            }
+        }
+        
+        // Check on page load
+        checkAppliedFilters();
+        
+        // Re-check when filters change
+        $('.filter-checkbox, #max_price, #range').on('change', function() {
+            setTimeout(checkAppliedFilters, 100);
+        });
     });
 
     /*-------------------------------------

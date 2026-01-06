@@ -42,16 +42,16 @@
 					<div class="product-category">
 						<a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
 					</div>
-					<h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:50}}</a></h2>
-					<div class="product-rate-cover">
+					<h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
+					<!-- <div class="product-rate-cover">
 						<div class="product-rate d-inline-block">
 							<div class="product-rating" style="width: 90%"></div>
 						</div>
-						<span class="font-small ml-5 text-muted"> {{p.get_average_rating|floatformat:1}} ({{p.get_total_ratings}} Reviews)</span>
-					</div>
-					<div>
+						<span class="font-small ml-5 text-muted"> {{p.get_average_rating|floatformat:1}} ({{p.get_total_ratings}})</span>
+					</div> -->
+					<!-- <div>
 						<span class="font-small text-muted">By <a href="{% url 'core:vendor-detail' p.vendor.vid %}">{{p.vendor}}</a></span>
-					</div>
+					</div> -->
 					<div class="product-card-bottom">
 						<div class="product-price">
 							<span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price }}</span>
