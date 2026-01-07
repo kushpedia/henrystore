@@ -13,7 +13,7 @@
 			<div class="archive-header">
 				<div class="row align-items-center">
 					<div class="col-xl-6">
-						<h1 class="mb-15">{{category.title}}</h1>
+						<h1 class="mb-15 fs-4 fs-sm-3 fs-md-2">{{category.title}}</h1>
 						<div class="breadcrumb">
 							<a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
 							<span></span> <a href="{% url 'core:category-product-list' category.category.cid %}">{{category.category.title}}</a> 
@@ -113,7 +113,7 @@
 							</div>
 							<div class="product-content-wrap">
 								<div class="product-category">
-									<a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
+									<a href="{% url 'core:minicategory-products' p.mini_subcategory.cid %}">{{p.mini_subcategory.title}}</a>
 								</div>
 								<h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
 								

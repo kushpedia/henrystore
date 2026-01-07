@@ -243,7 +243,7 @@ def mini_category_product_list_view(request, cid):
 
         # Pagination
         page = request.GET.get('page', 1)
-        per_page = request.GET.get('per_page', 1)
+        per_page = request.GET.get('per_page', 2)
         
         paginator = Paginator(products, per_page)
         
@@ -580,7 +580,7 @@ def add_to_cart(request):
     return JsonResponse({"data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj'])})
 
 
-
+@login_required
 def cart_view(request):
     cart_total_amount = 0
     # print("cart data obj session:", request.session.get('cart_data_obj'))
