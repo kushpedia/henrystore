@@ -6910,3 +6910,4 @@ Not Found: /media/vendor.jpg
 "GET /media/user_1/5_4.jpg HTTP/1.1" 304 0
 "GET /static/assets/imgs/theme/icons/search.png HTTP/1.1" 404 2029
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
