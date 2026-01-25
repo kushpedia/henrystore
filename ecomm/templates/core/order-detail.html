@@ -3,200 +3,476 @@
 {% load static %}
 {% block content %}
 <main class="main pages">
-	<div class="page-header breadcrumb-wrap">
-		<div class="container">
-			<div class="breadcrumb">
-				<a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-				<span></span> Pages <span></span> Orders
-			</div>
-		</div>
-	</div>
-	<div class="page-content pt-150 pb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-10 m-auto">
-					<div class="row">
-						<div class="col-md-3">
-							<div class="dashboard-menu">
-								<ul class="nav flex-column" role="tablist">
-									<li class="nav-item">
-										<a class="nav-link" href="{% url 'core:dashboard' %}" ><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link active" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
-									</li>
-									
-									<li class="nav-item">
-										<a class="nav-link" href="{% url 'userauths:sign-out' %}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-md-9">
-							<div class="tab-content account dashboard-content pl-50">
-								<!-- <div class="tab-pane fade " id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
-									<div class="card">
-										<div class="card-header">
-											<h3 class="mb-0">Hello {{request.user|title}}!</h3>
-										</div>
-										<div class="card-body">
-											<p>
-												From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>,<br />
-												manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
-											</p>
-										</div>
-									</div>
-								</div> -->
-								<div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
-									<div class="card">
-										<div class="card-header">
-											<h3 class="mb-0">Your Orders</h3>
-										</div>
-										<div class="card-body">
-											<div class="table-responsive">
-												<table class="table">
-													<thead>
-														<tr>
-															<th>Order INV</th>
-															<th>Image</th>
-															<th>Title</th>
-															<th>Price</th>
-															<th>Qty</th>
-															<th>Total</th>
-														</tr>
-													</thead>
-													<tbody>
-														{% for o in order_items %}
-														<tr>
-															<td>INVOICE_NO-{{o.id}}</td>
-															<td>
-																<p><img src="{{ o.image }}" style="width: 60px; height: 60px; object-fit: cover;" alt=""></p>
-															</td>
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <span></span> 
+                <a href="{% url 'core:dashboard' %}" rel="nofollow">Dashboard</a>
+                
+            </div>
+        </div>
+    </div>
+    <div class="page-content pt-100 pb-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 m-auto">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="dashboard-menu">
+                                <ul class="nav flex-column" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'core:dashboard' %}"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#"><i class="fi-rs-file-text mr-10"></i>Order Details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'userauths:sign-out' %}"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="dashboard-content pl-50">
+                                <!-- Order Summary Card -->
+                                <div class="card mb-4">
+                                    <div class="card-header bg-white py-4">
+                                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                            <div>
+                                                <h3 class="mb-1">Order Details</h3>
+                                                <p class="text-muted mb-0">Order ID: <span class="fw-semibold">INV-{{ order.id|stringformat:"06d" }}</span></p>
+                                            </div>
+                                            <div class="mt-2 mt-md-0">
+                                                {% if order.order_status == "processing" %}
+                                                <span class="badge bg-warning text-dark px-3 py-2">Processing</span>
+                                                {% elif order.order_status == "shipped" %}
+                                                <span class="badge bg-info px-3 py-2">Shipped</span>
+                                                {% elif order.order_status == "delivered" %}
+                                                <span class="badge bg-success px-3 py-2">Delivered</span>
+                                                {% else %}
+                                                <span class="badge bg-secondary px-3 py-2">{{ order.order_status|title }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3 mb-md-0">
+                                                <h6 class="text-muted mb-2">ORDER DATE</h6>
+                                                <p class="fw-medium mb-0">{{ order.order_date|date:"F d, Y h:i A" }}</p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <h6 class="text-muted mb-2">ORDER TOTAL</h6>
+                                                <p class="fw-bold text-primary h4 mb-0">Ksh {{ order.total_price|floatformat:0|intcomma }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-															<td>{{o.item}}</td>
-															<td>Ksh {{o.price|floatformat:0|intcomma}}</td>
-															
-															<td>{{o.qty}}</td>
-															<td>Ksh {{ o.total|floatformat:0|intcomma}}</td>
-														</tr>
-														{% endfor %}
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
-									<div class="card">
-										<div class="card-header">
-											<h3 class="mb-0">Orders tracking</h3>
-										</div>
-										<div class="card-body contact-from-area">
-											<p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
-											<div class="row">
-												<div class="col-lg-8">
-													<form class="contact-form-style mt-30 mb-50" action="#" method="post">
-														<div class="input-style mb-20">
-															<label>Order ID</label>
-															<input name="order-id" placeholder="Found in your order confirmation email" type="text" />
-														</div>
-														<div class="input-style mb-20">
-															<label>Billing email</label>
-															<input name="billing-email" placeholder="Email you used during checkout" type="email" />
-														</div>
-														<button class="submit submit-auto-width" type="submit">Track</button>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="card mb-3 mb-lg-0">
-												<div class="card-header">
-													<h3 class="mb-0">Billing Address</h3>
-												</div>
-												<div class="card-body">
-													<address>
-														3522 Interstate<br />
-														75 Business Spur,<br />
-														Sault Ste. <br />Marie, MI 49783
-													</address>
-													<p>New York</p>
-													<a href="#" class="btn-small">Edit</a>
-												</div>
-											</div>
-										</div>
-										<div class="col-lg-6">
-											<div class="card">
-												<div class="card-header">
-													<h5 class="mb-0">Shipping Address</h5>
-												</div>
-												<div class="card-body">
-													<address>
-														4299 Express Lane<br />
-														Sarasota, <br />FL 34249 USA <br />Phone: 1.941.227.4444
-													</address>
-													<p>Sarasota</p>
-													<a href="#" class="btn-small">Edit</a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
-									<div class="card">
-										<div class="card-header">
-											<h5>Account Details</h5>
-										</div>
-										<div class="card-body">
-											<p>Already have an account? <a href="page-login.html">Log in instead!</a></p>
-											<form method="post" name="enq">
-												<div class="row">
-													<div class="form-group col-md-6">
-														<label>First Name <span class="required">*</span></label>
-														<input required="" class="form-control" name="name" type="text" />
-													</div>
-													<div class="form-group col-md-6">
-														<label>Last Name <span class="required">*</span></label>
-														<input required="" class="form-control" name="phone" />
-													</div>
-													<div class="form-group col-md-12">
-														<label>Display Name <span class="required">*</span></label>
-														<input required="" class="form-control" name="dname" type="text" />
-													</div>
-													<div class="form-group col-md-12">
-														<label>Email Address <span class="required">*</span></label>
-														<input required="" class="form-control" name="email" type="email" />
-													</div>
-													<div class="form-group col-md-12">
-														<label>Current Password <span class="required">*</span></label>
-														<input required="" class="form-control" name="password" type="password" />
-													</div>
-													<div class="form-group col-md-12">
-														<label>New Password <span class="required">*</span></label>
-														<input required="" class="form-control" name="npassword" type="password" />
-													</div>
-													<div class="form-group col-md-12">
-														<label>Confirm Password <span class="required">*</span></label>
-														<input required="" class="form-control" name="cpassword" type="password" />
-													</div>
-													<div class="col-md-12">
-														<button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
-													</div>
-												</div>
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                <!-- Order Items Card -->
+                                <div class="card">
+                                    <div class="card-header bg-white py-4">
+                                        <h5 class="mb-0">Order Items ({{ order_items|length }})</h5>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover mb-0">
+                                                <thead class="bg-light">
+                                                    <tr>
+                                                        <th scope="col" class="ps-4">PRODUCT</th>
+                                                        <th scope="col" class="text-center">PRICE(Ksh)</th>
+                                                        <th scope="col" class="text-center">QUANTITY</th>
+                                                        <th scope="col" class="text-end pe-4">TOTAL(Ksh)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for item in order_items %}
+                                                    <tr class="align-middle">
+                                                        <td class="ps-4">
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="flex-shrink-0 me-3">
+                                                                    <img src="{{ item.image }}" alt="{{ item.item }}" 
+																			class="img-fluid rounded" 
+																			style="width: 60px; height: 60px; object-fit: cover; border: 1px solid #eaeaea;">
+                                                                </div>
+                                                                <div class="flex-grow-1">
+                                                                    <h6 class="mb-1">{{ item.item }}</h6>
+                                                                    {% if item.size %}
+                                                                    <small class="text-muted">Size: {{ item.size }}</small>
+                                                                    {% endif %}
+                                                                    {% if item.color %}
+                                                                    <small class="text-muted ms-2">Color: {{ item.color }}</small>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span class="fw-medium">{{ item.price|floatformat:0|intcomma }}</span>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <span class="fw-medium">{{ item.qty }}</span>
+                                                        </td>
+                                                        <td class="text-end pe-4">
+                                                            <span class="fw-bold text-dark">{{ item.total|floatformat:0|intcomma }}</span>
+                                                        </td>
+                                                    </tr>
+                                                    {% empty %}
+                                                    <tr>
+                                                        <td colspan="4" class="text-center py-5">
+                                                            <div class="py-5">
+                                                                <i class="fi-rs-shopping-bag display-4 text-muted mb-3"></i>
+                                                                <h4 class="text-muted mb-3">No Items Found</h4>
+                                                                <p class="text-muted mb-4">This order doesn't contain any items.</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                                <tfoot class="bg-light">
+                                                    
+                                                    {% if order.shipping_amount %}
+                                                    <tr>
+                                                        <td colspan="3" class="text-end fw-bold ps-4">Shipping:</td>
+                                                        <td class="text-end pe-4 fw-bold">Ksh {{ order.shipping_amount|floatformat:0|intcomma }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if order.vat and order.vat > 0 %}
+                                                    <tr>
+                                                        <td colspan="3" class="text-end fw-bold ps-4">Tax (VAT):</td>
+                                                        <td class="text-end pe-4 fw-bold">Ksh {{ order.vat|floatformat:0|intcomma }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    {% if order.saved %}
+                                                    <tr>
+                                                        <td colspan="3" class="text-end fw-bold text-success ps-4">Discount:</td>
+                                                        <td class="text-end pe-4 fw-bold text-success">-Ksh {{ order.saved|floatformat:0|intcomma }}</td>
+                                                    </tr>
+                                                    {% endif %}
+                                                    <tr>
+                                                        <td colspan="3" class="text-end fw-bold border-top ps-4">Grand Total (Ksh):</td>
+                                                        <td class="text-end pe-4 fw-bold border-top h5 text-primary"> {{ order.total_price|floatformat:0|intcomma }}</td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Order Information Cards -->
+                                <div class="row mt-4">
+                                    <!-- Shipping Address -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-white py-3">
+                                                <h6 class="mb-0"><i class="fi-rs-truck mr-2"></i>Shipping Address</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                
+                                                <address class="mb-0">
+                                                    <strong>{{ order.full_name|default:request.user.get_full_name|default:request.user.username|title }}</strong><br>
+                                                    {{ orderaddress }}<br>
+                                                    
+                                                    {{ order.city }}, {{ order.state }}<br>
+                                                    {{ order.country }}<br>
+                                                    <i class="fi-rs-phone mr-2"></i>{{ order.phone|default:"Not provided" }}
+                                                </address>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Billing Address -->
+                                    <div class="col-lg-6 mb-4">
+                                        <div class="card h-100">
+                                            <div class="card-header bg-white py-3">
+                                                <h6 class="mb-0"><i class="fi-rs-credit-card mr-2"></i>Billing & Payment</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <h6 class="text-muted mb-1">PAYMENT METHOD</h6>
+                                                    <p class="fw-medium mb-0">
+                                                        {% if order.payment_method %}
+                                                        {{ order.payment_method|title }}
+                                                        {% else %}
+                                                        Not specified
+                                                        {% endif %}
+                                                    </p>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <h6 class="text-muted mb-1">PAYMENT STATUS</h6>
+                                                    <p class="fw-medium mb-0">
+                                                        {% if order.paid_status %}
+                                                        <span class="badge bg-success">Paid</span>
+                                                        {% else %}
+                                                        <span class="badge bg-warning text-dark">Pending</span>
+                                                        {% endif %}
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <h6 class="text-muted mb-1">ORDER NOTES</h6>
+                                                    <p class="mb-0">
+                                                        {% if order.additional_info %}
+                                                        {{ order.additional_info }}
+                                                        {% else %}
+                                                        <span class="text-muted">No additional notes</span>
+                                                        {% endif %}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    
+                                    <div>
+                                        <a href="#" class="btn btn-outline-primary me-2">
+                                            <i class="fi-rs-printer mr-2"></i>Print Invoice
+                                        </a>
+                                        <a href="#" class="btn btn-primary">
+                                            <i class="fi-rs-headset mr-2"></i>Get Help
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 {% endblock content %}
+
+{% block extra_css %}
+<style>
+    .dashboard-menu .nav-link.active {
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        color: var(--bs-primary);
+        border-left: 3px solid var(--bs-primary);
+    }
+    
+    .dashboard-menu .nav-link {
+        padding: 0.75rem 1rem;
+        border-left: 3px solid transparent;
+        transition: all 0.2s ease;
+    }
+    
+    .dashboard-menu .nav-link:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        border-left-color: rgba(var(--bs-primary-rgb), 0.3);
+    }
+    
+    .card {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .table {
+        --bs-table-bg: transparent;
+        margin-bottom: 0;
+    }
+    
+    .table > :not(caption) > * > * {
+        padding: 1rem 0.75rem;
+        border-bottom-width: 1px;
+    }
+    
+    .table tbody tr:last-child > * {
+        border-bottom: none;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(var(--bs-primary-rgb), 0.04);
+    }
+    
+    .badge {
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+    
+    address {
+        line-height: 1.6;
+        font-style: normal;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .dashboard-content.pl-50 {
+            padding-left: 0 !important;
+        }
+        
+        .table-responsive {
+            margin: -1rem;
+        }
+        
+        .table thead {
+            display: none;
+        }
+        
+        .table tbody tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.375rem;
+            padding: 1rem;
+        }
+        
+        .table tbody tr td {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: right;
+        }
+        
+        .table tbody tr td:last-child {
+            border-bottom: none;
+        }
+        
+        .table tbody tr td::before {
+            content: attr(data-label);
+            font-weight: 600;
+            color: #495057;
+            text-align: left;
+            margin-right: 1rem;
+            min-width: 100px;
+        }
+        
+        /* Mobile labels for order items */
+        .table tbody tr td:nth-child(1)::before { content: "Product"; }
+        .table tbody tr td:nth-child(2)::before { content: "Price"; }
+        .table tbody tr td:nth-child(3)::before { content: "Quantity"; }
+        .table tbody tr td:nth-child(4)::before { content: "Total"; }
+        
+        .table tfoot tr {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .table tfoot tr:last-child {
+            border-top: 2px solid #dee2e6;
+        }
+        
+        .table tfoot tr td {
+            padding: 0.25rem 0;
+        }
+        
+        .table tfoot tr td[colspan="3"] {
+            display: none;
+        }
+        
+        .d-flex.justify-content-between.mt-4 {
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .d-flex.justify-content-between.mt-4 > div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .row > .col-lg-6 {
+            margin-bottom: 1rem;
+        }
+        
+        .card-header .d-flex {
+            flex-direction: column;
+            align-items: flex-start !important;
+        }
+        
+        .card-header .mt-2 {
+            margin-top: 1rem !important;
+        }
+        
+        .page-content {
+            padding-top: 50px !important;
+            padding-bottom: 50px !important;
+        }
+    }
+    
+    /* Hover effects */
+    .img-fluid.rounded {
+        transition: transform 0.2s ease;
+    }
+    
+    .img-fluid.rounded:hover {
+        transform: scale(1.05);
+    }
+    
+    tr {
+        cursor: default;
+    }
+    
+    /* Status badge colors */
+    .badge.bg-warning {
+        background-color: #ffc107 !important;
+    }
+    
+    .badge.bg-info {
+        background-color: #0dcaf0 !important;
+    }
+    
+    .badge.bg-success {
+        background-color: #198754 !important;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Add data labels for mobile responsive table
+        function setupResponsiveTable() {
+            if (window.innerWidth <= 768) {
+                const tableCells = document.querySelectorAll('.table tbody tr td');
+                const labels = ['Product', 'Price', 'Quantity', 'Total'];
+                
+                tableCells.forEach((cell, index) => {
+                    const labelIndex = index % labels.length;
+                    cell.setAttribute('data-label', labels[labelIndex]);
+                });
+            } else {
+                // Remove data labels on desktop
+                const tableCells = document.querySelectorAll('.table tbody tr td');
+                tableCells.forEach(cell => {
+                    cell.removeAttribute('data-label');
+                });
+            }
+        }
+        
+        // Initialize
+        setupResponsiveTable();
+        
+        // Update on resize
+        window.addEventListener('resize', setupResponsiveTable);
+        
+        // Print invoice functionality
+        document.querySelector('.btn-outline-primary[href="#"]')?.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.print();
+        });
+    });
+</script>
+{% endblock %}

@@ -695,8 +695,49 @@
 <!-- JavaScript for Variation Selection and Add to Cart -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+
+
 	{% if p.has_variations and available_variations %}
-	
+	function showNotification(type, message) {
+    // Remove any existing notifications
+    $('.cart-notification').remove();
+    
+    // Create notification
+    let notification = $('<div class="cart-notification"></div>');
+    notification.css({
+        'position': 'fixed',
+        'top': '20px',
+        'right': '20px',
+        'padding': '15px 20px',
+        'border-radius': '8px',
+        'color': 'white',
+        'font-weight': '600',
+        'z-index': '9999',
+        'box-shadow': '0 4px 12px rgba(0,0,0,0.15)',
+        'animation': 'slideIn 0.3s ease'
+    });
+    
+    if (type === 'success') {
+        notification.css('background-color', '#3BB77E');
+    } else {
+        notification.css('background-color', '#ff6b6b');
+    }
+    
+    notification.html(`
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} mr-2"></i>
+        ${message}
+    `);
+    
+    $('body').append(notification);
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        notification.animate({opacity: 0, right: '-100px'}, 300, function() {
+            $(this).remove();
+        });
+    }, 3000);
+}
 	console.log('=== DEBUG VARIATION DATA ===');
 	console.log('Available variations:', {{ available_variations|safe }});
 	console.log('===========================');

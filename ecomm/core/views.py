@@ -18,8 +18,9 @@ from django.db.models.functions import ExtractMonth
 from django.db.models import Count, Avg, Q,Sum
 from userauths.models import ContactUs
 from userauths.models import Profile
+import traceback
+from django.db import models
 
-from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 
 def index(request):
@@ -436,12 +437,7 @@ def tag_list(request, tag_slug=None):
     return render(request, "core/tag.html", context)
 
 
-import traceback
-from django.db import models
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
-from .models import Product, ProductReview, CartOrderItems
+
 
 @csrf_exempt
 def ajax_add_review(request, pid):
@@ -678,6 +674,7 @@ def filter_product(request):
     return JsonResponse({"data": data})
 
 # add to cart
+@csrf_exempt
 def add_to_cart(request):
     
     # Use request.POST since JavaScript sends POST
@@ -1074,6 +1071,7 @@ def order_detail(request, id):
     
     context = {
         "order_items": order_items,
+        "order": order,
     }
     return render(request, 'core/order-detail.html', context)
 
@@ -1140,7 +1138,7 @@ def remove_wishlist(request):
 def contact(request):
     return render(request, "core/contact.html")
 
-
+@csrf_exempt
 def ajax_contact_form(request):
     full_name = request.GET['full_name']
     email = request.GET['email']
