@@ -6,6 +6,7 @@ from taggit.managers import TaggableManager
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
 from django.db.models import Avg
+from decimal import Decimal
 
 
 STATUS_CHOICE = (
@@ -31,8 +32,6 @@ RATING = (
     (2,  "★★☆☆☆"),
     (1,  "★☆☆☆☆"),    
 )
-
-
 
 
 def user_directory_path(instance, filename):
@@ -183,6 +182,28 @@ class Vendor(models.Model):
     def __str__(self):
         return self.title
 
+# Product variations#
+class Color(models.Model):
+    """Model to store available colors"""
+    name = models.CharField(max_length=50)
+    hex_code = models.CharField(max_length=7, help_text="Hex color code, e.g., #FF0000")
+    
+    def color_preview(self):
+        return mark_safe(
+            f'<div style="width: 30px; height: 30px; background-color: {self.hex_code}; border: 1px solid #ccc;"></div>'
+        )
+    
+    def __str__(self):
+        return self.name
+
+
+class Size(models.Model):
+    """Model to store available sizes"""
+    name = models.CharField(max_length=20)
+    
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     pid = ShortUUIDField(unique=True, length=10,
@@ -239,6 +260,13 @@ class Product(models.Model):
     updated = models.DateTimeField(null=True, blank=True)
     deal_end_date = models.DateTimeField(blank=True, null=True)
     has_deal = models.BooleanField(default=False)
+
+    # variations
+    has_variations = models.BooleanField(default=False)
+    available_colors = models.ManyToManyField(Color, blank=True, related_name='products')
+    available_sizes = models.ManyToManyField(Size, blank=True, related_name='products')
+
+
     class Meta:
         verbose_name_plural = "Products"
 
@@ -291,7 +319,60 @@ class ProductImages(models.Model):
 
     class Meta:
         verbose_name_plural = "Product Images"
-        
+
+
+
+        # variations 
+class ProductVariation(models.Model):
+    """Model for product variations (combinations of color, size, etc.)"""
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='variations')
+    color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True)
+    size = models.ForeignKey(Size, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    # Variation-specific details
+    sku = ShortUUIDField(unique=True, length=8, max_length=12, 
+                        prefix="var", alphabet="1234567890")
+    price = models.DecimalField(max_digits=12, decimal_places=0, null=True, blank=True)
+    old_price = models.DecimalField(max_digits=12, decimal_places=0, null=True, blank=True)
+    stock_count = models.IntegerField(default=100)
+    image = models.ImageField(upload_to="variation-images", null=True, blank=True)
+    
+    # Status
+    is_active = models.BooleanField(default=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ['product', 'color', 'size']
+        verbose_name_plural = "Product Variations"
+    
+    def __str__(self):
+        variation_name = f"{self.product.title}"
+        if self.color:
+            variation_name += f" - {self.color.name}"
+        if self.size:
+            variation_name += f" - {self.size.name}"
+        return variation_name
+    
+    def get_final_price(self):
+        """Return variation price if set, otherwise product price"""
+        if self.price is not None:
+            return self.price
+        return self.product.price
+    
+    def get_final_old_price(self):
+        """Return variation old price if set, otherwise product old price"""
+        if self.old_price is not None:
+            return self.old_price
+        return self.product.old_price
+    
+    def is_in_stock(self):
+        return self.stock_count > 0
+    
+    def variation_image(self):
+        """Return variation image or product image"""
+        if self.image:
+            return self.image.url
+        return self.product.image.url
 ############################################## Cart, Order, OrderITems and Address ##################################
 ############################################## Cart, Order, OrderITems and Address ##################################
 ############################################## Cart, Order, OrderITems and Address ##################################
@@ -323,10 +404,6 @@ class CartOrder(models.Model):
     shipping_method = models.CharField(max_length=100, null=True, blank=True)
     tracking_id = models.CharField(max_length=100, null=True, blank=True)
     tracking_website_address = models.CharField(max_length=100, null=True, blank=True)
-
-
-    paid_status = models.BooleanField(default=False)
-    order_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
     sku = ShortUUIDField(null=True, blank=True, length=5,prefix="SKU", max_length=20, alphabet="1234567890")
     oid = ShortUUIDField(null=True, blank=True, length=8, max_length=20, alphabet="1234567890")
@@ -335,17 +412,69 @@ class CartOrder(models.Model):
     
     class Meta:
         verbose_name_plural = "Cart Order"
+        ordering = ['-date']
+
+    def __str__(self):
+        return f"Order #{self.oid} - {self.user.username}"
     
+    def total_price(self):
+        """Calculate total price from order items"""
+        return self.cartorderitems_set.aggregate(
+            total=models.Sum(models.F('price') * models.F('qty'))
+        )['total'] or Decimal('0')
+    @property
+    def order_items(self):
+        """Get all items for this order"""
+        return self.items.all()
+    
+    @property
+    def item_count(self):
+        """Total number of items"""
+        return self.items.aggregate(total=models.Sum('qty'))['total'] or 0
+    
+    @property
+    def subtotal(self):
+        """Subtotal before any discounts"""
+        return self.items.aggregate(
+            total=models.Sum(models.F('price') * models.F('qty'))
+        )['total'] or Decimal('0')
+    
+    @property
+    def final_total(self):
+        """Final total after discounts"""
+        subtotal = self.subtotal
+        if self.saved:
+            return subtotal - Decimal(str(self.saved))
+        return subtotal
+    
+    def update_totals(self):
+        """Update order totals from items"""
+        items_total = self.subtotal
+        self.price = items_total
+        self.save()
+
+
+
 class CartOrderItems(models.Model):
     order = models.ForeignKey(CartOrder, on_delete=models.CASCADE)
     invoice_no = models.CharField(max_length=200)
     item = models.CharField(max_length=200)
     product_id=models.ForeignKey(Product, on_delete=models.SET_NULL, null=True,blank=True)
+    variation = models.ForeignKey(
+        ProductVariation, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='cart_items'
+    )
+    original_title = models.CharField(max_length=200, blank=True,null=True)
     image = models.CharField(max_length=200)
     qty = models.IntegerField(default=0)
     price = models.DecimalField(max_digits=12, decimal_places=2, default="0.00")
     total = models.DecimalField(max_digits=12, decimal_places=2, default="0.00")
     
+    color = models.CharField(max_length=100, null=True, blank=True)
+    size = models.CharField(max_length=50, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Cart Order Item"
@@ -353,7 +482,8 @@ class CartOrderItems(models.Model):
     def order_img(self):
         return mark_safe('<img src="%s" width="50" height="50" />' % (self.image))
         
-    
+    def __str__(self):
+        return f"{self.item} - Qty: {self.qty}"
     
 
 ############################################## Product Revew, wishlists, Address ##################################

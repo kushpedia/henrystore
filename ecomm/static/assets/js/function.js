@@ -4,59 +4,111 @@ const monthNames = ["Jan", "Feb", "Mar", "April", "May", "June",
     "July", "Aug", "Sept", "Oct", "Nov", "Dec"
 ];
 
-
 $("#commentForm").submit(function (e) {
     e.preventDefault();
-	let dt = new Date();
-    let time = dt.getDay() + " " + monthNames[dt.getUTCMonth()] + ", " + dt.getFullYear()
-	$.ajax({
+    console.log("Form submission started");
+    
+    let dt = new Date();
+    let monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"];
+    let time = dt.getDate() + " " + monthNames[dt.getMonth()] + ", " + dt.getFullYear();
+    
+    // Show loading state
+    const submitBtn = $(this).find('button[type="submit"]');
+    const originalText = submitBtn.text();
+    submitBtn.prop('disabled', true).text('Submitting...');
+    
+    // Clear previous messages
+    $("#review-res").html('').removeClass('text-success text-danger');
+    
+    console.log("Sending AJAX request...");
+    
+    $.ajax({
         data: $(this).serialize(),
-		method: $(this).attr("method"),
-
+        method: $(this).attr("method"),
         url: $(this).attr("action"),
-
         dataType: "json",
-		success: function (res) {
-            // console.log("Comment Saved to DB...");
-
+        success: function (res, status, xhr) {
+            console.log("AJAX success response:", res);
+            console.log("Status:", status);
+            
             if (res.bool == true) {
-                $("#review-res").html("Review added successfully.")
-                $(".hide-comment-form").hide()
-                $(".add-review").hide()
+                $("#review-res").html(res.message || "Review added successfully.")
+                    .removeClass('text-danger')
+                    .addClass('text-success');
+                
+                $(".hide-comment-form").hide();
+                $(".add-review").hide();
 
-                let _html = '<div class="single-comment justify-content-between d-flex mb-30">'
-                _html += '<div class="user justify-content-between d-flex">'
-                _html += '<div class="thumb text-center">'
-                _html += '<img src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="" />'
-                _html += '<a href="#" class="font-heading text-brand">' + res.context.user + '</a>'
-                _html += '</div>'
-
-                _html += '<div class="desc">'
-                _html += '<div class="d-flex justify-content-between mb-10">'
-                _html += '<div class="d-flex align-items-center">'
-                _html += '<span class="font-xs text-muted">' + time + ' </span>'
-                _html += '</div>'
-
+                // Create new review HTML
+                let _html = '<div class="single-comment justify-content-between d-flex mb-30">';
+                _html += '<div class="user justify-content-between d-flex">';
+                _html += '<div class="thumb text-center">';
+                _html += '<img src="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg" alt="" />';
+                _html += '<p class="font-heading text-brand">' + res.context.user + '</p>';
+                _html += '</div>';
+                _html += '<div class="desc">';
+                _html += '<div class="d-flex justify-content-between mb-10">';
+                _html += '<div class="d-flex align-items-center">';
+                _html += '<span class="font-xs text-muted">' + (res.context.date || time) + ' </span>';
+                _html += '</div>';
+                _html += '<div>';
+                
                 for (var i = 1; i <= res.context.rating; i++) {
                     _html += '<i class="fas fa-star text-warning"></i>';
                 }
-
-
-                _html += '</div>'
-                _html += '<p class="mb-10">' + res.context.review + '</p>'
-
-                _html += '</div>'
-                _html += '</div>'
-                _html += ' </div>'
-				
-                $(".comment-list").prepend(_html)
+                
+                _html += '</div>';
+                _html += '</div>';
+                _html += '<p class="mb-10">' + res.context.review + '</p>';
+                _html += '</div>';
+                _html += '</div>';
+                _html += '</div>';
+                
+                $(".comment-list").prepend(_html);
+                
+                // Update average rating display if it exists
+                if (res.average_reviews) {
+                    $(".average-rating").text(res.average_reviews.toFixed(1));
+                }
+                
+            } else {
+                // Show error message
+                console.log("Error from server:", res.error);
+                $("#review-res").html(res.error || "Error submitting review.")
+                    .removeClass('text-success')
+                    .addClass('text-danger');
             }
-
-
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error details:");
+            console.error("Status:", status);
+            console.error("Error:", error);
+            console.error("XHR response:", xhr.responseText);
+            console.error("XHR status:", xhr.status);
+            
+            let errorMsg = "Error submitting review. Please try again.";
+            
+            try {
+                const response = JSON.parse(xhr.responseText);
+                if (response.error) {
+                    errorMsg = response.error;
+                }
+            } catch (e) {
+                // Couldn't parse JSON response
+            }
+            
+            $("#review-res").html(errorMsg)
+                .removeClass('text-success')
+                .addClass('text-danger');
+        },
+        complete: function() {
+            console.log("AJAX request complete");
+            // Reset button state
+            submitBtn.prop('disabled', false).text(originalText);
         }
-    })
-})
-
+    });
+});
 
 
 $(document).ready(function () {
@@ -112,209 +164,8 @@ $(document).ready(function () {
         })
     });
 
-    // ========== EVENT DELEGATION FOR DYNAMICALLY LOADED CONTENT ==========
     
-    // Add to Cart button - USING EVENT DELEGATION
-    $(document).on("click", ".add-to-cart-btn", function () {
-        console.log("Add to cart button clicked");
-
-        let this_val = $(this);
-        let index = this_val.attr("data-index");
-
-        let quantity = $(".product-quantity-" + index).val();
-        let product_title = $(".product-title-" + index).val();
-        let product_sku = $(".product-sku-" + index).val();
-        let product_id = $(".product-id-" + index).val();
-        let product_price = $(".current-product-price-" + index).text();
-        let product_pid = $(".product-pid-" + index).val();
-        let product_image = $(".product-image-" + index).val();
-
-        // console.log("Quantity:", quantity);
-        // console.log("Title:", product_title);
-        // console.log("Price:", product_price);
-        // console.log("ID:", product_id);
-        // console.log("PID:", product_pid);
-        // console.log("Image:", product_image);
-        // console.log("Index:", index);
-        // console.log("Current Element:", this_val);
-
-        $.ajax({
-            url: '/add-to-cart',
-            data: {
-                'id': product_id,
-                'pid': product_pid,
-                'image': product_image,
-                'qty': quantity,
-                'title': product_title,
-                'price': product_price,
-                'sku': product_sku
-            },
-            dataType: 'json',
-            beforeSend: function () {
-                console.log("Adding Product to Cart...");
-                // Optional: Show loading state
-                this_val.prop('disabled', true);
-                this_val.html('<i class="fi-rs-spinner fa-spin mr-5"></i>Adding...');
-            },
-            success: function (response) {
-                console.log("Added Product to Cart!");
-                
-                // Update button appearance
-                this_val.html('<i class="fas fa-check-circle mr-5"></i>Added');
-                this_val.removeClass('btn-primary').addClass('btn-success');
-                
-                // Update cart count
-                $(".cart-items-count").text(response.totalcartitems);
-                                
-                // Reset button after 2 seconds
-                setTimeout(function() {
-                    this_val.html('<i class="fi-rs-shopping-cart mr-5"></i>Add');
-                    this_val.removeClass('btn-success').addClass('btn-primary');
-                    this_val.prop('disabled', false);
-                }, 5000);
-            },
-            error: function (xhr, status, error) {
-                console.error("Error adding to cart:", error);
-                this_val.html('<i class="fi-rs-shopping-cart mr-5"></i>Add');
-                this_val.prop('disabled', false);
-                showNotification('Failed to add product to cart', 'error');
-            }
-        });
-    });
-
-    // Quick View button - USING EVENT DELEGATION
-    $(document).on("click", ".quick-view-btn", function(e) {
-        e.preventDefault();
-        
-        console.log("Quick view clicked");
-        
-        // Get data attributes
-        let productId = $(this).data("id");
-        let title = $(this).data("title");
-        let price = $(this).data("price");
-        let oldPrice = $(this).data("oldprice");
-        let image = $(this).data("image");
-        let description = $(this).data("description");
-        let vendor = $(this).data("vendor");
-        let percentage = $(this).data("percentage");
-        let pid = $(this).data("pid");
-        
-        console.log("Quick view for product:", title);
-        
-        // Populate modal with data
-        $('#quickViewModal .product-title').text(title);
-        $('#quickViewModal .product-price').text('Ksh ' + price);
-        if (oldPrice) {
-            $('#quickViewModal .product-old-price').text('Ksh ' + oldPrice).show();
-        } else {
-            $('#quickViewModal .product-old-price').hide();
-        }
-        $('#quickViewModal .product-image').attr('src', image);
-        $('#quickViewModal .product-description').text(description);
-        $('#quickViewModal .product-vendor').text(vendor);
-        if (percentage) {
-            $('#quickViewModal .product-percentage').text(percentage + '% OFF').show();
-        } else {
-            $('#quickViewModal .product-percentage').hide();
-        }
-        
-        // Update hidden fields in modal for add-to-cart
-        $('#quickViewModal .product-pid').val(pid);
-        $('#quickViewModal .product-id').val(productId);
-        $('#quickViewModal .product-title-input').val(title);
-        $('#quickViewModal .product-price-input').val(price);
-        $('#quickViewModal .product-image-input').val(image);
-        $('#quickViewModal .product-sku-input').val($(this).data("sku") || "");
-        
-        // Update add to cart button in modal
-        $('#quickViewModal .add-to-cart-btn').attr('data-index', productId);
-        
-        // Show modal
-        $('#quickViewModal').modal('show');
-    });
-
-    // Add to Wishlist button - USING EVENT DELEGATION
-    $(document).on("click", ".add-to-wishlist", function(e) {
-        e.preventDefault();
-        
-        let productId = $(this).data("product-item");
-        console.log("Add to wishlist clicked for product ID:", productId);
-        
-        // Get product data from hidden inputs
-        let title = $(".product-title-" + productId).val();
-        let price = $(".current-product-price-" + productId).text().trim();
-        let image = $(".product-image-" + productId).val();
-        let sku = $(".product-sku-" + productId).val();
-        let pid = $(".product-pid-" + productId).val();
-        
-        // console.log("Adding to wishlist:", {
-        //     id: productId,
-        //     title: title,
-        //     price: price
-        // });
-
-        let this_val = $(this);
-        let icon = this_val.find('i');
-        
-        $.ajax({
-            url: '/add-to-wishlist', // Update with your actual URL
-            data: {
-                'id': productId,
-                'title': title,
-                'price': price,
-                'image': image,
-                'sku': sku,
-                'pid': pid
-            },
-            dataType: 'json',
-            beforeSend: function () {
-                console.log("Adding to wishlist...");
-                icon.css('fill', '#ff6b6b'); // Change to red while loading
-            },
-            success: function (response) {
-                console.log("Added to wishlist!");
-                icon.css('fill', 'red'); // Keep red on success
-                
-                // Optional: Update wishlist count if you have one
-                if (response.totalwishlistitems) {
-                    $(".wishlist-items-count").text(response.totalwishlistitems);
-                }
-                
-                showNotification('Added to wishlist!', 'success');
-            },
-            error: function (xhr, status, error) {
-                console.error("Error adding to wishlist:", error);
-                icon.css('fill', ''); // Reset color
-                showNotification('Failed to add to wishlist', 'error');
-            }
-        });
-    });
-
-    // Price range slider update - USING EVENT DELEGATION
-    $(document).on("input change", "#range, #max_price", function() {
-        let rangeValue = $("#range").val();
-        let maxPriceValue = $("#max_price").val();
-        
-        // Keep them in sync
-        if($(this).attr("id") === "range") {
-            $("#max_price").val(rangeValue);
-        } else {
-            $("#range").val(maxPriceValue);
-        }
-        
-        // Update display
-        $("#slider-range-value2").text("Ksh " + maxPriceValue);
-    });
-
-    // ========== HELPER FUNCTIONS ==========
     
-    // Show notification
-    function showNotification(message, type = 'success') {
-        // You can use a toast notification library or implement your own
-        // For now, using alert as fallback
-        console.log(`${type.toUpperCase()}: ${message}`);
-        
-    }
     
     // Initialize any other functionality on page load
     console.log("Product filters and event delegation initialized");
@@ -358,115 +209,126 @@ $(document).ready(function () {
         });
     });
 
+    
     // Add to cart functionality
-    $(".add-to-cart-btn").on("click", function () {
-        console.log("Add to cart button clicked");
 
-        let this_val = $(this)
-        let index = this_val.attr("data-index")
-
-        let quantity = $(".product-quantity-" + index).val()
-        let product_title = $(".product-title-" + index).val()
-        let product_sku = $(".product-sku-" + index).val()
-
-        let product_id = $(".product-id-" + index).val()
-        let product_price = $(".current-product-price-" + index).text()
-
-        let product_pid = $(".product-pid-" + index).val()
-        let product_image = $(".product-image-" + index).val()
-
-
-        console.log("Quantity:", quantity);
-        console.log("Title:", product_title);
-        console.log("Price:", product_price);
-        console.log("ID:", product_id);
-        console.log("PID:", product_pid);
-        console.log("Image:", product_image);
-        console.log("Index:", index);
-        console.log("Currrent Element:", this_val);
-
-        $.ajax({
-            url: '/add-to-cart',
-            data: {
-                'id': product_id,
-                'pid': product_pid,
-                'image': product_image,
-                'qty': quantity,
-                'title': product_title,
-                'price': product_price,
-                'sku':product_sku
-            },
-            dataType: 'json',
-            beforeSend: function () {
-                console.log("Adding Product to Cart...");
-            },
-            success: function (response) {
-                // this_val.html("✓")
-                this_val.html("<i class='fas fa-check-circle'></i>")
-
-                console.log("Added Product to Cart!");
-                $(".cart-items-count").text(response.totalcartitems)
-
-
-            }
-        })
+// Notification function
+function showNotification(type, message) {
+    // Remove any existing notifications
+    $('.cart-notification').remove();
+    
+    // Create notification
+    let notification = $('<div class="cart-notification"></div>');
+    notification.css({
+        'position': 'fixed',
+        'top': '20px',
+        'right': '20px',
+        'padding': '15px 20px',
+        'border-radius': '8px',
+        'color': 'white',
+        'font-weight': '600',
+        'z-index': '9999',
+        'box-shadow': '0 4px 12px rgba(0,0,0,0.15)',
+        'animation': 'slideIn 0.3s ease'
     });
+    
+    if (type === 'success') {
+        notification.css('background-color', '#3BB77E');
+    } else {
+        notification.css('background-color', '#ff6b6b');
+    }
+    
+    notification.html(`
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} mr-2"></i>
+        ${message}
+    `);
+    
+    $('body').append(notification);
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        notification.animate({opacity: 0, right: '-100px'}, 300, function() {
+            $(this).remove();
+        });
+    }, 3000);
+}
+
+// Add CSS for animation
+$('head').append(`
+<style>
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+</style>
+`);
     // delete from cart functionality
     $(document).on("click", ".delete-product", function () {
-
-        let product_id = $(this).attr("data-product")
+        let product_key = $(this).attr("data-product")  // This is now the unique key
         let this_val = $(this)
-
-        console.log("Product ID:", product_id);
-
+    
+        console.log("Product Key:", product_key);
+    
         $.ajax({
             url: "/delete-from-cart",
             data: {
-                "id": product_id
+                "id": product_key  // Send the unique key
             },
             dataType: "json",
             beforeSend: function () {
-                this_val.hide()
+                this_val.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i>');
             },
             success: function (response) {
-                this_val.show()
-                $(".cart-items-count").text(response.totalcartitems)
-                $("#cart-list").html(response.data)
+                this_val.prop('disabled', false).html('<i class="fi-rs-trash"></i>');
+                $(".cart-items-count").text(response.totalcartitems);
+                $("#cart-list").html(response.data);
                 window.location.reload()
+                showNotification('success', 'Item removed from cart');
+            },
+            error: function() {
+                this_val.prop('disabled', false).html('<i class="fi-rs-trash"></i>');
+                showNotification('error', 'Error removing item');
             }
         })
-
     });
-
-    // update cart functionality
-    $(".update-product").on("click", function () {
-
-        let product_id = $(this).attr("data-product")
+    
+    // Update cart functionality
+    $(document).on("click", ".update-product", function () {
+        let product_key = $(this).attr("data-product")  // This is now the unique key
         let this_val = $(this)
-        let product_quantity = $(".product-qty-" + product_id).val()
-
-        console.log("PRoduct ID:", product_id);
-        console.log("PRoduct QTY:", product_quantity);
-
+        let product_quantity = $(".product-qty-" + product_key).val()
+    
+        console.log("Product Key:", product_key);
+        console.log("Product QTY:", product_quantity);
+    
         $.ajax({
             url: "/update-cart",
             data: {
-                "id": product_id,
+                "id": product_key,  // Send the unique key
                 "qty": product_quantity,
             },
             dataType: "json",
             beforeSend: function () {
-                this_val.hide()
+                this_val.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i>');
             },
             success: function (response) {
-                this_val.show()
-                $(".cart-items-count").text(response.totalcartitems)
-                $("#cart-list").html(response.data)
+                this_val.prop('disabled', false).html('<i class="fi-rs-refresh"></i>');
+                $(".cart-items-count").text(response.totalcartitems);
+                $("#cart-list").html(response.data);
                 window.location.reload()
-
+                showNotification('success', 'Cart updated successfully');
+            },
+            error: function() {
+                this_val.prop('disabled', false).html('<i class="fi-rs-refresh"></i>');
+                showNotification('error', 'Error updating cart');
             }
         })
-
     });
 
 

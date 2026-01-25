@@ -3,7 +3,6 @@
 {% load static %}
 {% block content %}
 
-
 <main class="main" id="cart-list">
 	<div class="page-header breadcrumb-wrap">
 		<div class="container">
@@ -32,9 +31,8 @@
                         <table class="table table-wishlist">
                             <thead>
                                 <tr class="main-heading">
-                                    
                                     <th scope="col">Product</th>
-                                    <th scope="col">Title</th>
+                                    <th scope="col">Title & Details</th>
                                     <th scope="col">Unit Price</th>
                                     <th scope="col" class="text-center">Quantity</th>
                                     <th scope="col">Subtotal</th>
@@ -42,31 +40,96 @@
                                     <th scope="col" class="end">Remove</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for product_id, item in cart_data.items %}
-                                <tr class="pt-30">
-                                    <td class="image product-thumbnail pt-40">
-                                        <img src="{{ item.image }}" alt="#" style="width: 100%; height: auto; display: block;">
-                                    </td>
-                                    <td class="product-des product-name">
-                                        <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="{% url 'core:product-detail' item.pid %}">{{ item.title|truncatechars:20 }}</a></h6>
-                                    
-                                    </td>
-                                    <td class="price" data-title="UnitPrice">
-                                        <h4 class="text-body">Ksh {{item.price|floatformat:0|intcomma}}</h4>
-                                    </td>
-                                    <td class="text-center detail-info" data-title="Quantity">
-                                        <div class="mr-15">
-                                            <input type="number" placeholder="Qty" class="w-25 product-qty-{{ product_id }}"  name="" value="{{ item.qty }}" id="">
-                                        </div>
-                                    </td>
-                                    <td class="price" data-title="Subtotal">
-                                        <h4 class="text-brand">Ksh {% widthratio item.price 1 item.qty %} </h4>
-                                    </td>
-                                    <td class="action text-center" data-title="Refresh"><a style="border: none; background: none;"  class="text-body update-product" data-product="{{ product_id }}"><i class="fi-rs-refresh"></i></a></td>
-                                    <td class="action text-center" data-title="Remove"><a style="border: none; background: none;"  class="text-body delete-product" data-product="{{ product_id }}"><i class="fi-rs-trash"></i></a></td>
-                                </tr>
-                                {% endfor %}
+                            <tbody>                               
+{% for product_id, item in cart_data.items %}
+<tr class="pt-30">
+    <td class="image product-thumbnail pt-40">
+        <img src="{{ item.image }}" alt="{{ item.original_title|default:item.title }}" 
+            style="width: 100px; height: auto; border-radius: 8px; border: 1px solid #eee;">
+    </td>
+    <td class="product-des product-name">
+        <!-- Product Title (without variation details) -->
+        <h6 class="mb-2">
+            <a class="product-name mb-10 text-heading" href="{% url 'core:product-detail' item.pid %}">
+                {{ item.original_title|default:item.title|truncatechars:30 }}
+            </a>
+        </h6>
+        
+        <!-- Variation Details - ALWAYS SHOW EVEN IF EMPTY FOR DEBUG -->
+        <div class="variation-details mb-2 p-2" style="background: #f8f9fa; border-radius: 6px; border-left: 3px solid #3BB77E;">
+            <div class="row">
+                {% if item.color and item.color != "none" and item.color != "" %}
+                <div class="col-12 mb-1">
+                    <span class="text-muted" style="font-size: 13px;">
+                        <i class="fi-rs-palette me-1"></i> 
+                        <strong>Color:</strong> 
+                        <span class="ms-1">{{ item.color }}</span>
+                        <div class="d-inline-block ms-2" style="
+                            width: 26px;
+                            height: 26px;
+                            border-radius: 20%;
+                            background-color: {% if item.color == 'Black' %}#000000{% elif item.color == 'Blue' %}#0000FF{% elif item.color == 'Brown' %}#A52A2A{% elif item.color == 'Red' %}#FF0000{% elif item.color == 'Green' %}#00FF00{% elif item.color == 'White' %}#FFFFFF{% elif item.color == 'Gray' %}#808080{% elif item.color == 'Cyan' %}#00FFFF{% elif item.color == 'Yellow' %}#FFFF00 {% else %}#CCCCCC{% endif %};
+                            border: 1px solid #ddd;
+                            vertical-align: middle;
+                        "></div>
+                    </span>
+                </div>
+                {% endif %}
+                
+                {% if item.size and item.size != "none" and item.size != "" %}
+                <div class="col-12">
+                    <span class="text-muted" style="font-size: 13px;">
+                        <i class="fi-rs-ruler me-1"></i> 
+                        <strong>Size:</strong> 
+                        <span class="ms-1">{{ item.size }}</span>
+                    </span>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- SKU -->
+        <div class="mt-2">
+            <small class="text-muted">
+                <i class="fi-rs-barcode me-1"></i>
+                SKU: {{ item.sku }}
+            </small>
+        </div>
+    </td>
+    <td class="price" data-title="UnitPrice">
+        <h4 class="text-body">Ksh {{ item.price|floatformat:0|intcomma }}</h4>
+    </td>
+    <td class="text-center detail-info" data-title="Quantity">
+        <div class="d-flex align-items-center justify-content-center">
+            <div class="input-group" style="width: 120px;">
+                <input type="number" 
+                        class="form-control product-qty-{{ product_id }}" 
+                        value="{{ item.qty }}" 
+                        min="1" 
+                        style="text-align: center;">
+                
+            </div>
+        </div>
+    </td>
+    <td class="price" data-title="Subtotal">
+        <h4 class="text-brand">Ksh {% widthratio item.price 1 item.qty %} </h4>
+    </td>
+    <td class="action text-center" data-title="Refresh">
+        <button class="btn btn-outline-secondary update-product" 
+                        type="button" 
+                        data-product="{{ product_id }}">
+                    <i class="fi-rs-refresh"></i>
+        </button>
+    </td>
+    <td class="action text-center" data-title="Remove">
+        <a style="border: none; background: none;"  
+            class="text-body delete-product" 
+            data-product="{{ product_id }}">
+            <i class="fi-rs-trash"></i>
+        </a>
+    </td>
+</tr>
+{% endfor %}
                             </tbody>
                         </table>
 
@@ -132,7 +195,7 @@
                             </div>
                         </div>
                         {% if totalcartitems %}
-                            <button type=submit" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></button>
+                            <button type="submit" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></button>
                         {% endif %}                    
                     </div>
                 </div>
@@ -140,4 +203,46 @@
         </form>
 	</div>
 </main>
+
+<!-- Add CSS for variation display -->
+<style>
+.variation-details {
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border-left: 3px solid #3BB77E;
+}
+
+.product-thumbnail img {
+    transition: transform 0.3s ease;
+}
+
+.product-thumbnail img:hover {
+    transform: scale(1.05);
+}
+
+.input-group .form-control {
+    border-color: #ddd;
+}
+
+.input-group .btn-outline-secondary {
+    border-color: #ddd;
+    color: #666;
+}
+
+.input-group .btn-outline-secondary:hover {
+    background-color: #3BB77E;
+    border-color: #3BB77E;
+    color: white;
+}
+
+.table-wishlist tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+.table-wishlist tbody tr:hover {
+    background-color: #f9f9f9;
+}
+</style>
+
 {% endblock content %}

@@ -49,3 +49,15 @@ def default(request):
         'new_products':new_products,
         'deals_products':deals_products,
     }
+
+def cart_context(request):
+    cart_count = 0
+    if 'cart_data_obj' in request.session:
+        cart_data = request.session['cart_data_obj']
+        cart_count = sum(item['qty'] for item in cart_data.values())
+    
+    return {
+        'cart_items_count': cart_count,
+        'cart_data': request.session.get('cart_data_obj', {})
+    }
+

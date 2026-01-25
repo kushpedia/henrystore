@@ -3,7 +3,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 import stripe
 from taggit.models import Tag
-from core.models import CartOrderItems, Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address,Coupon,SubCategory,MiniSubCategory
+from core.models import CartOrderItems, Product, Category,Color, Size, ProductVariation, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address,Coupon,SubCategory,MiniSubCategory
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -307,13 +307,12 @@ def vendor_detail_view(request, vid):
         "products": products,
     }
     return render(request, "core/vendor-detail.html", context)
-
 def product_detail_view(request, pid):
     product = Product.objects.get(pid=pid)
     product_images = product.p_images.all()
     related_products = Product.objects.filter(
-    mini_subcategory__subcategory=product.mini_subcategory.subcategory
-        ).exclude(pid=product.pid).filter(product_status="published")
+        mini_subcategory__subcategory=product.mini_subcategory.subcategory
+    ).exclude(pid=product.pid).filter(product_status="published")
     review = ProductReview.objects.filter(product=product).order_by("-id")
 
     # Getting average review
@@ -322,19 +321,23 @@ def product_detail_view(request, pid):
     review_form = ProductReviewForm()
 
     make_review = False
+    has_ordered_product = False
+    has_undelivered_product = False
+    has_reviewed = False
+    
     if request.user.is_authenticated:
         # Check if user has ordered this product
         has_ordered_product = CartOrderItems.objects.filter(
             order__user=request.user,
             order__product_status="delivered",  # Order must be delivered
-            item=product.title  # Assuming 'item' stores product title
+            original_title=product.title  # Assuming 'original_title' stores product title
         ).exists()
 
         # check the ordered product is not delivered yet
         has_undelivered_product = CartOrderItems.objects.filter(
             order__user=request.user,
             order__product_status__in=["processing", "shipped"],  # Un Delivered Orders
-            item=product.title  
+            original_title=product.title  
         ).exists()
 
         # Check if user has already reviewed this product
@@ -343,26 +346,78 @@ def product_detail_view(request, pid):
             product=product
         ).exists()
 
-
-
         # User can make review if they've ordered AND haven't reviewed yet
         make_review = has_ordered_product and not has_reviewed
+
+    # ============ VARIATION LOGIC ============
+    variations = None
+    available_variations_dict = {}
+    variation_colors = []
+    variation_sizes = []
+    
+    if product.has_variations:
+        # Get active variations
+        variations = ProductVariation.objects.filter(
+            product=product, 
+            is_active=True
+        ).select_related('color', 'size')
+        
+        # Create dictionary for available variations for JavaScript
+        for variation in variations:
+            color_id = str(variation.color.id) if variation.color else 'none'
+            size_id = str(variation.size.id) if variation.size else 'none'
+            key = f"{color_id}_{size_id}"
+            
+            available_variations_dict[key] = {
+                'id': variation.id,
+                'price': float(variation.get_final_price()),
+                'old_price': float(variation.get_final_old_price()) if variation.get_final_old_price() else None,
+                'stock_count': variation.stock_count,
+                'in_stock': variation.is_in_stock(),
+                'image': variation.variation_image(),
+                'color_name': variation.color.name if variation.color else '',
+                'size_name': variation.size.name if variation.size else '',
+                'sku': variation.sku,
+            }
+        
+        # Get unique colors and sizes from variations
+        if variations.exists():
+            # Get distinct colors
+            color_ids = variations.exclude(color__isnull=True).values_list('color', flat=True).distinct()
+            if color_ids:
+                variation_colors = Color.objects.filter(id__in=color_ids)
+            
+            # Get distinct sizes
+            size_ids = variations.exclude(size__isnull=True).values_list('size', flat=True).distinct()
+            if size_ids:
+                variation_sizes = Size.objects.filter(id__in=size_ids)
+    
+    # Convert available_variations_dict to JSON-safe format
+    import json
+    available_variations_json = json.dumps(available_variations_dict)
+    # ============ END VARIATION LOGIC ============
 
     context = {
         "p": product,
         "review_form": review_form,
         "make_review": make_review,
         "p_images": product_images,
-
-        "related_products":related_products,
+        "related_products": related_products,
         "average_rating": average_rating,
         "reviews": review,
         "has_undelivered_product": has_undelivered_product if request.user.is_authenticated else False,
         "has_reviewed": has_reviewed if request.user.is_authenticated else False,
-
+        "has_ordered_product": has_ordered_product if request.user.is_authenticated else False,
+        
+        # Add variation data to context
+        "variations": variations,
+        "available_variations": available_variations_json,  # JSON for JavaScript
+        "available_variations_dict": available_variations_dict,  # Dict for template
+        "variation_colors": variation_colors,
+        "variation_sizes": variation_sizes,
     }
+    
     return render(request, "core/product-detail.html", context)
-
 
 def tag_list(request, tag_slug=None):
 
@@ -381,64 +436,137 @@ def tag_list(request, tag_slug=None):
     return render(request, "core/tag.html", context)
 
 
+import traceback
+from django.db import models
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from .models import Product, ProductReview, CartOrderItems
 
 @csrf_exempt
 def ajax_add_review(request, pid):
-    if not request.user.is_authenticated:
-        return JsonResponse({'bool': False, 'error': 'Please login to submit a review'})
     
-    product = Product.objects.get(pk=pid)
-    user = request.user
     
-    # Check if user has ordered this product AND it's delivered
+    try:
+        if not request.user.is_authenticated:
+            
+            return JsonResponse({
+                'bool': False, 
+                'error': 'Please login to submit a review'
+            }, status=401)
+        
+        try:
+            product = Product.objects.get(pk=pid)
+        except Product.DoesNotExist:
+            return JsonResponse({
+                'bool': False, 
+                'error': 'Product not found'
+            }, status=404)
+        
+        user = request.user
+        
+        # DEBUG: Check user's orders
+        user_orders = CartOrderItems.objects.filter(
+            order__user=user,
+            order__product_status="delivered"
+        )
+        
+        # Check if user has ordered this product AND it's delivered
+        has_ordered = CartOrderItems.objects.filter(
+            order__user=user,
+            order__product_status="delivered"
+        ).filter(
+            models.Q(product_id=product) |  # Check product foreign key
+            models.Q(original_title=product.title)  # Check original title
+        ).exists()
+        
+        if not has_ordered:
+            # Check if item field contains the product title
+            has_ordered_via_item = CartOrderItems.objects.filter(
+                order__user=user,
+                order__product_status="delivered",
+                item__contains=product.title  # Check if item contains product title
+            ).exists()
+            
+            if not has_ordered_via_item:
+                return JsonResponse({
+                    'bool': False, 
+                    'error': 'You can only review products you have purchased and received.'
+                }, status=403)
+        
+        # Check if user has already reviewed this product
+        existing_review = ProductReview.objects.filter(
+            user=user,
+            product=product
+        ).exists()
+        
+        if existing_review:
+            return JsonResponse({
+                'bool': False, 
+                'error': 'You have already reviewed this product.'
+            }, status=400)
 
-    has_ordered = CartOrderItems.objects.filter(
-        order__user=user,
-        order__product_status="delivered",
-        item=product.title
-    ).exists()
+        # Get form data
+        review_text = request.POST.get('review', '').strip()
+        rating = request.POST.get('rating', '0').strip()
+        
+        if not review_text:
+            return JsonResponse({
+                'bool': False, 
+                'error': 'Review text is required.'
+            }, status=400)
+        
+        try:
+            rating_int = int(rating)
+            if rating_int < 1 or rating_int > 5:
+                return JsonResponse({
+                    'bool': False, 
+                    'error': 'Rating must be between 1 and 5.'
+                }, status=400)
+        except ValueError:
+            return JsonResponse({
+                'bool': False, 
+                'error': 'Invalid rating value.'
+            }, status=400)
 
-    if not has_ordered:
-        return JsonResponse({
-            'bool': False, 
-            'error': 'You can only review products you have purchased and received.'
-        })
-    # Check if user has already reviewed this product
-    existing_review = ProductReview.objects.filter(
-        user=user,
-        product=product
-    ).exists()
-    
-    if existing_review:
-        return JsonResponse({
-            'bool': False, 
-            'error': 'You have already reviewed this product.'
-        })
+        # Create review
+        review = ProductReview.objects.create(
+            user=user,
+            product=product,
+            review=review_text,
+            rating=rating_int,
+        )
 
-    review = ProductReview.objects.create(
-        user=user,
-        product=product,
-        review = request.POST['review'],
-        rating = request.POST['rating'],
-    )
-
-    context = {
-        'user': user.username,
-        'review': request.POST['review'],
-        'rating': request.POST['rating'],
-    }
-
-    average_reviews = ProductReview.objects.filter(product=product).aggregate(
-        rating=Avg("rating")
-    )
-    return JsonResponse(
-        {
-            'bool': True,
-            'context': context,
-            'average_reviews': average_reviews['rating'] or 0
+        context = {
+            'user': user.username,
+            'review': review_text,
+            'rating': rating_int,
+            'date': review.date.strftime("%d %B, %Y") if review.date else "Recently",
         }
-    )
 
+        # Calculate new average rating
+        average_reviews = ProductReview.objects.filter(product=product).aggregate(
+            rating=Avg("rating")
+        )
+        
+        avg_rating = float(average_reviews['rating'] or 0)
+        
+        return JsonResponse(
+            {
+                'bool': True,
+                'context': context,
+                'average_reviews': avg_rating,
+                'message': 'Review submitted successfully!'
+            }
+        )
+        
+    except Exception as e:
+        traceback.print_exc()
+        
+        return JsonResponse({
+            'bool': False,
+            'error': f'Server error: {str(e)}'
+        }, status=500)
 
 
 def search_view(request):
@@ -549,45 +677,130 @@ def filter_product(request):
     data = render_to_string("core/async/product-list.html", {"products": products})
     return JsonResponse({"data": data})
 
-
+# add to cart
 def add_to_cart(request):
-    cart_product = {}
-
-    cart_product[str(request.GET['id'])] = {
-        'title': request.GET['title'],
-        'qty': request.GET['qty'],
-        'sku': request.GET['sku'],
-        'price': request.GET['price'],
-        'image': request.GET['image'],
-        'pid': request.GET['pid'],
-        'product_id': request.GET['id'],
-    }
-
-    if 'cart_data_obj' in request.session:
-        if str(request.GET['id']) in request.session['cart_data_obj']:
-
-            cart_data = request.session['cart_data_obj']
-            cart_data[str(request.GET['id'])]['qty'] = int(cart_product[str(request.GET['id'])]['qty'])
-            cart_data.update(cart_data)
-            request.session['cart_data_obj'] = cart_data
-        else:
-            cart_data = request.session['cart_data_obj']
-            cart_data.update(cart_product)
-            request.session['cart_data_obj'] = cart_data
-
+    
+    # Use request.POST since JavaScript sends POST
+    if request.method == 'POST':
+        data_source = request.POST
     else:
-        request.session['cart_data_obj'] = cart_product
-    return JsonResponse({"data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj'])})
+        # Fallback to GET for compatibility
+        data_source = request.GET
+    
+    # Get all data from request
+    cart_key = data_source.get('id', '').strip()
+    pid = data_source.get('pid', '').strip()
+    image = data_source.get('image', '').strip()
+    qty = data_source.get('qty', '1').strip()
+    title = data_source.get('title', '').strip()
+    price = data_source.get('price', '0').strip()
+    sku = data_source.get('sku', '').strip()
+    
+    # Get variation data
+    variation_id = data_source.get('variation_id', '').strip()
+    color = data_source.get('color', '').strip()
+    size = data_source.get('size', '').strip()
+    original_title = data_source.get('original_title', title).strip()
+    
+    # Validate required fields
+    if not all([cart_key, pid, image, price]):
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Missing required fields',
+            'totalcartitems': 0
+        }, status=400)
+    
+    # Get the actual Product object
+    try:
+        product_obj = Product.objects.get(pid=pid)
+        real_product_id = product_obj.id  # Store the actual model ID
+    except Product.DoesNotExist:
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Product not found',
+            'totalcartitems': 0
+        }, status=400)
+    
+    # Convert price to float for storage
+    try:
+        # Remove commas and convert to float
+        price_float = float(str(price).replace(',', ''))
+    except (ValueError, AttributeError):
+        price_float = 0.0
+    
+    # Convert quantity to int
+    try:
+        qty_int = int(qty)
+    except (ValueError, AttributeError):
+        qty_int = 1
+    
+    # Build cart product dictionary
+    cart_product = {
+        'title': f"{original_title}",
+        'qty': qty_int,
+        'sku': sku,
+        'price': price_float,  # Store as float
+        'price_display': f"{price_float:,.0f}",  # Formatted for display
+        'image': image,
+        'pid': pid,
+        'product_id': cart_key,
+        'real_product_id': real_product_id,  # ADD THIS: Actual Product model ID
+        'original_title': original_title,
+        'variation_id': variation_id,
+        'color': color,
+        'size': size,
+        'product_obj_title': product_obj.title,  # Store original product title too
+    }
+    
+    # If color or size exists, add to title for display
+    if color or size:
+        variation_text = []
+        if color and color.lower() != 'no-color':
+            variation_text.append(f"Color: {color}")
+        if size and size.lower() != 'no-size':
+            variation_text.append(f"Size: {size}")
+        if variation_text:
+            cart_product['title'] = f"{original_title} ({', '.join(variation_text)})"
+    
+    # Initialize cart in session if not exists
+    if 'cart_data_obj' not in request.session:
+        request.session['cart_data_obj'] = {}
+    
+    cart_data = request.session['cart_data_obj']
+    
+    if cart_key in cart_data:
+        # Same variation - update quantity
+        cart_data[cart_key]['qty'] += qty_int  # Add to existing quantity
+    else:
+        # New variation - add new item
+        cart_data[cart_key] = cart_product
+    
+    # Save session
+    request.session.modified = True
+    request.session['cart_data_obj'] = cart_data
+    
+    # Calculate total items count
+    total_items = sum(item['qty'] for item in cart_data.values())
+    
+    return JsonResponse({
+        "status": "success",
+        "data": cart_data,
+        'totalcartitems': total_items,
+        'message': 'Product added to cart successfully'
+    })
 
 
 @login_required
 def cart_view(request):
     cart_total_amount = 0
-    # print("cart data obj session:", request.session.get('cart_data_obj'))
+    
+    
     if 'cart_data_obj' in request.session:
-        for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
-        return render(request, "core/cart.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems': len(request.session['cart_data_obj']), 'cart_total_amount':cart_total_amount})
+        return render(request, "core/cart.html", {
+            "cart_data": request.session['cart_data_obj'], 
+            'totalcartitems': len(request.session['cart_data_obj']), 
+            'cart_total_amount': cart_total_amount
+        })
     else:
         messages.warning(request, "Your cart is empty")
         return redirect("core:index")
@@ -685,8 +898,6 @@ def save_checkout_info(request):
         state = request.POST.get("state")
         country = request.POST.get("country")
 
-
-
         request.session['full_name'] = full_name
         request.session['email'] = email
         request.session['mobile'] = mobile
@@ -696,7 +907,7 @@ def save_checkout_info(request):
         request.session['country'] = country
 
         if 'cart_data_obj' in request.session:
-            # print(request.session['cart_data_obj'])
+            # Calculate total amount
             for p_id, item in request.session['cart_data_obj'].items():
                 total_amount += int(item['qty']) * float(item['price'])
 
@@ -713,6 +924,7 @@ def save_checkout_info(request):
                 country=country,
             )
 
+            # Clear session checkout data
             del request.session['full_name']
             del request.session['email']
             del request.session['mobile']
@@ -721,26 +933,51 @@ def save_checkout_info(request):
             del request.session['state']
             del request.session['country']
 
-            # Getting total amount for The Cart
+            # Create order items
             for p_id, item in request.session['cart_data_obj'].items():
                 cart_total_amount += int(item['qty']) * float(item['price'])
-                try:
-                    product = Product.objects.get(id=item['product_id'])
-                except Product.DoesNotExist:
-                    product = None
+                
+                # Get product using real_product_id
+                product = None
+                if 'real_product_id' in item:
+                    try:
+                        product = Product.objects.get(id=item['real_product_id'])
+                    except Product.DoesNotExist:
+                        print(f"Warning: Product with ID {item['real_product_id']} not found")
+                
+                # Fallback: Try to get product by pid if real_product_id fails
+                if not product and 'pid' in item:
+                    try:
+                        product = Product.objects.get(pid=item['pid'])
+                    except Product.DoesNotExist:
+                        print(f"Warning: Product with PID {item['pid']} not found")
+                
+                # Get variation if exists
+                variation = None
+                if 'variation_id' in item and item['variation_id']:
+                    try:
+                        variation = ProductVariation.objects.get(id=item['variation_id'])
+                    except ProductVariation.DoesNotExist:
+                        variation = None
+                
+                # Create order item
                 cart_order_products = CartOrderItems.objects.create(
                     order=order,
-                    invoice_no="INVOICE_NO-" + str(order.id), # INVOICE_NO-5,
+                    invoice_no="INVOICE_NO-" + str(order.id),
                     item=item['title'],
-                    product_id=product,
+                    product_id=product,  # Save the actual Product object
+                    variation=variation,  # Save variation object
                     image=item['image'],
                     qty=item['qty'],
                     price=item['price'],
-                    total=float(item['qty']) * float(item['price'])
+                    total=float(item['qty']) * float(item['price']),
+                    color=item.get('color', ''),
+                    size=item.get('size', ''),
+                    original_title=item.get('original_title', item.get('product_obj_title', item['title']))
                 )
+                
         return redirect("core:new_checkout", order.oid)
-    return redirect("core:new_checkout", order.oid)
-
+    return redirect("core:index")
 
 @login_required
 def payment_completed_view(request,oid):
