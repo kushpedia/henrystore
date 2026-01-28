@@ -37,14 +37,35 @@
 												<img src="{{ p_img.images.url }}" alt="product image" />
 											</figure>
 											{% endfor %}
+											{% if p.has_variations %}
+    {% for variation in p.variations.all %}
+        {% if variation.image %}
+        <figure class="border-radius-10">
+            <img src="{{ variation.image.url }}" alt="variation image" />
+        </figure>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 										</div>
+
+										
 										<!-- THUMBNAILS -->
 										<div class="slider-nav-thumbnails">
 											<div><img src="{{p.image.url}}" alt="product image" /></div>
 											{% for p_img in p_images %}
 											<div><img src="{{p_img.images.url}}" alt="product image" /></div>
 											{% endfor %}
+											{% if p.has_variations %}
+    {% for variation in p.variations.all %}
+        {% if variation.image %}
+        <div><img src="{{ variation.image.url }}" alt="variation image" /></div>
+        {% endif %}
+    {% endfor %}
+{% endif %}
 										</div>
+
+
+
 									</div>
 									<!-- End Gallery -->
 								</div>
@@ -632,7 +653,7 @@
 										<div class="product-rate d-inline-block">
 											<div class="product-rating" style="width: 90%"></div>
 										</div>
-										<span class="font-small ml-5 text-muted"> {{p.vendor.get_average_rating}} </span><br/><span> ({{p.vendor.get_total_reviews_count}} Reviews)</span>
+										<span class="font-small ml-5 text-muted"> {{p.vendor.get_average_rating|floatformat:1}} </span><br/><span> ({{p.vendor.get_total_reviews_count}} Reviews)</span>
 									</div>
 								</div>
 							</div>

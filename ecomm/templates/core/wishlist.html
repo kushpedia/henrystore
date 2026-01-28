@@ -57,15 +57,7 @@
                                     </td>
                                     <td class="text-right" data-title="Cart">
 
-
-										<input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ w.product.id }}">
-										<input type="hidden" class="product-pid-{{ w.product.id }}" value="{{ w.product.pid }}">
-										<input type="hidden" class="product-image-{{ w.product.id }}" value="{{ w.product.image.url }}">
-										<input type="hidden" class="product-id-{{ w.product.id }}" value="{{ w.product.id }}">
-										<input type="hidden" class="product-title-{{ w.product.id }}" value="{{ w.product.title }}">
-										<input type="hidden" class="product-sku-{{ w.product.id }}" value="{{ w.product.sku }}">
-
-                                        <button class="btn btn-sm add-to-cart-btn" data-index="{{ w.product.id }}">Add to cart</button>
+                                        <a  href="{% url 'core:product-detail' w.product.pid %}" >Add to cart</a>
                                     </td>
                                     <td class="action text-center" data-title="Remove">
                                         <button style="border: none; background: none;" data-wishlist-product="{{ w.id }}"  class="text-body delete-wishlist-product"><i class="fi-rs-trash"></i></button>

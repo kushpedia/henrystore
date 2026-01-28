@@ -791,12 +791,36 @@ def add_to_cart(request):
 def cart_view(request):
     cart_total_amount = 0
     
-    
     if 'cart_data_obj' in request.session:
+        cart_data = request.session['cart_data_obj']
+        
+        # Calculate total amount by iterating through cart items
+        for product_id, item in cart_data.items():
+            # Extract the price and quantity
+            # Note: item['price'] might be a string with "Ksh " prefix or comma separators
+            price_str = str(item['price'])
+            
+            # Clean the price string (remove currency symbol, commas, and whitespace)
+            price_str = price_str.replace('Ksh', '').replace('$', '').replace(',', '').strip()
+            
+            try:
+                # Convert to float then to Decimal for accurate calculation
+                price = float(price_str)
+                quantity = int(item['qty'])
+                cart_total_amount += price * quantity
+            except (ValueError, KeyError) as e:
+                # Handle errors if price or quantity format is invalid
+                print(f"Error processing cart item {product_id}: {e}")
+                continue
+        
+        # Format the total amount (optional)
+        cart_total_amount_formatted = "{:,.2f}".format(cart_total_amount)
+        
         return render(request, "core/cart.html", {
-            "cart_data": request.session['cart_data_obj'], 
-            'totalcartitems': len(request.session['cart_data_obj']), 
-            'cart_total_amount': cart_total_amount
+            "cart_data": cart_data, 
+            'totalcartitems': len(cart_data), 
+            'cart_total_amount': cart_total_amount,
+            'cart_total_amount_formatted': cart_total_amount_formatted
         })
     else:
         messages.warning(request, "Your cart is empty")

@@ -373,6 +373,8 @@ class ProductVariation(models.Model):
         if self.image:
             return self.image.url
         return self.product.image.url
+    
+    
 ############################################## Cart, Order, OrderITems and Address ##################################
 ############################################## Cart, Order, OrderITems and Address ##################################
 ############################################## Cart, Order, OrderITems and Address ##################################
