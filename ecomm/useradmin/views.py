@@ -1,21 +1,23 @@
 from django.shortcuts import render
 
+import os
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.db.models import Sum
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
-from core.models import CartOrder, CartOrderItems, MiniSubCategory, Product, Category, ProductReview
+from core.models import CartOrder, CartOrderItems, MiniSubCategory, Product, Category, ProductReview, Color, Size, ProductVariation,Vendor
 from userauths.models import Profile, User
 import datetime
-from useradmin.forms import AddProductForm
+from useradmin.forms import AddProductForm, VariationForm
 from django.contrib.auth.decorators import login_required
 from useradmin.decorators import admin_required
 from django.http import JsonResponse
 from core.models import SubCategory, MiniSubCategory
-
-
+import json
+import uuid
+from django.core.files.storage import FileSystemStorage
 
 @admin_required
 def dashboard(request):
@@ -60,6 +62,12 @@ def add_product(request):
         if form.is_valid():
             new_form = form.save(commit=False)
             new_form.user = request.user
+            try:            
+                vendor = Vendor.objects.get(user=request.user)
+                new_form.vendor = vendor
+            except Vendor.DoesNotExist:
+                vendor = Vendor.objects.create(user=request.user, title=f"{request.user.username}'s Store")
+                new_form.vendor = vendor
             
             # Check if mini_subcategory is selected
             if not new_form.mini_subcategory:
@@ -67,15 +75,61 @@ def add_product(request):
                 return render(request, "useradmin/add-products.html", {'form': form})
             
             new_form.save()
-            # form.save_m2m()  # Only needed if you have ManyToMany fields
+            form.save_m2m()  # Save ManyToMany fields (colors, sizes)
+            
+            # Handle variations if enabled
+            if new_form.has_variations and 'variations_data' in request.POST:
+                try:
+                    variations_data = json.loads(request.POST.get('variations_data', '[]'))
+                    
+                    for i, variation in enumerate(variations_data):
+                        # Create ProductVariation instance
+                        variation_instance = ProductVariation(
+                            product=new_form,
+                            color_id=variation.get('color'),
+                            size_id=variation.get('size'),
+                            price=variation.get('price') or None,
+                            old_price=variation.get('old_price') or None,
+                            stock_count=variation.get('stock_count', 0),
+                        )
+                        
+                        # Handle variation image upload
+                        image_key = f'variation_image_{i}'
+                        if image_key in request.FILES:
+                            variation_instance.image = request.FILES[image_key]
+                        
+                        variation_instance.save()
+                        
+                except (json.JSONDecodeError, KeyError) as e:
+                    print(f"Error creating variations: {e}")
+                    # Don't fail the product creation if variations fail
+            
             return redirect("useradmin:dashboard-products")
     else:
         form = AddProductForm()
     
     context = {
-        'form': form
+        'form': form,
+        'colors': Color.objects.all().order_by('name'),
+        'sizes': Size.objects.all().order_by('name'),
     }
     return render(request, "useradmin/add-products.html", context)
+
+
+
+# AJAX view for getting available colors/sizes
+@csrf_exempt
+def get_variation_options(request):
+    """Get colors and sizes for variation creation"""
+    if request.method == 'GET':
+        colors = list(Color.objects.all().values('id', 'name', 'hex_code'))
+        sizes = list(Size.objects.all().values('id', 'name'))
+        return JsonResponse({
+            'colors': colors,
+            'sizes': sizes,
+            'success': True
+        })
+    return JsonResponse({'success': False}, status=400)
 
 @admin_required
 def edit_product(request, pid):

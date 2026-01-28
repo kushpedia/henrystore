@@ -1,22 +1,26 @@
 {% extends 'useradmin/base.html' %}
 {% load static %}
 {% load humanize %}
-{{ form.media }}
-{% block content %}   
-<head>
-    <style>
-        select {
+
+
+
+{% block content %}
+{% block extra_css %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    /* Base styles */
+    select {
         appearance: none;
         outline: 0;
         background: rgba(240, 240, 240, 0.548);
         background-image: none;
         width: 100%;
-        height: 700px;
         color: black;
         cursor: pointer;
         border: none;
         border-radius: 3px;
     }
+    
     #id_category {
         position: relative;
         display: block;
@@ -29,198 +33,1010 @@
         border-radius: .25em;
         padding-bottom: 10px;
     }
-    </style>
-</head>
-            <section class="content-main">
-                <form method="POST" enctype="multipart/form-data">
-					{% csrf_token %}
+    
+    /* Select2 Customization */
+    .select2-container--default .select2-selection--multiple {
+        background: rgba(240, 240, 240, 0.548);
+        border: none;
+        min-height: 42px;
+    }
+    
+    /* Variations Section Styling */
+    .variations-section {
+        display: none;
+        background: #fff;
+        border-radius: 8px;
+        padding: 0;
+        margin-bottom: 20px;
+        border: 1px solid #e0e0e0;
+    }
+    
+    .variations-section.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    .variations-header {
+        background: #f8f9fa;
+        padding: 15px 20px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .variations-header h4 {
+        margin: 0;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .variations-body {
+        padding: 20px;
+    }
+    
+    /* Table Styling */
+    .variations-table-container {
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #dee2e6;
+    }
+    
+    .variations-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+    }
+    
+    .variations-table thead {
+        background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    }
+    
+    .variations-table thead th {
+        padding: 15px 12px;
+        text-align: left;
+        font-weight: 600;
+        color: white;
+        border-bottom: 2px solid #dee2e6;
+        white-space: nowrap;
+    }
+    
+    .variations-table tbody tr {
+        border-bottom: 1px solid #e9ecef;
+        transition: background-color 0.2s;
+    }
+    
+    .variations-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .variations-table tbody tr:last-child {
+        border-bottom: none;
+    }
+    
+    .variations-table td {
+        padding: 12px;
+        vertical-align: middle;
+    }
+    
+    /* Specific column widths */
+    .variations-table th:nth-child(1),
+    .variations-table td:nth-child(1) {
+        width: 15%;
+    }
+    
+    .variations-table th:nth-child(2),
+    .variations-table td:nth-child(2) {
+        width: 15%;
+    }
+    
+    .variations-table th:nth-child(3),
+    .variations-table td:nth-child(3) {
+        width: 20%;
+    }
+    
+    .variations-table th:nth-child(4),
+    .variations-table td:nth-child(4) {
+        width: 20%;
+    }
+    
+    .variations-table th:nth-child(5),
+    .variations-table td:nth-child(5) {
+        width: 20%;
+    }
+    
+    .variations-table th:nth-child(6),
+    .variations-table td:nth-child(6) {
+        width: 10%;
+    }
+    
+    /* Form controls in table */
+    .variations-table select,
+    .variations-table input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        background: #fff;
+        transition: border-color 0.15s ease-in-out;
+    }
+    
+    .variations-table select:focus,
+    .variations-table input:focus {
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    /* Color and size selection */
+    .color-option {
+        display: flex;
+        align-items: center;
+        padding: 4px 0;
+    }
+    
+    .color-preview {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        margin-right: 8px;
+        border: 1px solid #ccc;
+    }
+    
+    /* Image upload styling - FIXED */
+    .thumbnail-container {
+        position: relative;
+    }
+    
+    .thumbnail-label {
+        display: inline-block;
+        padding: 8px 16px;
+        background: #f8f9fa;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+        width: 100%;
+        transition: all 0.3s;
+    }
+    
+    .thumbnail-label:hover {
+        background: #e9ecef;
+        border-color: #adb5bd;
+    }
+    
+    .thumbnail-label.has-image {
+        background: #28a745;
+        color: white;
+        border-color: #28a745;
+    }
+    
+    .thumbnail-preview {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 1px solid #dee2e6;
+        margin-top: 8px;
+        display: none;
+    }
+    
+    .thumbnail-preview.has-image {
+        display: block;
+    }
+    
+    /* Make each file input completely independent */
+    .variation-image-input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    /* Currency input styling */
+    .currency-input {
+        position: relative;
+    }
+    
+    .currency-input .currency-symbol {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-weight: 500;
+    }
+    
+    .currency-input input {
+        padding-left: 40px;
+    }
+    
+    /* Action buttons */
+    .action-buttons {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+    }
+    
+    .action-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        background: #f8f9fa;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+    }
+    
+    .action-btn:hover {
+        background: #e9ecef;
+        transform: translateY(-1px);
+    }
+    
+    .action-btn.delete {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+    
+    .action-btn.delete:hover {
+        background: #dc3545;
+        color: white;
+    }
+    
+    /* Add variation button */
+    #addVariationBtn {
+        background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 6px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s;
+    }
+    
+    #addVariationBtn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 176, 155, 0.3);
+    }
+    
+    /* Empty state */
+    .empty-variations {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6c757d;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+    
+    .empty-variations i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: #adb5bd;
+    }
+    
+    /* Color preview container */
+    .color-preview-container {
+        margin-top: 5px;
+    }
+    
+    .color-preview-container .color-preview {
+        width: 24px;
+        height: 24px;
+        border-radius: 4px;
+        margin-right: 8px;
+    }
+    
+    .color-preview-container .d-flex {
+        align-items: center;
+    }
+    
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .variations-table-container {
+            overflow-x: auto;
+        }
+        
+        .variations-table {
+            min-width: 800px;
+        }
+        
+        .variations-header {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+    }
+    
+    /* Toggle switch */
+    .form-check-input:checked {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    
+    .form-check-input {
+        width: 3em;
+        height: 1.5em;
+    }
+    
+    /* Badge styling */
+    .variations-count {
+        background: #6c5ce7;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    
+    /* Basic stock section */
+    #basicStockSection {
+        transition: all 0.3s ease;
+    }
+</style>
+{% endblock %}
+<section class="content-main">
+    <form method="POST" enctype="multipart/form-data" id="productForm">
+        {% csrf_token %}
+        <input type="hidden" name="variations_data" id="variationsData">
 
-                <div class="row">
-                    <div class="col-9">
-                        <div class="content-header">
-                            <h2 class="content-title">Add New Product</h2>
-                            <div>
-                                <button class="btn btn-md rounded font-sm hover-up">Publish <i class="fas fa-check-circle ms-2"></i></button>
+        <div class="row">
+            <div class="col-12">
+                <div class="content-header">
+                    <h2 class="content-title">Add New Product</h2>
+                    <div>
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save me-2"></i>Publish Product
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-8">
+                <!-- Basic Information Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">Basic Information</h4>
+                    </div>
+                    <div class="card-body">
+                        {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <div><strong>{{ field|title }}:</strong> {{ error }}</div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Product Title *</label>
+                                {{ form.title }}
                             </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Product Type</label>
+                                {{ form.type }}
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Description *</label>
+                            {{ form.description }}
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Selling Price *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">KES</span>
+                                    {{ form.price }}
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Original Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">KES</span>
+                                    {{ form.old_price }}
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Basic Stock</label>
+                                {{ form.stock_count }}
+                            </div>
+                        </div>
+                        
+                        <!-- Variations Toggle -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="has_variations_toggle" 
+                                           name="has_variations" style="width: 3.5em; height: 1.8em;">
+                                    <label class="form-check-label" for="has_variations_toggle">
+                                        <strong class="fs-5">Enable Product Variations</strong>
+                                        <p class="text-muted mb-0">Enable this if your product comes in different colors, sizes, or other variations.</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Digital Product -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                {{ form.digital }}
+                                <label class="form-check-label ms-2" for="{{ form.digital.id_for_label }}">
+                                    This is a digital product (no shipping required)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Variations Section -->
+                <div class="variations-section" id="variationsSection">
+                    <div class="variations-header">
+                        <div>
+                            <h4><i class="fas fa-layer-group me-2"></i>Product Variations</h4>
+                            <small class="text-muted">Manage different variations of your product</small>
+                        </div>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="variations-count">
+                                <i class="fas fa-cubes me-1"></i>
+                                <span id="variationCount">0</span> Variations
+                            </span>
+                            <button type="button" class="btn btn-success" id="addVariationBtn">
+                                <i class="fas fa-plus-circle me-2"></i>Add Variation
+                            </button>
                         </div>
                     </div>
                     
-                    <div class="col-lg-6">
+                    <div class="variations-body">
+                        <!-- Available Options Selection -->
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h4>Basic</h4>
+                                <h5 class="mb-0">Available Options</h5>
                             </div>
                             <div class="card-body">
-                                
-                                {% if form.errors %}
-                                    
-                                
-                                <div class="alert alert-danger">
-                                    <strong>{{ form.errors }}</strong>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Available Colors</label>
+                                        {{ form.available_colors }}
+                                        <small class="text-muted">Select all colors available for variations</small>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Available Sizes</label>
+                                        {{ form.available_sizes }}
+                                        <small class="text-muted">Select all sizes available for variations</small>
+                                    </div>
                                 </div>
-                                {% endif %}
-                                    
-                                    <div class="mb-4">
-                                        <label for="product_name" class="form-label">Product title</label>
-                                        {{form.title}}
-                                        
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Full description</label>
-                                        {{form.description}}
-
-                                        
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Selling price</label>
-                                                <div class="row gx-2">
-                                        {{form.price}}
-
-                                                    <!-- <input placeholder="$" type="text" class="form-control" /> -->
-                                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Variations Table -->
+                        <div class="variations-table-container">
+                            <table class="variations-table">
+                                <thead>
+                                    <tr>
+                                        <th>Color</th>
+                                        <th>Size</th>
+                                        <th>Thumbnail</th>
+                                        <th>Market Referee Price</th>
+                                        <th>Selling Price</th>
+                                        <th>Inventory</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="variationsTableBody">
+                                    <!-- Variations will be added here -->
+                                    <tr id="noVariationsRow">
+                                        <td colspan="7">
+                                            <div class="empty-variations">
+                                                <i class="fas fa-box-open"></i>
+                                                <h5>No Variations Added</h5>
+                                                <p class="text-muted">Click "Add Variation" to create your first variation.</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Old price</label>
-                                        {{form.old_price}}
-
-                                                <!-- <input placeholder="$" type="text" class="form-control" /> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <label class="form-label">Currency</label>
-                                            <select class="form-select">
-                                                <option>KES</option>
-                                            
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Type</label>
-                                        {{form.type}}
-                                        <!-- <input type="text" placeholder="%" class="form-control" id="product_name" /> -->
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Stock</label>
-                                        {{form.stock_count}}
-                                        <!-- <input type="text" placeholder="%" class="form-control" id="product_name" /> -->
-                                    </div>
-
-                                    
-
-                                    
-
-                                    
-
-                                    <div class="mb-4">
-                                        <label class="form-label">Digital Product</label>
-                                        <br>
-                                        {{form.digital}}
-                                        <small class="text-muted ms-2">Check if only this is a digital product</small>
-                                    </div>
-                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-						<!-- card end// -->
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h4>Media</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="input-upload">
-                                    <img src="{% static 'assets2/imgs/theme/upload.svg' %}" alt="" />
-                                    <!-- <input class="form-control" type="file" /> -->
-                                    {{form.image}}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- card end// -->
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <h4>Others</h4>
-                            </div>
-                            <div class="card mb-4">
-                                <div class="card-header">
-                                    <h4>Category</h4>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row gx-2">
-                                        <div class="col-sm-12 mb-3">
-                                            <label class="form-label">Product Category</label>
-                                            {{form.mini_subcategory}}
-                                            <small class="text-muted">Format: Main Category > Subcategory > Mini Subcategory</small>
-                                            {% if form.mini_subcategory.errors %}
-                                                <div class="text-danger">
-                                                    {% for error in form.mini_subcategory.errors %}
-                                                        {{ error }}
-                                                    {% endfor %}
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                                <!-- row.// -->
-                            </div>
-                            <br>
-                            
-                        </div>
-                        <!-- card end// -->
-                        <button class="btn mt-3 btn-md rounded font-sm hover-up" type="submit">Create Product</button>
                     </div>
                 </div>
-                </form>
-            </section>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                
+                <!-- Specifications Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Specifications</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ form.specifications }}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Media Upload Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Main Product Image</h4>
+                    </div>
+                    <div class="card-body text-center">
+                        <div class="mb-3">
+                            <img id="mainImagePreview" src="{% static 'assets2/imgs/theme/upload.svg' %}" 
+                                 alt="Preview" class="img-fluid rounded" style="max-height: 200px;">
+                        </div>
+                        <div class="input-group">
+                            {{ form.image }}
+                        </div>
+                        <small class="text-muted d-block mt-2">Recommended size: 800x800px. Max 5MB</small>
+                    </div>
+                </div>
+                
+                <!-- Category Card -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Category</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label class="form-label">Select Category *</label>
+                            {{ form.mini_subcategory }}
+                            {% if form.mini_subcategory.errors %}
+                                <div class="text-danger small mt-1">
+                                    {% for error in form.mini_subcategory.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <small class="text-muted">Format: Main Category > Subcategory > Mini Subcategory</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Actions</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Publish Product
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
 $(document).ready(function() {
-    // When category changes, load subcategories
-    $('#id_category').change(function() {
-        var categoryId = $(this).val();
-        if (categoryId) {
-            $.ajax({
-                url: '/useradmin/get-subcategories/',  // You need to create this URL
-                data: {
-                    'category_id': categoryId
-                },
-                success: function(data) {
-                    $('#id_subcategory').html('<option value="">Select Subcategory</option>');
-                    $.each(data, function(key, value) {
-                        $('#id_subcategory').append('<option value="' + key + '">' + value + '</option>');
-                    });
-                    $('#id_mini_subcategory').html('<option value="">Select Mini Subcategory</option>');
-                }
-            });
-        } else {
-            $('#id_subcategory').html('<option value="">Select Category First</option>');
-            $('#id_mini_subcategory').html('<option value="">Select Subcategory First</option>');
+    // Initialize Select2
+    $('.select2-multiple').select2({
+        placeholder: "Select options",
+        allowClear: true,
+        width: '100%'
+    });
+    
+    // Main image preview
+    $('#id_image').change(function(e) {
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                $('#mainImagePreview').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(e.target.files[0]);
         }
     });
-
-    // When subcategory changes, load mini subcategories
-    $('#id_subcategory').change(function() {
-        var subcategoryId = $(this).val();
-        if (subcategoryId) {
-            $.ajax({
-                url: '/useradmin/get-mini-subcategories/',  // You need to create this URL
-                data: {
-                    'subcategory_id': subcategoryId
-                },
-                success: function(data) {
-                    $('#id_mini_subcategory').html('<option value="">Select Mini Subcategory</option>');
-                    $.each(data, function(key, value) {
-                        $('#id_mini_subcategory').append('<option value="' + key + '">' + value + '</option>');
-                    });
-                }
-            });
+    
+    // Toggle variations section
+    $('#has_variations_toggle').change(function() {
+        if ($(this).is(':checked')) {
+            $('#variationsSection').addClass('active');
+            $('#basicStockSection').hide();
         } else {
-            $('#id_mini_subcategory').html('<option value="">Select Subcategory First</option>');
+            $('#variationsSection').removeClass('active');
+            $('#basicStockSection').show();
         }
     });
+    
+    // Trigger initial state
+    $('#has_variations_toggle').trigger('change');
+    
+    // Variation counter
+    let variationCounter = 0;
+    const variations = new Map();
+    
+    // Add variation button click
+    $('#addVariationBtn').on('click', function(e) {
+        e.preventDefault();
+        addVariationRow();
+    });
+    
+    // Function to add a new variation row
+    function addVariationRow() {
+        variationCounter++;
+        const variationId = `variation_${variationCounter}`;
+        const uniqueId = Date.now() + Math.random().toString(36).substr(2, 9);
+        
+        // Get selected options
+        const selectedColors = $('#id_available_colors').val() || [];
+        const selectedSizes = $('#id_available_sizes').val() || [];
+        
+        // Build color options
+        let colorOptions = '<option value="">Select Color</option>';
+        {% for color in colors %}
+        if (selectedColors.includes('{{ color.id|stringformat:"s" }}')) {
+            colorOptions += `<option value="{{ color.id }}" data-hex="{{ color.hex_code }}">{{ color.name }}</option>`;
+        }
+        {% endfor %}
+        
+        // Build size options
+        let sizeOptions = '<option value="">Select Size</option>';
+        {% for size in sizes %}
+        if (selectedSizes.includes('{{ size.id|stringformat:"s" }}')) {
+            sizeOptions += `<option value="{{ size.id }}">{{ size.name }}</option>`;
+        }
+        {% endfor %}
+        
+        // Create table row with UNIQUE IDs
+        const variationRow = `
+        <tr id="${variationId}" data-index="${variationCounter}" data-unique="${uniqueId}">
+            <td>
+                <select class="form-control variation-color" data-variation-unique="${uniqueId}">
+                    ${colorOptions}
+                </select>
+                <div class="color-preview-container mt-1" id="colorPreview_${uniqueId}" style="display: none;">
+                    <div class="d-flex align-items-center">
+                        <span class="color-preview"></span>
+                        <small class="ms-2"></small>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <select class="form-control variation-size" data-variation-unique="${uniqueId}">
+                    ${sizeOptions}
+                </select>
+            </td>
+            <td>
+                <div class="thumbnail-container">
+                    <label class="thumbnail-label" for="variationImage_${uniqueId}" id="thumbnailLabel_${uniqueId}">
+                        <i class="fas fa-cloud-upload-alt me-2"></i>Select
+                    </label>
+                    <input type="file" class="variation-image-input" 
+                           id="variationImage_${uniqueId}"
+                           data-variation-unique="${uniqueId}"
+                           name="variation_image_${uniqueId}"
+                           accept="image/*">
+                    <img src="" class="thumbnail-preview" id="imagePreview_${uniqueId}" alt="Preview">
+                </div>
+            </td>
+            <td>
+                <div class="currency-input">
+                    <span class="currency-symbol">KES</span>
+                    <input type="number" class="form-control variation-old-price" 
+                           data-variation-unique="${uniqueId}"
+                           step="0.01" placeholder="0.00">
+                </div>
+            </td>
+            <td>
+                <div class="currency-input">
+                    <span class="currency-symbol">KES</span>
+                    <input type="number" class="form-control variation-price" 
+                           data-variation-unique="${uniqueId}"
+                           step="0.01" placeholder="0.00">
+                </div>
+            </td>
+            <td>
+                <input type="number" class="form-control variation-stock" 
+                       data-variation-unique="${uniqueId}"
+                       placeholder="0" min="0" required>
+            </td>
+            <td>
+                <div class="action-buttons">
+                    <button type="button" class="action-btn delete" onclick="removeVariation('${variationId}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>`;
+        
+        // Hide empty state
+        $('#noVariationsRow').hide();
+        
+        // Add the row before the empty row
+        $(variationRow).insertBefore('#noVariationsRow');
+        
+        // Initialize color preview for THIS SPECIFIC variation
+        $(`#${variationId} .variation-color`).on('change', function() {
+            const selectedOption = $(this).find('option:selected');
+            const hexCode = selectedOption.data('hex');
+            const colorName = selectedOption.text();
+            const uniqueId = $(this).data('variation-unique');
+            const previewDiv = $(`#colorPreview_${uniqueId}`);
+            
+            if (hexCode && colorName !== 'Select Color') {
+                previewDiv.find('.color-preview').css('background-color', hexCode);
+                previewDiv.find('small').text(colorName);
+                previewDiv.show();
+                
+                // Update variation data
+                updateVariationData(uniqueId, 'color', $(this).val());
+            } else {
+                previewDiv.hide();
+                updateVariationData(uniqueId, 'color', '');
+            }
+        });
+        
+        // Initialize image preview for THIS SPECIFIC variation
+        $(`#variationImage_${uniqueId}`).on('change', function(e) {
+            const file = e.target.files[0];
+            const uniqueId = $(this).data('variation-unique');
+            const previewImg = $(`#imagePreview_${uniqueId}`);
+            const thumbnailLabel = $(`#thumbnailLabel_${uniqueId}`);
+            
+            console.log(`Image changed for variation ${uniqueId}:`, file);
+            
+            if (file) {
+                if (!file.type.match('image.*')) {
+                    alert('Please select an image file.');
+                    this.value = '';
+                    return;
+                }
+                
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('Image size should be less than 5MB.');
+                    this.value = '';
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImg.attr('src', e.target.result);
+                    previewImg.addClass('has-image');
+                    thumbnailLabel.addClass('has-image');
+                    thumbnailLabel.html(`<i class="fas fa-check me-2"></i>Selected`);
+                };
+                reader.readAsDataURL(file);
+                
+                // Update variation data
+                updateVariationData(uniqueId, 'image_name', `variation_image_${uniqueId}`);
+                updateVariationData(uniqueId, 'has_image', true);
+            } else {
+                previewImg.removeClass('has-image');
+                previewImg.attr('src', '');
+                thumbnailLabel.removeClass('has-image');
+                thumbnailLabel.html(`<i class="fas fa-cloud-upload-alt me-2"></i>Select`);
+                updateVariationData(uniqueId, 'has_image', false);
+            }
+        });
+        
+        // Add event listeners for other inputs for THIS SPECIFIC variation
+        $(`#${variationId} .variation-old-price`).on('input', function() {
+            updateVariationData($(this).data('variation-unique'), 'old_price', $(this).val());
+        });
+        
+        $(`#${variationId} .variation-price`).on('input', function() {
+            updateVariationData($(this).data('variation-unique'), 'price', $(this).val());
+        });
+        
+        $(`#${variationId} .variation-stock`).on('input', function() {
+            updateVariationData($(this).data('variation-unique'), 'stock_count', $(this).val());
+        });
+        
+        $(`#${variationId} .variation-size`).on('change', function() {
+            updateVariationData($(this).data('variation-unique'), 'size', $(this).val());
+        });
+        
+        // Update counter
+        updateVariationCount();
+        
+        // Initialize variation data with UNIQUE ID
+        variations.set(uniqueId, {
+            id: variationId,
+            uniqueId: uniqueId,
+            index: variationCounter,
+            color: '',
+            size: '',
+            price: '',
+            old_price: '',
+            stock_count: 0,
+            image_name: `variation_image_${uniqueId}`,
+            has_image: false
+        });
+        
+        console.log(`Added variation ${variationCounter} with unique ID: ${uniqueId}`);
+    }
+    
+    // Function to update variation data
+    function updateVariationData(uniqueId, field, value) {
+        if (!variations.has(uniqueId)) return;
+        
+        const data = variations.get(uniqueId);
+        data[field] = value;
+        variations.set(uniqueId, data);
+    }
+    
+    // Function to remove variation
+    window.removeVariation = function(variationId) {
+        if (confirm('Are you sure you want to remove this variation?')) {
+            const uniqueId = $(`#${variationId}`).data('unique');
+            $(`#${variationId}`).remove();
+            variations.delete(uniqueId);
+            updateVariationCount();
+            
+            // Show empty state if no variations left
+            if ($('#variationsTableBody tr').not('#noVariationsRow').length === 0) {
+                $('#noVariationsRow').show();
+            }
+        }
+    };
+    
+    // Function to update variation count
+    function updateVariationCount() {
+        const count = $('#variationsTableBody tr').not('#noVariationsRow').length;
+        $('#variationCount').text(count);
+    }
+    
+    // Form submission handler
+    $('#productForm').submit(function(e) {
+    // Validate variations if enabled
+    if ($('#has_variations_toggle').is(':checked')) {
+        // Collect variation data
+        const variationsArray = [];
+        let hasError = false;
+        let variationIndex = 0;
+        
+        // Validate each variation
+        $('#variationsTableBody tr').not('#noVariationsRow').each(function() {
+            const uniqueId = $(this).data('unique');
+            const variationData = variations.get(uniqueId) || {};
+            
+            const stock = $(this).find('.variation-stock').val();
+            const color = $(this).find('.variation-color').val();
+            const size = $(this).find('.variation-size').val();
+            
+            // Validate required fields
+            if (!stock || parseInt(stock) < 0) {
+                alert(`Variation #${variationData.index}: Please enter a valid stock quantity`);
+                hasError = true;
+                return false;
+            }
+            
+            // At least color or size must be selected
+            if (!color && !size) {
+                alert(`Variation #${variationData.index}: Please select at least a color or size`);
+                hasError = true;
+                return false;
+            }
+            
+            // Get the image input for this variation
+            const imageInput = $(this).find('.variation-image-input')[0];
+            const hasImage = imageInput && imageInput.files && imageInput.files.length > 0;
+            
+            // Rename the image input to use sequential index for backend
+            if (imageInput && hasImage) {
+                const newName = `variation_image_${variationIndex}`;
+                imageInput.name = newName;
+                console.log(`Renamed image input from ${imageInput.name} to ${newName}`);
+            }
+            
+            // Prepare variation data for submission
+            variationsArray.push({
+                color: color || null,
+                size: size || null,
+                price: variationData.price || null,
+                old_price: variationData.old_price || null,
+                stock_count: stock,
+                image_index: variationIndex,
+                unique_id: uniqueId
+            });
+            
+            variationIndex++;
+        });
+        
+        if (hasError) {
+            e.preventDefault();
+            return false;
+        }
+        
+        // Validate at least one variation exists
+        if (variationsArray.length === 0) {
+            e.preventDefault();
+            alert('Please add at least one variation.');
+            return false;
+        }
+        
+        // Set variations data in hidden field
+        $('#variationsData').val(JSON.stringify(variationsArray));
+        
+        // Debug: Log all image inputs before submission
+        console.log('All variation images before submission:', 
+            Array.from($('.variation-image-input')).map((input, idx) => ({
+                index: idx,
+                id: input.id,
+                name: input.name,
+                hasFile: input.files && input.files.length > 0
+            }))
+        );
+    }
+    
+    return true;
+});
+    // When available colors/sizes change, update existing variation options
+    $('#id_available_colors, #id_available_sizes').change(function() {
+        updateExistingVariationOptions();
+    });
+    
+    function updateExistingVariationOptions() {
+        const selectedColors = $('#id_available_colors').val() || [];
+        const selectedSizes = $('#id_available_sizes').val() || [];
+        
+        // Update each variation row
+        $('#variationsTableBody tr').not('#noVariationsRow').each(function() {
+            const row = $(this);
+            
+            // Get current selections
+            const currentColor = row.find('.variation-color').val();
+            const currentSize = row.find('.variation-size').val();
+            
+            // Update color select
+            let newColorOptions = '<option value="">Select Color</option>';
+            {% for color in colors %}
+            if (selectedColors.includes('{{ color.id|stringformat:"s" }}')) {
+                const selected = (currentColor == '{{ color.id|stringformat:"s" }}') ? 'selected' : '';
+                newColorOptions += `<option value="{{ color.id }}" data-hex="{{ color.hex_code }}" ${selected}>{{ color.name }}</option>`;
+            }
+            {% endfor %}
+            
+            const colorSelect = row.find('.variation-color');
+            const oldValue = colorSelect.val();
+            colorSelect.html(newColorOptions);
+            if (oldValue && selectedColors.includes(oldValue)) {
+                colorSelect.val(oldValue).trigger('change');
+            }
+            
+            // Update size select
+            let newSizeOptions = '<option value="">Select Size</option>';
+            {% for size in sizes %}
+            if (selectedSizes.includes('{{ size.id|stringformat:"s" }}')) {
+                const selected = (currentSize == '{{ size.id|stringformat:"s" }}') ? 'selected' : '';
+                newSizeOptions += `<option value="{{ size.id }}" ${selected}>{{ size.name }}</option>`;
+            }
+            {% endfor %}
+            
+            const sizeSelect = row.find('.variation-size');
+            const oldSizeValue = sizeSelect.val();
+            sizeSelect.html(newSizeOptions);
+            if (oldSizeValue && selectedSizes.includes(oldSizeValue)) {
+                sizeSelect.val(oldSizeValue).trigger('change');
+            }
+        });
+    }
 });
 </script>
-            {% endblock content %}
+{% endblock %}
+{% endblock %}
+
