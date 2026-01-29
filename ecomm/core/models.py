@@ -5,6 +5,7 @@ from userauths.models import User
 from taggit.managers import TaggableManager
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
+from datetime import timedelta
 from django.db.models import Avg
 from decimal import Decimal
 
@@ -373,7 +374,31 @@ class ProductVariation(models.Model):
         if self.image:
             return self.image.url
         return self.product.image.url
+class ProductView(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)  # Reference your existing Product model
+    viewed_on = models.DateTimeField(auto_now_add=True)
     
+    class Meta:
+        ordering = ['-viewed_on']
+        unique_together = ['user', 'product']
+        verbose_name_plural = "Product Views"
+    
+    def __str__(self):
+        return f"{self.user.username} viewed {self.product.title}"
+    
+    @classmethod
+    def get_recent_views(cls, user, limit=20):
+        """Get recent views for a user, excluding out-of-stock products"""
+        thirty_days_ago = timezone.now() - timedelta(days=30)
+        
+        return cls.objects.filter(
+            user=user,
+            viewed_on__gte=thirty_days_ago,
+            product__in_stock=True,  # Using your in_stock field
+            product__status=True,
+            product__product_status="published"
+        ).select_related('product')[:limit]
     
 ############################################## Cart, Order, OrderITems and Address ##################################
 ############################################## Cart, Order, OrderITems and Address ##################################

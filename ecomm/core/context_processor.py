@@ -4,6 +4,9 @@ from django.db.models import Min, Max, Count
 from django.contrib import messages
 from django.utils import timezone
 
+from .recent_views import RecentViews
+
+
 def default(request):
     categories = Category.objects.annotate(
         product_count=Count('subcategories__mini_subcategories__products')
@@ -61,3 +64,9 @@ def cart_context(request):
         'cart_data': request.session.get('cart_data_obj', {})
     }
 
+
+def recently_viewed_products(request):
+    """Context processor to add recently viewed products to all templates"""
+    return {
+        'recently_viewed_products': RecentViews.get_recent_views(request)
+    }

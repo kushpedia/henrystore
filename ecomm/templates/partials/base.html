@@ -20,9 +20,120 @@
     <link rel="stylesheet" href="{% static '/assets/css/custom.css' %}" />
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<script>
+    // Auto-scroll functionality for recently viewed products
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollContainer = document.querySelector('.products-horizontal-scroll.auto-scroll');
+    const pauseBtn = document.querySelector('.pause-scroll');
+    const playBtn = document.querySelector('.play-scroll');
+    const speedBtns = document.querySelectorAll('.speed-btn');
+    
+    if (scrollContainer) {
+        // Default animation speed
+        let animationSpeed = 40; // seconds for one loop
+        let isPaused = false;
+        
+        // Pause/Play functionality
+        if (pauseBtn && playBtn) {
+            pauseBtn.addEventListener('click', () => {
+                scrollContainer.style.animationPlayState = 'paused';
+                pauseBtn.style.display = 'none';
+                playBtn.style.display = 'flex';
+                isPaused = true;
+            });
+            
+            playBtn.addEventListener('click', () => {
+                scrollContainer.style.animationPlayState = 'running';
+                playBtn.style.display = 'none';
+                pauseBtn.style.display = 'flex';
+                isPaused = false;
+            });
+            
+            // Pause on hover (CSS already handles this, but add JS for consistency)
+            scrollContainer.addEventListener('mouseenter', () => {
+                if (!isPaused) {
+                    scrollContainer.style.animationPlayState = 'paused';
+                }
+            });
+            
+            scrollContainer.addEventListener('mouseleave', () => {
+                if (!isPaused) {
+                    scrollContainer.style.animationPlayState = 'running';
+                }
+            });
+        }
+        
+        // Speed control functionality
+        if (speedBtns.length > 0) {
+            speedBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    speedBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Get speed multiplier
+                    const speedMultiplier = parseInt(btn.dataset.speed);
+                    
+                    // Calculate new animation duration
+                    // Higher multiplier = faster scroll
+                    const baseSpeed = 60; // Base seconds for slow speed
+                    const newSpeed = baseSpeed / speedMultiplier;
+                    
+                    // Update animation
+                    scrollContainer.style.animationDuration = `${newSpeed}s`;
+                });
+            });
+        }
+        
+        // Infinite scroll effect reset
+        scrollContainer.addEventListener('animationiteration', () => {
+            // This event fires when the animation completes one cycle
+            console.log('Auto-scroll loop completed');
+        });
+    }
+    
+    // Optional: Touch support for mobile
+    if (scrollContainer) {
+        let touchStartX = 0;
+        let scrollLeft = 0;
+        let isDragging = false;
+        
+        scrollContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].pageX;
+            scrollLeft = scrollContainer.scrollLeft;
+            isDragging = true;
+            
+            // Pause auto-scroll when user starts dragging
+            const originalPlayState = scrollContainer.style.animationPlayState;
+            scrollContainer.style.animationPlayState = 'paused';
+            
+            // Restore after touch ends
+            setTimeout(() => {
+                if (!isDragging && !isPaused) {
+                    scrollContainer.style.animationPlayState = originalPlayState || 'running';
+                }
+            }, 100);
+        });
+        
+        scrollContainer.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX;
+            const walk = (x - touchStartX) * 2;
+            scrollContainer.style.transform = `translateX(${scrollLeft - walk}px)`;
+        });
+        
+        scrollContainer.addEventListener('touchend', () => {
+            isDragging = false;
+            // Animation will resume automatically due to CSS
+        });
+    }
+});
+</script>
 
 
 </head>
@@ -541,7 +652,90 @@
 	
     {% block content %}
 	{% endblock content %}
-
+    <!-- recent viewed -->
+    {% if recently_viewed_products %}
+    <div class="recently-viewed-section">
+        <div class="section-header">
+            <h3><i class="fas fa-history"></i> Recently Viewed</h3>
+            <div class="auto-scroll-controls">
+                <button class="control-btn pause-scroll" aria-label="Pause auto-scroll">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="control-btn play-scroll" aria-label="Resume auto-scroll" style="display: none;">
+                    <i class="fas fa-play"></i>
+                </button>
+                <div class="scroll-speed">
+                    <span>Speed:</span>
+                    <button class="speed-btn" data-speed="1">Slow</button>
+                    <button class="speed-btn active" data-speed="2">Normal</button>
+                    <button class="speed-btn" data-speed="3">Fast</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="recently-viewed-container">
+            <div class="products-scroll-wrapper">
+                <div class="products-horizontal-scroll auto-scroll">
+                    {% for product in recently_viewed_products %}
+                    <div class="recently-viewed-card">
+                        <a href="{% url 'core:product-detail' product.pid %}" class="recent-product-link">
+                            <div class="product-image-container">
+                                {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="recent-product-img">
+                                {% if product.old_price and product.old_price > product.price %}
+                                <span class="discount-badge">
+                                    {{ product.get_precentage }}% OFF
+                                </span>
+                                {% endif %}
+                                {% else %}
+                                <div class="recent-product-placeholder">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="product-info">
+                                {% if product.get_category %}
+                                <div class="product-category">
+                                    {{ product.get_category.title|truncatechars:20 }}
+                                </div>
+                                {% endif %}
+                                <h4 class="product-title">{{ product.title|truncatechars:30 }}</h4>
+                                <div class="product-prices">
+                                    <span class="current-price">Ksh {{ product.price }}</span>
+                                    {% if product.old_price and product.old_price > product.price %}
+                                    <span class="old-price">Ksh {{ product.old_price }}</span>
+                                    {% endif %}
+                                </div>
+                                {% if product.get_average_rating %}
+                                <div class="d-flex align-items-center mb-1">
+                                    <div class="small-ratings">
+                                        {% with rating=product.get_average_rating|default:0 %}
+                                            {% for i in "12345" %}
+                                                {% if forloop.counter <= rating %}
+                                                    <i class="fa fa-star text-warning"></i>
+                                                {% else %}
+                                                    {% if forloop.counter|add:"-0.5" <= rating %}
+                                                        <i class="fa fa-star-half-alt text-warning"></i>
+                                                    {% else %}
+                                                        <i class="fa fa-star text-muted"></i>
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endwith %}
+                                    </div>
+                                    <small class="text-muted ms-1">{{product.get_average_rating|floatformat:1}}({{product.get_total_ratings}})</small>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}                  
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 	<footer class="main">
         <section class="newsletter mb-15 d-md-block d-none">
             <div class="container">

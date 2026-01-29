@@ -181,6 +181,8 @@ def change_order_status(request, oid):
     if request.method == "POST":
         status = request.POST.get("status")
         messages.success(request, f"Order status changed to {status}")
+        if status == "delivered":
+            order.paid_status = True
         order.product_status = status
         order.save()
     

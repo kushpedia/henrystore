@@ -42,7 +42,7 @@ SECRET_KEY = 'django-insecure-mfvte4i@l!m)ly9#%rqo^j7d8*0*z#tjw)qd^+(7220z#7mbwi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["590df98a62a3.ngrok-free.app",'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["0a7850f8f1ac.ngrok-free.app",'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -70,6 +70,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+	'core.middleware.RecentlyViewedMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -87,6 +88,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
 				'core.context_processor.default',
+				'core.context_processor.recently_viewed_products',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',

@@ -219,51 +219,78 @@
                         <!--End tab-content-->
                     </section>
                     <!--Products Tabs-->
+                    <section class="section-padding mb-30" style="background-color: #edf5f5; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                        {% if top_rated_products %}
+                        <h2 class="d-none d-lg-block"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h2>
+                        <h4 class="d-block d-lg-none"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h4>
+                        <div class="row product-grid-4">
+                            
+                            {% for p in top_rated_products %}
+                            <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
+                                <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a href="{% url 'core:product-detail' p.pid %}">
+                                                <img class="default-img" src="{{ p.image.url }}" alt="" />
+                                                <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                            <span class="hot">{{p.get_precentage|floatformat:0}}% Off</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <div class="product-category">
+                                            <a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
+                                        </div>
+                                        <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <div class="small-ratings">
+                                                {% with rating=p.get_average_rating|default:0 %}
+                                                    {% for i in "12345" %}
+                                                        {% if forloop.counter <= rating %}
+                                                            <i class="fa fa-star text-warning"></i>
+                                                        {% else %}
+                                                            {% if forloop.counter|add:"-0.5" <= rating %}
+                                                                <i class="fa fa-star-half-alt text-warning"></i>
+                                                            {% else %}
+                                                                <i class="fa fa-star text-muted"></i>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                            <small class="text-muted ms-1">{{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</small>
+                                        </div>
+
+
+
+
+
+                                        <div class="product-card-bottom">
+                                            <div class="product-price">
+                                                <span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price|floatformat:0|intcomma }}</span>
+                                                <span class="old-price">{{p.old_price|floatformat:0|intcomma  }} Ksh</span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!--end product card-->
+                            
+                        </div>
+                        {% endif %}
+                    </section>
+
+
 
                     {% include 'partials/deals.html' %}
 
                     <!--End Deals-->
-                    <section class="banners">
-                        <div class="row">
-                            <!-- Electronic Category -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="banner-img">
-                                    <img src="{% static 'assets/imgs/banner/banner-1.png' %}" alt="Latest Electronics" />
-                                    <div class="banner-text">
-                                        <h4>
-                                            Latest Tech Gadgets <br />& Smart Devices<br /> Collection
-                                        </h4>
-                                        <a href="{% url 'core:category-list' %}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Cookware Category -->
-                            <div class="col-lg-4 col-md-6">
-                                <div class="banner-img">
-                                    <img src="{% static 'assets/imgs/banner/banner-2.png' %}" alt="Premium Cookware" />
-                                    <div class="banner-text">
-                                        <h4>
-                                            Premium Kitchen<br /> Essentials & Cookware
-                                        </h4>
-                                        <a href="{% url 'core:category-list' %}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Fashion Category -->
-                            <div class="col-lg-4 d-md-none d-lg-flex">
-                                <div class="banner-img mb-sm-0">
-                                    <img src="{% static 'assets/imgs/banner/banner-3.png' %}" alt="Trendy Fashion" />
-                                    <div class="banner-text">
-                                        <h4>Trendy Fashion &<br />Style Collection</h4>
-                                        <a href="{% url 'core:category-list' %}" class="btn btn-xs">Shop Now <i class="fi-rs-arrow-small-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    <!--End banners-->
+                    
                 </div>
                 <div class="col-lg-1-5 primary-sidebar sticky-sidebar pt-30">
                     <div class="sidebar-widget widget-category-2 mb-30 d-lg-block d-none">
@@ -298,52 +325,7 @@
                 </div>
             </div>
         </div>
-        <section class="popular-categories section-padding">
-            <div class="container">
-                <div class="section-title">
-                    <div class="title d-flex align-items-center justify-content-between mb-4">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-th-large me-2 text-primary" style="font-size: 1.5rem;"></i>
-                            <h3 class="fw-bold mb-0" style="
-                                font-size: clamp(1.3rem, 6vw, 2rem);
-                                background: linear-gradient(90deg, #3fb84d 0%, #078825 100%);
-                                -webkit-background-clip: text;
-                                -webkit-text-fill-color: transparent;
-                                background-clip: text;">
-                                Shop by Categories
-                            </h3>
-                        </div>
-                        <a class="show-all align-items-center" 
-                            href="{% url 'core:category-list' %}">
-                            View All
-                            <i class="fi-rs-angle-right ms-1"></i>
-                        </a>
-                    </div>
-                    <div class="slider-arrow slider-arrow-2 flex-right carausel-8-columns-arrow" id="carausel-8-columns-arrows"></div>
-                </div>
-                <div class="carausel-8-columns-cover position-relative">
-                    <div class="carausel-8-columns" id="carausel-8-columns">
-                        {% for c in categories %}
-                        <div class="card-1">
-                            <figure class="img-hover-scale overflow-hidden">
-                                <a href="{% url 'core:category-product-list' c.cid %}"><img src="{{c.image.url}}" alt="Category Image"/></a>
-                            </figure>
-                            <h6>
-                                <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a>
-                            </h6>
-                        </div>
-                        {% endfor %}
-                        
-
-
-
-
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--End category slider-->
+        
         <section class="section-padding mb-30">
             <div class="container">
                 <div class="row d-none d-md-flex">

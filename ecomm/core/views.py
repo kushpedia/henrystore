@@ -20,7 +20,6 @@ from userauths.models import ContactUs
 from userauths.models import Profile
 import traceback
 from django.db import models
-
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 
 def index(request):
