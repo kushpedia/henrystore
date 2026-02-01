@@ -1,6 +1,6 @@
 # Business Requirements Document (BRD)
 
-## E-Commerce Platform (Nestify) — Multi-Vendor Marketplace
+## E-Commerce Platform (KStores) — Multi-Vendor Marketplace
 
 ---
 
@@ -8,7 +8,7 @@
 
 | Attribute | Value |
 |-----------|--------|
-| **Document Title** | Business Requirements Document — E-Commerce Platform (Nestify) |
+| **Document Title** | Business Requirements Document — E-Commerce Platform (KStores) |
 | **Version** | 1.0 |
 | **Status** | Approved / Draft |
 | **Date** | 2025-02-01 |
@@ -26,7 +26,7 @@
 
 ## 1. Executive Summary
 
-This Business Requirements Document (BRD) defines the business and functional requirements for the **E-Commerce Platform (Nestify)** — a multi-vendor online marketplace. The system enables multiple vendors (sellers) to list and manage products while customers browse, add to cart, checkout, and pay via **M-Pesa** (Kenya). The platform supports a three-level category hierarchy (Category → Subcategory → Mini-subcategory), product variations (color/size), reviews and ratings, wishlists, recently viewed products, and a dedicated vendor dashboard for sellers. The BRD serves as the single source of truth for business and high-level functional requirements to guide development, testing, and acceptance.
+This Business Requirements Document (BRD) defines the business and functional requirements for the **E-Commerce Platform (KStores)** — a multi-vendor online marketplace. The system enables multiple vendors (sellers) to list and manage products while customers browse, add to cart, checkout, and pay via **M-Pesa** (Kenya). The platform supports a three-level category hierarchy (Category → Subcategory → Mini-subcategory), product variations (color/size), reviews and ratings, wishlists, recently viewed products, and a dedicated vendor dashboard for sellers. The BRD serves as the single source of truth for business and high-level functional requirements to guide development, testing, and acceptance.
 
 ---
 
