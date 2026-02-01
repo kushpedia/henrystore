@@ -14,7 +14,8 @@ urlpatterns = [
 	path('subcategory/<cid>/', views.sub_category_product_list_view, name='subcategory-products'),
 	path('minicategory/<cid>/', views.mini_category_product_list_view, name='minicategory-products'),
 
-
+	# deals
+	path('deals/', views.all_deals, name='all-deals'),
 
 
 	path("vendors/", views.vendor_list_view, name="vendor-list"),
@@ -60,7 +61,7 @@ urlpatterns = [
 	path("ajax-contact-form/", views.ajax_contact_form, name="ajax-contact-form"),
 
 	path("save_checkout_info/", views.save_checkout_info, name="save_checkout_info"),
-	
+	path('about/', views.about_us, name='about'),
 	
 
     ]

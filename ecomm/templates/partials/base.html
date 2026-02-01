@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                         
                                     </li>
                                     <li>
-                                        <a href="page-about.html">About</a>
+                                        <a href="{% url 'core:about' %}">About</a>
                                     </li>
                                     <li>
                                         <a href="#">Category <i class="fi-rs-angle-down"></i></a>
@@ -555,7 +555,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <a href="{% url 'core:index' %}">Home</a>
                             </li>
                             <li>
-                                <a href="page-about.html">About</a>
+                                <a href="{% url 'core:about' %}">About</a>
                             </li>
                             <li class="menu-item-has-children">
                                 <span>Category </span>
@@ -855,7 +855,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="footer-link-widget col">
                         <h4 class="widget-title">Company</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
-                            <li><a href="#">About Us</a></li>
+                            <li><a href="{% url 'core:about' %}">About Us</a></li>
                             <li><a href="#">Delivery Information</a></li>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Terms &amp; Conditions</a></li>

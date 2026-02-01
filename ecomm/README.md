@@ -1,4 +1,4 @@
-# E-Commerce Platform (Kushpedia)
+# E-Commerce Platform (Kstores)
 
 A **multi-vendor e-commerce platform** built with Django. Sellers can list products and manage their shops; customers browse, cart, checkout, and pay via **M-Pesa** (Kenya). The project includes a three-level category hierarchy, product variations (color/size), reviews, wishlists, and a vendor dashboard.
 

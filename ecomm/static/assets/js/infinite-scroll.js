@@ -30,14 +30,7 @@ $(document).ready(function() {
             }, 200);
         });
         
-        function isAtBottom() {
-            const scrollTop = $(window).scrollTop();
-            const windowHeight = $(window).height();
-            const documentHeight = $(document).height();
-            const distanceFromBottom = 300; // Load when 300px from bottom
-            
-            return (scrollTop + windowHeight) >= (documentHeight - distanceFromBottom);
-        }
+        
         
         function loadMoreProducts() {
             if (isLoading || !hasNextPage) return;

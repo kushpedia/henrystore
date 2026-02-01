@@ -15,12 +15,15 @@ from django.contrib.auth.decorators import login_required
 from django.core import serializers
 import calendar
 from django.db.models.functions import ExtractMonth
-from django.db.models import Count, Avg, Q,Sum
+from django.db.models import Count, Avg, Q, Sum, Min, Max
 from userauths.models import ContactUs
 from userauths.models import Profile
 import traceback
 from django.db import models
 from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
+from django.utils import timezone
+from decimal import Decimal
+from django.template.loader import render_to_string
 
 def index(request):
     products = Product.objects.filter(product_status="published", featured=True).order_by("-id")
@@ -32,7 +35,7 @@ def index(request):
         total_sold=Sum('cartorderitems__qty')
     ).filter(
         total_sold__gt=0  # Only include products that have actually been sold
-    ).order_by('-total_sold')[:5]
+    ).order_by('-total_sold')[:6]
     # print(top_sold_products)
 
     # Show top rated even with fewer reviews but high rating
@@ -42,9 +45,9 @@ def index(request):
         avg_rating=Avg('reviews__rating'),
         review_count=Count('reviews')
     ).filter(
-        review_count__gte=1,  # Minimum 3 reviews to qualify
-        avg_rating__gte=3.0  # Only products with 4+ average rating
-    ).order_by('-avg_rating', '-review_count')[:10]
+        review_count__gte=1,  # Minimum 1 reviews to qualify
+        avg_rating__gte=2.0  # Only products with 4+ average rating
+    ).order_by('-avg_rating', '-review_count')[:20]
 
 
 
@@ -56,12 +59,37 @@ def index(request):
 
     return render(request, 'core/index.html', context)
 
-
+# deals
+def all_deals(request):
+    # Get all active deals (not expired)
+    deals_products = Product.objects.filter(
+        has_deal=True,
+        deal_end_date__gt=timezone.now()
+    ).order_by("-deal_end_date")
+    
+    # Update any expired deals
+    expired_deals = Product.objects.filter(
+        has_deal=True,
+        deal_end_date__lte=timezone.now()
+    )
+    expired_deals.update(has_deal=False, deal_end_date=None)
+    
+    # Pagination
+    paginator = Paginator(deals_products, 6)  # Show 20 deals per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'page_obj': page_obj,
+        'deals_products': page_obj.object_list,
+    }
+    
+    return render(request, 'core/deals.html', context)
 def product_list_view(request):
     products = Product.objects.filter(product_status="published").order_by("-id")
     # Pagination
     page = request.GET.get('page', 1)
-    per_page = request.GET.get('per_page', 4)
+    per_page = request.GET.get('per_page', 10)
         
     paginator = Paginator(products, per_page)
 
@@ -79,7 +107,7 @@ def product_list_view(request):
 
     # Check if it's an AJAX request for infinite scroll
         if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-            from django.template.loader import render_to_string
+            
             products_html = render_to_string('core/includes/product-cards.html', {
                 'products': page_obj
             })

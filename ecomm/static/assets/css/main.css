@@ -1,6 +1,6 @@
 /***
- Theme Name: Nest
- Description: Grocery, Super Market, eCommerce HTML Template
+ Theme Name: Kstore
+ Description: eCommerce HTML Template
  Version: 1.0
  License: GNU General Public License v2 or later
  License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -810,6 +810,10 @@ body {
     line-height: 24px;
     font-style: normal;
     font-weight: 400;
+    /* background-image: url("../imgs/banner/banner-19.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; */
 }
 
 h1,

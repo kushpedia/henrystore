@@ -64,7 +64,7 @@
                         </section>
                     
                     <!--End hero-->
-                    <section class="product-tabs section-padding position-relative">
+                    <section class="product-tabs section-padding position-relative mb-3" style="background-color: #bce3c9; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                         <div class="section-title style-2">
                             <h2 class="d-none d-lg-block">Popular Products</h2>
                             <h5 class="d-block d-lg-none" style="margin-left: 64px; margin-bottom: 12px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Popular Products</h5>
@@ -88,7 +88,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                                 <div class="row product-grid-4">
-                                    {% for p in products %}
+                                    {% for p in products|slice:":10" %}
                                     <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
@@ -219,13 +219,17 @@
                         <!--End tab-content-->
                     </section>
                     <!--Products Tabs-->
-                    <section class="section-padding mb-8" style="background-color: #edf5f5; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <section class="section-padding mb-8" style="background-color: #bce3c9; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                         {% if top_rated_products %}
-                        <h2 class="d-none d-lg-block"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h2>
-                        <h4 class="d-block d-lg-none"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h4>
+                        <h2 class="d-none d-lg-block mb-3"></i> <div class="product-rate d-inline-block">
+                            <div class="product-rating" style="width: 90%"></div>
+                        </div>Top Rated Products  <div class="product-rate d-inline-block">
+                            <div class="product-rating" style="width: 90%"></div>
+                        </div> </h2>
+                        <h4 class="d-block d-lg-none mb-3"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h4>
                         <div class="row product-grid-4" style="margin-bottom: 4px;">
                             
-                            {% for p in top_rated_products %}
+                            {% for p in top_rated_products|slice:":5" %}
                             <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
                                 <div class="product-cart-wrap mb-4">
                                     <div class="product-img-action-wrap">
@@ -284,6 +288,151 @@
                         </div>
                         {% endif %}
                     </section>
+
+
+                    <section class="section-padding mb-8" style="background-color: #bce3c9; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 8px;">
+                        {% if top_sold_products %}
+                        <h2 class="d-none d-lg-block mb-3"></i>Top Selling Products  <i class="bi bi-currency-dollar"></i></i> </h2>
+                        <h4 class="d-block d-lg-none mb-3"></i>Top Selling Products <i class="bi bi-currency-dollar"></i> </i> </h4>
+                        <div class="row product-grid-4" style="margin-bottom: 4px;">
+                            
+                            {% for p in top_sold_products %}
+                            <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
+                                <div class="product-cart-wrap mb-4">
+                                    <div class="product-img-action-wrap">
+                                        <div class="product-img product-img-zoom">
+                                            <a href="{% url 'core:product-detail' p.pid %}">
+                                                <img class="default-img" src="{{ p.image.url }}" alt="" />
+                                                <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                            </a>
+                                        </div>
+                                        
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                            <span class="hot">{{p.get_precentage|floatformat:0}}% Off</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <div class="product-category">
+                                            <a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
+                                        </div>
+                                        <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
+                                        <div class="d-flex align-items-center mb-1">
+                                            <div class="small-ratings">
+                                                {% with rating=p.get_average_rating|default:0 %}
+                                                    {% for i in "12345" %}
+                                                        {% if forloop.counter <= rating %}
+                                                            <i class="fa fa-star text-warning"></i>
+                                                        {% else %}
+                                                            {% if forloop.counter|add:"-0.5" <= rating %}
+                                                                <i class="fa fa-star-half-alt text-warning"></i>
+                                                            {% else %}
+                                                                <i class="fa fa-star text-muted"></i>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endwith %}
+                                            </div>
+                                            <small class="text-muted ms-1">{{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</small>
+                                        </div>
+
+
+
+
+
+                                        <div class="product-card-bottom">
+                                            <div class="product-price">
+                                                <span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price|floatformat:0|intcomma }}</span>
+                                                <span class="old-price">{{p.old_price|floatformat:0|intcomma  }} Ksh</span>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <!--end product card-->
+                            
+                        </div>
+                        {% endif %}
+                    </section>
+                    <section class="section-padding mb-8" style="background-color: #bce3c9; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 8px;">
+                        
+                        <h2 class="d-none d-lg-block mb-3">Home, Kitchen and Small Appliances  </h2>
+                        <h4 class="d-block d-lg-none mb-3">Home, Kitchen and Small Appliances  </h4>
+                        {% if categories %}
+                                    
+                                <div class="row product-grid-4">
+                                    {% for c in categories %}
+
+                                
+                                    {% if c.title == "Home & Living"%}
+                                    
+                                    {% for p in c.get_published_products|slice:":5" %}
+                                    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
+                                        <div class="product-cart-wrap mb-4">
+                                            <div class="product-img-action-wrap">
+                                                <div class="product-img product-img-zoom">
+                                                    <a href="{% url 'core:product-detail' p.pid %}">
+                                                        <img class="default-img" src="{{ p.image.url }}" alt="" />
+                                                        <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                                    </a>
+                                                </div>
+                                                
+                                                <div class="product-badges product-badges-position product-badges-mrg">
+                                                    <span class="hot">{{p.get_precentage|floatformat:0}}% Off</span>
+                                                </div>
+                                            </div>
+                                            <div class="product-content-wrap">
+                                                <div class="product-category">
+                                                    <a href="{% url 'core:category-product-list' p.mini_subcategory.subcategory.category.cid %}">{{p.mini_subcategory.subcategory.category.title}}</a>
+                                                </div>
+                                                <h2><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:30}}</a></h2>
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <div class="small-ratings">
+                                                        {% with rating=p.get_average_rating|default:0 %}
+                                                            {% for i in "12345" %}
+                                                                {% if forloop.counter <= rating %}
+                                                                    <i class="fa fa-star text-warning"></i>
+                                                                {% else %}
+                                                                    {% if forloop.counter|add:"-0.5" <= rating %}
+                                                                        <i class="fa fa-star-half-alt text-warning"></i>
+                                                                    {% else %}
+                                                                        <i class="fa fa-star text-muted"></i>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endwith %}
+                                                    </div>
+                                                    <small class="text-muted ms-1">{{p.get_average_rating|floatformat:1}}({{p.get_total_ratings}})</small>
+                                                </div>
+        
+        
+        
+        
+        
+                                                <div class="product-card-bottom">
+                                                    <div class="product-price">
+                                                        <span>Ksh </span><span class="current-product-price-{{ p.id }}">  {{p.price|floatformat:0|intcomma }}</span>
+                                                        <span class="old-price">{{p.old_price|floatformat:0|intcomma  }} Ksh</span>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {% endfor %}
+                                    {% endif %}
+                                    
+                                    <!--end product card-->
+                                    {% endfor %}
+                                    
+                                </div>                               
+                                {% endif %}
+                    </section>
+
+
+
 
 
 
@@ -374,7 +523,7 @@
                                     </figure>
                                     <div class="col-md-8 mb-0">
                                         <h6>
-                                            <a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a>
+                                            <a href="{% url 'core:product-detail' p.pid %}">{{ p.title|truncatechars:30 }}</a>
                                         </h6>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">

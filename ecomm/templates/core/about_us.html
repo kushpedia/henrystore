@@ -1,0 +1,389 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<main class="main">
+    <!-- Breadcrumb -->
+    <div class="page-header breadcrumb-wrap">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="{% url 'core:index' %}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <span></span> About Us
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="section-padding pt-50 pb-50" style="background: linear-gradient(rgba(59, 183, 126, 0.1), rgba(59, 183, 126, 0.05));">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="position-relative">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                             alt="Ktores Marketplace" 
+                             class="img-fluid rounded-lg shadow-lg">
+                        <div class="position-absolute" style="bottom: -20px; right: -20px; background: #3BB77E; color: white; padding: 15px 25px; border-radius: 10px; box-shadow: 0 10px 30px rgba(59, 183, 126, 0.3);">
+                            <div class="text-center">
+                                <div class="h3 mb-0">2023</div>
+                                <small>Established</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 pl-lg-5">
+                    <div class="section-title style-2 mb-30">
+                        <h2 class="mb-3">About Ktores</h2>
+                        <p class="lead">Kenya's Premier Multi-Vendor E-Commerce Marketplace</p>
+                    </div>
+                    <p class="mb-4">
+                        Founded in 2023, Ktores emerged from a vision to revolutionize e-commerce in Kenya by creating a unified platform where local businesses can thrive and customers can discover quality products with confidence.
+                    </p>
+                    <p class="mb-4">
+                        We're more than just a marketplace - we're a community of passionate vendors, satisfied customers, and dedicated team members working together to build Kenya's most trusted online shopping destination.
+                    </p>
+                    <div class="signature mt-4">
+                        <strong class="text-brand">The Ktores Team</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <div class="icon-circle bg-2 d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px; border-radius: 50%;">
+                                    <i class="fi-rs-target text-brand" style="font-size: 30px;"></i>
+                                </div>
+                            </div>
+                            <h3 class="mb-4 text-center">Our Mission</h3>
+                            <p class="text-center text-muted mb-4">
+                                To empower Kenyan entrepreneurs with cutting-edge e-commerce tools while providing customers with a seamless, secure, and rewarding shopping experience.
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fi-rs-check-circle text-success mr-3"></i>
+                                    <span>Democratize access to digital commerce</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fi-rs-check-circle text-success mr-3"></i>
+                                    <span>Foster vendor success and growth</span>
+                                </li>
+                                <li class="mb-0">
+                                    <i class="fi-rs-check-circle text-success mr-3"></i>
+                                    <span>Build trust through transparency and quality</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <div class="icon-circle bg-11 d-inline-flex align-items-center justify-content-center" style="width: 70px; height: 70px; border-radius: 50%;">
+                                    <i class="fi-rs-eye text-brand" style="font-size: 30px;"></i>
+                                </div>
+                            </div>
+                            <h3 class="mb-4 text-center">Our Vision</h3>
+                            <p class="text-center text-muted mb-4">
+                                To become East Africa's most trusted digital marketplace, transforming how businesses operate and how consumers shop in the digital age.
+                            </p>
+                            <ul class="list-unstyled">
+                                <li class="mb-3">
+                                    <i class="fi-rs-star text-warning mr-3"></i>
+                                    <span>Lead e-commerce innovation in East Africa</span>
+                                </li>
+                                <li class="mb-3">
+                                    <i class="fi-rs-star text-warning mr-3"></i>
+                                    <span>Support 10,000+ vendors by 2025</span>
+                                </li>
+                                <li class="mb-0">
+                                    <i class="fi-rs-star text-warning mr-3"></i>
+                                    <span>Create 50,000+ digital commerce opportunities</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Ktores -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title style-2 text-center mb-5">
+                <h2 class="mb-3">Why Choose Ktores?</h2>
+                <p>Designed with both vendors and customers in mind</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card text-center p-4 h-100 border rounded-lg hover-up">
+                        <div class="feature-icon mb-4">
+                            <div class="icon-circle bg-9 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; border-radius: 50%;">
+                                <i class="fi-rs-shop text-brand" style="font-size: 35px;"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3">Multi-Vendor Platform</h4>
+                        <p class="text-muted mb-0">
+                            We empower multiple sellers to showcase their products in one unified marketplace, creating diversity and choice for customers.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card text-center p-4 h-100 border rounded-lg hover-up">
+                        <div class="feature-icon mb-4">
+                            <div class="icon-circle bg-10 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; border-radius: 50%;">
+                                <i class="fi-rs-mobile text-brand" style="font-size: 35px;"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3">M-Pesa Integration</h4>
+                        <p class="text-muted mb-0">
+                            Seamless, secure M-Pesa payments make transactions easy and familiar for Kenyan customers and vendors.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-card text-center p-4 h-100 border rounded-lg hover-up">
+                        <div class="feature-icon mb-4">
+                            <div class="icon-circle bg-11 d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px; border-radius: 50%;">
+                                <i class="fi-rs-user-check text-brand" style="font-size: 35px;"></i>
+                            </div>
+                        </div>
+                        <h4 class="mb-3">Vendor Empowerment</h4>
+                        <p class="text-muted mb-0">
+                            Our comprehensive vendor dashboard gives sellers complete control over their store, products, and orders.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Stats -->
+    <section class="section-padding bg-dark text-white">
+        <div class="container">
+            <div class="section-title style-2 text-center mb-5">
+                <h2 class="text-white mb-3">Our Impact</h2>
+                <p class="text-white-50">Building Kenya's digital commerce ecosystem</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <div class="display-4 text-brand mb-2 font-weight-bold">10,000+</div>
+                        <p class="text-white-50 mb-0">Active Vendors</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <div class="display-4 text-brand mb-2 font-weight-bold">50+</div>
+                        <p class="text-white-50 mb-0">Products Listed</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <div class="display-4 text-brand mb-2 font-weight-bold">98%</div>
+                        <p class="text-white-50 mb-0">Customer Satisfaction</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="text-center">
+                        <div class="display-4 text-brand mb-2 font-weight-bold">24/7</div>
+                        <p class="text-white-50 mb-0">Support Available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title style-2 text-center mb-5">
+                <h2 class="mb-3">Our Core Values</h2>
+                <p>The principles that guide everything we do</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="value-item text-center p-4 border rounded-lg h-100">
+                        <div class="value-icon mb-4">
+                            <i class="fi-rs-users text-brand" style="font-size: 40px;"></i>
+                        </div>
+                        <h4 class="mb-3">Customer First</h4>
+                        <p class="text-muted mb-0">
+                            We prioritize customer satisfaction above all else, ensuring a seamless shopping experience from browse to delivery.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="value-item text-center p-4 border rounded-lg h-100">
+                        <div class="value-icon mb-4">
+                            <i class="fi-rs-scale text-brand" style="font-size: 40px;"></i>
+                        </div>
+                        <h4 class="mb-3">Integrity</h4>
+                        <p class="text-muted mb-0">
+                            We maintain transparency in all our dealings with customers, vendors, and partners, building trust through honest practices.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="value-item text-center p-4 border rounded-lg h-100">
+                        <div class="value-icon mb-4">
+                            <i class="fi-rs-bolt text-brand" style="font-size: 40px;"></i>
+                        </div>
+                        <h4 class="mb-3">Innovation</h4>
+                        <p class="text-muted mb-0">
+                            We continuously evolve our platform to meet the changing needs of the Kenyan e-commerce landscape.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Us CTA -->
+    <section class="section-padding" style="background: linear-gradient(135deg, #3BB77E, #29A56C);">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-4 mb-lg-0">
+                    <h2 class="text-white mb-3">Join Kenya's Digital Commerce Revolution</h2>
+                    <p class="text-white-80 mb-0">
+                        Whether you're growing your business or seeking quality products, Ktores provides the platform for success.
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-right">
+                    <div class="d-flex flex-column flex-md-row">
+                        <a href="{% url 'userauths:sign-up' %}" class="btn btn-light btn-lg mb-2 mb-md-0 mr-md-2">
+                            <i class="fi-rs-store mr-2"></i>Start Selling
+                        </a>
+                        <a href="{% url 'core:product-list' %}" class="btn btn-outline-light btn-lg">
+                            <i class="fi-rs-shopping-cart mr-2"></i>Start Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Banner -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="banner-img banner-big wow fadeIn animated" style="background: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1600&q=80') no-repeat center center; background-size: cover; border-radius: 15px; padding: 80px 50px; position: relative;">
+                <div class="banner-text" style="max-width: 500px;">
+                    <h4 class="text-white mb-3">Need Help? Contact Us</h4>
+                    <p class="text-white mb-4">
+                        Our support team is ready to help you with any questions about selling or shopping on Ktores.
+                    </p>
+                    <a href="#" class="btn btn-primary">
+                        <i class="fi-rs-headset mr-2"></i>Contact Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+{% block styles %}
+<style>
+    /* Custom styles to match your theme */
+    .icon-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover .icon-circle {
+        transform: translateY(-5px);
+        transition: all 0.3s ease;
+    }
+    
+    .value-item {
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+    }
+    
+    .value-item:hover {
+        border-color: #3BB77E;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .signature {
+        font-family: 'Playfair Display', serif;
+        font-style: italic;
+        color: #253D4E;
+        border-left: 3px solid #3BB77E;
+        padding-left: 15px;
+    }
+    
+    .text-white-80 {
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .hover-up {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-up:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .display-4 {
+            font-size: 2.5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 1.8rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Simple counter animation for stats
+    document.addEventListener('DOMContentLoaded', function() {
+        const counters = document.querySelectorAll('.display-4');
+        const speed = 200;
+        
+        counters.forEach(counter => {
+            const animate = () => {
+                const value = +counter.getAttribute('data-count');
+                const data = +counter.innerText.replace('+', '');
+                
+                if (data < value) {
+                    counter.innerText = Math.ceil(data + value / speed) + '+';
+                    setTimeout(animate, 1);
+                } else {
+                    counter.innerText = value + '+';
+                }
+            }
+            
+            animate();
+        });
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

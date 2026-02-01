@@ -12,9 +12,9 @@ def default(request):
         product_count=Count('subcategories__mini_subcategories__products')
     ).all()
     vendors = Vendor.objects.all()
-    new_products = Product.objects.all().order_by("-id")[:4]
+    new_products = Product.objects.all().order_by("-id")[:6]
     try:
-        deals_products = Product.objects.filter(has_deal=True).order_by("-deal_end_date")
+        deals_products = Product.objects.filter(has_deal=True).order_by("-deal_end_date")[:4]
     except:
         deals_products = []
     min_max_price = Product.objects.aggregate(Min("price"), Max("price"))
