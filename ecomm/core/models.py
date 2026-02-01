@@ -134,7 +134,7 @@ class Vendor(models.Model):
     vid = ShortUUIDField(unique=True, length=10, max_length=20,
                     prefix="ven", alphabet="abcdefgh12345")
 
-    title = models.CharField(max_length=100, default="Nestify")
+    title = models.CharField(max_length=100, default="kushpedia")
     image = models.ImageField(
         upload_to=user_directory_path, default="vendor.jpg")
     cover_image = models.ImageField(

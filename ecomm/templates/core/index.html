@@ -219,15 +219,15 @@
                         <!--End tab-content-->
                     </section>
                     <!--Products Tabs-->
-                    <section class="section-padding mb-30" style="background-color: #edf5f5; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <section class="section-padding mb-8" style="background-color: #edf5f5; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                         {% if top_rated_products %}
                         <h2 class="d-none d-lg-block"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h2>
                         <h4 class="d-block d-lg-none"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h4>
-                        <div class="row product-grid-4">
+                        <div class="row product-grid-4" style="margin-bottom: 4px;">
                             
                             {% for p in top_rated_products %}
                             <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
-                                <div class="product-cart-wrap mb-30">
+                                <div class="product-cart-wrap mb-4">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
                                             <a href="{% url 'core:product-detail' p.pid %}">

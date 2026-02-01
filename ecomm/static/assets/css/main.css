@@ -4064,8 +4064,8 @@ table .product-thumbnail img {
 }
 
 .product-cart-wrap:hover {
-    -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05);
+    -webkit-box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.09);
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.1);
     border: 1px solid #BCE3C9;
     transition: .2s;
     -moz-transition: .2s;

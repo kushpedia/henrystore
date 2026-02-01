@@ -42,7 +42,7 @@ SECRET_KEY = 'django-insecure-mfvte4i@l!m)ly9#%rqo^j7d8*0*z#tjw)qd^+(7220z#7mbwi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0a7850f8f1ac.ngrok-free.app",'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["f532f9fc1ac7.ngrok-free.app",'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -61,10 +61,9 @@ INSTALLED_APPS = [
 	'ckeditor',
     # custom apps
     'core',
-    'userauths',	
-	'payments',
-
-	
+    'userauths',
+    'useradmin',
+    'payments',
 ]
 
 MIDDLEWARE = [
