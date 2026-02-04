@@ -71,6 +71,15 @@
                             <span class="text">Reviews</span>
                         </a>
                     </li>
+                    <li class="menu-item {% if '/useradmin/contact-messages/' in request.path %}active{% endif %}">
+                        <a class="menu-link" href="{% url 'useradmin:dashboard-contact-messages' %}">
+                            <i class="icon material-icons md-contact_mail"></i>
+                            <span class="text">Contact Messages</span>
+                            {% if unread_messages_count > 0 %}
+                            <span class="sidebar-badge badge bg-danger">{{ unread_messages_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
                 </ul>
                 <hr />
                 <ul class="menu-aside">

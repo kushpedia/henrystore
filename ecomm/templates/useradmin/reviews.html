@@ -1,46 +1,583 @@
 {% extends 'useradmin/base.html' %}
 {% load static %}
 {% load humanize %}
-{% block content %}    
+{% block content %}
 
 <section class="content-main">
+    <!-- Page Header -->
     <div class="content-header">
         <div>
-            <h2 class="content-title card-title">Reviews</h2>
-            <p>Manage all product reviews</p>
+            <h1 class="content-title card-title mb-2">Review Management</h1>
+            <p class="text-muted mb-0">Monitor and manage customer feedback across all products</p>
+        </div>
+        <div>
+            <button class="btn btn-light" onclick="refreshReviews()">
+                <i class="material-icons md-refresh"></i> Refresh
+            </button>
         </div>
     </div>
-    <div class="card mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>S/N</th>
-                            <th>Product</th>
-                            <th>Name</th>
-                            <th>Review</th>
-                            <th>Rating</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                        {% for r in reviews %}
-                            <tr>
-                                <td>{{forloop.counter}}</td>
-                                <td><b>{{r.product.title}}</b></td>
-                                <td>{{r.user.username|title}}</td>
-                                <td>{{r.review}}</td>
-                                <td>{{r.rating}} Stars</td>
-                                <td>{{r.date|date:"m M, Y"}}</td>
-                            </tr>
-                        {% endfor %}
 
-                    </tbody>
-                </table>
+    <!-- Stats Overview -->
+    <div class="row mb-4">
+        <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <div class="avatar avatar-lg bg-primary bg-opacity-10 rounded">
+                            <i class="material-icons md-rate_review fs-4 text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h3 class="mb-1">{{ total_reviews }}</h3>
+                        <p class="text-muted mb-0">Total Reviews</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <div class="avatar avatar-lg bg-success bg-opacity-10 rounded">
+                            <i class="material-icons md-star fs-4 text-success"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h3 class="mb-1">{{ avg_rating|floatformat:1 }}</h3>
+                        <p class="text-muted mb-0">Average Rating</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <div class="avatar avatar-lg bg-warning bg-opacity-10 rounded">
+                            <i class="material-icons md-star_half fs-4 text-warning"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h3 class="mb-1">{{ critical_reviews }}</h3>
+                        <p class="text-muted mb-0">Critical Reviews (≤2★)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-4 col-sm-6">
+            <div class="card card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <div class="avatar avatar-lg bg-info bg-opacity-10 rounded">
+                            <i class="material-icons md-access_time fs-4 text-info"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h3 class="mb-1">{{ today_reviews }}</h3>
+                        <p class="text-muted mb-0">Today's Reviews</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Filters Card -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-lg-3 col-md-6">
+                    <label class="form-label">Rating Filter</label>
+                    <select name="rating" class="form-select" onchange="this.form.submit()">
+                        <option value="all" {% if current_rating == 'all' %}selected{% endif %}>All Ratings</option>
+                        <option value="5" {% if current_rating == '5' %}selected{% endif %}>★★★★★ (5)</option>
+                        <option value="4" {% if current_rating == '4' %}selected{% endif %}>★★★★☆ (4)</option>
+                        <option value="3" {% if current_rating == '3' %}selected{% endif %}>★★★☆☆ (3)</option>
+                        <option value="2" {% if current_rating == '2' %}selected{% endif %}>★★☆☆☆ (2)</option>
+                        <option value="1" {% if current_rating == '1' %}selected{% endif %}>★☆☆☆☆ (1)</option>
+                    </select>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <label class="form-label">Date Range</label>
+                    <select name="date_range" class="form-select" onchange="this.form.submit()">
+                        <option value="all" {% if date_range == 'all' %}selected{% endif %}>All Time</option>
+                        <option value="today" {% if date_range == 'today' %}selected{% endif %}>Today</option>
+                        <option value="week" {% if date_range == 'week' %}selected{% endif %}>This Week</option>
+                        <option value="month" {% if date_range == 'month' %}selected{% endif %}>This Month</option>
+                    </select>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <label class="form-label">Search Reviews</label>
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" 
+                                placeholder="Search by product name, review content, or username..." 
+                                value="{{ search_query }}">
+                        <button class="btn btn-light" type="submit">
+                            <i class="material-icons md-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 d-flex align-items-end">
+                    <a href="{% url 'useradmin:reviews' %}" class="btn btn-outline-secondary w-100">
+                        <i class="material-icons md-refresh"></i> Reset
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reviews Table -->
+    <div class="card">
+        <div class="card-header border-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h4 class="card-title mb-0">Customer Reviews</h4>
+                    {% if reviews %}
+                    <p class="text-muted mb-0 small">
+                        Showing {{ reviews|length }} review{{ reviews|pluralize }}
+                        {% if search_query %}matching "{{ search_query }}"{% endif %}
+                    </p>
+                    {% endif %}
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" 
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="material-icons md-tune"></i> Actions
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="material-icons md-download"></i> Export CSV</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#"><i class="material-icons md-delete_sweep"></i> Delete All Critical</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card-body p-0">
+            {% if reviews %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="border-0">Review Details</th>
+                            <th class="border-0 text-center">Rating</th>
+                            <th class="border-0 text-center">Status</th>
+                            <th class="border-0 text-center">Date</th>
+                            <th class="border-0 text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for r in reviews %}
+                        <tr class="review-row" data-review-id="{{ r.id }}">
+                            <td>
+                                <div class="d-flex align-items-start">
+                                    <!-- Product Image -->
+                                    <div class="flex-shrink-0 me-3">
+                                        <a href="{% url 'core:product-detail' r.product.pid %}" target="_blank">
+                                            <img src="{{ r.product.image.url }}" 
+                                                    alt="{{ r.product.title }}" 
+                                                    class="rounded" 
+                                                    style="width: 60px; height: 60px; object-fit: cover;">
+                                            </a>
+                                        </div>
+                                        <!-- Review Content -->
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1">
+                                                <a href="{% url 'core:product-detail' r.product.pid %}" 
+                                                class="text-dark text-decoration-none" 
+                                                target="_blank">
+                                                    {{ r.product.title|truncatechars:60 }}
+                                            </a>
+                                        </h6>
+                                        <p class="text-muted small mb-1">
+                                            <i class="material-icons md-person_outline"></i>
+                                            {{ r.user.username|title }}
+                                            {% if r.user.email %}
+                                            <span class="ms-2">{{ r.user.email }}</span>
+                                            {% endif %}
+                                        </p>
+                                        <p class="mb-0">{{ r.review|truncatechars:120 }}</p>
+                                        {% if r.review|length > 120 %}
+                                        <a href="#" class="small text-primary" onclick="showFullReview({{ r.id }})">Read more</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="rating-display" data-rating="{{ r.rating }}">
+                                    {% for i in "12345" %}
+                                        {% if forloop.counter <= r.rating %}
+                                        <i class="material-icons md-star text-warning"></i>
+                                        {% else %}
+                                        <i class="material-icons md-star_outline text-muted"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <div class="small text-muted mt-1">{{ r.rating }}.0</div>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="form-check form-switch d-inline-block">
+                                    <input class="form-check-input review-status" 
+                                            type="checkbox" 
+                                            id="status{{ r.id }}" 
+                                            {% if r.active %}checked{% endif %}
+                                            data-review-id="{{ r.id }}">
+                                    <label class="form-check-label small" for="status{{ r.id }}">
+                                        {% if r.active %}
+                                        <span class="badge bg-success">Published</span>
+                                        {% else %}
+                                        <span class="badge bg-secondary">Hidden</span>
+                                        {% endif %}
+                                    </label>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <div class="text-nowrap">
+                                    <div class="fw-medium">{{ r.date|date:"M d, Y" }}</div>
+                                    <small class="text-muted">{{ r.date|date:"h:i A" }}</small>
+                                </div>
+                                <div class="small text-muted">{{ r.date|timesince }} ago</div>
+                            </td>
+                            <td class="text-end">
+                                <div class="dropdown">
+                                    <button class="btn btn-light btn-sm dropdown-toggle" 
+                                            type="button" 
+                                            data-bs-toggle="dropdown">
+                                        <i class="material-icons md-more_vert"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" 
+                                                href="{% url 'core:product-detail' r.product.pid %}" 
+                                                target="_blank">
+                                                    <i class="material-icons md-remove_red_eye"></i> View Product
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" 
+                                                href="#"
+                                                onclick="replyToReview({{ r.id }})">
+                                                    <i class="material-icons md-reply"></i> Reply
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" 
+                                                href="#"
+                                                onclick="editReview({{ r.id }})">
+                                                    <i class="material-icons md-edit"></i> Edit
+                                            </a>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <a class="dropdown-item text-danger" 
+                                                href="#"
+                                                onclick="deleteReview({{ r.id }}, '{{ r.user.username }}')">
+                                                <i class="material-icons md-delete"></i> Delete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <!-- Reply Section (Hidden by default) -->
+                        <tr id="reply-section-{{ r.id }}" class="d-none">
+                            <td colspan="5" class="bg-light">
+                                <div class="p-3">
+                                    <h6 class="mb-2">Reply to {{ r.user.username|title }}'s review:</h6>
+                                    <form class="reply-form" data-review-id="{{ r.id }}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <textarea class="form-control" rows="3" 
+                                                        placeholder="Type your response here..." 
+                                                        name="reply_text"></textarea>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="material-icons md-send"></i> Send Reply
+                                            </button>
+                                            <button type="button" class="btn btn-light btn-sm" 
+                                                    onclick="cancelReply({{ r.id }})">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Pagination -->
+            {% if page_obj.paginator.num_pages > 1 %}
+            <div class="card-footer border-top">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center mb-0">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" 
+                                href="?page={{ page_obj.previous_page_number }}{% if current_params %}&{{ current_params }}{% endif %}">
+                                <i class="material-icons md-chevron_left"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                        
+                        {% for num in page_obj.paginator.page_range %}
+                            {% if num == page_obj.number %}
+                            <li class="page-item active">
+                                <span class="page-link">{{ num }}</span>
+                            </li>
+                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                            <li class="page-item">
+                                <a class="page-link" 
+                                    href="?page={{ num }}{% if current_params %}&{{ current_params }}{% endif %}">
+                                    {{ num }}
+                                </a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" 
+                                href="?page={{ page_obj.next_page_number }}{% if current_params %}&{{ current_params }}{% endif %}">
+                                <i class="material-icons md-chevron_right"></i>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            {% endif %}
+            
+            {% else %}
+            <!-- Empty State -->
+            <div class="text-center py-5">
+                <div class="mb-4">
+                    <i class="material-icons md-rate_review fs-1 text-muted"></i>
+                </div>
+                <h4 class="text-muted mb-3">No reviews found</h4>
+                <p class="text-muted mb-4">
+                    {% if search_query or current_rating != 'all' %}
+                    Try adjusting your search or filter criteria.
+                    {% else %}
+                    No customer reviews have been submitted yet.
+                    {% endif %}
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </section>
-{% endblock content %}    
+
+<!-- Full Review Modal -->
+<div class="modal fade" id="fullReviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Full Review Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="fullReviewContent">
+                <!-- Content loaded via JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+// Refresh page
+function refreshReviews() {
+    location.reload();
+}
+
+// Show full review in modal
+function showFullReview(reviewId) {
+    const row = document.querySelector(`tr[data-review-id="${reviewId}"]`);
+    if (!row) return;
+    
+    const product = row.querySelector('h6 a').textContent;
+    const user = row.querySelector('.text-muted.small').textContent;
+    const rating = row.querySelector('.rating-display').getAttribute('data-rating');
+    const review = row.querySelector('p.mb-0').textContent;
+    const date = row.querySelector('.fw-medium').textContent + ' ' + 
+                    row.querySelector('.text-muted').textContent;
+    
+    const modalContent = `
+        <div class="review-full">
+            <div class="d-flex align-items-start mb-4">
+                <div class="flex-shrink-0 me-3">
+                    <img src="${row.querySelector('img').src}" 
+                            alt="${product}" 
+                            class="rounded" 
+                            style="width: 80px; height: 80px; object-fit: cover;">
+                </div>
+                <div class="flex-grow-1">
+                    <h6>${product}</h6>
+                    <p class="text-muted mb-1">${user}</p>
+                    <div class="mb-2">
+                        ${'★'.repeat(parseInt(rating))}${'☆'.repeat(5-parseInt(rating))}
+                        <span class="ms-2">${rating}.0</span>
+                    </div>
+                    <small class="text-muted">${date}</small>
+                </div>
+            </div>
+            <div class="review-text">
+                <p class="lead">${review}</p>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('fullReviewContent').innerHTML = modalContent;
+    new bootstrap.Modal(document.getElementById('fullReviewModal')).show();
+}
+
+// Toggle review status
+document.querySelectorAll('.review-status').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        const reviewId = this.getAttribute('data-review-id');
+        const isActive = this.checked;
+        
+        fetch(`/api/reviews/${reviewId}/toggle-status/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: JSON.stringify({ active: isActive })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const badge = this.nextElementSibling.querySelector('.badge');
+                if (isActive) {
+                    badge.className = 'badge bg-success';
+                    badge.textContent = 'Published';
+                } else {
+                    badge.className = 'badge bg-secondary';
+                    badge.textContent = 'Hidden';
+                }
+            }
+        });
+    });
+});
+
+// Reply to review
+function replyToReview(reviewId) {
+    // Hide any other open reply sections
+    document.querySelectorAll('[id^="reply-section-"]').forEach(el => {
+        el.classList.add('d-none');
+    });
+    
+    // Show this reply section
+    const replySection = document.getElementById(`reply-section-${reviewId}`);
+    if (replySection) {
+        replySection.classList.remove('d-none');
+        replySection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function cancelReply(reviewId) {
+    const replySection = document.getElementById(`reply-section-${reviewId}`);
+    if (replySection) {
+        replySection.classList.add('d-none');
+    }
+}
+
+// Handle reply submission
+document.querySelectorAll('.reply-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const reviewId = this.getAttribute('data-review-id');
+        const replyText = this.querySelector('textarea').value;
+        
+        if (!replyText.trim()) {
+            alert('Please enter a reply message.');
+            return;
+        }
+        
+        // Send reply via AJAX
+        fetch(`/api/reviews/${reviewId}/reply/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}',
+            },
+            body: JSON.stringify({ reply: replyText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Reply sent successfully!');
+                cancelReply(reviewId);
+                this.reset();
+            }
+        });
+    });
+});
+
+// Delete review
+function deleteReview(reviewId, username) {
+    if (confirm(`Are you sure you want to delete ${username}'s review? This action cannot be undone.`)) {
+        fetch(`/api/reviews/${reviewId}/delete/`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.querySelector(`tr[data-review-id="${reviewId}"]`).remove();
+                // Also remove reply section if exists
+                const replySection = document.getElementById(`reply-section-${reviewId}`);
+                if (replySection) replySection.remove();
+            }
+        });
+    }
+}
+
+// Edit review (placeholder function)
+function editReview(reviewId) {
+    alert('Edit functionality coming soon!');
+}
+
+// Initialize tooltips
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
+});
+</script>
+
+<style>
+.review-row:hover {
+    background-color: #f8f9fa;
+}
+.rating-display i {
+    font-size: 18px;
+}
+.table th {
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.badge {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+}
+.review-full {
+    line-height: 1.6;
+}
+.modal-body {
+    padding: 2rem;
+}
+</style>
+
+{% endblock content %}

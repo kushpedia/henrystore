@@ -18,17 +18,43 @@ class User(AbstractUser):
 class ContactUs(models.Model):
     full_name = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
-    phone = models.CharField(max_length=200) 
-    subject = models.CharField(max_length=200) 
+    phone = models.CharField(max_length=200, blank=True, null=True)
+    subject = models.CharField(max_length=200)
     message = models.TextField()
-
-    class Meta:
-        verbose_name = "Contact Us"
-        verbose_name_plural = "Contact Us"
-
-    def __str__(self):
-        return self.full_name
     
+    # Tracking fields
+    read = models.BooleanField(default=False)
+    read_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='read_contacts')
+    read_at = models.DateTimeField(null=True, blank=True)
+    
+    replied = models.BooleanField(default=False)
+    replied_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='replied_contacts')
+    replied_at = models.DateTimeField(null=True, blank=True)
+    reply_message = models.TextField(blank=True, null=True)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Contact Message"
+        verbose_name_plural = "Contact Messages"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.full_name} - {self.subject}"
+    
+    def get_truncated_message(self, length=100):
+        """Get truncated message for display in tables"""
+        if len(self.message) > length:
+            return self.message[:length] + "..."
+        return self.message
+    
+    # Add this property for backward compatibility
+    @property
+    def date(self):
+        """Backward compatibility property"""
+        return self.created_at  
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
