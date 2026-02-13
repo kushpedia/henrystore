@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.conf import settings
 app_name = 'core'
 urlpatterns = [
 	path('', views.index, name='index'),
@@ -62,6 +63,18 @@ urlpatterns = [
 
 	path("save_checkout_info/", views.save_checkout_info, name="save_checkout_info"),
 	path('about/', views.about_us, name='about'),
+
+	# missing
+	path('affiliate-program/', views.affiliate_program, name='affiliate-program'),
+    
+    path('our-suppliers/', views.our_suppliers, name='our-suppliers'),
+    path('accessibility/', views.accessibility, name='accessibility'),
+    path('promotions/', views.promotions, name='promotions'),
+    
 	
 
+    ]
+if settings.DEBUG:
+    urlpatterns += [
+        path('404-test/', views.custom_page_not_found, {'exception': Exception('Test 404 page')}),
     ]

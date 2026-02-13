@@ -1,0 +1,135 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Page Not Found - KStores{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5 text-center">
+                    
+                    <div class="error-illustration mb-4">
+                        <div class="display-1" style="font-size: 120px; color: #3bb77e;">404</div>
+                    </div>
+                    
+                    <h2 class="mb-3" style="color: #253D4E;">Page Not Found</h2>
+                    
+                    <p class="text-muted mb-4 fs-5">
+                        {% if exception %}
+                            {{ exception }}
+                        {% else %}
+                            The page you're looking for doesn't exist, has been moved, or is currently under construction.
+                        {% endif %}
+                    </p>
+                    
+                    <div class="search-style-2 mb-4 mx-auto" style="max-width: 500px;">
+                        <form action="{% url 'core:search' %}" method="GET">
+                            <input type="text" placeholder="Search for products..." name="q" class="w-100" autocomplete="off">
+                            <button type="submit" class="material-symbols-outlined">
+                                <span class="material-symbols-outlined">search</span>
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="d-flex gap-3 justify-content-center flex-wrap mb-5">
+                        <a href="{% url 'core:index' %}" class="btn btn-primary px-4 py-2">
+                            <i class="fi-rs-home mr-10"></i> Go to Homepage
+                        </a>
+                        <a href="{% url 'core:contact' %}" class="btn btn-outline-primary px-4 py-2">
+                            <i class="fi-rs-headphones mr-10"></i> Contact Support
+                        </a>
+                    </div>
+                    
+                    {% if categories %}
+                    <div class="popular-categories mt-4">
+                        <h5 class="mb-3">Popular Categories</h5>
+                        <div class="d-flex flex-wrap gap-2 justify-content-center">
+                            {% for category in categories|slice:":6" %}
+                            <a href="{% url 'core:category-product-list' category.cid %}" 
+                               class="btn btn-light btn-sm rounded-pill px-4 py-2">
+                                {{ category.title }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if recently_viewed_products %}
+                    <div class="recently-viewed mt-5 pt-3 border-top">
+                        <h5 class="mb-3">You Might Like These</h5>
+                        <div class="row g-3">
+                            {% for product in recently_viewed_products %}
+                            <div class="col-md-3 col-6">
+                                <div class="product-card">
+                                    <a href="{% url 'core:product-detail' product.pid %}" class="text-decoration-none">
+                                        <div class="product-img-container mb-2">
+                                            {% if product.image %}
+                                            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid rounded">
+                                            {% endif %}
+                                        </div>
+                                        <h6 class="product-title small text-truncate">{{ product.title }}</h6>
+                                        <span class="text-brand fw-bold">Ksh {{ product.price }}</span>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if debug %}
+                    <div class="mt-4 pt-3 border-top text-start small text-muted">
+                        <p class="mb-1"><strong>Requested URL:</strong> {{ request.build_absolute_uri }}</p>
+                    </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-illustration {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .product-card {
+        transition: transform 0.2s;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .product-img-container {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .product-img-container img {
+        max-height: 100%;
+        width: auto;
+        object-fit: contain;
+    }
+    
+    .btn-light {
+        background-color: #f8f9fa;
+        border-color: #f1f1f1;
+    }
+    
+    .btn-light:hover {
+        background-color: #e9ecef;
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}

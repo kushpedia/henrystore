@@ -1,0 +1,404 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}{{ page_name }} - {{ estimated_launch|default:"Coming Soon" }} | KStores{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-11">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-4 p-lg-5">
+                    
+                    <!-- Header with Icon -->
+                    <div class="text-center mb-5">
+                        <div class="construction-illustration mb-3">
+                            <div class="display-1" style="font-size: 100px;">{{ page_icon|default:"🚧" }}</div>
+                        </div>
+                        
+                        <h1 class="display-4 fw-bold mb-2" style="color: #253D4E;">{{ page_name }}</h1>
+                        
+                        {% if page_description %}
+                        <p class="lead text-muted">{{ page_description }}</p>
+                        {% endif %}
+                        
+                        {% if estimated_launch %}
+                        <span class="badge bg-warning text-dark px-4 py-2 mt-2 fs-6 rounded-pill">
+                            <i class="fi-rs-clock mr-5"></i> {{ estimated_launch }}
+                        </span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark px-4 py-2 mt-2 fs-6 rounded-pill">
+                            <i class="fi-rs-clock mr-5"></i> Coming Soon
+                        </span>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Main Message -->
+                    <div class="alert alert-info bg-light border-0 mb-5 mx-lg-4 p-4" style="border-radius: 20px;">
+                        <div class="d-flex align-items-start">
+                            <i class="fi-rs-info fs-4 me-3 text-brand"></i>
+                            <div class="fs-6">
+                                {% if exception %}
+                                    {{ exception }}
+                                {% else %}
+                                    This page is currently under construction. We're working hard to bring you this feature!
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Features Grid -->
+                    {% if features %}
+                    <div class="row g-4 mb-5">
+                        <div class="col-12">
+                            <h4 class="text-center mb-4" style="color: #253D4E;">What to Expect</h4>
+                        </div>
+                        {% for feature in features %}
+                        <div class="col-md-3 col-6">
+                            <div class="text-center p-3 feature-card">
+                                <div class="display-5 mb-2">{{ feature.icon }}</div>
+                                <h6 class="fw-bold">{{ feature.title }}</h6>
+                                <p class="small text-muted mb-0">{{ feature.description }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Job Openings - Careers Page Specific -->
+                    {% if job_openings %}
+                    <div class="bg-light p-4 p-lg-5 rounded-4 mb-5">
+                        <h4 class="text-center mb-4" style="color: #253D4E;">Current Openings</h4>
+                        <div class="row g-4">
+                            {% for job in job_openings %}
+                            <div class="col-md-6">
+                                <div class="card border-0 shadow-sm h-100 job-card">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex justify-content-between align-items-start mb-2">
+                                            <h5 class="fw-bold mb-0">{{ job.title }}</h5>
+                                            <span class="badge bg-success">{{ job.type }}</span>
+                                        </div>
+                                        <p class="text-muted small mb-2">
+                                            <i class="fi-rs-marker me-1"></i> {{ job.location }} | 
+                                            <i class="fi-rs-briefcase me-1"></i> {{ job.department }}
+                                        </p>
+                                        <p class="small mb-3">{{ job.description }}</p>
+                                        <a href="{{ cta_url|default:'#' }}" class="btn btn-outline-primary btn-sm">
+                                            Apply Now <i class="fi-rs-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Suppliers Preview -->
+                    {% if vendors %}
+                    <div class="mb-5">
+                        <h4 class="text-center mb-4" style="color: #253D4E;">Our Trusted Suppliers</h4>
+                        <div class="row g-3">
+                            {% for vendor in vendors %}
+                            <div class="col-md-3 col-6">
+                                <div class="d-flex align-items-center p-3 bg-light rounded-3 supplier-card">
+                                    {% if vendor.image %}
+                                    <img src="{{ vendor.image.url }}" alt="{{ vendor.title }}" class="rounded-circle me-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                    {% else %}
+                                    <div class="rounded-circle bg-brand bg-opacity-10 d-flex align-items-center justify-content-center me-2" style="width: 50px; height: 50px;">
+                                        <span class="fw-bold text-brand">{{ vendor.title|first }}</span>
+                                    </div>
+                                    {% endif %}
+                                    <div>
+                                        <h6 class="mb-0 fw-bold small">{{ vendor.title|truncatechars:20 }}</h6>
+                                        <small class="text-muted">{{ vendor.product.count }} products</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Discounted Products Preview -->
+                    {% if discounted_products %}
+                    <div class="mb-5">
+                        <h4 class="text-center mb-4" style="color: #253D4E;">Hot Deals Available Now</h4>
+                        <div class="row g-3">
+                            {% for product in discounted_products %}
+                            <div class="col-md-3 col-6">
+                                <div class="product-card">
+                                    <a href="{% url 'core:product-detail' product.pid %}" class="text-decoration-none">
+                                        <div class="product-img-container mb-2 position-relative">
+                                            {% if product.image %}
+                                            <img src="{{ product.image.url }}" alt="{{ product.title }}" class="img-fluid rounded">
+                                            {% else %}
+                                            <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height: 120px;">
+                                                <i class="fi-rs-picture text-muted fs-1"></i>
+                                            </div>
+                                            {% endif %}
+                                            {% if product.get_percentage %}
+                                            <span class="badge bg-danger position-absolute top-0 end-0 m-2 rounded-pill">
+                                                -{{ product.get_percentage }}%
+                                            </span>
+                                            {% endif %}
+                                        </div>
+                                        <h6 class="product-title small text-truncate fw-bold">{{ product.title }}</h6>
+                                        <div class="product-price">
+                                            <span class="text-brand fw-bold">Ksh {{ product.price }}</span>
+                                            {% if product.old_price %}
+                                            <span class="old-price text-muted text-decoration-line-through small ms-1">
+                                                Ksh {{ product.old_price }}
+                                            </span>
+                                            {% endif %}
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Benefits/Requirements Sections -->
+                    <div class="row g-4 mb-5">
+                        {% if benefits %}
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold mb-3"><i class="fi-rs-gift text-brand me-2"></i> Benefits</h5>
+                                <ul class="list-unstyled">
+                                    {% for benefit in benefits %}
+                                    <li class="mb-2">
+                                        <i class="fi-rs-check me-2 text-success"></i> {{ benefit }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if requirements %}
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold mb-3"><i class="fi-rs-checkbox text-brand me-2"></i> Requirements</h5>
+                                <ul class="list-unstyled">
+                                    {% for requirement in requirements %}
+                                    <li class="mb-2">
+                                        <i class="fi-rs-check me-2 text-success"></i> {{ requirement }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if perks %}
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold mb-3"><i class="fi-rs-heart text-brand me-2"></i> Perks & Benefits</h5>
+                                <ul class="list-unstyled">
+                                    {% for perk in perks %}
+                                    <li class="mb-2">
+                                        <i class="fi-rs-check me-2 text-success"></i> {{ perk }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if solutions %}
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold mb-3"><i class="fi-rs-box-alt text-brand me-2"></i> Solutions</h5>
+                                <ul class="list-unstyled">
+                                    {% for solution in solutions %}
+                                    <li class="mb-2">
+                                        <i class="fi-rs-check me-2 text-success"></i> {{ solution }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if supplier_categories %}
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold mb-3"><i class="fi-rs-categories text-brand me-2"></i> Supplier Categories</h5>
+                                <ul class="list-unstyled">
+                                    {% for category in supplier_categories %}
+                                    <li class="mb-2">
+                                        <i class="fi-rs-check me-2 text-success"></i> {{ category }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if accessibility_features %}
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold mb-3"><i class="fi-rs-universal-access text-brand me-2"></i> Features</h5>
+                                <ul class="list-unstyled">
+                                    {% for feature in accessibility_features %}
+                                    <li class="mb-2">
+                                        <i class="fi-rs-check me-2 text-success"></i> {{ feature }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if upcoming_promotions %}
+                        <div class="col-md-6">
+                            <div class="bg-light p-4 rounded-4 h-100">
+                                <h5 class="fw-bold mb-3"><i class="fi-rs-calendar text-brand me-2"></i> Upcoming Promotions</h5>
+                                <ul class="list-unstyled">
+                                    {% for promo in upcoming_promotions %}
+                                    <li class="mb-2">
+                                        <span class="badge bg-brand-light text-brand me-2">{{ promo.month }}</span>
+                                        <strong>{{ promo.name }}</strong> - {{ promo.discount }}
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- CTA Section -->
+                    <div class="text-center mt-4 pt-2">
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <a href="javascript:history.back()" class="btn btn-outline-secondary btn-lg px-4">
+                                <i class="fi-rs-arrow-left mr-10"></i> Go Back
+                            </a>
+                            <a href="{% url 'core:index' %}" class="btn btn-primary btn-lg px-4">
+                                <i class="fi-rs-home mr-10"></i> Home
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Notify Me Form -->
+                    <div class="mt-5 pt-4 border-top">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <h6 class="text-center mb-3" style="color: #253D4E;">Want to know when this page launches?</h6>
+                                <form class="d-flex gap-2" method="POST" action="{% url 'core:contact' %}">
+                                    {% csrf_token %}
+                                    <input type="email" name="email" class="form-control form-control-lg rounded-pill" placeholder="Enter your email address" required>
+                                    <input type="hidden" name="subject" value="{{ page_name }} Launch Notification">
+                                    <button type="submit" class="btn btn-primary btn-lg px-4 rounded-pill">
+                                        <i class="fi-rs-envelope"></i>
+                                    </button>
+                                </form>
+                                <small class="text-muted d-block text-center mt-2">
+                                    We'll notify you when {{ page_name }} is live. No spam, unsubscribe anytime.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .construction-illustration {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+    
+    .feature-card {
+        transition: all 0.3s;
+        border-radius: 15px;
+    }
+    
+    .feature-card:hover {
+        background-color: #f8f9fa;
+        transform: translateY(-5px);
+    }
+    
+    .product-card {
+        transition: transform 0.2s;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .product-img-container {
+        height: 120px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+    }
+    
+    .product-img-container img {
+        max-height: 100%;
+        width: auto;
+        object-fit: contain;
+    }
+    
+    .job-card, .supplier-card {
+        transition: all 0.3s;
+    }
+    
+    .job-card:hover, .supplier-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+    }
+    
+    .badge {
+        border-radius: 30px;
+        font-weight: 500;
+    }
+    
+    .rounded-4 {
+        border-radius: 20px !important;
+    }
+    
+    .btn-lg {
+        padding: 12px 30px;
+        border-radius: 30px;
+    }
+    
+    .form-control-lg {
+        padding: 15px 25px;
+        border-radius: 30px;
+        border: 2px solid #e0e0e0;
+    }
+    
+    .form-control-lg:focus {
+        border-color: #3bb77e;
+        box-shadow: 0 0 0 3px rgba(59, 183, 126, 0.1);
+    }
+    
+    .bg-brand-light {
+        background-color: rgba(59, 183, 126, 0.1);
+    }
+    
+    .text-brand {
+        color: #3bb77e !important;
+    }
+    
+    .bg-brand {
+        background-color: #3bb77e !important;
+    }
+</style>
+{% endblock %}
