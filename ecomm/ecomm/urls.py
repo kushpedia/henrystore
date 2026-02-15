@@ -12,6 +12,7 @@ urlpatterns = [
     path("useradmin/", include("useradmin.urls")),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('payments/', include('payments.urls')),
+    path('corporate/', include('corporate.urls')),
 
 ]
 handler404 = 'core.views.custom_page_not_found'

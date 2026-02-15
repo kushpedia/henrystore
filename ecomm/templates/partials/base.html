@@ -262,10 +262,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                     </div>
                                 </div>
                                 <div class="header-action-icon-2">
-                                    <a href="page-account.html">
+                                    <p>
                                         <img class="svgInject" alt="Kstores" src="{% static 'assets/imgs/theme/icons/icon-user.svg' %}" />
-                                    </a>
-                                    <a href="{% url 'core:dashboard' %}"><span class="lable ml-0">Account</span></a>
+                                    </p>
+                                    <p><span class="lable ml-0">Account</span></p>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-user mr-10"></i>My Account</a></li>
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <span>
                                     <img class="svgInject" alt="Kstores" src="{% static 'assets/imgs/theme/icons/icon-user.svg' %}" />
                                 </span>
-                                <a href="{% url 'core:dashboard' %}"><span class="lable ml-0">Account</span></a>
+                                <a href=""><span class="lable ml-0">Account</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                     <ul>
                                         <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-user mr-10"></i>My Account</a></li>
@@ -881,11 +881,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h4 class="widget-title">Corporate</h4>
                         <ul class="footer-list mb-sm-5 mb-md-0">
                             <li><a href="{% url 'userauths:sign-up' %}">Become a Vendor</a></li>
-                            <li><a href="{% url 'core:affiliate-program' %}">Affiliate Program</a></li>
+                            <li><a href="{% url 'corporate:affiliate-program' %}">Affiliate Program</a></li>
                             
-                            <li><a href="{% url 'core:our-suppliers' %}">Our Suppliers</a></li>
-                            <li><a href="{% url 'core:accessibility' %}">Accessibility</a></li>  
-                            <li><a href="{% url 'core:promotions' %}">Promotions</a></li>
+                            <li><a href="{% url 'corporate:our-suppliers' %}">Our Suppliers</a></li>
+                            <li><a href="{% url 'corporate:accessibility' %}">Accessibility</a></li>  
+                            <li><a href="{% url 'corporate:promotions' %}">Promotions</a></li>
                         </ul>
                     </div>
                     

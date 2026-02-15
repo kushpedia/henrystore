@@ -11,7 +11,7 @@ from core.models import CartOrder,CartOrderItems, MiniSubCategory, Product, Cate
 from userauths.models import Profile, User
 import datetime
 from useradmin.forms import AddProductForm, VariationForm
-from useradmin.decorators import admin_required
+
 from django.http import JsonResponse,HttpResponse
 from core.models import SubCategory, MiniSubCategory
 import json
@@ -21,6 +21,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Count, Avg
 from datetime import datetime, timedelta
+import datetime
 from django.utils import timezone
 from userauths.models import ContactUs
 
@@ -28,6 +29,15 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 import csv
 from django.contrib import messages as django_messages
+from django.contrib.auth.decorators import user_passes_test
+
+def admin_required(view_func):
+    """Decorator to check if user is admin/staff"""
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_authenticated and (request.user.is_staff or request.user.is_superuser):
+            return view_func(request, *args, **kwargs)
+        return redirect('login')
+    return wrapper
 
 
 
