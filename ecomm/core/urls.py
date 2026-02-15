@@ -64,13 +64,6 @@ urlpatterns = [
 	path("save_checkout_info/", views.save_checkout_info, name="save_checkout_info"),
 	path('about/', views.about_us, name='about'),
 
-	# missing
-	path('affiliate-program/', views.affiliate_program, name='affiliate-program'),
-    
-    path('our-suppliers/', views.our_suppliers, name='our-suppliers'),
-    path('accessibility/', views.accessibility, name='accessibility'),
-    path('promotions/', views.promotions, name='promotions'),
-    
 	
 
     ]
