@@ -85,6 +85,7 @@
                                                         <th scope="col" class="text-center">PRICE(Ksh)</th>
                                                         <th scope="col" class="text-center">QUANTITY</th>
                                                         <th scope="col" class="text-end pe-4">TOTAL(Ksh)</th>
+                                                        <th scope="col" class="text-end pe-4">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -117,6 +118,11 @@
                                                         <td class="text-end pe-4">
                                                             <span class="fw-bold text-dark">{{ item.total|floatformat:0|intcomma }}</span>
                                                         </td>
+                                                        <td class="text-end pe-4">
+                                                            <a href="{% url 'core:return-request' item.id %}" class="btn btn-sm btn-outline-primary">
+                                                                <i class="fi-rs-eye mr-1"></i>Request Refund
+                                                            </a>
+                                                            </td>       
                                                     </tr>
                                                     {% empty %}
                                                     <tr>

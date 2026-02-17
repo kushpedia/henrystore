@@ -1,0 +1,419 @@
+{% extends 'useradmin/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Header with Navigation -->
+    <div class="row mb-4">
+        <div class="col">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'useradmin:admin-return-list' %}">Returns</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Return #{{ return.rma_number }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Main Content - Left Column -->
+        <div class="col-lg-8">
+            <!-- Status Banner -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between">
+                        <div>
+                            <h4 class="mb-2">Return Request Details</h4>
+                            <p class="text-muted mb-0">
+                                Created: {{ return.created_at|date:"F j, Y H:i" }} • 
+                                Last Updated: {{ return.updated_at|date:"F j, Y H:i" }}
+                            </p>
+                        </div>
+                        <div>
+                            {% if return.status == 'pending' %}
+                                <span class="badge bg-warning text-dark px-3 py-2">Pending Approval</span>
+                            {% elif return.status == 'approved' %}
+                                <span class="badge bg-info text-white px-3 py-2">Approved</span>
+                            {% elif return.status == 'received' %}
+                                <span class="badge bg-primary text-white px-3 py-2">Item Received</span>
+                            {% elif return.status == 'completed' %}
+                                <span class="badge bg-success text-white px-3 py-2">Refund Completed</span>
+                            {% elif return.status == 'rejected' %}
+                                <span class="badge bg-danger text-white px-3 py-2">Rejected</span>
+                            {% elif return.status == 'cancelled' %}
+                                <span class="badge bg-secondary text-white px-3 py-2">Cancelled</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer & Order Information -->
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h6 class="card-title mb-3">
+                                <i class="fi-rs-user me-2"></i>Customer Information
+                            </h6>
+                            <div class="mb-2">
+                                <strong>{{ return.user.get_full_name|default:return.user.username }}</strong>
+                            </div>
+                            <div class="mb-1">
+                                <i class="fi-rs-envelope me-2 text-muted"></i>{{ return.user.email }}
+                            </div>
+                            {% if return.order.phone %}
+                            <div class="mb-1">
+                                <i class="fi-rs-phone me-2 text-muted"></i>{{ return.order.phone }}
+                            </div>
+                            {% endif %}
+                            <div class="mt-3 pt-2 border-top">
+                                <small class="text-muted">Customer since: {{ return.user.date_joined|date:"M Y" }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body">
+                            <h6 class="card-title mb-3">
+                                <i class="fi-rs-shopping-cart me-2"></i>Order Information
+                            </h6>
+                            <div class="mb-2">
+                                <strong>Order #{{ return.order.oid }}</strong>
+                            </div>
+                            <div class="mb-1">
+                                <span class="text-muted">Order Date:</span> {{ return.order.order_date|date:"F j, Y" }}
+                            </div>
+                            <div class="mb-1">
+                                <span class="text-muted">Order Total:</span> {{ return.order.price|floatformat:0|intcomma }}
+                            </div>
+                            <div class="mb-1">
+                                <span class="text-muted">Payment Status:</span> 
+                                {% if return.order.paid_status %}
+                                    <span class="badge bg-success">Paid</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Unpaid</span>
+                                {% endif %}
+                            </div>
+                            <div class="mt-3 pt-2 border-top">
+                                <a href="{% url 'useradmin:order_detail' return.order.id %}" class="btn btn-sm btn-outline-primary" target="_blank">
+                                    <i class="fi-rs-eye me-1"></i>View Full Order
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item Details -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">
+                        <i class="fi-rs-package me-2"></i>Return Item Details
+                    </h6>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{{ return.order_item.image }}" alt="{{ return.order_item.item }}" 
+                                 class="img-fluid rounded" style="max-width: 100%; border: 1px solid #eaeaea;">
+                        </div>
+                        <div class="col-md-9">
+                            <table class="table table-sm">
+                                <tr>
+                                    <th style="width: 150px;">Product:</th>
+                                    <td>{{ return.order_item.item }}</td>
+                                </tr>
+                                <tr>
+                                    <th>SKU:</th>
+                                    <td>{{ return.order_item.product_id.sku|default:"N/A" }}</td>
+                                </tr>
+                                {% if return.order_item.size %}
+                                <tr>
+                                    <th>Size:</th>
+                                    <td>{{ return.order_item.size }}</td>
+                                </tr>
+                                {% endif %}
+                                {% if return.order_item.color %}
+                                <tr>
+                                    <th>Color:</th>
+                                    <td>{{ return.order_item.color }}</td>
+                                </tr>
+                                {% endif %}
+                                <tr>
+                                    <th>Original Price:</th>
+                                    <td>{{ return.order_item.price|floatformat:0|intcomma }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Quantity Ordered:</th>
+                                    <td>{{ return.order_item.qty }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Quantity Returning:</th>
+                                    <td><strong>{{ return.quantity }}</strong></td>
+                                </tr>
+                                <tr>
+                                    <th>Refund Amount:</th>
+                                    <td><strong class="text-success">{{ return.refund_amount|floatformat:0|intcomma }}</strong></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Return Reason -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">
+                        <i class="fi-rs-comment me-2"></i>Return Reason
+                    </h6>
+                    <div class="bg-light p-3 rounded">
+                        <strong>{{ return.reason }}</strong>
+                        {% if return.reason_details %}
+                        <p class="mt-2 mb-0">{{ return.reason_details }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shipping Information (if available) -->
+            {% if return.tracking_number or return.shipping_carrier %}
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">
+                        <i class="fi-rs-truck me-2"></i>Return Shipping Information
+                    </h6>
+                    <div class="row">
+                        {% if return.shipping_carrier %}
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <span class="text-muted">Carrier:</span> {{ return.shipping_carrier }}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if return.tracking_number %}
+                        <div class="col-md-6">
+                            <div class="mb-2">
+                                <span class="text-muted">Tracking #:</span> {{ return.tracking_number }}
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if return.shipped_date %}
+                        <div class="col-12">
+                            <div class="mb-2">
+                                <span class="text-muted">Shipped Date:</span> {{ return.shipped_date|date:"F j, Y H:i" }}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Activity Log -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">
+                        <i class="fi-rs-time-passing me-2"></i>Activity Log
+                    </h6>
+                    <div class="activity-log" style="max-height: 300px; overflow-y: auto;">
+                        {% for log in logs %}
+                        <div class="d-flex align-items-start mb-3 pb-2 border-bottom">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-light rounded-circle p-2">
+                                    <i class="fi-rs-time-passing small"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-1">
+                                    <strong>{{ log.action }}</strong>
+                                    {% if log.from_status and log.to_status %}
+                                    <span class="text-muted">({{ log.from_status }} → {{ log.to_status }})</span>
+                                    {% endif %}
+                                </p>
+                                {% if log.notes %}
+                                <p class="small text-muted mb-1">{{ log.notes }}</p>
+                                {% endif %}
+                                <small class="text-muted">
+                                    {{ log.created_at|date:"M d, Y H:i" }} 
+                                    {% if log.user %}by {{ log.user.get_full_name|default:log.user.username }}{% endif %}
+                                </small>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="text-muted text-center py-3">No activity logs yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column - Actions -->
+        <div class="col-lg-4">
+            <!-- Action Cards based on status -->
+            {% if return.status == 'pending' %}
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Pending Approval</h6>
+                    
+                    <form method="post" class="mb-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="approve">
+                        <div class="mb-3">
+                            <label class="form-label">Notes (optional)</label>
+                            <textarea name="notes" class="form-control" rows="2" placeholder="Add approval notes..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 mb-2" onclick="return confirm('Approve this return request?')">
+                            <i class="fi-rs-check me-2"></i>Approve Return
+                        </button>
+                    </form>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="reject">
+                        <div class="mb-3">
+                            <label class="form-label">Rejection Reason <span class="text-danger">*</span></label>
+                            <textarea name="notes" class="form-control" rows="2" placeholder="Explain why this return is being rejected..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-danger w-100" onclick="return confirm('Reject this return request? This action cannot be undone.')">
+                            <i class="fi-rs-times me-2"></i>Reject Return
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if return.status == 'approved' %}
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Awaiting Return Shipment</h6>
+                    
+                    <!-- Update Tracking Form -->
+                    <form method="post" class="mb-4">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="update_tracking">
+                        <div class="mb-3">
+                            <label class="form-label">Shipping Carrier</label>
+                            <input type="text" name="shipping_carrier" class="form-control" 
+                                   value="{{ return.shipping_carrier|default:'' }}" 
+                                   placeholder="e.g., USPS, FedEx, DHL">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tracking Number</label>
+                            <input type="text" name="tracking_number" class="form-control" 
+                                   value="{{ return.tracking_number|default:'' }}" 
+                                   placeholder="Enter tracking number">
+                        </div>
+                        <button type="submit" class="btn btn-info w-100 mb-2">
+                            <i class="fi-rs-truck me-2"></i>Update Tracking
+                        </button>
+                    </form>
+                    
+                    <!-- Mark as Received -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="receive">
+                        <div class="mb-3">
+                            <label class="form-label">Item Condition</label>
+                            <select name="condition" class="form-select" required>
+                                <option value="">Select condition...</option>
+                                {% for value, label in condition_choices %}
+                                <option value="{{ value }}">{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Notes</label>
+                            <textarea name="notes" class="form-control" rows="2" placeholder="Add inspection notes..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100" onclick="return confirm('Mark this item as received?')">
+                            <i class="fi-rs-package me-2"></i>Mark as Received
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if return.status == 'received' %}
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Item Received - Process Refund</h6>
+                    
+                    <div class="alert alert-info mb-3">
+                        <strong>Condition reported:</strong> {{ return.get_item_condition_display|default:"Not specified" }}
+                    </div>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="complete">
+                        <div class="mb-3">
+                            <label class="form-label">Refund Notes</label>
+                            <textarea name="notes" class="form-control" rows="2" placeholder="Add refund notes..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100" onclick="return confirm('Process refund for {{ return.refund_amount|floatformat:0|intcomma }}?')">
+                            <i class="fi-rs-credit-card me-2"></i>Process Refund
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if return.status == 'completed' %}
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Return Completed</h6>
+                    
+                    <div class="alert alert-success">
+                        <i class="fi-rs-check-circle me-2"></i>
+                        Refund processed on {{ return.completed_at|date:"F j, Y" }}
+                    </div>
+                    
+                    <div class="bg-light p-3 rounded">
+                        <small class="text-muted d-block">Refund Amount</small>
+                        <strong class="h4">{{ return.refund_amount|floatformat:0|intcomma }}</strong>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if return.status == 'rejected' %}
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Return Rejected</h6>
+                    
+                    <div class="alert alert-danger">
+                        <i class="fi-rs-info me-2"></i>
+                        {{ return.admin_notes|default:"No rejection reason provided." }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Quick Actions -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Quick Actions</h6>
+                    
+                    <a href="mailto:{{ return.user.email }}" class="btn btn-outline-secondary w-100 mb-2">
+                        <i class="fi-rs-envelope me-2"></i>Email Customer
+                    </a>
+                    
+                    {% if return.status != 'completed' and return.status != 'rejected' %}
+                    <form method="post" onsubmit="return confirm('Are you sure you want to cancel this return?')">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="reject">
+                        <input type="hidden" name="notes" value="Cancelled by admin">
+                        <button type="submit" class="btn btn-outline-danger w-100">
+                            <i class="fi-rs-trash me-2"></i>Cancel Return
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

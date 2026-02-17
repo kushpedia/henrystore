@@ -1,0 +1,216 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'core:order-detail' order_item.order.oid %}">Order Details</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Return Request</li>
+                </ol>
+            </nav>
+
+            <!-- Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Return Request</h4>
+                    <p class="text-muted mb-0">
+                        Order #{{ order_item.order.oid }} • Placed on {{ order_item.order.order_date|date:"F j, Y" }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Item Summary -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Item to Return</h5>
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0 me-3">
+                            <img src="{{ order_item.image }}" alt="{{ order_item.item }}" 
+                                 class="img-fluid rounded" 
+                                 style="width: 80px; height: 80px; object-fit: cover; border: 1px solid #eaeaea;">
+                        </div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-2">{{ order_item.item }}</h6>
+                            <div class="d-flex flex-wrap gap-3">
+                                {% if order_item.size %}
+                                <span class="badge bg-light text-dark">Size: {{ order_item.size }}</span>
+                                {% endif %}
+                                {% if order_item.color %}
+                                <span class="badge bg-light text-dark">Color: {{ order_item.color }}</span>
+                                {% endif %}
+                                <span class="badge bg-light text-dark">Price: {{ order_item.price|floatformat:0|intcomma }}</span>
+                                <span class="badge bg-light text-dark">Ordered: {{ order_item.qty }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Return Form -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Return Details</h5>
+                    
+                    <form method="post" id="returnForm">
+                        {% csrf_token %}
+                        
+                        <!-- Reason Dropdown -->
+                        <div class="mb-4">
+                            <label for="{{ form.reason.id_for_label }}" class="form-label fw-medium">
+                                Reason for Return <span class="text-danger">*</span>
+                            </label>
+                            {{ form.reason }}
+                            {% if form.reason.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.reason.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Other Reason Text (Hidden by default) -->
+                        <div class="mb-4" id="otherReasonDiv" style="display: none;">
+                            <label for="{{ form.other_reason_text.id_for_label }}" class="form-label fw-medium">
+                                Please specify your reason <span class="text-danger">*</span>
+                            </label>
+                            {{ form.other_reason_text }}
+                            {% if form.other_reason_text.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.other_reason_text.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="mb-4">
+                            <label for="{{ form.quantity.id_for_label }}" class="form-label fw-medium">
+                                Quantity to Return <span class="text-danger">*</span>
+                            </label>
+                            {{ form.quantity }}
+                            {% if form.quantity.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.quantity.errors }}
+                            </div>
+                            {% endif %}
+                            <small class="text-muted">{{ form.quantity.help_text }}</small>
+                        </div>
+
+                        <!-- Additional Details -->
+                        <div class="mb-4">
+                            <label for="{{ form.reason_details.id_for_label }}" class="form-label fw-medium">
+                                Additional Details (Optional)
+                            </label>
+                            {{ form.reason_details }}
+                            {% if form.reason_details.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.reason_details.errors }}
+                            </div>
+                            {% endif %}
+                            <small class="text-muted">Please provide any additional information that might help us process your return.</small>
+                        </div>
+
+                        <!-- Refund Summary -->
+                        <div class="bg-light p-3 rounded mb-4">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <span class="text-muted">Estimated Refund Amount:</span>
+                                </div>
+                                <div class="col-auto">
+                                    <span class="h5 mb-0" id="refundAmount">
+                                        {{ order_item.price|floatformat:0|intcomma }}
+                                    </span>
+                                </div>
+                            </div>
+                            <small class="text-muted">
+                                Based on {{ order_item.price|floatformat:0|intcomma }} per item × <span id="qtyDisplay">1</span>
+                            </small>
+                        </div>
+
+                        <!-- Submit Buttons -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary flex-grow-1">
+                                <i class="fi-rs-send me-2"></i>Submit Return Request
+                            </button>
+                            <a href="{% url 'core:order-detail' order_item.order.oid %}" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Return Policy -->
+            <div class="card border-0 shadow-sm mt-4 bg-light">
+                <div class="card-body">
+                    <h6 class="card-title mb-2"><i class="fi-rs-info me-2"></i>Return Policy</h6>
+                    <ul class="small text-muted mb-0">
+                        <li>Returns must be requested within {{ return_window }} days of order.</li>
+                        <li>Item must be in original condition with tags attached.</li>
+                        <li>Refund will be processed to original payment method within 5-7 business days after we receive the item.</li>
+                        <li>You'll receive a return shipping label via email once your request is approved.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const reasonSelect = document.getElementById('reason_select');
+    const otherReasonDiv = document.getElementById('otherReasonDiv');
+    const quantityInput = document.getElementById('quantity_input');
+    const refundAmountSpan = document.getElementById('refundAmount');
+    const qtyDisplay = document.getElementById('qtyDisplay');
+    const itemPrice = {{ order_item.price|safe }};
+    
+    // Format number as currency
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-KE', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(amount);
+    }
+    
+    // Handle reason dropdown change
+    reasonSelect.addEventListener('change', function() {
+        if (this.value === 'other') {
+            otherReasonDiv.style.display = 'block';
+        } else {
+            otherReasonDiv.style.display = 'none';
+        }
+    });
+    
+    // Handle quantity change
+    quantityInput.addEventListener('input', function() {
+        let qty = parseInt(this.value) || 1;
+        const maxQty = parseInt(this.max) || 1;
+        
+        // Ensure quantity is within bounds
+        if (qty > maxQty) {
+            qty = maxQty;
+            this.value = qty;
+        }
+        if (qty < 1) {
+            qty = 1;
+            this.value = qty;
+        }
+        
+        // Update refund amount
+        const refundTotal = itemPrice * qty;
+        refundAmountSpan.textContent = formatCurrency(refundTotal);
+        qtyDisplay.textContent = qty;
+    });
+    
+    // Initial update
+    quantityInput.dispatchEvent(new Event('input'));
+});
+</script>
+{% endblock %}
+
+{% endblock %}

@@ -3,8 +3,11 @@ from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 import stripe
 from taggit.models import Tag
-from core.models import CartOrderItems, Product, Category,Color, Size, ProductVariation, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address,Coupon,SubCategory,MiniSubCategory
-from core.forms import ProductReviewForm
+from core.models import ( CartOrderItems, Product, Category,Color,
+                Size, ProductVariation, Vendor, CartOrder, ProductImages, ProductReview, 
+                wishlist_model, Address,Coupon,SubCategory,MiniSubCategory,ReturnRequest, ReturnLog)
+
+from core.forms import ProductReviewForm, ReturnRequestForm
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.urls import reverse
@@ -14,6 +17,7 @@ from paypal.standard.forms import PayPalPaymentsForm
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 import calendar
+from django.db import transaction
 from django.db.models.functions import ExtractMonth
 from django.db.models import Count, Avg, Q, Sum, Min, Max, F
 from userauths.models import ContactUs
@@ -1218,6 +1222,223 @@ def remove_wishlist(request):
     return JsonResponse({'data':t,'w':wishlist_json})
 
 
+
+
+# process refund
+
+@login_required
+def return_request_view(request, id):
+    """
+    Handle return request for a specific order item
+    URL: /refund/<id>/
+    """
+    # Get the order item and verify it belongs to the logged-in user
+    order_item = get_object_or_404(
+        CartOrderItems, 
+        id=id,
+        order__user=request.user  # Ensures item belongs to user
+    )
+    
+    # Check if item is eligible for return (7 days window)
+    order_date = order_item.order.order_date
+    days_since_order = (timezone.now() - order_date).days
+    return_window = 7  # 7 days return window
+    
+    if days_since_order < return_window:
+        messages.error(
+            request, 
+            f"This item is no longer eligible for return. "
+            f"Returns must be requested within {return_window} days of order."
+        )
+        return redirect('core:order-detail', order_item.order.oid)
+    
+    # Check if there's already a pending return for this item
+    existing_return = ReturnRequest.objects.filter(
+        order_item=order_item,
+        status__in=['pending', 'approved', 'received']  # Active returns
+    ).exists()
+    
+    if existing_return:
+        messages.warning(
+            request,
+            "You already have an active return request for this item. "
+            "Please wait for it to be processed."
+        )
+        return redirect('core:order-detail', order_item.order.id)
+    
+    # Handle form submission
+    if request.method == 'POST':
+        form = ReturnRequestForm(request.POST, order_item=order_item)
+        
+        if form.is_valid():
+            try:
+                with transaction.atomic():
+                    # Create the return request
+                    return_request = form.save(commit=False)
+                    return_request.order_item = order_item
+                    return_request.order = order_item.order
+                    return_request.user = request.user
+                    
+                    # Handle 'other' reason
+                    reason = form.cleaned_data['reason']
+                    if reason == 'other':
+                        return_request.reason = form.cleaned_data['other_reason_text']
+                    else:
+                        # Get the display label for the reason
+                        reason_dict = dict(form.REASON_CHOICES)
+                        return_request.reason = reason_dict.get(reason, reason)
+                    
+                    # Calculate refund amount
+                    return_request.refund_amount = order_item.price * form.cleaned_data['quantity']
+                    
+                    # Save the return request
+                    return_request.save()
+                    
+                    # Create log entry
+                    ReturnLog.objects.create(
+                        return_request=return_request,
+                        user=request.user,
+                        action="RETURN_REQUESTED",
+                        to_status=return_request.status,
+                        notes=f"Return requested for {form.cleaned_data['quantity']} item(s)"
+                    )
+                    
+                    messages.success(
+                        request, 
+                        f"Return request #{return_request.rma_number} has been submitted successfully!"
+                    )
+                    
+                    # Redirect to return confirmation page
+                    return redirect('core:return-confirmation', rma_number=return_request.rma_number)
+                    
+            except Exception as e:
+                messages.error(request, f"An error occurred: {str(e)}")
+        else:
+            messages.error(request, "Please correct the errors below.")
+    else:
+        form = ReturnRequestForm(order_item=order_item)
+    
+    # Context for the template
+    context = {
+        'order_item': order_item,
+        'form': form,
+        'return_window': return_window,
+        'days_since_order': days_since_order,
+        'max_refund': order_item.price * order_item.qty,
+    }
+    
+    return render(request, 'core/return-request.html', context)
+
+
+@login_required
+def return_confirmation_view(request, rma_number):
+    """
+    Show return request confirmation
+    """
+    return_request = get_object_or_404(
+        ReturnRequest,
+        rma_number=rma_number,
+        user=request.user
+    )
+    
+    context = {
+        'return_request': return_request,
+    }
+    return render(request, 'core/return_confirmation.html', context)
+
+# views.py - Add this new view
+
+@login_required
+def return_status_view(request, rma_number):
+    """
+    Track the status of a return request
+    """
+    return_request = get_object_or_404(
+        ReturnRequest,
+        rma_number=rma_number,
+        user=request.user
+    )
+    
+    # Get all logs for this return
+    logs = return_request.logs.all().order_by('-created_at')
+    
+    # Define status timeline with icons and descriptions
+    status_timeline = [
+        {
+            'status': 'pending',
+            'label': 'Request Submitted',
+            'icon': 'fi-rs-send',
+            'description': 'Your return request has been submitted and is waiting for review.',
+            'date': return_request.created_at,
+            'completed': True
+        },
+        {
+            'status': 'approved',
+            'label': 'Return Approved',
+            'icon': 'fi-rs-check',
+            'description': 'Your return has been approved. Please ship the item back.',
+            'date': return_request.approved_at,
+            'completed': return_request.status in ['approved', 'received', 'completed']
+        },
+        {
+            'status': 'received',
+            'label': 'Item Received',
+            'icon': 'fi-rs-package',
+            'description': 'We have received your returned item and are inspecting it.',
+            'date': None,  # Will be filled from logs
+            'completed': return_request.status in ['received', 'completed']
+        },
+        {
+            'status': 'completed',
+            'label': 'Refund Processed',
+            'icon': 'fi-rs-credit-card',
+            'description': 'Your refund has been processed successfully.',
+            'date': return_request.completed_at,
+            'completed': return_request.status == 'completed'
+        },
+    ]
+    
+    # If rejected, show rejection reason
+    if return_request.status == 'rejected':
+        status_timeline = [
+            {
+                'status': 'pending',
+                'label': 'Request Submitted',
+                'icon': 'fi-rs-send',
+                'date': return_request.created_at,
+                'completed': True
+            },
+            {
+                'status': 'rejected',
+                'label': 'Return Rejected',
+                'icon': 'fi-rs-times-circle',
+                'description': return_request.admin_notes or 'Your return request was not approved.',
+                'date': return_request.updated_at,
+                'completed': True,
+                'is_rejected': True
+            },
+        ]
+    
+    context = {
+        'return': return_request,
+        'logs': logs,
+        'status_timeline': status_timeline,
+    }
+    return render(request, 'core/return_status.html', context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Other Pages 
 def contact(request):
     return render(request, "core/contact.html")
@@ -1261,145 +1482,3 @@ def terms_of_service(request):
 
 
 
-def affiliate_program(request):
-    """Affiliate Program page - Learn about earning commissions"""
-    categories = Category.objects.all()[:10]
-    
-    context = {
-        'categories': categories,
-        'page_name': 'Affiliate Program',
-        'page_icon': '🤝',
-        'page_description': 'Join our affiliate program and earn commissions by promoting KStores products.',
-        'estimated_launch': 'Coming Q2 2026',
-        'exception': 'Our affiliate program is currently under development. Soon you\'ll be able to earn commissions by sharing your favorite products!',
-        'features': [
-            {'icon': '💰', 'title': 'Competitive Commissions', 'description': 'Earn up to 15% on every sale'},
-            {'icon': '📊', 'title': 'Real-time Tracking', 'description': 'Monitor your clicks, sales, and earnings'},
-            {'icon': '🎯', 'title': 'Dedicated Support', 'description': 'Get help from our affiliate team'},
-            {'icon': '🚀', 'title': 'Marketing Tools', 'description': 'Access banners, links, and promotional content'},
-        ],
-        'benefits': [
-            '60-day cookie duration',
-            'Monthly payouts via M-Pesa or Bank Transfer',
-            'Exclusive affiliate-only promotions',
-            'Dedicated affiliate manager',
-            'Custom tracking links',
-            'Bulk product feeds'
-        ],
-        'requirements': [
-            'Website, blog, or social media presence',
-            'Relevant audience in Kenya/East Africa',
-            'Commitment to ethical marketing',
-            '18 years or older'
-        ],
-        'cta_text': 'Join Waitlist',
-        'cta_icon': 'fi-rs-user-add',
-        'cta_url': '{% url "core:contact" %}?subject=Affiliate%20Program%20Inquiry',
-    }
-    return render(request, 'core/under_construction.html', context)
-
-def our_suppliers(request):
-    """Our Suppliers page - Vendor/supplier information"""
-    categories = Category.objects.all()[:10]
-    
-    
-    # Get active vendors to show as preview
-    vendors = Vendor.objects.all()[:8]
-    
-    context = {
-        'categories': categories,
-        'page_name': 'Our Suppliers',
-        'page_icon': '📦',
-        'page_description': 'Meet the manufacturers who supply our products.',
-        'estimated_launch': 'Coming Q2 2026',
-        'exception': '🤝 We\'re building a directory of our trusted suppliers and partners. Soon you\'ll be able to learn more about where our products come from!',
-        'features': [
-            {'icon': '🏆', 'title': 'Quality Assured', 'description': 'Vetted and verified suppliers'},
-            {'icon': '🌍', 'title': 'Local Sourcing', 'description': 'Supporting Kenyan businesses'},
-            {'icon': '♻️', 'title': 'Sustainable Practices', 'description': 'Eco-friendly suppliers'},
-            {'icon': '📱', 'title': 'Supplier Portal', 'description': 'Manage your products and orders'},
-        ],
-        'vendors': vendors,
-        'supplier_categories': [            
-            'Home Decor & Wall Art Artisans',
-            'Blender & Mixer Manufacturers',
-            'Laptop & Computer Suppliers',
-            ' Beauty & Personal Care Product Makers',
-            'Electronics Distributors'
-        ],
-        'cta_text': 'Become a Supplier',
-        'cta_icon': 'fi-rs-store',
-        'cta_url': '{% url "userauths:sign-up" %}?type=vendor',
-    }
-    return render(request, 'core/under_construction.html', context)
-
-def accessibility(request):
-    """Accessibility page - ADA compliance and inclusive shopping"""
-    categories = Category.objects.all()[:10]
-    
-    
-    context = {
-        'categories': categories,
-        'page_name': 'Accessibility',
-        'page_icon': '♿',
-        'page_description': 'Making KStores accessible to everyone.',
-        'estimated_launch': 'Coming Q2 2026',
-        'exception': 'We\'re committed to making KStores accessible to all users. Our accessibility features and compliance information will be available soon.',
-        'features': [
-            {'icon': '👁️', 'title': 'Screen Reader Compatible', 'description': 'WCAG 2.1 AA compliance'},
-            {'icon': '⌨️', 'title': 'Keyboard Navigation', 'description': 'Full keyboard support'},
-            {'icon': '🎨', 'title': 'High Contrast Mode', 'description': 'Better visibility options'},
-            {'icon': '📝', 'title': 'Accessibility Statement', 'description': 'Our commitment to inclusion'},
-        ],
-        'accessibility_features': [
-            'Alternative text for all images',
-            'Proper heading structure',
-            'ARIA labels for interactive elements',
-            'Focus indicators for keyboard navigation',
-            'Color contrast compliance',
-            'Resizable text without loss of functionality',
-            'Captions for video content',
-            'Skip to main content links'
-        ],
-        'cta_text': 'Contact Accessibility Team',
-        'cta_icon': 'fi-rs-headphones',
-        'cta_url': '{% url "core:contact" %}?subject=Accessibility%20Inquiry',
-    }
-    return render(request, 'core/under_construction.html', context)
-
-def promotions(request):
-    """Promotions page - Deals, discounts, and special offers"""
-    categories = Category.objects.all()[:10]
-    
-    
-    # Get discounted products to show as preview
-    discounted_products = Product.objects.all()[:8]
-    
-    # Sample upcoming promotions
-    upcoming_promotions = [
-        {'name': 'Black Friday Sale', 'month': 'November', 'discount': 'Up to 70%'},
-        {'name': 'New Year Clearance', 'month': 'January', 'discount': 'Up to 50%'},
-        {'name': 'Farmers Week', 'month': 'March', 'discount': '30% off agricultural products'},
-        {'name': 'Back to School', 'month': 'August', 'discount': '25% off stationery'},
-    ]
-    
-    context = {
-        'categories': categories,
-        'page_name': 'Promotions',
-        'page_icon': '🎉',
-        'page_description': 'Exclusive deals, seasonal sales, and special offers.',
-        'estimated_launch': 'Coming Q1 2026',
-        'exception': '🎁 Get ready for amazing deals! Our promotions hub is launching soon with exclusive discounts and special offers.',
-        'features': [
-            {'icon': '🏷️', 'title': 'Flash Sales', 'description': 'Limited-time deep discounts'},
-            {'icon': '🎫', 'title': 'Coupon Codes', 'description': 'Extra savings on your purchases'},
-            {'icon': '📅', 'title': 'Seasonal Events', 'description': 'Holiday and special occasion sales'},
-            {'icon': '⭐', 'title': 'Member Exclusives', 'description': 'Special prices for registered users'},
-        ],
-        'discounted_products': discounted_products,
-        'upcoming_promotions': upcoming_promotions,
-        'cta_text': 'Get Notified',
-        'cta_icon': 'fi-rs-bell',
-        'cta_url': '{% url "core:contact" %}?subject=Promotions%20Notification',
-    }
-    return render(request, 'core/under_construction.html', context)

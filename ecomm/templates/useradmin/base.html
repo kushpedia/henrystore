@@ -71,6 +71,19 @@
                             <span class="text">Reviews</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a href="{% url 'useradmin:admin-return-list' %}" class="nav-link {% if request.resolver_match.url_name == 'admin-return-list' %}active{% endif %}">
+                            <i class="fi-rs-return"></i>
+                            <span>Return Requests</span>
+                            {% if pending_returns_count > 0 %}
+                            <span class="badge bg-warning ms-auto">{{ pending_returns_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+
+
+
                     <li class="menu-item {% if '/useradmin/contact-messages/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:dashboard-contact-messages' %}">
                             <i class="icon material-icons md-contact_mail"></i>

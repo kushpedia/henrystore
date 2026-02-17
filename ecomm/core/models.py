@@ -8,6 +8,8 @@ from django.utils import timezone
 from datetime import timedelta
 from django.db.models import Avg
 from decimal import Decimal
+import decimal
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 STATUS_CHOICE = (
@@ -568,3 +570,169 @@ class Coupon(models.Model):
     def __str__(self):
         return f"{self.code}"
     
+
+
+# procedd returns
+
+
+
+
+class ReturnRequest(models.Model):
+    """Main return request model - for a single item return"""
+    
+    # Return status choices
+    class ReturnStatus(models.TextChoices):
+        PENDING = 'pending', 'Pending Approval'
+        APPROVED = 'approved', 'Approved'
+        RECEIVED = 'received', 'Item Received'
+        COMPLETED = 'completed', 'Refund Completed'
+        REJECTED = 'rejected', 'Rejected'
+        CANCELLED = 'cancelled', 'Cancelled'
+    
+    # Return type choices (for future expansion)
+    class ReturnType(models.TextChoices):
+        REFUND = 'refund', 'Refund'
+        STORE_CREDIT = 'store_credit', 'Store Credit'
+        EXCHANGE = 'exchange', 'Exchange'
+    
+    # Core relationships - each return is for ONE order item
+    order_item = models.ForeignKey('CartOrderItems', on_delete=models.CASCADE, related_name='return_requests')
+    order = models.ForeignKey('CartOrder', on_delete=models.CASCADE, related_name='return_requests')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='return_requests')
+    
+    # Return identification
+    rma_number = ShortUUIDField(
+        length=8, 
+        max_length=20, 
+        alphabet="1234567890ABCDEF",
+        prefix="RMA",
+        unique=True,
+        editable=False
+    )
+    
+    # Return details
+    return_type = models.CharField(
+        max_length=20,
+        choices=ReturnType.choices,
+        default=ReturnType.REFUND
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=ReturnStatus.choices,
+        default=ReturnStatus.PENDING,
+        db_index=True
+    )
+    
+    # Quantity being returned (for items with multiple quantities)
+    quantity = models.PositiveIntegerField(
+        default=1,
+        validators=[MinValueValidator(1)],
+        help_text="Quantity being returned"
+    )
+    
+    # Return reason
+    reason = models.CharField(max_length=100, help_text="Reason for return")
+    reason_details = models.TextField(blank=True, null=True)
+    
+    # Financial - automatically calculated from order item
+    refund_amount = models.DecimalField(
+        max_digits=12, 
+        decimal_places=2, 
+        default=decimal.Decimal('0.00')
+    )
+    
+    # Condition of returned item
+    CONDITION_CHOICES = [
+        ('new', 'New/Unopened'),
+        ('opened', 'Opened/Like New'),
+        ('used', 'Used'),
+        ('defective', 'Defective/Damaged'),
+    ]
+    item_condition = models.CharField(
+        max_length=20,
+        choices=CONDITION_CHOICES,
+        blank=True,
+        null=True,
+        help_text="Condition when received (updated by admin)"
+    )
+    
+    # Tracking for customer return shipment
+    tracking_number = models.CharField(max_length=100, blank=True, null=True)
+    shipping_carrier = models.CharField(max_length=50, blank=True, null=True)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    # Admin fields
+    approved_by = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name='approved_returns'
+    )
+    approved_at = models.DateTimeField(blank=True, null=True)
+    completed_at = models.DateTimeField(blank=True, null=True)
+    admin_notes = models.TextField(blank=True, null=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Return Request"
+        verbose_name_plural = "Return Requests"
+        # Prevent multiple pending returns for same item
+        constraints = [
+            models.UniqueConstraint(
+                fields=['order_item'],
+                condition=models.Q(status__in=['pending', 'approved', 'received']),
+                name='unique_active_return_per_item'
+            )
+        ]
+    
+    def __str__(self):
+        return f"Return {self.rma_number} - {self.order_item.item}"
+    
+    def save(self, *args, **kwargs):
+        # Auto-calculate refund amount from order item if not set
+        if not self.refund_amount and self.order_item:
+            self.refund_amount = self.order_item.price * self.quantity
+        super().save(*args, **kwargs)
+    
+    @property
+    def item_details(self):
+        """Quick access to item details"""
+        return {
+            'name': self.order_item.item,
+            'price': self.order_item.price,
+            'image': self.order_item.image,
+            'size': self.order_item.size,
+            'color': self.order_item.color,
+        }
+
+
+class ReturnLog(models.Model):
+    """Audit log for return actions"""
+    
+    return_request = models.ForeignKey(
+        ReturnRequest, 
+        on_delete=models.CASCADE,
+        related_name='logs'
+    )
+    user = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True
+    )
+    action = models.CharField(max_length=100)
+    from_status = models.CharField(max_length=50, blank=True, null=True)
+    to_status = models.CharField(max_length=50, blank=True, null=True)
+    notes = models.TextField(blank=True)
+    ip_address = models.GenericIPAddressField(blank=True, null=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.return_request.rma_number} - {self.action}"

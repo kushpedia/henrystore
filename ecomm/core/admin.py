@@ -2,7 +2,15 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from core.models import CartOrderItems, Product,Coupon, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address, SubCategory, MiniSubCategory,Color, Size, ProductVariation
+from core.models import ( CartOrderItems, Product,Coupon, Category,
+						Vendor, CartOrder, ProductImages, ProductReview,
+						wishlist_model, Address, SubCategory, MiniSubCategory,
+						Color, Size, ProductVariation,ReturnRequest, ReturnLog)
+
+admin.site.register(ReturnRequest)
+admin.site.register(ReturnLog)
+
+
 
 @admin.register(Color)
 class ColorAdmin(admin.ModelAdmin):

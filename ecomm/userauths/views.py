@@ -100,7 +100,7 @@ def forgot_password(request):
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             messages.error(request, "User with this email not exist.")
-            return redirect('forgot_password')
+            return redirect('userauths:forgot_password')
 
         # Generate reset token
         token = default_token_generator.make_token(user)

@@ -4,10 +4,15 @@ import os
 # Create your views here.
 from django.shortcuts import render, redirect
 from django.db.models import Sum
+from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
-from core.models import CartOrder,CartOrderItems, MiniSubCategory, Product, Category, ProductReview, Color, Size, ProductVariation,Vendor
+from core.models import (
+	CartOrder,CartOrderItems, MiniSubCategory, Product,
+	Category, ProductReview, Color, Size, ProductVariation,Vendor,
+    ReturnLog, ReturnRequest
+    )
 from userauths.models import Profile, User
 import datetime
 from useradmin.forms import AddProductForm, VariationForm
@@ -26,10 +31,11 @@ from django.utils import timezone
 from userauths.models import ContactUs
 
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q
+from django.db.models import Q, Count, Sum
 import csv
 from django.contrib import messages as django_messages
 from django.contrib.auth.decorators import user_passes_test
+
 
 def admin_required(view_func):
     """Decorator to check if user is admin/staff"""
@@ -647,9 +653,138 @@ def mark_and_view_message(request, message_id):
         django_messages.error(request, "Message not found.")
         return redirect('useradmin:dashboard-contact-messages')
 
+# return status view and update
+
+# views.py - Add admin return management views
 
 
+@admin_required
+def admin_return_list(request):
+    """
+    Admin view to list all return requests
+    """
+    # Get filter parameters
+    status_filter = request.GET.get('status', '')
+    search_query = request.GET.get('search', '')
+    
+    # Base queryset
+    returns = ReturnRequest.objects.select_related(
+        'order', 'user', 'order_item'
+    ).prefetch_related('logs').all()
+    
+    # Apply filters
+    if status_filter:
+        returns = returns.filter(status=status_filter)
+    
+    if search_query:
+        returns = returns.filter(
+            Q(rma_number__icontains=search_query) |
+            Q(order__oid__icontains=search_query) |
+            Q(user__email__icontains=search_query) |
+            Q(order_item__item__icontains=search_query)
+        )
+    
+    # Order by most recent
+    returns = returns.order_by('-created_at')
+    
+    # Pagination
+    paginator = Paginator(returns, 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    # Statistics
+    stats = {
+        'total': ReturnRequest.objects.count(),
+        'pending': ReturnRequest.objects.filter(status='pending').count(),
+        'approved': ReturnRequest.objects.filter(status='approved').count(),
+        'received': ReturnRequest.objects.filter(status='received').count(),
+        'completed': ReturnRequest.objects.filter(status='completed').count(),
+        'total_refund': ReturnRequest.objects.filter(
+            status='completed'
+        ).aggregate(total=Sum('refund_amount'))['total'] or 0,
+    }
+    
+    context = {
+        'page_obj': page_obj,
+        'stats': stats,
+        'current_status': status_filter,
+        'search_query': search_query,
+        'status_choices': ReturnRequest.ReturnStatus.choices,
+    }
+    return render(request, 'useradmin/return_list.html', context)
 
+
+@admin_required
+def admin_return_detail(request, pk):
+    """
+    Admin view to manage individual return request
+    """
+    return_request = get_object_or_404(
+        ReturnRequest.objects.select_related(
+            'order', 'user', 'order_item', 'order_item__product_id'
+        ).prefetch_related('logs__user'),
+        pk=pk
+    )
+    
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        notes = request.POST.get('notes', '')
+        
+        try:
+            with transaction.atomic():
+                old_status = return_request.status
+                
+                if action == 'approve':
+                    return_request.status = 'approved'
+                    return_request.approved_by = request.user
+                    return_request.approved_at = timezone.now()
+                    return_request.admin_notes = notes or "Return approved"
+                    
+                elif action == 'reject':
+                    return_request.status = 'rejected'
+                    return_request.admin_notes = notes or "Return rejected"
+                    
+                elif action == 'receive':
+                    return_request.status = 'received'
+                    return_request.item_condition = request.POST.get('condition')
+                    return_request.admin_notes = notes or "Item received"
+                    
+                elif action == 'complete':
+                    return_request.status = 'completed'
+                    return_request.completed_at = timezone.now()
+                    return_request.admin_notes = notes or "Refund processed"
+                    
+                elif action == 'update_tracking':
+                    return_request.tracking_number = request.POST.get('tracking_number')
+                    return_request.shipping_carrier = request.POST.get('shipping_carrier')
+                    return_request.shipped_date = timezone.now()
+                    return_request.status = 'approved'  # Ensure status is approved
+                    
+                return_request.save()
+                
+                # Create log entry
+                ReturnLog.objects.create(
+                    return_request=return_request,
+                    user=request.user,
+                    action=action.upper(),
+                    from_status=old_status,
+                    to_status=return_request.status,
+                    notes=notes or f"Admin {action} action performed"
+                )
+                
+                messages.success(request, f"Return {action} successfully!")
+                
+        except Exception as e:
+            messages.error(request, f"Error: {str(e)}")
+        
+        return redirect('core:admin-return-detail', pk=return_request.pk)
+    
+    context = {
+        'return': return_request,
+        'logs': return_request.logs.all().order_by('-created_at'),
+        'condition_choices': ReturnRequest.CONDITION_CHOICES,
+    }
+    return render(request, 'useradmin/return_detail.html', context)
 
 
 

@@ -1,0 +1,265 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <!-- Main Content -->
+        <div class="col-lg-8">
+            <!-- Header -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between">
+                        <div>
+                            <h4 class="mb-2">Return Status</h4>
+                            <p class="text-muted mb-0">
+                                RMA: <strong>{{ return.rma_number }}</strong> • 
+                                Order: <a href="{% url 'core:order-detail' return.order.oid %}">#{{ return.order.oid }}</a>
+                            </p>
+                        </div>
+                        <div>
+                            {% if return.status == 'pending' %}
+                                <span class="badge bg-warning text-dark px-3 py-2">Pending Approval</span>
+                            {% elif return.status == 'approved' %}
+                                <span class="badge bg-info text-white px-3 py-2">Approved - Awaiting Shipment</span>
+                            {% elif return.status == 'received' %}
+                                <span class="badge bg-primary text-white px-3 py-2">Item Received</span>
+                            {% elif return.status == 'completed' %}
+                                <span class="badge bg-success text-white px-3 py-2">Refund Completed</span>
+                            {% elif return.status == 'rejected' %}
+                                <span class="badge bg-danger text-white px-3 py-2">Rejected</span>
+                            {% elif return.status == 'cancelled' %}
+                                <span class="badge bg-secondary text-white px-3 py-2">Cancelled</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Timeline -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Return Progress</h5>
+                    
+                    <div class="timeline">
+                        {% for step in status_timeline %}
+                        <div class="timeline-item {% if step.completed %}completed{% endif %} {% if step.is_rejected %}rejected{% endif %}">
+                            <div class="timeline-marker">
+                                <i class="{{ step.icon }}"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="d-flex flex-wrap align-items-center justify-content-between mb-2">
+                                    <h6 class="mb-0">{{ step.label }}</h6>
+                                    {% if step.date %}
+                                    <small class="text-muted">{{ step.date|date:"M d, Y H:i" }}</small>
+                                    {% endif %}
+                                </div>
+                                {% if step.description %}
+                                <p class="text-muted small mb-0">{{ step.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Return Details -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Return Details</h5>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded">
+                                <small class="text-muted d-block mb-1">Item</small>
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ return.order_item.image }}" alt="{{ return.order_item.item }}" 
+                                         style="width: 50px; height: 50px; object-fit: cover;" 
+                                         class="rounded me-3">
+                                    <div>
+                                        <strong>{{ return.order_item.item }}</strong>
+                                        {% if return.order_item.size %}
+                                        <div><small>Size: {{ return.order_item.size }}</small></div>
+                                        {% endif %}
+                                        {% if return.order_item.color %}
+                                        <div><small>Color: {{ return.order_item.color }}</small></div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded">
+                                <small class="text-muted d-block mb-1">Return Reason</small>
+                                <strong>{{ return.reason }}</strong>
+                                {% if return.reason_details %}
+                                <p class="small text-muted mt-2 mb-0">{{ return.reason_details }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded">
+                                <small class="text-muted d-block mb-1">Quantity</small>
+                                <strong>{{ return.quantity }} of {{ return.order_item.qty }} items</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="bg-light p-3 rounded">
+                                <small class="text-muted d-block mb-1">Refund Amount</small>
+                                <strong class="text-success">{{ return.refund_amount|floatformat:0|intcomma }}</strong>
+                            </div>
+                        </div>
+                        
+                        {% if return.tracking_number %}
+                        <div class="col-12">
+                            <div class="bg-light p-3 rounded">
+                                <small class="text-muted d-block mb-1">Return Shipping</small>
+                                <strong>{{ return.shipping_carrier }}: {{ return.tracking_number }}</strong>
+                                {% if return.shipped_date %}
+                                <div><small>Shipped on: {{ return.shipped_date|date:"M d, Y" }}</small></div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Activity Log -->
+            {% if logs %}
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3">Activity Log</h5>
+                    <div class="activity-log">
+                        {% for log in logs %}
+                        <div class="d-flex align-items-start mb-3 pb-2 border-bottom">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-light rounded-circle p-2">
+                                    <i class="fi-rs-time-passing small"></i>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="mb-1">
+                                    <strong>{{ log.action }}</strong>
+                                    {% if log.from_status and log.to_status %}
+                                    <span class="text-muted">({{ log.from_status }} → {{ log.to_status }})</span>
+                                    {% endif %}
+                                </p>
+                                {% if log.notes %}
+                                <p class="small text-muted mb-1">{{ log.notes }}</p>
+                                {% endif %}
+                                <small class="text-muted">{{ log.created_at|date:"M d, Y H:i" }}</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+            <!-- Need Help -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Need Help?</h6>
+                    <p class="small text-muted mb-3">
+                        If you have questions about your return, please contact our support team.
+                    </p>
+                    <a href="{% url 'core:contact' %}" class="btn btn-outline-primary w-100">
+                        <i class="fi-rs-headset me-2"></i>Contact Support
+                    </a>
+                </div>
+            </div>
+
+            <!-- Return Policy Summary -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Return Policy</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2">
+                            <i class="fi-rs-check text-success me-2"></i>
+                            7-day return window
+                        </li>
+                        <li class="mb-2">
+                            <i class="fi-rs-check text-success me-2"></i>
+                            Free returns
+                        </li>
+                        <li class="mb-2">
+                            <i class="fi-rs-check text-success me-2"></i>
+                            Full refund to original payment
+                        </li>
+                        <li>
+                            <i class="fi-rs-check text-success me-2"></i>
+                            Items must be in original condition
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.timeline {
+    position: relative;
+    padding-left: 3rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e9ecef;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -2.5rem;
+    width: 2rem;
+    height: 2rem;
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+    z-index: 1;
+}
+
+.timeline-item.completed .timeline-marker {
+    background: #198754;
+    border-color: #198754;
+    color: white;
+}
+
+.timeline-item.rejected .timeline-marker {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.timeline-content {
+    padding-bottom: 1rem;
+}
+
+.timeline-item:last-child .timeline-content {
+    padding-bottom: 0;
+}
+</style>
+{% endblock %}

@@ -36,4 +36,7 @@ urlpatterns = [
     
     # Row click functionality
     path('contact-messages/<int:message_id>/view/', views.mark_and_view_message, name='view-message'),
+	# track returns
+	path("returns/", views.admin_return_list, name="admin-return-list"),
+    path("returns/<int:pk>/", views.admin_return_detail, name="admin-return-detail"),
 ]
