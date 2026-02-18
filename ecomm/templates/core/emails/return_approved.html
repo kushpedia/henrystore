@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Return Request Approved</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #2196F3; color: white; padding: 20px; text-align: center; }
+        .content { padding: 30px; background: #f9f9f9; }
+        .shipping-box { background: #fff; border: 2px solid #2196F3; padding: 20px; margin: 20px 0; }
+        .button { display: inline-block; padding: 12px 24px; background: #2196F3; color: white; text-decoration: none; border-radius: 4px; }
+        .instructions { background: #fff; padding: 20px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Return Request Approved</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ return.user.get_full_name|default:return.user.username }},</p>
+            
+            <p>Good news! Your return request <strong>#{{ return.rma_number }}</strong> has been approved.</p>
+            
+            <div class="shipping-box">
+                <h3 style="margin-top: 0; color: #2196F3;">📦 Return Shipping Instructions</h3>
+                <p>Please follow these steps to return your item:</p>
+                
+                <ol>
+                    <li><strong>Pack the item</strong> securely in its original packaging if possible.</li>
+                    <li><strong>Print the return label</strong> attached to this email.</li>
+                    <li><strong>Attach the label</strong> to your package.</li>
+                    <li><strong>Drop off the package</strong> at any {{ return.shipping_carrier|default:"courier" }} location.</li>
+                </ol>
+                
+                {% if return.tracking_number %}
+                <p><strong>Tracking Number:</strong> {{ return.tracking_number }}</p>
+                {% endif %}
+            </div>
+            
+            <div class="instructions">
+                <h4>Important Reminders:</h4>
+                <ul>
+                    <li>Item must be in original condition with tags attached</li>
+                    <li>Package the item securely to prevent damage</li>
+                    <li>Keep the receipt from the shipping carrier</li>
+                    <li>Refund will be processed within 5-7 business days after we receive the item</li>
+                </ul>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <a href="{{ tracking_url }}" class="button">Track Return Status</a>
+            </div>
+            
+            <p>Thank you for shopping with us!</p>
+            
+            <p>Best regards,<br>Kstores Team</p>
+        </div>
+        
+        <div class="footer">
+            <p>Return label attached separately. Please print and use for your return shipment.</p>
+        </div>
+    </div>
+</body>
+</html>

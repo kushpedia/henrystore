@@ -35,7 +35,7 @@ from django.db.models import Q, Count, Sum
 import csv
 from django.contrib import messages as django_messages
 from django.contrib.auth.decorators import user_passes_test
-
+from core.utils.email_utils import ReturnEmailService
 
 def admin_required(view_func):
     """Decorator to check if user is admin/staff"""
@@ -634,7 +634,7 @@ def api_unread_count(request):
     count = ContactUs.objects.filter(read=False).count()
     return JsonResponse({'count': count})
 
-# Add this view for row click functionality
+#  row click functionality
 @admin_required
 def mark_and_view_message(request, message_id):
     """Mark message as read and redirect to view"""
@@ -653,9 +653,9 @@ def mark_and_view_message(request, message_id):
         django_messages.error(request, "Message not found.")
         return redirect('useradmin:dashboard-contact-messages')
 
-# return status view and update
 
-# views.py - Add admin return management views
+
+# admin return management views
 
 
 @admin_required
@@ -771,13 +771,22 @@ def admin_return_detail(request, pk):
                     to_status=return_request.status,
                     notes=notes or f"Admin {action} action performed"
                 )
-                
+                # SEND EMAILS BASED ON ACTION
+                if action == 'approve':
+                    ReturnEmailService.send_return_approved(return_request)
+                elif action == 'reject':
+                    ReturnEmailService.send_return_rejected(return_request)
+                elif action == 'receive':
+                    ReturnEmailService.send_return_received(return_request)
+                elif action == 'complete':
+                    ReturnEmailService.send_return_completed(return_request)
+                    
                 messages.success(request, f"Return {action} successfully!")
                 
         except Exception as e:
             messages.error(request, f"Error: {str(e)}")
         
-        return redirect('core:admin-return-detail', pk=return_request.pk)
+        return redirect('useradmin:admin-return-detail', pk=return_request.pk)
     
     context = {
         'return': return_request,

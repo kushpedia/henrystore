@@ -1,0 +1,60 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Refund Processed</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #28a745; color: white; padding: 20px; text-align: center; }
+        .content { padding: 30px; background: #f9f9f9; }
+        .refund-box { background: #d4edda; border: 2px solid #28a745; padding: 20px; margin: 20px 0; text-align: center; }
+        .refund-amount { font-size: 32px; font-weight: bold; color: #28a745; }
+        .summary { background: #fff; padding: 20px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Refund Processed Successfully</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear {{ return.user.get_full_name|default:return.user.username }},</p>
+            
+            <p>Great news! We have processed your refund for return <strong>#{{ return.rma_number }}</strong>.</p>
+            
+            <div class="refund-box">
+                <p style="margin: 0; font-size: 18px;">Refund Amount:</p>
+                <div class="refund-amount">{{ return.refund_amount|floatformat:0|intcomma }}</div>
+                <p style="margin: 10px 0 0 0;">has been credited to your original payment method</p>
+            </div>
+            
+            <div class="summary">
+                <h4 style="margin-top: 0;">Return Summary</h4>
+                <table style="width: 100%;">
+                    <tr>
+                        <td>Item:</td>
+                        <td><strong>{{ return.order_item.item }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Quantity:</td>
+                        <td>{{ return.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <td>Return Reason:</td>
+                        <td>{{ return.reason }}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <p>The refund should appear in your account within 1-2 business days, depending on your bank's processing time.</p>
+            
+            <p>Thank you for shopping with us. We hope to see you again soon!</p>
+            
+            <p>Best regards,<br>Kstore Team</p>
+        </div>
+    </div>
+</body>
+</html>

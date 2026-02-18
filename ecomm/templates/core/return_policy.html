@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">Return Policy</h2>
+                    
+                    <div class="policy-section mb-4">
+                        <h5 class="text-primary">📦 Return Window</h5>
+                        <p>You have <strong>7 days</strong> from the date of delivery to request a return.</p>
+                    </div>
+                    
+                    <div class="policy-section mb-4">
+                        <h5 class="text-primary">💰 Refunds</h5>
+                        <p>We offer <strong>full refunds</strong> to your original payment method. No restocking fees, no deductions.</p>
+                    </div>
+                    
+                    <div class="policy-section mb-4">
+                        <h5 class="text-primary">🚚 Return Shipping</h5>
+                        <p><strong>Free returns</strong> - We provide prepaid return labels for all approved returns.</p>
+                    </div>
+                    
+                    <div class="policy-section mb-4">
+                        <h5 class="text-primary">📝 Return Conditions</h5>
+                        <ul>
+                            <li>Items must be in original condition with tags attached</li>
+                            <li>Items must not be worn, washed, or altered</li>
+                            <li>Original packaging should be included if possible</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="policy-section mb-4">
+                        <h5 class="text-primary">⏱️ Processing Time</h5>
+                        <ul>
+                            <li><strong>Return approval:</strong> Within 24-48 hours</li>
+                            <li><strong>Refund processing:</strong> 5-7 business days after we receive the item</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fi-rs-info me-2"></i>
+                        Need to start a return? Go to your <a href="{% url 'core:orders' %}">Orders page</a> and click "Request Refund" on the item you want to return.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

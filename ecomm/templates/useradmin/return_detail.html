@@ -118,7 +118,7 @@
                     <div class="row">
                         <div class="col-md-3">
                             <img src="{{ return.order_item.image }}" alt="{{ return.order_item.item }}" 
-                                 class="img-fluid rounded" style="max-width: 100%; border: 1px solid #eaeaea;">
+                                class="img-fluid rounded" style="max-width: 100%; border: 1px solid #eaeaea;">
                         </div>
                         <div class="col-md-9">
                             <table class="table table-sm">
@@ -298,14 +298,14 @@
                         <div class="mb-3">
                             <label class="form-label">Shipping Carrier</label>
                             <input type="text" name="shipping_carrier" class="form-control" 
-                                   value="{{ return.shipping_carrier|default:'' }}" 
-                                   placeholder="e.g., USPS, FedEx, DHL">
+                                    value="{{ return.shipping_carrier|default:'' }}" 
+                                    placeholder="e.g., USPS, FedEx, DHL">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Tracking Number</label>
                             <input type="text" name="tracking_number" class="form-control" 
-                                   value="{{ return.tracking_number|default:'' }}" 
-                                   placeholder="Enter tracking number">
+                                    value="{{ return.tracking_number|default:'' }}" 
+                                    placeholder="Enter tracking number">
                         </div>
                         <button type="submit" class="btn btn-info w-100 mb-2">
                             <i class="fi-rs-truck me-2"></i>Update Tracking

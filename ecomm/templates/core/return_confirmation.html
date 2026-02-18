@@ -54,10 +54,10 @@
                     
                     <!-- Action Buttons -->
                     <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
-                        <a href="{% url 'core:order-detail' return_request.order.oid %}" class="btn btn-outline-primary">
+                        <a href="{% url 'core:order-detail' return_request.order.id %}" class="btn btn-outline-primary">
                             <i class="fi-rs-arrow-left me-2"></i>Back to Order
                         </a>
-                        <a href="{% url 'core:return-status' return_request.rma_number %}" class="btn btn-primary">
+                        <a href="{% url 'core:dashboard'%}" class="btn btn-primary">
                             <i class="fi-rs-eye me-2"></i>Track Return Status
                         </a>
                     </div>

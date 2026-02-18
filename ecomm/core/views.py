@@ -28,7 +28,7 @@ from django.core.paginator import Paginator,EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from decimal import Decimal
 from django.template.loader import render_to_string
-
+from .utils.email_utils import ReturnEmailService
 # ================ CUSTOM ERROR HANDLERS ================
 
 def custom_page_not_found(request, exception):
@@ -1224,7 +1224,7 @@ def remove_wishlist(request):
 
 
 
-# process refund
+# process returns
 
 @login_required
 def return_request_view(request, id):
@@ -1238,19 +1238,21 @@ def return_request_view(request, id):
         id=id,
         order__user=request.user  # Ensures item belongs to user
     )
+    cart_order_id = order_item.order.id
+    # print("cart order id issssssssssssss:" + str(cart_order_id))
     
     # Check if item is eligible for return (7 days window)
     order_date = order_item.order.order_date
     days_since_order = (timezone.now() - order_date).days
     return_window = 7  # 7 days return window
     
-    if days_since_order < return_window:
-        messages.error(
+    if days_since_order > return_window:
+        messages.warning(
             request, 
             f"This item is no longer eligible for return. "
             f"Returns must be requested within {return_window} days of order."
         )
-        return redirect('core:order-detail', order_item.order.oid)
+        return redirect('core:order-detail', cart_order_id)
     
     # Check if there's already a pending return for this item
     existing_return = ReturnRequest.objects.filter(
@@ -1264,7 +1266,7 @@ def return_request_view(request, id):
             "You already have an active return request for this item. "
             "Please wait for it to be processed."
         )
-        return redirect('core:order-detail', order_item.order.id)
+        return redirect('core:order-detail', cart_order_id)
     
     # Handle form submission
     if request.method == 'POST':
@@ -1302,7 +1304,11 @@ def return_request_view(request, id):
                         to_status=return_request.status,
                         notes=f"Return requested for {form.cleaned_data['quantity']} item(s)"
                     )
-                    
+                    # SEND CONFIRMATION EMAIL
+                    ReturnEmailService.send_return_confirmation(return_request)
+
+
+
                     messages.success(
                         request, 
                         f"Return request #{return_request.rma_number} has been submitted successfully!"

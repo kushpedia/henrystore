@@ -42,7 +42,7 @@ SECRET_KEY = 'django-insecure-mfvte4i@l!m)ly9#%rqo^j7d8*0*z#tjw)qd^+(7220z#7mbwi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["391a31d84542.ngrok-free.app",'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["bf8f-196-96-76-134.ngrok-free.app",'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'django.contrib.humanize',
-
+    'django.contrib.sites',
     # third party apps	
     'taggit',
 	'ckeditor',
@@ -66,6 +66,8 @@ INSTALLED_APPS = [
     'payments',
 	'corporate',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -188,7 +190,7 @@ LOGGING = {
             'handlers': ['console', 'file'],
             'level': 'INFO',
         },
-        'yourapp': {  # Replace with your app name
+        'yourapp': {  #  app name
             'handlers': ['console', 'file'],
             'level': 'DEBUG',
             'propagate': True,
