@@ -744,3 +744,29 @@
         showItems: 1
     });
 })(jQuery);
+
+
+
+// Simplified WhatsApp inquiry function
+function sendWhatsAppInquiry(title, pid, price, url) {
+    const yourNumber = "254703443827"; // Your WhatsApp number
+    
+    // Get selected variations if they exist
+    const selectedColor = document.querySelector('.color-option.active')?.getAttribute('data-color-name') || '';
+    const selectedSize = document.querySelector('.size-option.active')?.getAttribute('data-size-name') || '';
+    const quantity = document.getElementById('product-quantity')?.value || '1';
+    
+    // Build clean message
+    let message = `🛍️ *Product Inquiry*\n\n`;
+    message += `📦 *Product:* ${title}\n`;
+    message += `💰 *Price:* Ksh ${price}\n`;
+    message += `🔢 *Quantity:* ${quantity}\n`;
+    
+    if (selectedColor) message += `🎨 *Color:* ${selectedColor}\n`;
+    if (selectedSize) message += `📏 *Size:* ${selectedSize}\n`;
+    
+    message += `\n🔗 * Product Link:* ${url}`;
+    
+    // Open WhatsApp
+    window.open(`https://wa.me/${yourNumber}?text=${encodeURIComponent(message)}`, '_blank');
+}

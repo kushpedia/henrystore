@@ -13038,3 +13038,34 @@ html {
         animation-duration: 80s;
     }
 }
+
+/* Pulse Animation for WhatsApp Icon */
+@keyframes pulse-whatsapp {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.9;
+        filter: drop-shadow(0 4px 8px rgba(37, 211, 102, 0.6));
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Simple hover effect */
+.whatsapp-inquiry-btn {
+    transition: all 0.3s ease !important;
+}
+
+.whatsapp-inquiry-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5) !important;
+}
+
+.whatsapp-inquiry-btn:hover .fab.fa-whatsapp {
+    animation: pulse-whatsapp 1s infinite !important;
+}

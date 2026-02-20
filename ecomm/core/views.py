@@ -1097,6 +1097,9 @@ def payment_failed_view(request):
 def customer_dashboard(request):
     orders_list = CartOrder.objects.filter(user=request.user).order_by("-id")
     address = Address.objects.filter(user=request.user)
+    returns = ReturnRequest.objects.select_related(
+        'order', 'user', 'order_item'
+    ).filter(user=request.user).order_by("-id")
     
     orders = CartOrder.objects.filter(user=request.user).annotate(
                 month=ExtractMonth("order_date")
@@ -1133,6 +1136,7 @@ def customer_dashboard(request):
         "orders": orders,
         "month": month,
         "total_orders": total_orders,
+        "returns": returns,
     }
     return render(request, 'core/dashboard.html', context)
 
@@ -1432,7 +1436,34 @@ def return_status_view(request, rma_number):
     }
     return render(request, 'core/return_status.html', context)
 
-
+# update tracking number
+@login_required
+def add_return_tracking(request, id):
+    return_request = get_object_or_404(ReturnRequest, id=id, user=request.user)
+    
+    if request.method == 'POST':
+        tracking_number = request.POST.get('tracking_number')
+        shipping_carrier = request.POST.get('shipping_carrier')
+        
+        if tracking_number and shipping_carrier:
+            return_request.tracking_number = tracking_number
+            return_request.shipping_carrier = shipping_carrier
+            return_request.shipped_date = timezone.now()
+            return_request.save()
+            
+            # Log the action
+            ReturnLog.objects.create(
+                return_request=return_request,
+                user=request.user,
+                action="TRACKING_ADDED",
+                notes=f"Customer added tracking: {shipping_carrier} - {tracking_number}"
+            )
+            
+            messages.success(request, "Tracking information added successfully!")
+        else:
+            messages.error(request, "Please provide both carrier and tracking number.")
+    
+    return redirect('core:dashboard')
 
 
 

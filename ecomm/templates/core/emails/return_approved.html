@@ -20,7 +20,7 @@
         </div>
         
         <div class="content">
-            <p>Dear {{ return.user.get_full_name|default:return.user.username }},</p>
+            <p>Dear {{ return.user.profile.full_name|default:return.user.username }},</p>
             
             <p>Good news! Your return request <strong>#{{ return.rma_number }}</strong> has been approved.</p>
             
@@ -46,7 +46,7 @@
                     <li>Item must be in original condition with tags attached</li>
                     <li>Package the item securely to prevent damage</li>
                     <li>Keep the receipt from the shipping carrier</li>
-                    <li>Refund will be processed within 5-7 business days after we receive the item</li>
+                    <li>Refund will be processed within 2-7 business days after we receive the item</li>
                 </ul>
             </div>
             

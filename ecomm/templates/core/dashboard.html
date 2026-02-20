@@ -4,6 +4,26 @@
 {% load humanize %}
 {% load static %}
 {% block content %}
+<style>
+    .bg-light-success {
+        background-color: #f0fff4;
+        border-color: #28a745 !important;
+    }
+    .bg-light-danger {
+        background-color: #fff5f5;
+        border-color: #dc3545 !important;
+    }
+    .badge {
+        font-weight: 500;
+        border-radius: 50px;
+    }
+    .border {
+        transition: all 0.3s ease;
+    }
+    .border:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+</style>
 <main class="main pages">
 	<div class="page-header breadcrumb-wrap">
 		<div class="container">
@@ -145,14 +165,190 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
-									<div class="card">
-										<div class="card-header">
-											<h3 class="mb-0">Returns Tracking</h3>
+									<div class="card border-0 shadow-sm">
+										<div class="card-header bg-white py-3">
+											<h3 class="mb-0">
+												<i class="fi-rs-return me-2 text-primary"></i>
+												My Returns
+											</h3>
 										</div>
-										<div class="card-body contact-from-area">
-											<p>Track Your Returns requests</p>
+										
+										{% if returns %}
+										<div class="card-body">
+											<p class="text-muted mb-4">Track and manage your return requests</p>
 											
+											{% for return in returns %}
+											<div class="border rounded-3 p-4 mb-3 {% if return.status == 'completed' %}bg-light-success{% elif return.status == 'rejected' %}bg-light-danger{% endif %}">
+												<!-- Return Header -->
+												<div class="d-flex flex-wrap align-items-center justify-content-between mb-3">
+													<div>
+														<h5 class="mb-1">
+															Return #{{ return.rma_number }}
+															<small class="text-muted ms-2">(Order #{{ return.order.oid }})</small>
+														</h5>
+														<p class="small text-muted mb-0">
+															<i class="fi-rs-calendar me-1"></i> Requested: {{ return.created_at|date:"F j, Y" }}
+														</p>
+													</div>
+													<div>
+														{% if return.status == 'pending' %}
+															<span class="badge bg-warning text-dark px-3 py-2">Pending Approval</span>
+														{% elif return.status == 'approved' %}
+															<span class="badge bg-info text-white px-3 py-2">Approved - Awaiting Shipment</span>
+														{% elif return.status == 'received' %}
+															<span class="badge bg-primary text-white px-3 py-2">Item Received</span>
+														{% elif return.status == 'completed' %}
+															<span class="badge bg-success text-white px-3 py-2">Refund Completed</span>
+														{% elif return.status == 'rejected' %}
+															<span class="badge bg-danger text-white px-3 py-2">Rejected</span>
+														{% endif %}
+													</div>
+												</div>
+												
+												<!-- Item Details -->
+												<div class="row g-3 mb-3">
+													<div class="col-md-6">
+														<div class="d-flex align-items-center">
+															<div class="flex-shrink-0 me-3">
+																<img src="{{ return.order_item.image }}" 
+																		alt="{{ return.order_item.item }}" 
+																		style="width: 60px; height: 60px; object-fit: cover;" 
+																		class="rounded border">
+															</div>
+															<div class="flex-grow-1">
+																<h6 class="mb-1">{{ return.order_item.item }}</h6>
+																<div class="small text-muted">
+																	{% if return.order_item.size %}Size: {{ return.order_item.size }}{% endif %}
+																	{% if return.order_item.size and return.order_item.color %} | {% endif %}
+																	{% if return.order_item.color %}Color: {{ return.order_item.color }}{% endif %}
+																</div>
+															</div>
+														</div>
+													</div>
+													
+													<div class="col-md-3">
+														<div class="small text-muted">Quantity</div>
+														<div class="fw-medium">{{ return.quantity }} of {{ return.order_item.qty }}</div>
+													</div>
+													
+													<div class="col-md-3">
+														<div class="small text-muted">Refund Amount</div>
+														<div class="fw-medium text-success">{{ return.refund_amount|floatformat:0|intcomma }}</div>
+													</div>
+												</div>
+												
+												<!-- Reason & Actions -->
+												<div class="d-flex flex-wrap align-items-center justify-content-between pt-2 border-top">
+													<div class="small">
+														<span class="text-muted">Reason:</span>
+														<span class="fw-medium ms-1">{{ return.reason|truncatechars:50 }}</span>
+													</div>
+													
+													<div class="d-flex gap-2 mt-2 mt-sm-0">
+														<a href="{% url 'core:return-status' return.rma_number %}" 
+															class="btn btn-sm btn-outline-primary">
+															<i class="fi-rs-eye me-1"></i>View Details
+														</a>
+														
+														{% if return.status == 'approved' and not return.tracking_number %}
+														<button type="button" 
+																class="btn btn-sm btn-outline-info" 
+																data-bs-toggle="modal" 
+																data-bs-target="#trackingModal{{ return.id }}">
+															<i class="fi-rs-truck me-1"></i>Add Tracking
+														</button>
+														
+														<!-- Tracking Modal -->
+														<div class="modal fade" id="trackingModal{{ return.id }}" tabindex="-1">
+															<div class="modal-dialog">
+																<div class="modal-content">
+																	<div class="modal-header">
+																		<h5 class="modal-title">Add Tracking Information</h5>
+																		<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+																	</div>
+																	<form method="post" action="{% url 'core:add-return-tracking' return.id %}">
+																		{% csrf_token %}
+																		<div class="modal-body">
+																			<p class="small text-muted mb-3">
+																				Please enter the tracking number from your return shipment.
+																			</p>
+																			<div class="mb-3">
+																				<label class="form-label">Shipping Carrier</label>
+																				<select name="shipping_carrier" class="form-select" required>
+																					<option value="">Select carrier...</option>
+																					<option value="Wells Fargo">Well Fago</option>
+																					<option value="G4S">G4S</option>
+																					<option value="Mololine">Mololine</option>
+																					<option value="Tahmid">Tahmid</option>
+																					<option value="Lopha">Lopha</option>
+																				</select>
+																			</div>
+																			<div class="mb-3">
+																				<label class="form-label">Tracking Number</label>
+																				<input type="text" name="tracking_number" class="form-control" 
+																					placeholder="Enter tracking number" required>
+																			</div>
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+																			<button type="submit" class="btn btn-primary">Submit Tracking</button>
+																		</div>
+																	</form>
+																</div>
+															</div>
+														</div>
+														{% endif %}
+														
+														{% if return.tracking_number %}
+														<span class="btn btn-sm btn-outline-success" title="Tracking: {{ return.tracking_number }}">
+															<i class="fi-rs-check me-1"></i>Shipped
+														</span>
+														{% endif %}
+													</div>
+												</div>
+											</div>
+											{% endfor %}
 										</div>
+										
+										<!-- Pagination (if needed) -->
+										{% if returns.has_other_pages %}
+										<div class="card-footer bg-white border-0">
+											<nav aria-label="Returns pagination">
+												<ul class="pagination justify-content-center mb-0">
+													{% if returns.has_previous %}
+													<li class="page-item">
+														<a class="page-link" href="?page={{ returns.previous_page_number }}#track-orders">Previous</a>
+													</li>
+													{% endif %}
+													
+													{% for num in returns.paginator.page_range %}
+													<li class="page-item {% if returns.number == num %}active{% endif %}">
+														<a class="page-link" href="?page={{ num }}#track-orders">{{ num }}</a>
+													</li>
+													{% endfor %}
+													
+													{% if returns.has_next %}
+													<li class="page-item">
+														<a class="page-link" href="?page={{ returns.next_page_number }}#track-orders">Next</a>
+													</li>
+													{% endif %}
+												</ul>
+											</nav>
+										</div>
+										{% endif %}
+										
+										{% else %}
+										<div class="card-body text-center py-5">
+											<div class="mb-4">
+												<i class="fi-rs-return" style="font-size: 64px; color: #dee2e6;"></i>
+											</div>
+											<h5 class="text-muted mb-3">No Return Requests Found</h5>
+											<p class="text-muted mb-4">You haven't submitted any return requests yet.</p>
+											<a href="{% url 'core:orders' %}" class="btn btn-primary">
+												<i class="fi-rs-shopping-cart me-2"></i>View Your Orders
+											</a>
+										</div>
+										{% endif %}
 									</div>
 								</div>
 								<div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-tab">

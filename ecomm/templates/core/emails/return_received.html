@@ -18,7 +18,7 @@
         </div>
         
         <div class="content">
-            <p>Dear {{ return.user.get_full_name|default:return.user.username }},</p>
+            <p>Dear {{ return.user.profile.full_name|default:return.user.username }},</p>
             
             <p>We have received your returned item for request <strong>#{{ return.rma_number }}</strong>.</p>
             

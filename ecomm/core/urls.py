@@ -48,6 +48,7 @@ urlpatterns = [
 	path("refund/<int:id>/", views.return_request_view, name="return-request"),
     path("return-confirmation/<str:rma_number>/", views.return_confirmation_view, name="return-confirmation"),
     path("return-status/<str:rma_number>/", views.return_status_view, name="return-status"),
+    path("add-return-tracking/<int:id>/", views.add_return_tracking, name="add-return-tracking"),
 	# dashboard
 	path("dashboard/", views.customer_dashboard, name="dashboard"),
 	# order deatails

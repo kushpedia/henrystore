@@ -287,21 +287,65 @@
 												</div>
 											</div>
 										</div>
-										
-										<div class="font-xs">
-											<ul class="mr-50 float-start">
-												<li class="mb-5">Type: <span class="text-brand">{{p.type}}</span></li>
-												<li class="mb-5">MFG:<span class="text-brand"> {{p.mfd|date:"d M, Y"}}</span></li>
-												<li>LIFE: <span class="text-brand">{{ p.life }}</span></li>
-											</ul>
-											<ul class="float-start">
-												<li class="mb-5">SKU: <a href="#">{{p.sku}}</a></li>
-												{% if p.tags %}
-												<li class="mb-5">Tags: {% for tag in p.tags.all %}<a href="{% url 'core:tags' tag.slug %}" rel="tag"> #{{tag.name}}</a>,{% endfor %} </li>
-												{% endif %}
-												<li>Stock:<span class="in-stock text-brand ml-5">{{p.stock_count}} Items In Stock</span></li>
-											</ul>
-										</div>
+<!-- Whatsapp functionality -->
+<div class="whatsapp-inquiry-section mt-3" id="whatsappSection">
+    <!-- Main WhatsApp Button with Styling Only -->
+    <div class="whatsapp-button-wrapper position-relative">
+        <a href="javascript:void(0);" 
+            class="btn whatsapp-inquiry-btn" 
+            id="whatsappInquiryBtn"
+            onclick="sendWhatsAppInquiry('{{ p.title|escapejs }}', '{{ p.pid }}', '{{ p.price|floatformat:0|intcomma }}', '{{ request.build_absolute_uri }}')"
+            style="background: linear-gradient(145deg, #25D366, #128C7E); 
+					color: white; 
+					padding: 14px 30px; 
+					border-radius: 50px; 
+					text-decoration: none; 
+					display: inline-flex; 
+					align-items: center; 
+					font-weight: 600; 
+					box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4); 
+					transition: all 0.3s ease; 
+					border: none; 
+					position: relative; 
+					overflow: hidden; 
+					cursor: pointer;"
+            onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 12px 30px rgba(37, 211, 102, 0.5)';"
+            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 20px rgba(37, 211, 102, 0.4)';"
+            data-product-title="{{ p.title }}"
+            data-product-price="{{ p.price }}"
+            data-product-pid="{{ p.pid }}"
+            title="Inquire via WhatsApp">
+            
+            <!-- WhatsApp Icon with Pulse Animation (KEPT) -->
+            <span class="whatsapp-icon-wrapper" style="display: flex; align-items: center; justify-content: center; margin-right: 12px; position: relative;">
+                <i class="fab fa-whatsapp" style="font-size: 28px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2)); animation: pulse-whatsapp 2s infinite;"></i>
+            </span>
+            
+            <!-- Button Text -->
+            <span class="btn-text" style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2;">
+                <span class="main-text" style="font-size: 16px; letter-spacing: 0.5px;">Inquire via WhatsApp</span>
+                <span class="sub-text" style="font-size: 12px; opacity: 0.9;">Quick response within 5min ⚡</span>
+            </span>
+        </a>
+    </div>
+    
+    <!-- Quick Response Badge - Styling Only -->
+    <div class="quick-response-badge mt-2" style="display: flex; align-items: center; gap: 10px; font-size: 13px; color: #666;">
+        <span style="display: flex; align-items: center;">
+            <i class="fas fa-clock" style="color: #25D366; margin-right: 5px;"></i>
+            <span>Avg. response: <strong>&lt;5 min</strong></span>
+        </span>
+        <span style="display: flex; align-items: center;">
+            <i class="fas fa-users" style="color: #25D366; margin-right: 5px;"></i>
+            <span> online now</span>
+        </span>
+    </div>
+    
+    <small class="text-muted d-block mt-2" style="display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-info-circle" style="color: #25D366;"></i>
+        <span>Get quick answers about this product</span>
+    </small>
+</div>
 									</div>
 									<!-- Detail Info -->
 								</div>

@@ -26,7 +26,7 @@
         </div>
         
         <div class="content">
-            <p>Dear {{ return.user.get_full_name|default:return.user.username }},</p>
+            <p>Dear {{ return.user.profile.full_name|default:return.user.username }},</p>
             
             <p>Thank you for submitting your return request. We have received it and will begin processing shortly.</p>
             
