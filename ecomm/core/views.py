@@ -1230,6 +1230,7 @@ def remove_wishlist(request):
 
 # process returns
 
+
 @login_required
 def return_request_view(request, id):
     """
@@ -1243,7 +1244,16 @@ def return_request_view(request, id):
         order__user=request.user  # Ensures item belongs to user
     )
     cart_order_id = order_item.order.id
-    # print("cart order id issssssssssssss:" + str(cart_order_id))
+    
+    # CRITICAL VALIDATION: Check if order is delivered
+    # Assuming 'delivered' is one of the STATUS_CHOICE values in your CartOrder model
+    if order_item.order.product_status != 'delivered':
+        messages.warning(
+            request,
+            "You can only request returns for items that have been delivered. "
+            f"This order is currently '{order_item.order.get_product_status_display()}'."
+        )
+        return redirect('core:order-detail', cart_order_id)
     
     # Check if item is eligible for return (7 days window)
     order_date = order_item.order.order_date
@@ -1308,10 +1318,9 @@ def return_request_view(request, id):
                         to_status=return_request.status,
                         notes=f"Return requested for {form.cleaned_data['quantity']} item(s)"
                     )
+                    
                     # SEND CONFIRMATION EMAIL
                     ReturnEmailService.send_return_confirmation(return_request)
-
-
 
                     messages.success(
                         request, 
@@ -1335,11 +1344,10 @@ def return_request_view(request, id):
         'return_window': return_window,
         'days_since_order': days_since_order,
         'max_refund': order_item.price * order_item.qty,
+        'order_status': order_item.order.get_product_status_display(),  # Pass status to template
     }
     
     return render(request, 'core/return-request.html', context)
-
-
 @login_required
 def return_confirmation_view(request, rma_number):
     """
