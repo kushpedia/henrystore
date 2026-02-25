@@ -199,3 +199,20 @@ def promotions(request):
         'cta_url': '{% url "core:contact" %}?subject=Promotions%20Notification',
     }
     return render(request, 'corporate/under_construction.html', context)
+
+
+
+def return_policy_view(request):
+    """Display return policy page"""
+    
+    return render(request, "corporate/return-policy.html")
+
+
+
+def terms_conditions_view(request):
+    """Display terms and conditions page"""
+    return render(request, 'corporate/terms-conditions.html')
+
+def privacy_policy_view(request):
+    """Display privacy policy page"""
+    return render(request, 'corporate/privacy-policy.html')

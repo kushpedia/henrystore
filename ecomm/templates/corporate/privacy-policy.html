@@ -1,0 +1,700 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Breadcrumb Section -->
+<div class="breadcrumb-section breadcrumb-bg-1 pt-50 pb-50">
+    <div class="container">
+        <div class="breadcrumb-text text-center">
+            <h1>Privacy Policy</h1>
+            <div class="breadcrumb-menu">
+                <ul>
+                    <li><a href="{% url 'core:index' %}">Home</a></li>
+                    <li><i class="fi-rs-angle-right"></i></li>
+                    <li>Privacy Policy</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Policy Content -->
+<div class="privacy-container pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <!-- Sidebar Navigation -->
+                <div class="privacy-sidebar sticky-top" style="top: 100px;">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title mb-3">Quick Navigation</h5>
+                            <ul class="nav flex-column nav-pills">
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link active" href="#introduction">Introduction</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#information">Information We Collect</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#usage">How We Use Your Information</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#sharing">Information Sharing</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#cookies">Cookies & Tracking</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#data-security">Data Security</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#your-rights">Your Rights</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#children">Children's Privacy</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#third-party">Third-Party Links</a>
+                                </li>
+                                <li class="nav-item mb-2">
+                                    <a class="nav-link" href="#changes">Changes to Policy</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#contact">Contact Us</a>
+                                </li>
+                            </ul>
+                            
+                            <hr class="my-3">
+                            
+                            <div class="text-center">
+                                <small class="text-muted">Last Updated: {% now "F j, Y" %}</small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Protection Badge -->
+                    <div class="card border-0 shadow-sm mt-3">
+                        <div class="card-body text-center">
+                            <i class="fi-rs-shield text-primary mb-2" style="font-size: 32px;"></i>
+                            <h6 class="mb-1">GDPR Compliant</h6>
+                            <small class="text-muted">We respect your privacy rights</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
+                <div class="privacy-content-card">
+                    <!-- Introduction Section -->
+                    <section id="introduction" class="privacy-section mb-5">
+                        <h2 class="privacy-title">1. Introduction</h2>
+                        <div class="privacy-body">
+                            <p class="lead">At Kstores, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or make a purchase.</p>
+                            
+                            <p>Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.</p>
+                            
+                            <div class="alert alert-info">
+                                <i class="fi-rs-info me-2"></i>
+                                <strong>We are committed to protecting your personal information and your right to privacy.</strong> If you have any questions or concerns about this policy, please contact us.
+                            </div>
+                            
+                            <p><strong>Kstores</strong> ("we", "us", or "our") operates the website and provides the services offered through our platform.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Information We Collect -->
+                    <section id="information" class="privacy-section mb-5">
+                        <h2 class="privacy-title">2. Information We Collect</h2>
+                        <div class="privacy-body">
+                            <p>We collect several types of information from and about users of our website, including:</p>
+                            
+                            <h5 class="mt-4 mb-3">Personal Information You Provide</h5>
+                            <p>When you register, place an order, or interact with our site, we may collect:</p>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="list-styled">
+                                        <li><strong>Contact Details:</strong> Name, email address, phone number</li>
+                                        <li><strong>Account Information:</strong> Username, password, profile information</li>
+                                        <li><strong>Payment Information:</strong> Credit card details, billing address (processed securely)</li>
+                                        <li><strong>Shipping Information:</strong> Delivery address, shipping preferences</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <ul class="list-styled">
+                                        <li><strong>Order History:</strong> Products purchased, order details, returns</li>
+                                        <li><strong>Communications:</strong> Emails, customer support inquiries, reviews</li>
+                                        <li><strong>Account Settings:</strong> Preferences, marketing choices</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mt-4 mb-3">Information Automatically Collected</h5>
+                            <p>When you visit our site, we automatically collect:</p>
+                            
+                            <ul>
+                                <li><strong>Usage Data:</strong> Pages visited, time spent, links clicked</li>
+                                <li><strong>Device Information:</strong> IP address, browser type, operating system</li>
+                                <li><strong>Location Data:</strong> General geographic location based on IP</li>
+                                <li><strong>Cookies:</strong> See our Cookies section below</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <!-- How We Use Your Information -->
+                    <section id="usage" class="privacy-section mb-5">
+                        <h2 class="privacy-title">3. How We Use Your Information</h2>
+                        <div class="privacy-body">
+                            <p>We use the information we collect for various purposes, including:</p>
+                            
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="usage-card bg-light p-3 rounded-3">
+                                        <i class="fi-rs-shopping-cart text-primary mb-2"></i>
+                                        <h6 class="mb-2">Order Processing</h6>
+                                        <small class="text-muted">To process and fulfill your orders, send order confirmations, and manage returns</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="usage-card bg-light p-3 rounded-3">
+                                        <i class="fi-rs-headset text-primary mb-2"></i>
+                                        <h6 class="mb-2">Customer Support</h6>
+                                        <small class="text-muted">To respond to your inquiries and provide customer service</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="usage-card bg-light p-3 rounded-3">
+                                        <i class="fi-rs-envelope text-primary mb-2"></i>
+                                        <h6 class="mb-2">Marketing Communications</h6>
+                                        <small class="text-muted">To send you promotional emails (with your consent) about products and offers</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="usage-card bg-light p-3 rounded-3">
+                                        <i class="fi-rs-stats text-primary mb-2"></i>
+                                        <h6 class="mb-2">Site Improvement</h6>
+                                        <small class="text-muted">To analyze usage patterns and improve our website and services</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="usage-card bg-light p-3 rounded-3">
+                                        <i class="fi-rs-shield text-primary mb-2"></i>
+                                        <h6 class="mb-2">Fraud Prevention</h6>
+                                        <small class="text-muted">To detect and prevent fraudulent transactions and protect our rights</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="usage-card bg-light p-3 rounded-3">
+                                        <i class="fi-rs-legal text-primary mb-2"></i>
+                                        <h6 class="mb-2">Legal Compliance</h6>
+                                        <small class="text-muted">To comply with legal obligations and enforce our terms</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-warning mt-4">
+                                <i class="fi-rs-exclamation me-2"></i>
+                                <strong>Note:</strong> We will only use your personal information for the purposes stated in this policy or with your consent.
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Information Sharing -->
+                    <section id="sharing" class="privacy-section mb-5">
+                        <h2 class="privacy-title">4. Information Sharing</h2>
+                        <div class="privacy-body">
+                            <p>We do not sell, trade, or rent your personal information to third parties. We may share information in the following situations:</p>
+                            
+                            <h5 class="mt-3 mb-3">Service Providers</h5>
+                            <p>We share information with trusted third parties who assist us in operating our website and serving you:</p>
+                            
+                            <table class="table table-bordered">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th>Provider Type</th>
+                                        <th>Purpose</th>
+                                        <th>Data Shared</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Payment Processors</td>
+                                        <td>Process payments securely</td>
+                                        <td>Payment information, order details</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping Carriers</td>
+                                        <td>Deliver your orders</td>
+                                        <td>Name, address, phone</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Email Service Providers</td>
+                                        <td>Send order confirmations and marketing</td>
+                                        <td>Email address, name</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Analytics Providers</td>
+                                        <td>Analyze site usage</td>
+                                        <td>Anonymous usage data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <h5 class="mt-4 mb-3">Legal Requirements</h5>
+                            <p>We may disclose information if required by law, court order, or to protect our rights and safety.</p>
+                            
+                            <h5 class="mt-4 mb-3">Business Transfers</h5>
+                            <p>In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of the transaction.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Cookies & Tracking -->
+                    <section id="cookies" class="privacy-section mb-5">
+                        <h2 class="privacy-title">5. Cookies & Tracking Technologies</h2>
+                        <div class="privacy-body">
+                            <p>We use cookies and similar tracking technologies to enhance your browsing experience and analyze site traffic.</p>
+                            
+                            <h5 class="mb-3">What Are Cookies?</h5>
+                            <p>Cookies are small text files stored on your device that help us remember your preferences and improve our site.</p>
+                            
+                            <h5 class="mb-3">Types of Cookies We Use</h5>
+                            
+                            <div class="cookie-table mb-4">
+                                <div class="cookie-row d-flex border-bottom py-3">
+                                    <div class="cookie-type fw-bold" style="width: 150px;">Essential</div>
+                                    <div class="cookie-desc text-muted">Required for site functionality, like shopping cart and login</div>
+                                </div>
+                                <div class="cookie-row d-flex border-bottom py-3">
+                                    <div class="cookie-type fw-bold" style="width: 150px;">Functional</div>
+                                    <div class="cookie-desc text-muted">Remember your preferences and settings</div>
+                                </div>
+                                <div class="cookie-row d-flex border-bottom py-3">
+                                    <div class="cookie-type fw-bold" style="width: 150px;">Analytics</div>
+                                    <div class="cookie-desc text-muted">Help us understand how visitors use our site</div>
+                                </div>
+                                <div class="cookie-row d-flex py-3">
+                                    <div class="cookie-type fw-bold" style="width: 150px;">Marketing</div>
+                                    <div class="cookie-desc text-muted">Used to deliver relevant ads and track campaign performance</div>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mb-3">Managing Cookies</h5>
+                            <p>You can control cookies through your browser settings. However, disabling cookies may affect site functionality.</p>
+                            
+                            <div class="browser-settings mt-3">
+                                <p><strong>Browser Settings:</strong></p>
+                                <ul>
+                                    <li><strong>Chrome:</strong> Settings → Privacy and Security → Cookies</li>
+                                    <li><strong>Firefox:</strong> Options → Privacy & Security → Cookies</li>
+                                    <li><strong>Safari:</strong> Preferences → Privacy → Cookies</li>
+                                    <li><strong>Edge:</strong> Settings → Site permissions → Cookies</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Data Security -->
+                    <section id="data-security" class="privacy-section mb-5">
+                        <h2 class="privacy-title">6. Data Security</h2>
+                        <div class="privacy-body">
+                            <p>We implement appropriate technical and organizational measures to protect your personal information:</p>
+                            
+                            <div class="security-features row g-4 mt-2">
+                                <div class="col-md-6">
+                                    <div class="security-card d-flex align-items-start">
+                                        <i class="fi-rs-lock text-success me-3 mt-1"></i>
+                                        <div>
+                                            <h6 class="mb-1">SSL Encryption</h6>
+                                            <small class="text-muted">All data transmitted is encrypted using SSL technology</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="security-card d-flex align-items-start">
+                                        <i class="fi-rs-shield text-success me-3 mt-1"></i>
+                                        <div>
+                                            <h6 class="mb-1">PCI Compliance</h6>
+                                            <small class="text-muted">Payment processing is PCI DSS compliant</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="security-card d-flex align-items-start">
+                                        <i class="fi-rs-key text-success me-3 mt-1"></i>
+                                        <div>
+                                            <h6 class="mb-1">Secure Authentication</h6>
+                                            <small class="text-muted">Password hashing and secure login protocols</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="security-card d-flex align-items-start">
+                                        <i class="fi-rs-database text-success me-3 mt-1"></i>
+                                        <div>
+                                            <h6 class="mb-1">Regular Backups</h6>
+                                            <small class="text-muted">Data backed up and protected from loss</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="alert alert-warning mt-4">
+                                <i class="fi-rs-info me-2"></i>
+                                <strong>Please note:</strong> No method of transmission over the Internet is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Your Rights -->
+                    <section id="your-rights" class="privacy-section mb-5">
+                        <h2 class="privacy-title">7. Your Privacy Rights</h2>
+                        <div class="privacy-body">
+                            <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+                            
+                            <div class="rights-grid row g-4 mt-2">
+                                <div class="col-md-6">
+                                    <div class="right-card bg-light p-3 rounded-3">
+                                        <h6 class="mb-2">Right to Access</h6>
+                                        <small class="text-muted">Request a copy of the personal information we hold about you</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-card bg-light p-3 rounded-3">
+                                        <h6 class="mb-2">Right to Rectification</h6>
+                                        <small class="text-muted">Correct inaccurate or incomplete information</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-card bg-light p-3 rounded-3">
+                                        <h6 class="mb-2">Right to Erasure</h6>
+                                        <small class="text-muted">Request deletion of your personal information</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-card bg-light p-3 rounded-3">
+                                        <h6 class="mb-2">Right to Restrict Processing</h6>
+                                        <small class="text-muted">Limit how we use your information</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-card bg-light p-3 rounded-3">
+                                        <h6 class="mb-2">Right to Data Portability</h6>
+                                        <small class="text-muted">Receive your data in a structured, machine-readable format</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="right-card bg-light p-3 rounded-3">
+                                        <h6 class="mb-2">Right to Object</h6>
+                                        <small class="text-muted">Object to processing based on legitimate interests</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mt-4 mb-3">How to Exercise Your Rights</h5>
+                            <p>To exercise any of these rights, please contact us using the information in the Contact section below. We will respond to your request within 30 days.</p>
+                            
+                            <div class="alert alert-success mt-3">
+                                <i class="fi-rs-check-circle me-2"></i>
+                                <strong>GDPR Compliance:</strong> If you are in the European Economic Area (EEA), you have additional rights under GDPR.
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Children's Privacy -->
+                    <section id="children" class="privacy-section mb-5">
+                        <h2 class="privacy-title">8. Children's Privacy</h2>
+                        <div class="privacy-body">
+                            <p>Our website is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13.</p>
+                            
+                            <p>If you are a parent or guardian and believe your child has provided us with personal information, please contact us. We will take steps to delete such information.</p>
+                            
+                            <div class="alert alert-danger mt-3">
+                                <i class="fi-rs-warning me-2"></i>
+                                <strong>For children under 13:</strong> Please do not use our site or provide any personal information.
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Third-Party Links -->
+                    <section id="third-party" class="privacy-section mb-5">
+                        <h2 class="privacy-title">9. Third-Party Links</h2>
+                        <div class="privacy-body">
+                            <p>Our website may contain links to third-party websites. This privacy policy does not apply to those sites. We are not responsible for the privacy practices of other sites and encourage you to read their privacy policies.</p>
+                            
+                            <p>Third-party services we use include:</p>
+                            <ul>
+                                <li>Payment gateways (Stripe, PayPal)</li>
+                                <li>Analytics services (Google Analytics)</li>
+                                <li>Marketing platforms (Mailchimp, Klaviyo)</li>
+                                <li>Social media platforms (Facebook, Instagram)</li>
+                            </ul>
+                        </div>
+                    </section>
+                    
+                    <!-- Changes to Policy -->
+                    <section id="changes" class="privacy-section mb-5">
+                        <h2 class="privacy-title">10. Changes to This Privacy Policy</h2>
+                        <div class="privacy-body">
+                            <p>We may update this privacy policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any material changes by:</p>
+                            
+                            <ul>
+                                <li>Posting the new policy on this page</li>
+                                <li>Updating the "Last Updated" date</li>
+                                <li>Sending an email notification for significant changes</li>
+                            </ul>
+                            
+                            <p>We encourage you to review this policy periodically to stay informed about how we protect your information.</p>
+                        </div>
+                    </section>
+                    
+                    <!-- Contact Us -->
+                    <section id="contact" class="privacy-section mb-5">
+                        <h2 class="privacy-title">11. Contact Us</h2>
+                        <div class="privacy-body">
+                            <p>If you have questions or concerns about this Privacy Policy or our data practices, please contact us:</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-3">
+                                    <div class="contact-card bg-light p-4 rounded-3 text-center">
+                                        <i class="fi-rs-envelope text-primary mb-3" style="font-size: 28px;"></i>
+                                        <h6 class="mb-2">Email</h6>
+                                        <p class="mb-2">
+                                            <a href="mailto:privacy@kstores.com">privacy@kstores.com</a>
+                                        </p>
+                                        <small class="text-muted">Response within 48 hours</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="contact-card bg-light p-4 rounded-3 text-center">
+                                        <i class="fi-rs-headset text-primary mb-3" style="font-size: 28px;"></i>
+                                        <h6 class="mb-2">Phone</h6>
+                                        <p class="mb-2">
+                                            <a href="tel:+1234567890">+1 (234) 567-890</a>
+                                        </p>
+                                        <small class="text-muted">Mon-Fri, 9am-6pm</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="contact-card bg-light p-4 rounded-3 text-center">
+                                        <i class="fi-rs-marker text-primary mb-3" style="font-size: 28px;"></i>
+                                        <h6 class="mb-2">Mail</h6>
+                                        <p class="mb-2">
+                                            Privacy Officer<br>
+                                            Kstores<br>
+                                            123 Business Street<br>
+                                            City, State 12345
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-3">
+                                    <div class="contact-card bg-light p-4 rounded-3 text-center">
+                                        <i class="fi-rs-document text-primary mb-3" style="font-size: 28px;"></i>
+                                        <h6 class="mb-2">Data Protection Officer</h6>
+                                        <p class="mb-2">
+                                            <a href="mailto:dpo@kstores.com">dpo@kstores.com</a>
+                                        </p>
+                                        <small class="text-muted">For GDPR/Data Protection inquiries</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Consent Statement -->
+                    <div class="privacy-footer bg-primary bg-opacity-10 p-4 rounded-3 text-center">
+                        <p class="mb-0">
+                            <i class="fi-rs-check-circle text-primary me-2"></i>
+                            By using our website, you consent to our Privacy Policy and agree to its terms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.privacy-content-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.privacy-section {
+    scroll-margin-top: 100px;
+}
+
+.privacy-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.privacy-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color, #4CAF50);
+    border-radius: 2px;
+}
+
+.privacy-body {
+    color: #666;
+    line-height: 1.8;
+}
+
+.privacy-body p {
+    margin-bottom: 15px;
+}
+
+.privacy-body ul, .privacy-body ol {
+    margin-bottom: 15px;
+    padding-left: 20px;
+}
+
+.privacy-body li {
+    margin-bottom: 8px;
+}
+
+.list-styled {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.list-styled li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+}
+
+.list-styled li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color, #4CAF50);
+    font-weight: bold;
+}
+
+.privacy-sidebar .nav-link {
+    color: #666;
+    padding: 8px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.privacy-sidebar .nav-link:hover {
+    background: #f8f9fa;
+    color: var(--primary-color, #4CAF50);
+    padding-left: 20px;
+}
+
+.privacy-sidebar .nav-link.active {
+    background: var(--primary-color, #4CAF50);
+    color: white;
+}
+
+.usage-card, .security-card, .right-card {
+    transition: all 0.3s ease;
+}
+
+.usage-card:hover, .security-card:hover, .right-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.contact-card {
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.table {
+    font-size: 0.95rem;
+}
+
+.cookie-row {
+    transition: background 0.2s ease;
+}
+
+.cookie-row:hover {
+    background: #f8f9fa;
+}
+
+@media (max-width: 991px) {
+    .privacy-sidebar {
+        position: relative !important;
+        top: 0 !important;
+        margin-bottom: 30px;
+    }
+    
+    .privacy-content-card {
+        padding: 25px;
+    }
+    
+    .privacy-title {
+        font-size: 22px;
+    }
+}
+</style>
+
+<!-- Smooth Scroll Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('.privacy-sidebar a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            // Remove active class from all links
+            document.querySelectorAll('.privacy-sidebar .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked link
+            this.classList.add('active');
+            
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // Update active nav based on scroll position
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('.privacy-section');
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        document.querySelectorAll('.privacy-sidebar .nav-link').forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}

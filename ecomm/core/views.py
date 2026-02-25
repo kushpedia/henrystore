@@ -1562,7 +1562,8 @@ def privacy_policy(request):
     return render(request, "core/privacy_policy.html")
 
 def terms_of_service(request):
-    return render(request, "core/terms_of_service.html")
+    return render(request, "corporate/terms_of_service.html")
+
 
 
 

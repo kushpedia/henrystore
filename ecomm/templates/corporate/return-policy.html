@@ -1,0 +1,474 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!-- Breadcrumb Section -->
+<div class="breadcrumb-section breadcrumb-bg-1 pt-50 pb-50">
+    <div class="container">
+        <div class="breadcrumb-text text-center">
+            <h1>Return Policy</h1>
+            <div class="breadcrumb-menu">
+                <ul>
+                    <li><a href="{% url 'core:index' %}">Home</a></li>
+                    <li><i class="fi-rs-angle-right"></i></li>
+                    <li>Return Policy</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Return Policy Content -->
+<div class="policy-container pt-100 pb-100">
+    <div class="container">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8 mx-auto">
+                <div class="policy-card">
+                    <!-- Last Updated -->
+                    <div class="last-updated mb-4 text-end">
+                        <small class="text-muted">Last Updated: {% now "F j, Y" %}</small>
+                    </div>
+
+                    <!-- Quick Summary -->
+                    <div class="policy-summary bg-light p-4 rounded-3 mb-5">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="fi-rs-time text-primary mb-2" style="font-size: 32px;"></i>
+                                    <h6 class="mb-1">Return Window</h6>
+                                    <p class="small text-muted mb-0">7 Days</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="fi-rs-shopping-bag text-primary mb-2" style="font-size: 32px;"></i>
+                                    <h6 class="mb-1">Condition</h6>
+                                    <p class="small text-muted mb-0">Unused, Original Packaging</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-center">
+                                    <i class="fi-rs-credit-card text-primary mb-2" style="font-size: 32px;"></i>
+                                    <h6 class="mb-1">Refund Method</h6>
+                                    <p class="small text-muted mb-0">Original Payment Method</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Introduction -->
+                    <div class="policy-section mb-5">
+                        <h3 class="section-title">Our Return Policy</h3>
+                        <p class="text-muted">
+                            At Kstores, customer satisfaction is our top priority. We want you to be completely happy with your purchase. 
+                            If you're not satisfied with an item, we're here to help make it right.
+                        </p>
+                    </div>
+
+                    <!-- Return Window -->
+                    <div class="policy-section mb-5">
+                        <div class="d-flex align-items-start">
+                            <div class="policy-icon me-3">
+                                <span class="bg-primary bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fi-rs-calendar text-primary"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <h4 class="mb-3">7-Day Return Window</h4>
+                                <p class="text-muted">You have <strong class="text-primary">7 calendar days</strong> from the date your order was delivered to request a return. We recommend inspecting your items immediately upon delivery.</p>
+                                
+                                <div class="alert alert-info mt-3">
+                                    <i class="fi-rs-info me-2"></i>
+                                    <strong>Note:</strong> Returns requested after 7 days may not be accepted.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Return Conditions -->
+                    <div class="policy-section mb-5">
+                        <div class="d-flex align-items-start">
+                            <div class="policy-icon me-3">
+                                <span class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fi-rs-check text-success"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <h4 class="mb-3">Eligibility Conditions</h4>
+                                <p class="text-muted mb-3">To be eligible for a return, your item must meet the following conditions:</p>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="condition-card h-100">
+                                            <div class="d-flex">
+                                                <i class="fi-rs-check-circle text-success me-2 mt-1"></i>
+                                                <div>
+                                                    <strong>Unused Condition</strong>
+                                                    <p class="small text-muted mb-0">Item must not be worn, washed, or used</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="condition-card h-100">
+                                            <div class="d-flex">
+                                                <i class="fi-rs-check-circle text-success me-2 mt-1"></i>
+                                                <div>
+                                                    <strong>Original Tags</strong>
+                                                    <p class="small text-muted mb-0">All tags must be attached</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="condition-card h-100">
+                                            <div class="d-flex">
+                                                <i class="fi-rs-check-circle text-success me-2 mt-1"></i>
+                                                <div>
+                                                    <strong>Original Packaging</strong>
+                                                    <p class="small text-muted mb-0">Item should be in its original box/packaging</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="condition-card h-100">
+                                            <div class="d-flex">
+                                                <i class="fi-rs-check-circle text-success me-2 mt-1"></i>
+                                                <div>
+                                                    <strong>Proof of Purchase</strong>
+                                                    <p class="small text-muted mb-0">Order number or receipt required</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Non-Returnable Items -->
+                    <div class="policy-section mb-5">
+                        <div class="d-flex align-items-start">
+                            <div class="policy-icon me-3">
+                                <span class="bg-danger bg-opacity-10 p-3 rounded-circle d-inline-flex">
+                                    <i class="fi-rs-ban text-danger"></i>
+                                </span>
+                            </div>
+                            <div>
+                                <h4 class="mb-3">Non-Returnable Items</h4>
+                                <p class="text-muted mb-3">For hygiene and safety reasons, the following items cannot be returned:</p>
+                                
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fi-rs-cross text-danger me-2"></i> Intimate apparel and underwear</li>
+                                    <li class="mb-2"><i class="fi-rs-cross text-danger me-2"></i> Swimwear (if hygiene seal is broken)</li>
+                                    <li class="mb-2"><i class="fi-rs-cross text-danger me-2"></i> Earrings and piercing jewelry</li>
+                                    <li class="mb-2"><i class="fi-rs-cross text-danger me-2"></i> Gift cards</li>
+                                    <li class="mb-2"><i class="fi-rs-cross text-danger me-2"></i> Final sale items (clearly marked)</li>
+                                    <li class="mb-2"><i class="fi-rs-cross text-danger me-2"></i> Perishable goods</li>
+                                </ul>
+                                
+                                <div class="alert alert-warning mt-3">
+                                    <i class="fi-rs-exclamation me-2"></i>
+                                    <strong>Please note:</strong> We reserve the right to refuse returns that do not meet our conditions.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Return Process -->
+                    <div class="policy-section mb-5">
+                        <h4 class="mb-4">
+                            <i class="fi-rs-settings me-2 text-primary"></i>
+                            How to Return an Item
+                        </h4>
+                        
+                        <div class="process-steps">
+                            <div class="process-step d-flex mb-4">
+                                <div class="step-number bg-primary text-white rounded-circle me-3">1</div>
+                                <div>
+                                    <h5 class="mb-2">Submit Return Request</h5>
+                                    <p class="text-muted">Log into your account, go to your orders, and click "Request Refund" on the item you wish to return. Fill out the return form with your reason.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step d-flex mb-4">
+                                <div class="step-number bg-primary text-white rounded-circle me-3">2</div>
+                                <div>
+                                    <h5 class="mb-2">Wait for Approval</h5>
+                                    <p class="text-muted">Our team will review your request within 24-48 hours. You'll receive an email notification once your return is approved.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step d-flex mb-4">
+                                <div class="step-number bg-primary text-white rounded-circle me-3">3</div>
+                                <div>
+                                    <h5 class="mb-2">Pack and Ship</h5>
+                                    <p class="text-muted">Pack the item securely in its original packaging. Print the return label provided in your approval email and attach it to your package.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step d-flex mb-4">
+                                <div class="step-number bg-primary text-white rounded-circle me-3">4</div>
+                                <div>
+                                    <h5 class="mb-2">Drop Off</h5>
+                                    <p class="text-muted">Drop off your package at any designated shipping location. Keep the receipt as proof of return.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step d-flex">
+                                <div class="step-number bg-primary text-white rounded-circle me-3">5</div>
+                                <div>
+                                    <h5 class="mb-2">Receive Refund</h5>
+                                    <p class="text-muted">Once we receive and inspect your item, we'll process your refund. You'll receive a confirmation email when complete.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Refund Information -->
+                    <div class="policy-section mb-5">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="info-card bg-light p-4 rounded-3 h-100">
+                                    <i class="fi-rs-credit-card text-primary mb-3" style="font-size: 28px;"></i>
+                                    <h5 class="mb-2">Refund Method</h5>
+                                    <p class="text-muted small mb-0">Refunds are issued to the original payment method used for purchase. </p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <div class="info-card bg-light p-4 rounded-3 h-100">
+                                    <i class="fi-rs-time-fast text-primary mb-3" style="font-size: 28px;"></i>
+                                    <h5 class="mb-2">Processing Time</h5>
+                                    <p class="text-muted small mb-0">Refunds are typically processed within 1-4 business days after we receive and inspect your returned item. You'll receive an email confirmation once processed.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <div class="info-card bg-light p-4 rounded-3 h-100">
+                                    <i class="fi-rs-truck text-primary mb-3" style="font-size: 28px;"></i>
+                                    <h5 class="mb-2">Return Shipping</h5>
+                                    <p class="text-muted small mb-0">We provide free return shipping labels for all approved returns. The cost of return shipping will be covered by us.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-4">
+                                <div class="info-card bg-light p-4 rounded-3 h-100">
+                                    <i class="fi-rs-percent text-primary mb-3" style="font-size: 28px;"></i>
+                                    <h5 class="mb-2">Restocking Fee</h5>
+                                    <p class="text-muted small mb-0">We do not charge any restocking fees. You'll receive a full refund of the item price.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Damaged/Defective Items -->
+                    <div class="policy-section mb-5">
+                        <h4 class="mb-3">Damaged or Defective Items</h4>
+                        <p class="text-muted">If you receive a damaged or defective item, please contact us immediately:</p>
+                        
+                        <ul class="list-unstyled mt-3">
+                            <li class="mb-2">
+                                <i class="fi-rs-envelope text-primary me-2"></i>
+                                <strong>Email:</strong> <a href="mailto:support@kstores.com">support@kstores.com</a>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fi-rs-headset text-primary me-2"></i>
+                                <strong>Phone:</strong> <a href="tel:+1234567890">+254 (703) 443-827</a>
+                            </li>
+                            <li>
+                                <i class="fi-rs-clock text-primary me-2"></i>
+                                <strong>Response Time:</strong> Within 24 hours
+                            </li>
+                        </ul>
+                        
+                        <div class="alert alert-success mt-3">
+                            <i class="fi-rs-camera me-2"></i>
+                            <strong>Pro Tip:</strong> Take photos of any damage before returning. This helps us process your claim faster.
+                        </div>
+                    </div>
+
+                    <!-- Exchanges -->
+                    <div class="policy-section mb-5">
+                        <h4 class="mb-3">Exchanges</h4>
+                        <p class="text-muted">If you need a different size or color, the fastest way is to return the original item and place a new order separately. Once your return is processed, you'll receive a refund for the original item.</p>
+                    </div>
+
+                    <!-- International Returns -->
+                    <div class="policy-section mb-5">
+                        <h4 class="mb-3">International Returns</h4>
+                        <p class="text-muted">For international orders, customers are responsible for return shipping costs. Please contact our support team for assistance with international returns.</p>
+                    </div>
+
+                    <!-- FAQ Accordion -->
+                    <div class="policy-section mb-5">
+                        <h4 class="mb-4">Frequently Asked Questions</h4>
+                        
+                        <div class="accordion" id="returnFAQ">
+                            <div class="accordion-item border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button bg-light rounded" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                        Can I return an item if I've already worn it?
+                                    </button>
+                                </h2>
+                                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#returnFAQ">
+                                    <div class="accordion-body">
+                                        Items must be unused, unworn, and in their original condition with tags attached. Worn items cannot be accepted for return unless they are defective.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button bg-light rounded collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                        How long does the refund take?
+                                    </button>
+                                </h2>
+                                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#returnFAQ">
+                                    <div class="accordion-body">
+                                        Once we receive your return, processing takes 1-4 business days. After processing, it may take an additional 3-5 business days for the refund to appear on your credit card statement, depending on your bank.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button bg-light rounded collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                        Do I have to pay for return shipping?
+                                    </button>
+                                </h2>
+                                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#returnFAQ">
+                                    <div class="accordion-body">
+                                        No! We provide free return shipping labels for all approved returns within our 7-day return window.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item border-0 mb-3">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button bg-light rounded collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                        Can I return a gift?
+                                    </button>
+                                </h2>
+                                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#returnFAQ">
+                                    <div class="accordion-body">
+                                        Yes, gifts can be returned. However, the refund will be issued as store credit to the gift recipient. Please contact our support team for assistance with gift returns.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="accordion-item border-0">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button bg-light rounded collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                        What if my return is lost in transit?
+                                    </button>
+                                </h2>
+                                <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#returnFAQ">
+                                    <div class="accordion-body">
+                                        If your return is lost in transit, please contact us with your tracking number. We'll work with the carrier to locate your package. If it cannot be found, we'll process a refund based on the tracking information.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Section -->
+                    <div class="contact-section bg-primary bg-opacity-10 p-5 rounded-3 text-center">
+                        <h4 class="mb-3">Still Have Questions?</h4>
+                        <p class="text-muted mb-4">Our customer support team is here to help with any return-related questions.</p>
+                        
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="{% url 'core:contact' %}" class="btn btn-primary">
+                                <i class="fi-rs-headset me-2"></i>Contact Support
+                            </a>
+                            <a href="{% url 'core:dashboard' %}" class="btn btn-outline-primary">
+                                <i class="fi-rs-shopping-cart me-2"></i>View My Orders
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.policy-card {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color, #4CAF50);
+    border-radius: 2px;
+}
+
+.process-step {
+    position: relative;
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.condition-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.condition-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.info-card {
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e8f5e9;
+    color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .policy-card {
+        padding: 20px;
+    }
+    
+    .section-title {
+        font-size: 24px;
+    }
+}
+</style>
+{% endblock %}
