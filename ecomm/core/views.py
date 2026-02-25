@@ -29,6 +29,14 @@ from django.utils import timezone
 from decimal import Decimal
 from django.template.loader import render_to_string
 from .utils.email_utils import ReturnEmailService
+import logging
+
+
+
+logger = logging.getLogger(__name__)
+
+
+
 # ================ CUSTOM ERROR HANDLERS ================
 
 def custom_page_not_found(request, exception):
@@ -1371,78 +1379,109 @@ def return_status_view(request, rma_number):
     """
     Track the status of a return request
     """
-    return_request = get_object_or_404(
-        ReturnRequest,
-        rma_number=rma_number,
-        user=request.user
-    )
+    try:
+        return_request = get_object_or_404(
+            ReturnRequest,
+            rma_number=rma_number,
+            user=request.user
+        )
+    except Exception as e:
+        # Log the error and show a user-friendly message
+        logger.error(f"Error fetching return request {rma_number}: {str(e)}")
+        messages.error(request, "Unable to find the return request. Please check the RMA number and try again.")
+        return redirect('core:dashboard')  # or wherever you want to redirect
     
-    # Get all logs for this return
-    logs = return_request.logs.all().order_by('-created_at')
+    try:
+        # Get all logs for this return
+        logs = return_request.logs.all().order_by('-created_at')
+    except Exception as e:
+        logger.error(f"Error fetching logs for return {rma_number}: {str(e)}")
+        logs = []  # Fallback to empty list if logs can't be fetched
+        messages.warning(request, "Unable to load activity logs at this time.")
     
-    # Define status timeline with icons and descriptions
-    status_timeline = [
-        {
-            'status': 'pending',
-            'label': 'Request Submitted',
-            'icon': 'fi-rs-send',
-            'description': 'Your return request has been submitted and is waiting for review.',
-            'date': return_request.created_at,
-            'completed': True
-        },
-        {
-            'status': 'approved',
-            'label': 'Return Approved',
-            'icon': 'fi-rs-check',
-            'description': 'Your return has been approved. Please ship the item back.',
-            'date': return_request.approved_at,
-            'completed': return_request.status in ['approved', 'received', 'completed']
-        },
-        {
-            'status': 'received',
-            'label': 'Item Received',
-            'icon': 'fi-rs-package',
-            'description': 'We have received your returned item and are inspecting it.',
-            'date': None,  # Will be filled from logs
-            'completed': return_request.status in ['received', 'completed']
-        },
-        {
-            'status': 'completed',
-            'label': 'Refund Processed',
-            'icon': 'fi-rs-credit-card',
-            'description': 'Your refund has been processed successfully.',
-            'date': return_request.completed_at,
-            'completed': return_request.status == 'completed'
-        },
-    ]
-    
-    # If rejected, show rejection reason
-    if return_request.status == 'rejected':
+    try:
+        # Define status timeline with icons and descriptions
         status_timeline = [
             {
                 'status': 'pending',
                 'label': 'Request Submitted',
                 'icon': 'fi-rs-send',
+                'description': 'Your return request has been submitted and is waiting for review.',
                 'date': return_request.created_at,
                 'completed': True
             },
             {
-                'status': 'rejected',
-                'label': 'Return Rejected',
-                'icon': 'fi-rs-times-circle',
-                'description': return_request.admin_notes or 'Your return request was not approved.',
-                'date': return_request.updated_at,
-                'completed': True,
-                'is_rejected': True
+                'status': 'approved',
+                'label': 'Return Approved',
+                'icon': 'fi-rs-check',
+                'description': 'Your return has been approved. Please ship the item back.',
+                'date': return_request.approved_at,
+                'completed': return_request.status in ['approved', 'received', 'completed']
+            },
+            {
+                'status': 'received',
+                'label': 'Item Received',
+                'icon': 'fi-rs-package',
+                'description': 'We have received your returned item and are inspecting it.',
+                'date': None,  # Will be filled from logs
+                'completed': return_request.status in ['received', 'completed']
+            },
+            {
+                'status': 'completed',
+                'label': 'Refund Processed',
+                'icon': 'fi-rs-credit-card',
+                'description': 'Your refund has been processed successfully.',
+                'date': return_request.completed_at,
+                'completed': return_request.status == 'completed'
             },
         ]
+        
+        # If rejected, show rejection reason
+        if return_request.status == 'rejected':
+            status_timeline = [
+                {
+                    'status': 'pending',
+                    'label': 'Request Submitted',
+                    'icon': 'fi-rs-send',
+                    'date': return_request.created_at,
+                    'completed': True
+                },
+                {
+                    'status': 'rejected',
+                    'label': 'Return Rejected',
+                    'icon': 'fi-rs-times-circle',
+                    'description': return_request.admin_notes or 'Your return request was not approved.',
+                    'date': return_request.updated_at,
+                    'completed': True,
+                    'is_rejected': True
+                },
+            ]
+    except Exception as e:
+        logger.error(f"Error building status timeline for return {rma_number}: {str(e)}")
+        # Fallback timeline
+        status_timeline = [
+            {
+                'status': 'pending',
+                'label': 'Request Submitted',
+                'icon': 'fi-rs-send',
+                'date': return_request.created_at if return_request else None,
+                'completed': True
+            }
+        ]
+        messages.warning(request, "Unable to load complete status information.")
     
     context = {
         'return': return_request,
         'logs': logs,
         'status_timeline': status_timeline,
     }
-    return render(request, 'core/return_status.html', context)
+    
+    try:
+        return render(request, 'core/return_status.html', context)
+    except Exception as e:
+        logger.error(f"Error rendering return status template for {rma_number}: {str(e)}")
+        messages.error(request, "An error occurred while displaying the return status.")
+        return redirect('returns:list')  # or wherever you want to redirect
 
 # update tracking number
 @login_required

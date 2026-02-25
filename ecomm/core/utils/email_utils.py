@@ -14,11 +14,11 @@ class ReturnEmailService:
     @staticmethod
     def get_tracking_url(return_request):
         """Generate tracking URL for return"""
-        domain = getattr(settings, 'SITE_DOMAIN', 'localhost:8080')
+        domain = getattr(settings, 'SITE_DOMAIN', '127.0.0.1:8080')
         protocol = getattr(settings, 'SITE_PROTOCOL', 'http')
         
         # This line builds the full URL
-        return f"{protocol}://{domain}{reverse('core:return-confirmation', args=[return_request.rma_number])}"
+        return f"{protocol}://{domain}{reverse('core:return-status', args=[return_request.rma_number])}"
     
     @staticmethod
     def send_return_confirmation(return_request):

@@ -757,15 +757,17 @@ function sendWhatsAppInquiry(title, pid, price, url) {
     const quantity = document.getElementById('product-quantity')?.value || '1';
     
     // Build clean message
-    let message = `🛍️ *Product Inquiry*\n\n`;
+    let message = `🛍️*Product Inquiry*\n\n`;
+    message += `👋 *Hi, I saw this on your website and would like to know if it's available:* \n\n`;
     message += `📦 *Product:* ${title}\n`;
+    message += `🔗 * Product Link:* ${url}\n`;    
     message += `💰 *Price:* Ksh ${price}\n`;
     message += `🔢 *Quantity:* ${quantity}\n`;
     
     if (selectedColor) message += `🎨 *Color:* ${selectedColor}\n`;
     if (selectedSize) message += `📏 *Size:* ${selectedSize}\n`;
     
-    message += `\n🔗 * Product Link:* ${url}`;
+    message += `\n🙏 *Thank you:*\n`;
     
     // Open WhatsApp
     window.open(`https://wa.me/${yourNumber}?text=${encodeURIComponent(message)}`, '_blank');
