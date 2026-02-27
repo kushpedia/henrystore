@@ -16,7 +16,6 @@ from core.models import (
 from userauths.models import Profile, User
 import datetime
 from useradmin.forms import AddProductForm, VariationForm
-
 from django.http import JsonResponse,HttpResponse
 from core.models import SubCategory, MiniSubCategory
 import json
@@ -24,18 +23,24 @@ import uuid
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.db.models import Count, Avg
-from datetime import datetime, timedelta
+from django.db.models import Count, Avg, Q, Sum
+from datetime import datetime, timedelta, date, time
+
 import datetime
 from django.utils import timezone
 from userauths.models import ContactUs
 
 from django.views.decorators.csrf import csrf_exempt
-from django.db.models import Q, Count, Sum
+
 import csv
 from django.contrib import messages as django_messages
 from django.contrib.auth.decorators import user_passes_test
 from core.utils.email_utils import ReturnEmailService
+import calendar
+
+
+
+
 
 def admin_required(view_func):
     """Decorator to check if user is admin/staff"""
@@ -232,12 +237,180 @@ def delete_product(request, pid):
 
 @admin_required
 def orders(request):
-    orders = CartOrder.objects.all().order_by("-date")
+    # Get all orders ordered by date
+    orders_list = CartOrder.objects.all().order_by("-date")
+    
+    # Search functionality
+    search_query = request.GET.get('search', '')
+    if search_query:
+        orders_list = orders_list.filter(
+            Q(oid__icontains=search_query) |
+            Q(full_name__icontains=search_query) |
+            Q(email__icontains=search_query)
+        )
+    
+    # Order ID specific search
+    order_id_search = request.GET.get('order_id', '')
+    if order_id_search:
+        orders_list = orders_list.filter(oid__icontains=order_id_search)
+    
+    # Status filtering
+    status_filter = request.GET.get('status', '')
+    if status_filter and status_filter != 'Show all':
+        if status_filter == 'processing':
+            orders_list = orders_list.filter(product_status='processing')
+        elif status_filter == 'shipped':
+            orders_list = orders_list.filter(product_status='shipped')
+        elif status_filter == 'delivered':
+            orders_list = orders_list.filter(product_status='delivered')
+    
+    # Pagination
+    items_per_page = request.GET.get('per_page', '20')
+    try:
+        items_per_page = int(items_per_page)
+        if items_per_page not in [20, 30, 40]:
+            items_per_page = 20
+    except ValueError:
+        items_per_page = 20
+    
+    paginator = Paginator(orders_list, items_per_page)
+    page = request.GET.get('page', 1)
+    
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+    
+    # ========== GRAPH DATA ==========
+    
+    # 1. Orders by Status (Pie Chart)
+    status_counts = CartOrder.objects.values('product_status').annotate(count=Count('id'))
+    status_labels = []
+    status_data = []
+    for item in status_counts:
+        status_labels.append(item['product_status'].title() if item['product_status'] else 'Unknown')
+        status_data.append(item['count'])
+    
+    # 2. Orders by Payment Status (Pie Chart)
+    payment_counts = CartOrder.objects.values('paid_status').annotate(count=Count('id'))
+    payment_labels = []
+    payment_data = []
+    for item in payment_counts:
+        payment_labels.append('Paid' if item['paid_status'] else 'Unpaid')
+        payment_data.append(item['count'])
+    
+    # 3. Daily Orders for Last 7 Days (Line Chart)
+    last_7_days = []
+    dates_labels = []
+    today = timezone.now().date()
+    
+    for i in range(6, -1, -1):
+        current_date = today - timedelta(days=i)
+        dates_labels.append(current_date.strftime('%a, %b %d'))
+        
+        # Create datetime objects for start and end of day
+        day_start = datetime.datetime(current_date.year, current_date.month, current_date.day).replace(hour=0, minute=0, second=0, microsecond=0)
+        day_end = datetime.datetime(current_date.year, current_date.month, current_date.day).replace(hour=23, minute=59, second=59, microsecond=999999)
+        
+        count = CartOrder.objects.filter(date__range=[day_start, day_end]).count()
+        last_7_days.append(count)
+    
+    # 4. Monthly Orders for Last 6 Months (Simplified Version)
+    monthly_orders = []
+    month_labels = []
+    today = timezone.now()
+    
+    for i in range(5, -1, -1):
+        # Get first day of the month, i months ago
+        year = today.year
+        month = today.month - i
+        
+        # Adjust year if needed
+        while month <= 0:
+            month += 12
+            year -= 1
+        
+        # First day of the month at 00:00:00
+        month_start = datetime.datetime(year, month, 1, 0, 0, 0)
+        
+        # Last day of the month at 23:59:59
+        if month == 12:
+            month_end = datetime.datetime(year + 1, 1, 1, 23, 59, 59) - timedelta(days=1)
+        else:
+            month_end = datetime.datetime(year, month + 1, 1, 23, 59, 59) - timedelta(days=1)
+        
+        month_name = month_start.strftime('%b %Y')
+        month_labels.append(month_name)
+        
+        count = CartOrder.objects.filter(date__range=[month_start, month_end]).count()
+        monthly_orders.append(count)
+    
+    # 5. Revenue by Status
+    revenue_by_status = CartOrder.objects.values('product_status').annotate(
+        total=Sum('price')
+    ).order_by('-total')
+    
+    # 6. Top Customers by Order Count
+    top_customers = CartOrder.objects.values('full_name', 'email').annotate(
+        order_count=Count('id'),
+        total_spent=Sum('price')
+    ).order_by('-order_count')[:5]
+    
+    # 7. Overall Statistics
+    total_orders = CartOrder.objects.count()
+    total_revenue = CartOrder.objects.aggregate(Sum('price'))['price__sum'] or 0
+    paid_orders = CartOrder.objects.filter(paid_status=True).count()
+    unpaid_orders = CartOrder.objects.filter(paid_status=False).count()
+    avg_order_value = total_revenue / total_orders if total_orders > 0 else 0
+    
+    # Revenue statistics
+    paid_revenue = CartOrder.objects.filter(paid_status=True).aggregate(Sum('price'))['price__sum'] or 0
+    unpaid_revenue = CartOrder.objects.filter(paid_status=False).aggregate(Sum('price'))['price__sum'] or 0
+    # 8. Payment Status Counts for display
+    paid_count = CartOrder.objects.filter(paid_status=True).count()
+    unpaid_count = CartOrder.objects.filter(paid_status=False).count()
+    
+    # Convert to JSON for JavaScript
     context = {
-        'orders':orders,
+        'orders': orders,
+        'search_query': search_query,
+        'order_id_search': order_id_search,
+        'status_filter': status_filter,
+        'items_per_page': items_per_page,
+        
+        # Graph data as JSON
+        'status_labels': json.dumps(status_labels),
+        'status_data': json.dumps(status_data),
+        'payment_labels': json.dumps(payment_labels),
+        'payment_data': json.dumps(payment_data),
+        'daily_labels': json.dumps(dates_labels),
+        'daily_data': json.dumps(last_7_days),
+        'monthly_labels': json.dumps(month_labels),
+        'monthly_data': json.dumps(monthly_orders),
+        
+        # Original data for tables
+        'status_counts': status_counts,
+        'payment_counts': payment_counts,
+        'revenue_by_status': revenue_by_status,
+        'top_customers': top_customers,
+        'total_orders': total_orders,
+        'total_revenue': total_revenue,
+        'paid_orders': paid_orders,
+        'unpaid_orders': unpaid_orders,
+        'avg_order_value': avg_order_value,
+        'paid_count': paid_count,
+        'unpaid_count': unpaid_count,
+        'paid_revenue': paid_revenue,
+        'unpaid_revenue': unpaid_revenue,
+        
     }
     return render(request, "useradmin/orders.html", context)
 
+
+
+@admin_required
 def order_detail(request, id):
     order = CartOrder.objects.get(id=id)
     order_items = CartOrderItems.objects.filter(order=order)

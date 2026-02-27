@@ -223,3 +223,240 @@ Admin notified for Order: 33582572
 D:\ecommerce\ecomm\ecomm\settings.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 48, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 308, in orders
+    day_start = datetime.combine(date, datetime.min.time())
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 309, in orders
+    day_start = datetime.combine(date, datetime.min.time())
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 309, in orders
+    day_start = datetime.combine(date, datetime.min.time())
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 309, in orders
+    day_start = datetime.combine(date, datetime.min.time())
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 312, in orders
+    day_start = datetime.combine(current_date, time.min)
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+Not Found: /favicon.ico
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 312, in orders
+    day_start = datetime.combine(current_date, time.min)
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+Not Found: /favicon.ico
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 312, in orders
+    day_start = datetime.combine(current_date, time.min)
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 312, in orders
+    day_start = datetime.combine(current_date, time.min)
+                ^^^^^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'combine'
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 312, in orders
+    day_start = datetime(current_date.year, current_date.month, current_date.day).replace(hour=0, minute=0, second=0, microsecond=0)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'module' object is not callable. Did you mean: 'datetime.datetime(...)'?
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 334, in orders
+    month_start = datetime(year, month, 1, 0, 0, 0)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'module' object is not callable. Did you mean: 'datetime.datetime(...)'?
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Failed to send admin order notification: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+Failed to send admin order notification: [Errno 11001] getaddrinfo failed
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /useradmin/orders/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 49, in wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 316, in orders
+    day_start = datetime(current_date.year, current_date.month, current_date.day)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'module' object is not callable. Did you mean: 'datetime.datetime(...)'?
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Failed to send admin order notification: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+Failed to send admin order notification: [Errno 11001] getaddrinfo failed
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Internal Server Error: /payments/initiate/

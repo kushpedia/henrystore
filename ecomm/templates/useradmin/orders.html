@@ -1,47 +1,285 @@
 {% extends 'useradmin/base.html' %}
 {% load static %}
 {% load humanize %}
-{% block content %}    
+{% block content %}
+
+<style>
+    .stat-card {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        margin-bottom: 20px;
+        transition: transform 0.3s;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    }
+    .stat-icon {
+        font-size: 2.5rem;
+        color: #088178;
+        margin-bottom: 10px;
+    }
+    .stat-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+    }
+    .stat-label {
+        color: #666;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .chart-container {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        margin-bottom: 32px;
+        height: 300px;
+    }
+    .chart-title {
+        margin-bottom: 15px;
+        font-weight: 600;
+        color: #333;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 10px;
+    }
+</style>
 
 <section class="content-main">
     <div class="content-header">
         <div>
-            <h2 class="content-title card-title">Order List</h2>
-            <p>Manage all your orders from here</p>
+            <h2 class="content-title card-title">Order Dashboard</h2>
+            <p>Manage orders and view analytics</p>
         </div>
         <div>
-            <input type="text" placeholder="Search order ID" class="form-control bg-white" />
+            <form method="GET" action="{% url 'useradmin:orders' %}" id="orderIdForm">
+                <input type="text" name="order_id" placeholder="Search order ID" class="form-control bg-white" value="{{ order_id_search }}" />
+                {% if search_query %}
+                    <input type="hidden" name="search" value="{{ search_query }}">
+                {% endif %}
+                {% if status_filter %}
+                    <input type="hidden" name="status" value="{{ status_filter }}">
+                {% endif %}
+                {% if items_per_page %}
+                    <input type="hidden" name="per_page" value="{{ items_per_page }}">
+                {% endif %}
+            </form>
         </div>
     </div>
-    <div class="card mb-4">
-        <header class="card-header">
-            <div class="row gx-3">
-                <div class="col-lg-4 col-md-6 me-auto">
-                    <input type="text" placeholder="Search..." class="form-control" />
+
+    <!-- Statistics Cards -->
+    <div class="row">
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="stat-card text-center">
+                <div class="stat-icon">
+                    <i class="material-icons md-shopping_cart"></i>
                 </div>
-                <div class="col-lg-2 col-6 col-md-3">
-                    <select class="form-select">
-                        <option>Status</option>
-                        <option>Active</option>
-                        <option>Disabled</option>
-                        <option>Show all</option>
-                    </select>
+                <div class="stat-value">{{ total_orders|intcomma }}</div>
+                <div class="stat-label">Total Orders</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="stat-card text-center">
+                <div class="stat-icon">
+                    <i class="material-icons md-attach_money"></i>
                 </div>
-                <div class="col-lg-2 col-6 col-md-3">
-                    <select class="form-select">
-                        <option>Show 20</option>
-                        <option>Show 30</option>
-                        <option>Show 40</option>
-                    </select>
+                <div class="stat-value">Ksh {{ total_revenue|floatformat:0|intcomma }}</div>
+                <div class="stat-label">Total Revenue</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="stat-card text-center">
+                <div class="stat-icon">
+                    <i class="material-icons md-check_circle"></i>
+                </div>
+                <div class="stat-value">{{ paid_orders|intcomma }}</div>
+                <div class="stat-label">Paid Orders</div>
+                <div class="stat-label"><span style="color: rgb(13, 228, 49); font-weight: bold;">Paid Revenue:</span> Ksh {{ paid_revenue|floatformat:0|intcomma }}</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="stat-card text-center">
+                <div class="stat-icon">
+                    <i class="material-icons md-cancel"></i>
+                </div>
+                <div class="stat-value">{{ unpaid_orders|intcomma }}</div>
+                <div class="stat-label">Unpaid Orders</div>
+                <div class="stat-label"> <span style="color: rgb(231, 9, 9); font-weight: bold;">Unpaid Revenue:</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ksh {{ unpaid_revenue|floatformat:0|intcomma }}</div>
+
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="stat-card text-center">
+                <div class="stat-icon">
+                    <i class="material-icons md-trending_up"></i>
+                </div>
+                <div class="stat-value">Ksh {{ avg_order_value|floatformat:0|intcomma }}</div>
+                <div class="stat-label">Avg Order Value</div>
+            </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="stat-card text-center">
+                <div class="stat-icon">
+                    <i class="material-icons md-star"></i>
+                </div>
+                <div class="stat-value">
+                    {% widthratio paid_orders total_orders 100 %}%
+                </div>
+                <div class="stat-label">Orders Conversion Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="chart-container">
+                <h4 class="chart-title">Daily Orders (Last 7 Days)</h4>
+                <canvas id="dailyOrdersChart"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="chart-container">
+                <h4 class="chart-title">Orders by Status</h4>
+                <canvas id="statusPieChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="row">
+        <div class="col-lg-6 mb-12">
+            <div class="chart-container">
+                <h4 class="chart-title">Monthly Orders (Last 6 Months)</h4>
+                <canvas id="monthlyOrdersChart"></canvas>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="chart-container">
+                <h4 class="chart-title">Payment Status Distribution</h4>
+                <canvas id="paymentPieChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Revenue and Top Customers -->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Revenue by Order Status</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Revenue</th>
+                                    <th>% of Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in revenue_by_status %}
+                                <tr>
+                                    <td><span class="badge alert-secondary">{{ item.product_status|title }}</span></td>
+                                    <td>Ksh {{ item.total|floatformat:0|intcomma }}</td>
+                                    <td>
+                                        {% widthratio item.total total_revenue 100 %}%
+                                        <div class="progress mt-1" style="height: 5px;">
+                                            <div class="progress-bar" style="width: {% widthratio item.total total_revenue 100 %}%; background-color: #088178;"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center">No revenue data available</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h4>Top Customers</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Orders</th>
+                                    <th>Total Spent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for customer in top_customers %}
+                                <tr>
+                                    <td>
+                                        <b>{{ customer.full_name|title }}</b><br>
+                                        <small>{{ customer.email }}</small>
+                                    </td>
+                                    <td>{{ customer.order_count }}</td>
+                                    <td>Ksh {{ customer.total_spent|floatformat:0|intcomma }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" class="text-center">No customer data available</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders Table Section -->
+    <div class="card mb-4">
+        <header class="card-header">
+            <form method="GET" action="{% url 'useradmin:orders' %}" id="filterForm">
+                <div class="row gx-3">
+                    <div class="col-lg-4 col-md-6 me-auto">
+                        <input type="text" name="search" placeholder="Search by name, email or order ID..." class="form-control" value="{{ search_query }}" />
+                        {% if order_id_search %}
+                            <input type="hidden" name="order_id" value="{{ order_id_search }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-2 col-6 col-md-3">
+                        <select name="status" class="form-select" onchange="this.form.submit()">
+                            <option value="">All Status</option>
+                            <option value="processing" {% if status_filter == 'processing' %}selected{% endif %}>Processing</option>
+                            <option value="shipped" {% if status_filter == 'shipped' %}selected{% endif %}>Shipped</option>
+                            <option value="delivered" {% if status_filter == 'delivered' %}selected{% endif %}>Delivered</option>
+                            <option value="Show all" {% if status_filter == 'Show all' %}selected{% endif %}>Show all</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2 col-6 col-md-3">
+                        <select name="per_page" class="form-select" onchange="this.form.submit()">
+                            <option value="20" {% if items_per_page == 20 %}selected{% endif %}>Show 20</option>
+                            <option value="30" {% if items_per_page == 30 %}selected{% endif %}>Show 30</option>
+                            <option value="40" {% if items_per_page == 40 %}selected{% endif %}>Show 40</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
         </header>
         <!-- card-header end// -->
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
-                            <tr>
+                        <tr>
                             <th>#ID</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
@@ -50,7 +288,6 @@
                             <th scope="col">Payment Status</th>
                             <th scope="col">Action</th>
                         </tr>
-                            
                     </thead>
                     <tbody>
                         {% for c in orders %}
@@ -61,7 +298,7 @@
                                 <td>Ksh {{c.price|floatformat:0|intcomma}}</td>
                                 <td><span class="badge alert-secondary">{{c.product_status}}</span></td>
                                 {% if c.paid_status == True %}
-                                    <td><span class="badge alert-success"></span>Paid</td>
+                                    <td><span class="badge alert-success">Paid</span></td>
                                 {% else %}
                                     <td><span class="badge alert-danger">Not Paid</span></td>
                                 {% endif %}
@@ -69,8 +306,11 @@
                                     <a href="{% url 'useradmin:order_detail' c.id %}" class="btn btn-md rounded font-sm">View Detail</a>
                                 </td>
                             </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center">No orders found.</td>
+                            </tr>
                         {% endfor %}
-                        
                     </tbody>
                 </table>
             </div>
@@ -79,21 +319,247 @@
         <!-- card-body end// -->
     </div>
     <!-- card end// -->
-    <!-- <div class="pagination-area mt-15 mb-50">
+    
+    {% if orders.has_other_pages %}
+    <div class="pagination-area mt-15 mb-50">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-start">
-                <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                <li class="page-item"><a class="page-link" href="#">02</a></li>
-                <li class="page-item"><a class="page-link" href="#">03</a></li>
-                <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="#">16</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
-                </li>
+                {% if orders.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if order_id_search %}order_id={{ order_id_search }}&{% endif %}{% if status_filter %}status={{ status_filter }}&{% endif %}{% if items_per_page %}per_page={{ items_per_page }}&{% endif %}page={{ orders.previous_page_number }}">
+                            <i class="material-icons md-chevron_left"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                
+                {% for i in orders.paginator.page_range %}
+                    {% if orders.number == i %}
+                        <li class="page-item active"><a class="page-link" href="#">{{ i|stringformat:"02d" }}</a></li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if order_id_search %}order_id={{ order_id_search }}&{% endif %}{% if status_filter %}status={{ status_filter }}&{% endif %}{% if items_per_page %}per_page={{ items_per_page }}&{% endif %}page={{ i }}">{{ i|stringformat:"02d" }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if orders.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{% if search_query %}search={{ search_query }}&{% endif %}{% if order_id_search %}order_id={{ order_id_search }}&{% endif %}{% if status_filter %}status={{ status_filter }}&{% endif %}{% if items_per_page %}per_page={{ items_per_page }}&{% endif %}page={{ orders.next_page_number }}">
+                            <i class="material-icons md-chevron_right"></i>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
-    </div> -->
+        <div class="text-muted mt-2">
+            Showing {{ orders.start_index }} - {{ orders.end_index }} of {{ orders.paginator.count }} orders
+        </div>
+    </div>
+    {% endif %}
 </section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Auto-submit forms
+        let searchTimeout = null;
+        
+        document.querySelector('input[name="search"]')?.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                document.getElementById('filterForm').submit();
+            }, 500);
+        });
+        
+        document.querySelector('input[name="order_id"]')?.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                document.getElementById('orderIdForm').submit();
+            }, 500);
+        });
+
+        // 1. Daily Orders Chart (Line Chart)
+        const dailyCtx = document.getElementById('dailyOrdersChart')?.getContext('2d');
+        if (dailyCtx) {
+            const dailyLabels = {{ daily_labels|safe }};
+            const dailyData = {{ daily_data|safe }};
+            
+            if (dailyLabels && dailyLabels.length > 0) {
+                new Chart(dailyCtx, {
+                    type: 'line',
+                    data: {
+                        labels: dailyLabels,
+                        datasets: [{
+                            label: 'Number of Orders',
+                            data: dailyData,
+                            borderColor: '#088178',
+                            backgroundColor: 'rgba(8, 129, 120, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1,
+                                    precision: 0
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                dailyCtx.canvas.parentNode.innerHTML = '<div class="text-center p-4">No daily data available</div>';
+            }
+        }
+
+        // 2. Status Pie Chart
+        const statusCtx = document.getElementById('statusPieChart')?.getContext('2d');
+        if (statusCtx) {
+            const statusLabels = {{ status_labels|safe }};
+            const statusData = {{ status_data|safe }};
+            
+            if (statusLabels && statusLabels.length > 0 && statusData && statusData.length > 0) {
+                new Chart(statusCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: statusLabels,
+                        datasets: [{
+                            data: statusData,
+                            backgroundColor: ['#088178', '#ffc107', '#dc3545', '#17a2b8', '#6610f2'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.raw || 0;
+                                        let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        let percentage = Math.round((value / total) * 100);
+                                        return `${label}: ${value} orders (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                statusCtx.canvas.parentNode.innerHTML = '<div class="text-center p-4">No status data available</div>';
+            }
+        }
+
+        // 3. Monthly Orders Chart (Bar Chart)
+        const monthlyCtx = document.getElementById('monthlyOrdersChart')?.getContext('2d');
+        if (monthlyCtx) {
+            const monthlyLabels = {{ monthly_labels|safe }};
+            const monthlyData = {{ monthly_data|safe }};
+            
+            if (monthlyLabels && monthlyLabels.length > 0) {
+                new Chart(monthlyCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: monthlyLabels,
+                        datasets: [{
+                            label: 'Number of Orders',
+                            data: monthlyData,
+                            backgroundColor: '#088178',
+                            borderRadius: 5
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1,
+                                    precision: 0
+                                }
+                            }
+                        }
+                    }
+                });
+            } else {
+                monthlyCtx.canvas.parentNode.innerHTML = '<div class="text-center p-4">No monthly data available</div>';
+            }
+        }
+
+        // 4. Payment Status Pie Chart
+        const paymentCtx = document.getElementById('paymentPieChart')?.getContext('2d');
+        if (paymentCtx) {
+            const paymentLabels = {{ payment_labels|safe }};
+            const paymentData = {{ payment_data|safe }};
+            
+            if (paymentLabels && paymentLabels.length > 0 && paymentData && paymentData.length > 0) {
+                new Chart(paymentCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: paymentLabels,
+                        datasets: [{
+                            data: paymentData,
+                            backgroundColor: ['#28a745', '#dc3545'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        let value = context.raw || 0;
+                                        let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                        let percentage = Math.round((value / total) * 100);
+                                        return `${label}: ${value} orders (${percentage}%)`;
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            } else {
+                paymentCtx.canvas.parentNode.innerHTML = '<div class="text-center p-4">No payment data available</div>';
+            }
+        }
+
+        // Debug: Log data to console to verify
+        console.log('Status Labels:', {{ status_labels|safe }});
+        console.log('Status Data:', {{ status_data|safe }});
+        console.log('Payment Labels:', {{ payment_labels|safe }});
+        console.log('Payment Data:', {{ payment_data|safe }});
+        console.log('Monthly Labels:', {{ monthly_labels|safe }});
+        console.log('Monthly Data:', {{ monthly_data|safe }});
+    });
+</script>
+
 
 
 {% endblock content %}
