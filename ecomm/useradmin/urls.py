@@ -39,4 +39,5 @@ urlpatterns = [
 	# track returns
 	path("returns/", views.admin_return_list, name="admin-return-list"),
     path("returns/<int:pk>/", views.admin_return_detail, name="admin-return-detail"),
+	path("visitors/", views.visitor_dashboard, name="visitor_dashboard"),
 ]

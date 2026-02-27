@@ -1,0 +1,792 @@
+{% extends 'useradmin/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .dashboard-header h2 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 2.2rem;
+    }
+    
+    .dashboard-header p {
+        margin: 0.5rem 0 0 0;
+        opacity: 0.9;
+        font-size: 1rem;
+    }
+    
+    .stat-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+        min-height: 160px;
+    }
+    
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .stat-card .card-header {
+        background: rgba(255,255,255,0.1);
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0.75rem 1.25rem;
+    }
+    
+    .stat-card .card-body {
+        padding: 1.25rem;
+        color: white;
+    }
+    
+    .stat-card .card-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        line-height: 1.2;
+    }
+    
+    .stat-card .card-text {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        margin-bottom: 0;
+    }
+    
+    /* Card colors */
+    .card-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card-success { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+    .card-info { background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%); }
+    .card-warning { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+    .card-secondary { background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%); }
+    .card-dark { background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); }
+    
+    .chart-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+    }
+    
+    .chart-card .card-header {
+        background: white;
+        border-bottom: 2px solid #f3f6f9;
+        padding: 1.25rem 1.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 1.1rem;
+    }
+    
+    .chart-card .card-header h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+    
+    .chart-card .card-body {
+        padding: 1.5rem;
+        background: white;
+    }
+    
+    .table-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+    }
+    
+    .table-card .card-header {
+        background: white;
+        border-bottom: 2px solid #f3f6f9;
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .table-card .card-header h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+    
+    .table-card .card-body {
+        padding: 1.5rem;
+        background: white;
+    }
+    
+    .table {
+        margin-bottom: 0;
+    }
+    
+    .table thead th {
+        border-top: none;
+        border-bottom: 2px solid #e9ecef;
+        color: #6c757d;
+        font-weight: 600;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 0.75rem;
+    }
+    
+    .table tbody td {
+        padding: 0.75rem;
+        vertical-align: middle;
+        color: #2c3e50;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .table tbody tr:hover {
+        background-color: #f8f9fa;
+        
+    }
+    
+    .badge-authenticated {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        color: white;
+        padding: 0.35rem 0.65rem;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.75rem;
+        display: inline-block;
+    }
+    
+    .badge-anonymous {
+        background: linear-gradient(135deg, #6c757d 0%, #868e96 100%);
+        color: white;
+        padding: 0.35rem 0.65rem;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.75rem;
+        display: inline-block;
+    }
+    
+    .progress-custom {
+        background: #f3f6f9;
+        border-radius: 10px;
+        height: 30px;
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+    }
+    
+    .progress-custom .progress-bar {
+        font-size: 0.85rem;
+        font-weight: 500;
+        line-height: 30px;
+        text-align: left;
+        padding-left: 10px;
+        color: white;
+        height: 100%;
+    }
+    
+    .stats-mini {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .stats-mini-item {
+        text-align: center;
+        flex: 1;
+    }
+    
+    .stats-mini-value {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: white;
+        line-height: 1.2;
+    }
+    
+    .stats-mini-label {
+        font-size: 0.7rem;
+        opacity: 0.8;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: #6c757d;
+    }
+    
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #dee2e6;
+    }
+    
+    .chart-wrapper {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+    
+    .stat-box {
+        padding: 1.25rem;
+        border: 1px solid #e9ecef;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .stat-box:hover {
+        border-color: #667eea;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+    }
+    
+    .stat-box small {
+        color: #6c757d;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .stat-box h4 {
+        margin: 0.5rem 0 0 0;
+        color: #2c3e50;
+        font-weight: 700;
+    }
+</style>
+
+<div class="container-fluid px-4">
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <h2><i class="fas fa-chart-pie me-3"></i>Visitor Analytics Dashboard</h2>
+        <p>Track and analyze your site's visitor performance in real-time</p>
+    </div>
+
+    <!-- Stats Cards Row -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card card-primary">
+                <div class="card-header">
+                    <i class="fas fa-calendar-day me-2"></i>Today
+                </div>
+                <div class="card-body">
+                    <div class="card-title">{{ unique_visitors_today|intcomma }}</div>
+                    <div class="card-text">Unique visitors</div>
+                    <div class="stats-mini">
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">{{ visits_by_day.0.count|default:"0" }}</div>
+                            <div class="stats-mini-label">Visits</div>
+                        </div>
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">
+                                {% if total_unique_all_time > 0 %}
+                                    {% widthratio unique_visitors_today total_unique_all_time 100 %}%
+                                {% else %}
+                                    0%
+                                {% endif %}
+                            </div>
+                            <div class="stats-mini-label">of total</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card card-success">
+                <div class="card-header">
+                    <i class="fas fa-calendar-week me-2"></i>This Week
+                </div>
+                <div class="card-body">
+                    <div class="card-title">{{ unique_visitors_this_week|intcomma }}</div>
+                    <div class="card-text">Unique visitors</div>
+                    <div class="stats-mini">
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">{{ authenticated_visits_unique|intcomma }}</div>
+                            <div class="stats-mini-label">Auth</div>
+                        </div>
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">{{ anonymous_visits_unique|intcomma }}</div>
+                            <div class="stats-mini-label">Anon</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card card-info">
+                <div class="card-header">
+                    <i class="fas fa-calendar-month me-2"></i>This Month
+                </div>
+                <div class="card-body">
+                    <div class="card-title">{{ unique_visitors_this_month|intcomma }}</div>
+                    <div class="card-text">Unique visitors</div>
+                    <div class="stats-mini">
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">{{ visits_this_week|intcomma }}</div>
+                            <div class="stats-mini-label">Visits</div>
+                        </div>
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">{{ unique_visitors_this_month|intcomma }}</div>
+                            <div class="stats-mini-label">Unique</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="stat-card card-secondary">
+                <div class="card-header">
+                    <i class="fas fa-globe me-2"></i>All Time
+                </div>
+                <div class="card-body">
+                    <div class="card-title">{{ total_unique_all_time|intcomma }}</div>
+                    <div class="card-text">Unique visitors</div>
+                    <div class="stats-mini">
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">{{ auth_all_unique|intcomma }}</div>
+                            <div class="stats-mini-label">Auth</div>
+                        </div>
+                        <div class="stats-mini-item">
+                            <div class="stats-mini-value">{{ anon_all_unique|intcomma }}</div>
+                            <div class="stats-mini-label">Anon</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 - Main Trends -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-line me-2 text-primary"></i>Daily Unique Visitors (Last 30 Days)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrapper">
+                        <canvas id="dailyUniqueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-pie me-2 text-info"></i>Visitor Type (All Time)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrapper" style="height: 200px;">
+                        <canvas id="visitorTypeChart"></canvas>
+                    </div>
+                    <div class="row mt-4 g-3">
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <span class="badge-authenticated d-inline-block mb-2">Authenticated</span>
+                                <h4 class="mb-0">{{ auth_all|intcomma }}</h4>
+                                <small class="text-muted">visitors</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-center p-3 bg-light rounded">
+                                <span class="badge-anonymous d-inline-block mb-2">Anonymous</span>
+                                <h4 class="mb-0">{{ anon_all|intcomma }}</h4>
+                                <small class="text-muted">visitors</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 - Comparison -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-12">
+            <div class="chart-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-bar me-2 text-success"></i>Total Visits vs Unique Visitors (Last 30 Days)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="chart-wrapper">
+                        <canvas id="totalVsUniqueChart"></canvas>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div style="width: 20px; height: 20px; background: #0dcaf0; border-radius: 4px; margin-right: 10px;"></div>
+                                <span class="text-muted">Total Visits (includes repeat visits)</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-center">
+                                <div style="width: 20px; height: 20px; background: #667eea; border-radius: 4px; margin-right: 10px;"></div>
+                                <span class="text-muted">Unique Visitors (per day)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weekly Breakdown Table -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-12">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-table me-2 text-warning"></i>Daily Visitors (Last 7 Days)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Total Visits</th>
+                                    <th>Unique Visitors</th>
+                                    <th>Authenticated</th>
+                                    <th>Anonymous</th>
+                                    <th>Engagement Rate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for day in visits_by_day %}
+                                <tr>
+                                    <td><strong>{{ day.visit_date|date:"M d, Y" }}</strong></td>
+                                    <td>{{ day.count|intcomma }}</td>
+                                    <td>{{ day.unique_count|intcomma }}</td>
+                                    <td>
+                                        {% if day.authenticated_unique %}
+                                            <span class="badge-authenticated">{{ day.authenticated_unique }}</span>
+                                        {% else %}
+                                            <span class="text-muted">0</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if day.anonymous_unique %}
+                                            <span class="badge-anonymous">{{ day.anonymous_unique }}</span>
+                                        {% else %}
+                                            <span class="text-muted">0</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if day.count > 0 %}
+                                            {% widthratio day.unique_count day.count 100 %}%
+                                            <div class="progress" style="height: 4px; margin-top: 5px;">
+                                                <div class="progress-bar bg-success" style="width: {% widthratio day.unique_count day.count 100 %}%"></div>
+                                            </div>
+                                        {% else %}
+                                            0%
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="empty-state">
+                                        <i class="fas fa-chart-line"></i>
+                                        <h6>No Data Available</h6>
+                                        <p class="text-muted">Start tracking visitors to see analytics</p>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Authentication Breakdown & Additional Stats -->
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-user-check me-2 text-success"></i>Visitor Authentication (Last 7 Days)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress-custom mb-3">
+                        <div class="progress-bar bg-success" style="width: {% if unique_visitors_this_week > 0 %}{% widthratio authenticated_visits_unique unique_visitors_this_week 100 %}{% else %}0{% endif %}%; line-height: 30px;">
+                            {% if authenticated_visits_unique > 0 %}Authenticated: {{ authenticated_visits_unique }}{% endif %}
+                        </div>
+                        <div class="progress-bar bg-secondary" 
+                            style="width: {% if unique_visitors_this_week > 0 %}{% widthratio anonymous_visits_unique unique_visitors_this_week 100 %}{% else %}0{% endif %}%; line-height: 30px;">
+                            {% if anonymous_visits_unique > 0 %}Anonymous: {{ anonymous_visits_unique }}{% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <div class="p-3 bg-light rounded text-center">
+                                <h3 class="mb-1 text-success">{{ visits_this_week|intcomma }}</h3>
+                                <small class="text-muted">Total visits this week</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-3 bg-light rounded text-center">
+                                <h3 class="mb-1 text-info">{{ unique_visitors_this_week|intcomma }}</h3>
+                                <small class="text-muted">Unique visitors this week</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <div class="table-card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-simple me-2 text-info"></i>Quick Stats</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <small class="text-muted d-block mb-1">Avg. Daily Unique</small>
+                                <h4 class="mb-0">{{ avg_daily_unique|floatformat:1|intcomma }}</h4>
+                                <small>last 30 days</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <small class="text-muted d-block mb-1">Visits per Unique</small>
+                                <h4 class="mb-0">{{ visits_per_unique|floatformat:1 }}</h4>
+                                <small>this week</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <small class="text-muted d-block mb-1">Return Rate</small>
+                                <h4 class="mb-0">{{ return_rate|floatformat:1 }}%</h4>
+                                <small>returning visitors</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <small class="text-muted d-block mb-1">Auth Ratio</small>
+                                <h4 class="mb-0">{{ auth_ratio|floatformat:1 }}%</h4>
+                                <small>of unique visitors</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <small class="text-muted d-block mb-1">Peak Day</small>
+                                <h4 class="mb-0">{{ peak_day_visits|intcomma }}</h4>
+                                <small>{{ peak_day_date }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Color palette
+    const colors = {
+        primary: '#667eea',
+        success: '#43e97b',
+        info: '#36d1dc',
+        warning: '#f093fb',
+        danger: '#f5576c',
+        dark: '#2c3e50',
+        secondary: '#6c757d',
+        light: '#f8f9fa'
+    };
+
+    // 1. Daily Unique Visitors Line Chart
+    const ctxDaily = document.getElementById('dailyUniqueChart')?.getContext('2d');
+    if (ctxDaily) {
+        new Chart(ctxDaily, {
+            type: 'line',
+            data: {
+                labels: {{ last_30_dates|safe }},
+                datasets: [{
+                    label: 'Unique Visitors',
+                    data: {{ last_30_uniques|safe }},
+                    borderColor: colors.primary,
+                    backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: colors.primary,
+                    pointBorderColor: 'white',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: 'white',
+                        bodyColor: 'rgba(255,255,255,0.8)',
+                        borderColor: colors.primary,
+                        borderWidth: 2
+                    }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        ticks: { 
+                            stepSize: 1, 
+                            precision: 0,
+                            color: colors.dark
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: {
+                        ticks: { 
+                            maxRotation: 45,
+                            minRotation: 45,
+                            color: colors.dark
+                        },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    }
+
+    // 2. Visitor Type Pie Chart
+    const ctxPie = document.getElementById('visitorTypeChart')?.getContext('2d');
+    if (ctxPie) {
+        new Chart(ctxPie, {
+            type: 'doughnut',
+            data: {
+                labels: ['Authenticated', 'Anonymous'],
+                datasets: [{
+                    data: [{{ auth_all_unique }}, {{ anon_all_unique }}],
+                    backgroundColor: [colors.success, colors.secondary],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                let value = context.raw || 0;
+                                let total = context.dataset.data.reduce((a,b) => a+b, 0);
+                                let percentage = Math.round((value / total) * 100);
+                                return `${label}: ${value.toLocaleString()} (${percentage}%)`;
+                            }
+                        },
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: 'white',
+                        bodyColor: 'rgba(255,255,255,0.8)'
+                    }
+                }
+            }
+        });
+    }
+
+    // 3. Total vs Unique Bar Chart
+    const ctxBar = document.getElementById('totalVsUniqueChart')?.getContext('2d');
+    if (ctxBar) {
+        new Chart(ctxBar, {
+            type: 'bar',
+            data: {
+                labels: {{ last_30_dates|safe }},
+                datasets: [
+                    {
+                        label: 'Total Visits',
+                        data: {{ last_30_totals|safe }},
+                        backgroundColor: 'rgba(13, 202, 240, 0.8)',
+                        borderRadius: 6,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: 'Unique Visitors',
+                        data: {{ last_30_uniques|safe }},
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderRadius: 6,
+                        barPercentage: 0.7,
+                        categoryPercentage: 0.8
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { 
+                        position: 'top',
+                        labels: { 
+                            usePointStyle: true,
+                            boxWidth: 8,
+                            color: colors.dark
+                        }
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleColor: 'white',
+                        bodyColor: 'rgba(255,255,255,0.8)'
+                    }
+                },
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        ticks: { 
+                            stepSize: 1, 
+                            precision: 0,
+                            color: colors.dark
+                        },
+                        grid: { color: 'rgba(0,0,0,0.05)' }
+                    },
+                    x: {
+                        ticks: { 
+                            maxRotation: 45,
+                            minRotation: 45,
+                            color: colors.dark
+                        },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    }
+});
+</script>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}

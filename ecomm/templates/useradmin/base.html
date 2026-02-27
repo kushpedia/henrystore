@@ -75,8 +75,8 @@
                     
                     <li class="menu-item {% if '/useradmin/return-list/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:admin-return-list' %}" >
-                            <i class="icon material-icons md-comment"></i>
-                            <span>Return Requests</span>
+                            <i class="fa-solid fa-circle-arrow-left" style="color: rgb(159, 168, 183);"></i>
+                            <span> &nbsp;&nbsp;&nbsp; Return Requests</span>
                             
                         </a>
                     </li>
@@ -90,6 +90,13 @@
                             {% if unread_messages_count > 0 %}
                             <span class="sidebar-badge badge bg-danger">{{ unread_messages_count }}</span>
                             {% endif %}
+                        </a>
+                    </li>
+                    <li class="menu-item {% if '/useradmin/visitors/' in request.path %}active{% endif %}">
+                        <a class="menu-link" href="{% url 'useradmin:visitor_dashboard' %}" >
+                            <i class="fa-solid fa-chart-column" style="color: rgb(159, 168, 183);"></i>
+                            <span> &nbsp;&nbsp;&nbsp; Visitors report</span>
+                            
                         </a>
                     </li>
                 </ul>

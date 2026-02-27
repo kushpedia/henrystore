@@ -38,7 +38,7 @@ from django.contrib.auth.decorators import user_passes_test
 from core.utils.email_utils import ReturnEmailService
 import calendar
 
-
+from corporate.models import UniqueVisit
 
 
 
@@ -50,8 +50,136 @@ def admin_required(view_func):
         return redirect('login')
     return wrapper
 
-
-
+# unique visit tracking view 
+def visitor_dashboard(request):
+    today = timezone.now().date()
+    week_ago = today - timedelta(days=7)
+    month_ago = today - timedelta(days=30)
+    
+    # BASIC STATS (these are correct)
+    unique_today = UniqueVisit.objects.filter(visit_date=today).values('ip_address').distinct().count()
+    unique_week = UniqueVisit.objects.filter(visit_date__gte=week_ago).values('ip_address').distinct().count()
+    unique_month = UniqueVisit.objects.filter(visit_date__gte=month_ago).values('ip_address').distinct().count()
+    unique_all = UniqueVisit.objects.values('ip_address').distinct().count()
+    
+    # TOTAL VISITS (for comparison)
+    visits_today = UniqueVisit.objects.filter(visit_date=today).count()
+    visits_week = UniqueVisit.objects.filter(visit_date__gte=week_ago).count()
+    visits_month = UniqueVisit.objects.filter(visit_date__gte=month_ago).count()
+    visits_all = UniqueVisit.objects.count()
+    
+    # Daily breakdown for last 7 days (for the table)
+    visits_by_day = UniqueVisit.objects.filter(
+        visit_date__gte=week_ago
+    ).values('visit_date').annotate(
+        count=Count('id'),
+        unique_count=Count('ip_address', distinct=True)
+    ).order_by('visit_date')
+    
+    # Add authenticated/anonymous counts per day (UNIQUE counts)
+    for day in visits_by_day:
+        day['authenticated_unique'] = UniqueVisit.objects.filter(
+            visit_date=day['visit_date'],
+            user__isnull=False
+        ).values('user').distinct().count()
+        day['anonymous_unique'] = UniqueVisit.objects.filter(
+            visit_date=day['visit_date'],
+            user__isnull=True
+        ).values('ip_address').distinct().count()
+    
+    # AUTHENTICATED VS ANONYMOUS (UNIQUE counts for the week)
+    authenticated_week_unique = UniqueVisit.objects.filter(
+        user__isnull=False, 
+        visit_date__gte=week_ago
+    ).values('user').distinct().count()
+    
+    anonymous_week_unique = UniqueVisit.objects.filter(
+        user__isnull=True, 
+        visit_date__gte=week_ago
+    ).values('ip_address').distinct().count()
+    
+    # AUTHENTICATED VS ANONYMOUS (UNIQUE counts all time)
+    auth_all_unique = UniqueVisit.objects.filter(
+        user__isnull=False
+    ).values('user').distinct().count()
+    
+    anon_all_unique = UniqueVisit.objects.filter(
+        user__isnull=True
+    ).values('ip_address').distinct().count()
+    
+    # Last 30 days data for line/bar charts
+    dates_30 = [today - timedelta(days=i) for i in range(29, -1, -1)]
+    last_30_dates = [d.strftime('%Y-%m-%d') for d in dates_30]
+    
+    daily_uniques = []
+    daily_totals = []
+    for d in dates_30:
+        daily_uniques.append(UniqueVisit.objects.filter(visit_date=d).values('ip_address').distinct().count())
+        daily_totals.append(UniqueVisit.objects.filter(visit_date=d).count())
+    
+    # Calculate additional stats
+    avg_daily_unique = sum(daily_uniques) / len(daily_uniques) if daily_uniques else 0
+    peak_day_visits = max(daily_totals) if daily_totals else 0
+    peak_day_date = dates_30[daily_totals.index(peak_day_visits)].strftime('%b %d') if peak_day_visits > 0 else 'N/A'
+    
+    # FIXED: Return rate (percentage of visitors who returned this week)
+    
+    returning_ips_count = UniqueVisit.objects.filter(
+        visit_date__gte=week_ago
+    ).values('ip_address').annotate(
+        visit_count=Count('id')
+    ).filter(visit_count__gt=1).count()
+    
+    return_rate = (returning_ips_count / unique_week * 100) if unique_week > 0 else 0
+    
+    # FIXED: Visits per unique (ratio for the week)
+    visits_per_unique = (visits_week / unique_week) if unique_week > 0 else 0
+    
+    # FIXED: Authentication ratio (using UNIQUE counts)
+    auth_ratio = (auth_all_unique / unique_all * 100) if unique_all > 0 else 0
+    
+    # FIXED: Anonymous ratio
+    anon_ratio = (anon_all_unique / unique_all * 100) if unique_all > 0 else 0
+    
+    context = {
+        # Basic stats (keep as is)
+        'unique_visitors_today': unique_today,
+        'unique_visitors_this_week': unique_week,
+        'unique_visitors_this_month': unique_month,
+        'total_unique_all_time': unique_all,
+        
+        # ADD THESE NEW CONTEXT VARIABLES
+        'visits_today': visits_today,
+        'visits_this_week': visits_week,
+        'visits_this_month': visits_month,
+        'total_visits_all_time': visits_all,
+        
+        # Daily breakdown (updated with unique counts)
+        'visits_by_day': visits_by_day,
+        
+        # Authenticated stats (now using UNIQUE counts)
+        'authenticated_visits_unique': authenticated_week_unique,
+        'anonymous_visits_unique': anonymous_week_unique,
+        
+        # All-time auth/anonymous (UNIQUE)
+        'auth_all_unique': auth_all_unique,
+        'anon_all_unique': anon_all_unique,
+        
+        # Chart data (keep as is)
+        'last_30_dates': json.dumps(last_30_dates),
+        'last_30_uniques': json.dumps(daily_uniques),
+        'last_30_totals': json.dumps(daily_totals),
+        
+        # FIXED STATS
+        'avg_daily_unique': round(avg_daily_unique, 1),
+        'peak_day_visits': peak_day_visits,
+        'peak_day_date': peak_day_date,
+        'return_rate': round(return_rate, 1),           # Now a percentage
+        'visits_per_unique': round(visits_per_unique, 1), # NEW: ratio
+        'auth_ratio': round(auth_ratio, 1),             # Now correct (≤100%)
+        'anon_ratio': round(anon_ratio, 1),             # NEW
+    }
+    return render(request, 'useradmin/visitor_dashboard.html', context)
 
 @admin_required
 def dashboard(request):
