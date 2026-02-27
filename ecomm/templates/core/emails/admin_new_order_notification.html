@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>New Order Notification</title>
+</head>
+<body style="margin:0; padding:20px; font-family: Arial, sans-serif; background:#f4f6f9;">
+
+<h2 style="color:#111827;">🛒 New Order Created</h2>
+
+<hr>
+
+<h3>Order Details</h3>
+<p><strong>Order Number:</strong> #{{ order.oid }}</p>
+<p><strong>Total Amount:</strong> KES {{ order.price }}</p>
+<p><strong>Date:</strong> {{ order.date }}</p>
+
+<hr>
+
+<h3>Customer Details</h3>
+<p><strong>Name:</strong> {{ customer.username }}</p>
+<p><strong>Email:</strong> {{ customer.email }}</p>
+
+{% if order.phone %}
+<p><strong>Phone:</strong> {{ order.phone }}</p>
+{% endif %}
+
+<hr>
+
+<h3>Ordered Items</h3>
+
+<table width="100%" cellpadding="10" cellspacing="0" border="1" style="border-collapse: collapse; background:white;">
+    <thead style="background:#e5e7eb;">
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in order_items %}
+        <tr>
+            <td align="center">
+                {% if item.image %}
+                <img src="{{ domain }}{{ item.image }}" width="60" height="60" style="object-fit:cover;">
+                {{ domain }}{{ item.image }}
+                {% else %}
+                No Image
+                {% endif %}
+            </td>
+            <td>{{ item.original_title }}</td>
+            <td align="center">{{ item.qty }}</td>
+            <td align="right">KES {{ item.price }}</td>
+            <td align="right">KES {{ item.total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<p style="font-weight:bold; font-size:16px;">
+Grand Total: KES {{ order.price }}
+</p>
+
+<hr>
+
+<p style="font-size:13px; color:#6b7280;">
+This email was automatically generated from Kstores system.
+</p>
+
+</body>
+</html>

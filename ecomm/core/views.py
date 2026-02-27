@@ -944,6 +944,15 @@ def newCheckout(request, oid):
     order = CartOrder.objects.get(oid=oid)
     order_items = CartOrderItems.objects.filter(order=order)
 
+    if not order.checkout_email_sent:
+        ReturnEmailService.send_new_order_admin_notification(order)
+        order.checkout_email_sent = True
+        order.save()
+
+
+
+
+
     if request.method == "POST":
         code = request.POST.get("code")
         # print("code ========", code)
@@ -961,6 +970,13 @@ def newCheckout(request, oid):
                 order.save()
 
                 messages.success(request, "Coupon Activated")
+
+
+
+
+
+
+
                 return redirect("core:new_checkout", order.oid)
         else:
             messages.warning(request, "Coupon Does Not Exist")
@@ -1511,16 +1527,6 @@ def add_return_tracking(request, id):
             messages.error(request, "Please provide both carrier and tracking number.")
     
     return redirect('core:dashboard')
-
-
-
-
-
-
-
-
-
-
 
 
 # Other Pages 

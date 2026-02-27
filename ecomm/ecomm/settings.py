@@ -42,7 +42,7 @@ SECRET_KEY = 'django-insecure-mfvte4i@l!m)ly9#%rqo^j7d8*0*z#tjw)qd^+(7220z#7mbwi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["80b8-105-164-64-65.ngrok-free.app",'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ["9240-105-161-227-168.ngrok-free.app",'localhost', '127.0.0.1']
 
 # Application definition
 
@@ -171,10 +171,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'userauths.User'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
@@ -185,15 +185,9 @@ LOGGING = {
             'filename': 'debug.log',
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['console', 'file'],
-            'level': 'INFO',
-        },
-        'yourapp': {  #  app name
-            'handlers': ['console', 'file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
+
+    'root': {   # ✅ This captures EVERYTHING
+        'handlers': ['console', 'file'],
+        'level': 'DEBUG',
     },
 }

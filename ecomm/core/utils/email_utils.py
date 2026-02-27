@@ -172,3 +172,42 @@ class ReturnEmailService:
         except Exception as e:
             logger.error(f"Failed to send return completed email: {str(e)}")
             return False
+        
+    @staticmethod
+    def send_new_order_admin_notification(order):
+        """Send email to admin when a new order is created"""
+        try:
+            subject = f"🛒 New Order Created - #{order.oid} (up-paid)"
+
+            order_items = order.cartorderitems_set.all()  # adjust if related_name exists
+            domain = getattr(settings, 'SITE_DOMAIN', '9240-105-161-227-168.ngrok-free.app')
+            protocol = getattr(settings, 'SITE_PROTOCOL', 'https')
+            html_content = render_to_string(
+                'core/emails/admin_new_order_notification.html',
+                {
+                    'order': order,
+                    'order_items': order_items,
+                    'customer': order.user,
+                    'domain': domain,
+                    'protocol': protocol
+                }
+            )
+
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                subject=subject,
+                body=text_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=["henrykuria10@gmail.com"]  # 🔥 ADMIN EMAIL
+            )
+
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+
+            logger.info(f"Admin notified for Order: {order.oid}")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to send admin order notification: {str(e)}")
+            return False

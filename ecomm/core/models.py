@@ -438,7 +438,7 @@ class CartOrder(models.Model):
     oid = ShortUUIDField(null=True, blank=True, length=8, max_length=20, alphabet="1234567890")
     stripe_payment_intent = models.CharField(max_length=1000, null=True, blank=True)
     date = models.DateTimeField(default=timezone.now, null=True, blank=True)
-    
+    checkout_email_sent = models.BooleanField(default=False)
     class Meta:
         verbose_name_plural = "Cart Order"
         ordering = ['-date']
