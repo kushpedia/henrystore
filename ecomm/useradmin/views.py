@@ -61,7 +61,8 @@ def visitor_dashboard(request):
     unique_week = UniqueVisit.objects.filter(visit_date__gte=week_ago).values('ip_address').distinct().count()
     unique_month = UniqueVisit.objects.filter(visit_date__gte=month_ago).values('ip_address').distinct().count()
     unique_all = UniqueVisit.objects.values('ip_address').distinct().count()
-    
+    total_month = UniqueVisit.objects.filter(visit_date__gte=month_ago).count()
+    all_visits = UniqueVisit.objects.count()
     # TOTAL VISITS (for comparison)
     visits_today = UniqueVisit.objects.filter(visit_date=today).count()
     visits_week = UniqueVisit.objects.filter(visit_date__gte=week_ago).count()
@@ -153,6 +154,8 @@ def visitor_dashboard(request):
         'visits_this_week': visits_week,
         'visits_this_month': visits_month,
         'total_visits_all_time': visits_all,
+        'total_visits_this_month': total_month,
+        'all_visits': all_visits,
         
         # Daily breakdown (updated with unique counts)
         'visits_by_day': visits_by_day,

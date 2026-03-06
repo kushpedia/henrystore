@@ -288,8 +288,10 @@
                     <div class="card-text">Unique visitors</div>
                     <div class="stats-mini">
                         <div class="stats-mini-item">
-                            <div class="stats-mini-value">{{ visits_by_day.0.count|default:"0" }}</div>
-                            <div class="stats-mini-label">Visits</div>
+
+                            
+                            <div class="stats-mini-value">{{ visits_by_day.6.count|default:"0" }}</div>
+                            <div class="stats-mini-label">Total Visits Today</div>
                         </div>
                         <div class="stats-mini-item">
                             <div class="stats-mini-value">
@@ -299,7 +301,7 @@
                                     0%
                                 {% endif %}
                             </div>
-                            <div class="stats-mini-label">of total</div>
+                            <div class="stats-mini-label">Unique of total ({{total_unique_all_time}})</div>
                         </div>
                     </div>
                 </div>
@@ -307,7 +309,7 @@
         </div>
         
         <div class="col-xl-3 col-md-6">
-            <div class="stat-card card-success">
+            <div class="stat-card card-dark">
                 <div class="card-header">
                     <i class="fas fa-calendar-week me-2"></i>This Week
                 </div>
@@ -317,11 +319,11 @@
                     <div class="stats-mini">
                         <div class="stats-mini-item">
                             <div class="stats-mini-value">{{ authenticated_visits_unique|intcomma }}</div>
-                            <div class="stats-mini-label">Auth</div>
+                            <div class="stats-mini-label">Authorized</div>
                         </div>
                         <div class="stats-mini-item">
                             <div class="stats-mini-value">{{ anonymous_visits_unique|intcomma }}</div>
-                            <div class="stats-mini-label">Anon</div>
+                            <div class="stats-mini-label">Anonymous</div>
                         </div>
                     </div>
                 </div>
@@ -331,15 +333,15 @@
         <div class="col-xl-3 col-md-6">
             <div class="stat-card card-info">
                 <div class="card-header">
-                    <i class="fas fa-calendar-month me-2"></i>This Month
+                    <i class="fas fa-calendar-month me-2"></i>One Month
                 </div>
                 <div class="card-body">
                     <div class="card-title">{{ unique_visitors_this_month|intcomma }}</div>
                     <div class="card-text">Unique visitors</div>
                     <div class="stats-mini">
                         <div class="stats-mini-item">
-                            <div class="stats-mini-value">{{ visits_this_week|intcomma }}</div>
-                            <div class="stats-mini-label">Visits</div>
+                            <div class="stats-mini-value">{{ total_visits_this_month|intcomma }}</div>
+                            <div class="stats-mini-label"> Toal Visits</div>
                         </div>
                         <div class="stats-mini-item">
                             <div class="stats-mini-value">{{ unique_visitors_this_month|intcomma }}</div>
@@ -361,11 +363,11 @@
                     <div class="stats-mini">
                         <div class="stats-mini-item">
                             <div class="stats-mini-value">{{ auth_all_unique|intcomma }}</div>
-                            <div class="stats-mini-label">Auth</div>
+                            <div class="stats-mini-label">Authorized</div>
                         </div>
                         <div class="stats-mini-item">
                             <div class="stats-mini-value">{{ anon_all_unique|intcomma }}</div>
-                            <div class="stats-mini-label">Anon</div>
+                            <div class="stats-mini-label">Anonymous</div>
                         </div>
                     </div>
                 </div>
