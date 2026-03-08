@@ -40,4 +40,7 @@ urlpatterns = [
 	path("returns/", views.admin_return_list, name="admin-return-list"),
     path("returns/<int:pk>/", views.admin_return_detail, name="admin-return-detail"),
 	path("visitors/", views.visitor_dashboard, name="visitor_dashboard"),
+	
+	path("transactions-dashboard/", views.transactions_dashboard, name="transactions_dashboard"),
+    path("export-transactions/", views.export_transactions, name="export_transactions"),
 ]

@@ -6,12 +6,7 @@ from django.http import JsonResponse
 from .genrateMpesaAcesstoken import get_access_token
 from .models import Transaction
 from django.views.decorators.csrf import csrf_exempt
-
-
-
-
-
-
+from django.http import HttpRequest
 
 @csrf_exempt
 def initiate_stk_push(request):
@@ -59,7 +54,7 @@ def initiate_stk_push(request):
         # Get access token
         try:
             # Create a mock request for get_access_token if needed
-            from django.http import HttpRequest
+            
             token_request = HttpRequest()
             token_request.method = 'GET'
             
@@ -102,7 +97,7 @@ def initiate_stk_push(request):
         
         # M-Pesa API configuration
         process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
-        callback_url = 'https://dcb2-105-164-2-7.ngrok-free.app/payments/callback/'  # Update if needed
+        callback_url = 'https://124e-102-0-17-166.ngrok-free.app/payments/callback/'  # Update if needed
         passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
         business_short_code = '174379'
         

@@ -1,0 +1,1047 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Professional Dashboard</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        body {
+            background: #f4f7fc;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        .dashboard-card {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: white;
+            height: 100%;
+        }
+        .dashboard-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        .metric-icon {
+            font-size: 2rem;
+            color: #4e73df;
+            width: 48px;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+        }
+        .metric-label {
+            font-size: 0.85rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-status {
+            padding: 0.5em 0.9em;
+            font-weight: 500;
+            border-radius: 30px;
+            font-size: 0.8rem;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            margin-top: 10px;
+        }
+        .filter-section {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .table th {
+            background-color: #f8fafd;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            border-bottom-width: 1px;
+        }
+        .table td {
+            vertical-align: middle;
+            padding: 0.9rem 0.75rem;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-left: 2px solid #4e73df;
+            padding-left: 1.5rem;
+            position: relative;
+            margin-left: 10px;
+        }
+        .timeline-item:before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #4e73df;
+            border-radius: 50%;
+            position: absolute;
+            left: -7px;
+            top: 0.8rem;
+        }
+        .bulk-bar {
+            background: #eef2f7;
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .alert-badge {
+            font-size: 0.8rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+        }
+        .progress {
+            border-radius: 10px;
+            background-color: #e9ecef;
+        }
+        @media (max-width: 768px) {
+            .metric-value { font-size: 1.4rem; }
+            .chart-container { height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid py-4 px-lg-4">
+
+    <!-- Header with title, date range, alerts, export -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+        
+        <a href="{% url 'useradmin:dashboard' %}" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left me-1"></i>Back to dashboard
+        </a>
+        <h2 class="fw-bold"><i class="fas fa-chart-line me-2" style="color: #4e73df;"></i>Payments Transactions Dashboard</h2>
+        <div class="d-flex gap-2 align-items-center flex-wrap">
+            <!-- Notification badges -->
+            {% if stuck_transactions > 0 %}
+            <span class="badge bg-warning text-dark alert-badge">
+                <i class="fas fa-exclamation-triangle me-1"></i>{{ stuck_transactions }} stuck
+            </span>
+            {% endif %}
+            {% if high_failure_alert %}
+            <span class="badge bg-danger alert-badge">
+                <i class="fas fa-bolt me-1"></i>High failure rate
+            </span>
+            {% endif %}
+            
+            <!-- Date range dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    <i class="far fa-calendar-alt me-1"></i> 
+                    {% if date_range == '7' %}Last 7 days
+                    {% elif date_range == '30' %}Last 30 days
+                    {% elif date_range == '90' %}Last 90 days
+                    {% elif date_range == 'all' %}All time
+                    {% else %}Last 30 days
+                    {% endif %}
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="?range=7">Last 7 days</a></li>
+                    <li><a class="dropdown-item" href="?range=30">Last 30 days</a></li>
+                    <li><a class="dropdown-item" href="?range=90">Last 90 days</a></li>
+                    <li><a class="dropdown-item" href="?range=all">All time</a></li>
+                </ul>
+            </div>
+            
+            <!-- Export buttons -->
+            <a href="{% url 'useradmin:export_transactions' %}" class="btn btn-success">
+                <i class="fas fa-download me-1"></i>CSV
+            </a>
+            <button class="btn btn-outline-primary" onclick="location.reload()">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Key Metrics Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6 col-lg-4 col-xl-2">
+            <div class="dashboard-card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="metric-icon"><i class="fas fa-coins"></i></div>
+                    <div class="ms-2">
+                        <div class="metric-value">KES {{ total_revenue|floatformat:0|intcomma }}</div>
+                        <div class="metric-label">Total Revenue</div>
+                    </div>
+                </div>
+                {% if growth_percentage %}
+                <small class="text-{% if growth_percentage >= 0 %}success{% else %}danger{% endif %}">
+                    <i class="fas fa-{% if growth_percentage >= 0 %}arrow-up{% else %}arrow-down{% endif %}"></i> 
+                    {{ growth_absolute }}%
+                </small>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-2">
+            <div class="dashboard-card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="metric-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <div class="ms-2">
+                        <div class="metric-value">{{ transaction_count }}</div>
+                        <div class="metric-label">Transactions</div>
+                    </div>
+                </div>
+                <small class="text-muted">{{ success_count }} success · {{ failed_count }} failed · {{ pending_count }} pending · {{ cancelled_expired_count }} cancelled</small>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-2">
+            <div class="dashboard-card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="metric-icon"><i class="fas fa-check-circle text-success"></i></div>
+                    <div class="ms-2">
+                        <div class="metric-value">{{ success_rate }}%</div>
+                        <div class="metric-label">Success Rate</div>
+                    </div>
+                </div>
+                <div class="progress mt-2" style="height:5px;">
+                    <div class="progress-bar bg-success" style="width:{{ success_rate }}%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-2">
+            <div class="dashboard-card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="metric-icon"><i class="fas fa-clock"></i></div>
+                    <div class="ms-2">
+                        <div class="metric-value">{{ avg_completion_time }}</div>
+                        <div class="metric-label">Avg Completion</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-2">
+            <div class="dashboard-card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="metric-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="ms-2">
+                        <div class="metric-value">{{ mpesa_success_rate }}%</div>
+                        <div class="metric-label">M-Pesa Success</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4 col-xl-2">
+            <div class="dashboard-card p-3">
+                <div class="d-flex align-items-center">
+                    <div class="metric-icon text-danger"><i class="fas fa-times-circle"></i></div>
+                    <div class="ms-2">
+                        <div class="metric-value">{{ failed_count }}</div>
+                        <div class="metric-label">Failed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Today's Snapshot Widget -->
+    <div class="dashboard-card p-3 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="mb-0"><i class="far fa-calendar-check me-2 text-primary"></i>Today's Snapshot ({% now "F j, Y" %})</h5>
+            <span class="badge bg-info">Updated {% now "H:i" %}</span>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <div class="border-start border-4 border-primary ps-3">
+                    <small class="text-muted">Total</small>
+                    <h4>{{ today_count|default:"0" }}</h4>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="border-start border-4 border-success ps-3">
+                    <small class="text-muted">Success</small>
+                    <h4 class="text-success">{{ today_success|default:"0" }}</h4>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="border-start border-4 border-danger ps-3">
+                    <small class="text-muted">Failed</small>
+                    <h4 class="text-danger">{{ today_failed|default:"0" }}</h4>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="border-start border-4 border-warning ps-3">
+                    <small class="text-muted">Pending</small>
+                    <h4 class="text-warning">{{ today_pending|default:"0" }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="bg-light p-2 rounded">
+                    <small>Today's Revenue</small>
+                    <h3 class="mb-0">KES {{ today_revenue|floatformat:0|default:"0"|intcomma }}</h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-light p-2 rounded">
+                    <small>Average Order</small>
+                    <h3 class="mb-0">
+                        KES {% if today_count %}{% widthratio today_revenue today_count 1 %}{% else %}0{% endif %}
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden JSON data for charts -->
+    <div id="chart-data" 
+            data-revenue='{{ revenue_trend|safe }}'
+            data-status='{{ status_counts|safe }}'
+            data-error='{{ error_counts|safe }}'
+            data-hourly='{{ hourly_data|safe }}'
+            data-weekday='{{ weekday_data|safe }}'>
+    </div>
+
+    <!-- Graphs Row 1 -->
+    <div class="row g-3 mb-4">
+        <div class="col-lg-4">
+            <div class="dashboard-card p-3">
+                <h6><i class="fas fa-chart-line me-2 text-primary"></i>Revenue Trend</h6>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="dashboard-card p-3">
+                <h6><i class="fas fa-chart-pie me-2 text-success"></i>Status Distribution</h6>
+                <div class="chart-container">
+                    <canvas id="statusChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="dashboard-card p-3">
+                <h6><i class="fas fa-clock me-2 text-info"></i>Hourly Volume</h6>
+                <div class="chart-container">
+                    <canvas id="hourlyChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphs Row 2 -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-7">
+            <div class="dashboard-card p-3">
+                <h6><i class="fas fa-exclamation-triangle me-2 text-danger"></i>Failed by Error Category</h6>
+                <div class="chart-container">
+                    <canvas id="errorChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="dashboard-card p-3">
+                <h6><i class="fas fa-calendar-week me-2 text-warning"></i>Weekday Revenue</h6>
+                <div class="chart-container">
+                    <canvas id="weekdayChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Advanced Analytics Row -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="dashboard-card p-3">
+                <h6><i class="fas fa-bug me-2"></i>Error Pattern Analysis</h6>
+                <table class="table table-sm table-borderless">
+                    <tbody>
+                        <tr>
+                            <td>User Error</td>
+                            <td>{{ user_error_count }}</td>
+                            <td width="40%">
+                                <div class="progress" style="height:8px;">
+                                    <div class="progress-bar bg-danger" style="width:{{ user_error_percent }}%"></div>
+                                </div>
+                            </td>
+                            <td>{{ user_error_percent }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Balance Error</td>
+                            <td>{{ balance_error_count }}</td>
+                            <td>
+                                <div class="progress" style="height:8px;">
+                                    <div class="progress-bar bg-warning" style="width:{{ balance_error_percent }}%"></div>
+                                </div>
+                            </td>
+                            <td>{{ balance_error_percent }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Limit Error</td>
+                            <td>{{ limit_error_count }}</td>
+                            <td>
+                                <div class="progress" style="height:8px;">
+                                    <div class="progress-bar bg-info" style="width:{{ limit_error_percent }}%"></div>
+                                </div>
+                            </td>
+                            <td>{{ limit_error_percent }}%</td>
+                        </tr>
+                        <tr>
+                            <td>System Error</td>
+                            <td>{{ system_error_count }}</td>
+                            <td>
+                                <div class="progress" style="height:8px;">
+                                    <div class="progress-bar bg-secondary" style="width:{{ system_error_percent }}%"></div>
+                                </div>
+                            </td>
+                            <td>{{ system_error_percent }}%</td>
+                        </tr>
+                        <tr>
+                            <td>Timeout Error</td>
+                            <td>{{ timeout_error_count }}</td>
+                            <td>
+                                <div class="progress" style="height:8px;">
+                                    <div class="progress-bar bg-dark" style="width:{{ timeout_error_percent }}%"></div>
+                                </div>
+                            </td>
+                            <td>{{ timeout_error_percent }}%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <h6>Most Common Result Codes</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    {% for code in result_code_breakdown %}
+                    <span class="badge bg-secondary"><code>{{ code.result_code }}</code> ({{ code.count }})</span>
+                    {% empty %}
+                    <span class="text-muted">No result codes</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="dashboard-card p-3">
+                <h6><i class="fas fa-tower-cell me-2"></i>Success Rate by Network</h6>
+                <div class="row text-center g-2">
+                    <div class="col-4">
+                        <div class="p-2 rounded bg-light">
+                            <span class="badge bg-primary mb-2">Safaricom</span>
+                            <h4>{{ saf_completion_rate|default:"0" }}%</h4>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="p-2 rounded bg-light">
+                            <span class="badge bg-warning text-dark mb-2">Airtel</span>
+                            <h4>{{ airtel_completion_rate|default:"0" }}%</h4>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="p-2 rounded bg-light">
+                            <span class="badge bg-secondary mb-2">Telkom</span>
+                            <h4>{{ telkom_completion_rate|default:"0" }}%</h4>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <h6>Top Customers</h6>
+                <table class="table table-sm">
+                    {% for cust in top_customers %}
+                    <tr>
+                        <td>{{ cust.phone_number|slice:":4" }}•••{{ cust.phone_number|slice:"-2:" }}</td>
+                        <td>{{ cust.transaction_count }} txns</td>
+                        <td>KES {{ cust.total_spent|floatformat:0|intcomma }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3" class="text-muted">No data</td></tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Operations Bar -->
+    <div class="bulk-bar">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="selectAll">
+            <label class="form-check-label" for="selectAll">Select all</label>
+        </div>
+        <div>
+            <button class="btn btn-sm btn-outline-primary" id="exportSelected">
+                <i class="fas fa-download me-1"></i>Export selected
+            </button>
+            <button class="btn btn-sm btn-outline-warning" id="retrySelected">
+                <i class="fas fa-redo me-1"></i>Retry selected
+            </button>
+        </div>
+        <span class="ms-auto text-muted" id="selectedCount">0 selected</span>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-section">
+        <div class="row g-2 align-items-center">
+            <div class="col-md-3">
+                <input type="text" class="form-control" id="searchInput" placeholder="🔍 Search by phone, checkout ID...">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="statusFilter">
+                    <option value="">All statuses</option>
+                    <option value="Success">Success</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Failed">Failed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Expired">Expired</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="errorCategoryFilter">
+                    <option value="">All errors</option>
+                    <option value="user_error">User Error</option>
+                    <option value="balance_error">Balance Error</option>
+                    <option value="limit_error">Limit Error</option>
+                    <option value="system_error">System Error</option>
+                    <option value="timeout_error">Timeout Error</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <span class="input-group-text">KES</span>
+                    <input type="number" class="form-control" id="minAmount" placeholder="Min">
+                    <input type="number" class="form-control" id="maxAmount" placeholder="Max">
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="hasCodeFilter">
+                    <label class="form-check-label">Has Code</label>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-outline-secondary w-100" onclick="resetFilters()">Reset</button>
+            </div>
+        </div>
+        <div class="mt-2 text-muted small" id="filterStats"></div>
+    </div>
+
+    <!-- Transactions Table -->
+    <div class="dashboard-card p-0">
+        <div class="table-responsive">
+            <table class="table table-hover mb-0" id="transactionsTable">
+                <thead>
+                    <tr>
+                        <th width="40"><input type="checkbox" id="selectAllRows"></th>
+                        <th>Checkout ID</th>
+                        <th>Order ID</th>
+                        <th>Phone</th>
+                        <th>Amount (KES)</th>
+                        <th>M-Pesa Code</th>
+                        <th>Status</th>
+                        <th>Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in transactions %}
+                    <tr class="transaction-row" 
+                        data-checkout="{{ t.checkout_id }}"
+                        data-order="{{ t.order_id|default:'' }}"
+                        data-phone="{{ t.phone_number }}"
+                        data-amount="{{ t.amount }}"
+                        data-mpesa="{{ t.mpesa_code|default:'' }}"
+                        data-status="{{ t.status }}"
+                        data-error="{{ t.error_category|default:'' }}"
+                        data-date="{{ t.timestamp|date:'Y-m-d' }}">
+                        <td><input type="checkbox" class="row-checkbox" value="{{ t.checkout_id }}"></td>
+                        <td title="{{ t.checkout_id }}">{{ t.checkout_id|slice:":12" }}…</td>
+                        <td>{{ t.order_id|default:"—" }}</td>
+                        <td>{{ t.phone_number|slice:":4" }}•••{{ t.phone_number|slice:"-2:" }}</td>
+                        <td> {{ t.amount|floatformat:0|intcomma }}</td>
+                        <td>
+                            {% if t.mpesa_code %}
+                                <span class="text-success">{{ t.mpesa_code|slice:":8" }}…</span>
+                            {% else %}
+                                <span class="text-muted">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="badge badge-status
+                                {% if t.status == 'Success' %}bg-success
+                                {% elif t.status == 'Pending' %}bg-warning text-dark
+                                {% elif t.status == 'Processing' %}bg-info text-dark
+                                {% elif t.status == 'Failed' %}bg-danger
+                                {% elif t.status == 'Cancelled' %}bg-secondary
+                                {% elif t.status == 'Expired' %}bg-dark
+                                {% endif %}">
+                                {{ t.status }}
+                            </span>
+                        </td>
+                        <td><span title="{{ t.timestamp }}">{{ t.timestamp|timesince }} ago</span></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">⋯</button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick='showTransactionModal({{ t|safe }})'>
+                                        <i class="far fa-eye me-2"></i>View details
+                                    </a></li>
+                                    {% if t.status == 'Failed' and t.user_action == 'retry' %}
+                                    <li><a class="dropdown-item" href="#">
+                                        <i class="fas fa-redo me-2"></i>Retry payment
+                                    </a></li>
+                                    {% endif %}
+                                    {% if not t.order_id %}
+                                    <li><a class="dropdown-item" href="#">
+                                        <i class="fas fa-link me-2"></i>Link to order
+                                    </a></li>
+                                    {% endif %}
+                                    <li><a class="dropdown-item" href="#" onclick='printReceipt({{ t|safe }})'>
+                                        <i class="fas fa-print me-2"></i>Print receipt
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Transaction Detail Modal -->
+    <div class="modal fade" id="transactionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title"><i class="fas fa-receipt me-2"></i>Transaction Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-sm">
+                                <tr><th>Checkout ID</th><td id="modal_checkout">—</td></tr>
+                                <tr><th>Order ID</th><td id="modal_order">—</td></tr>
+                                <tr><th>Phone</th><td id="modal_phone">—</td></tr>
+                                <tr><th>Amount</th><td id="modal_amount">—</td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-sm">
+                                <tr><th>Status</th><td><span id="modal_status_badge" class="badge"></span></td></tr>
+                                <tr><th>M-Pesa Code</th><td id="modal_mpesa">—</td></tr>
+                                <tr><th>Created</th><td id="modal_timestamp">—</td></tr>
+                                <tr><th>Completed</th><td id="modal_completed">—</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card border-danger mt-3" id="modal_error_section" style="display:none;">
+                        <div class="card-header bg-danger text-white">Error Details</div>
+                        <div class="card-body">
+                            <p><strong>Result Code:</strong> <code id="modal_resultcode"></code></p>
+                            <p><strong>Description:</strong> <span id="modal_resultdesc"></span></p>
+                            <p><strong>Category:</strong> <span id="modal_errorcat" class="badge bg-warning text-dark"></span></p>
+                            <p><strong>Recommended:</strong> <span id="modal_useraction"></span></p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Timeline</h6>
+                        <div class="timeline-item">Checkout created <span class="ms-auto text-muted" id="timeline_created"></span></div>
+                        <div class="timeline-item">Payment initiated <span class="ms-auto text-muted" id="timeline_initiated"></span></div>
+                        <div class="timeline-item">Completed/Failed <span class="ms-auto text-muted" id="timeline_final"></span></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="printReceiptBtn">
+                        <i class="fas fa-print me-1"></i>Print Receipt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing charts...');
+    
+    // Get data from the div attribute
+    const dataDiv = document.getElementById('chart-data');
+    if (!dataDiv) {
+        console.error('Chart data div not found');
+        return;
+    }
+    
+    try {
+        // Parse the JSON data
+        const revenueData = JSON.parse(dataDiv.dataset.revenue || '[]');
+        const statusData = JSON.parse(dataDiv.dataset.status || '[]');
+        const errorData = JSON.parse(dataDiv.dataset.error || '[]');
+        const hourlyData = JSON.parse(dataDiv.dataset.hourly || '[]');
+        const weekdayData = JSON.parse(dataDiv.dataset.weekday || '[]');
+        
+        console.log('Data loaded:', {
+            revenue: revenueData.length,
+            status: statusData.length,
+            error: errorData.length,
+            hourly: hourlyData.length,
+            weekday: weekdayData.length
+        });
+
+        // 1. Revenue Chart
+        const revenueCtx = document.getElementById('revenueChart')?.getContext('2d');
+        if (revenueCtx && revenueData.length > 0) {
+            new Chart(revenueCtx, {
+                type: 'line',
+                data: {
+                    labels: revenueData.map(d => {
+                        const date = new Date(d.day);
+                        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    }),
+                    datasets: [{
+                        label: 'Revenue (KES)',
+                        data: revenueData.map(d => d.total),
+                        borderColor: '#4e73df',
+                        backgroundColor: 'rgba(78, 115, 223, 0.1)',
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { 
+                            callbacks: { 
+                                label: (ctx) => 'KES ' + ctx.raw.toLocaleString() 
+                            } 
+                        }
+                    },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            grid: { color: '#e9ecef' }
+                        }
+                    }
+                }
+            });
+            console.log('Revenue chart created');
+        }
+
+        // 2. Status Chart
+        const statusCtx = document.getElementById('statusChart')?.getContext('2d');
+        if (statusCtx && statusData.length > 0) {
+            new Chart(statusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: statusData.map(s => s.status),
+                    datasets: [{
+                        data: statusData.map(s => s.count),
+                        backgroundColor: ['#28a745', '#ffc107', '#17a2b8', '#dc3545', '#6c757d', '#343a40'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    cutout: '65%',
+                    plugins: {
+                        legend: { position: 'bottom' }
+                    }
+                }
+            });
+            console.log('Status chart created');
+        }
+
+        // 3. Hourly Chart
+        const hourlyCtx = document.getElementById('hourlyChart')?.getContext('2d');
+        if (hourlyCtx && hourlyData.length > 0) {
+            // Create array for all 24 hours
+            const hourlyCounts = Array(24).fill(0);
+            hourlyData.forEach(h => {
+                if (h.hour >= 0 && h.hour < 24) {
+                    hourlyCounts[h.hour] = h.count;
+                }
+            });
+            
+            new Chart(hourlyCtx, {
+                type: 'bar',
+                data: {
+                    labels: Array.from({length: 24}, (_, i) => i + ':00'),
+                    datasets: [{
+                        label: 'Transactions',
+                        data: hourlyCounts,
+                        backgroundColor: '#17a2b8',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { 
+                            beginAtZero: true, 
+                            ticks: { stepSize: 1 },
+                            grid: { color: '#e9ecef' }
+                        }
+                    }
+                }
+            });
+            console.log('Hourly chart created');
+        }
+
+        // 4. Error Chart
+        const errorCtx = document.getElementById('errorChart')?.getContext('2d');
+        if (errorCtx && errorData.length > 0) {
+            new Chart(errorCtx, {
+                type: 'bar',
+                data: {
+                    labels: errorData.map(e => 
+                        e.error_category.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+                    ),
+                    datasets: [{
+                        label: 'Number of Failures',
+                        data: errorData.map(e => e.count),
+                        backgroundColor: '#dc3545',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    indexAxis: 'y',
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { 
+                            beginAtZero: true, 
+                            ticks: { stepSize: 1 },
+                            grid: { color: '#e9ecef' }
+                        }
+                    }
+                }
+            });
+            console.log('Error chart created');
+        }
+
+        // 5. Weekday Chart
+        const weekdayCtx = document.getElementById('weekdayChart')?.getContext('2d');
+        if (weekdayCtx && weekdayData.length > 0) {
+            const weekdayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const weekdayRevenue = Array(7).fill(0);
+            
+            weekdayData.forEach(w => {
+                if (w.weekday >= 1 && w.weekday <= 7) {
+                    weekdayRevenue[w.weekday - 1] = w.revenue;
+                }
+            });
+            
+            new Chart(weekdayCtx, {
+                type: 'line',
+                data: {
+                    labels: weekdayNames,
+                    datasets: [{
+                        label: 'Revenue (KES)',
+                        data: weekdayRevenue,
+                        borderColor: '#f6c23e',
+                        backgroundColor: 'rgba(246, 194, 62, 0.1)',
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { 
+                            beginAtZero: true,
+                            ticks: { callback: (v) => 'KES ' + v },
+                            grid: { color: '#e9ecef' }
+                        }
+                    }
+                }
+            });
+            console.log('Weekday chart created');
+        }
+        
+        console.log('All charts initialized successfully');
+        
+    } catch (error) {
+        console.error('Error creating charts:', error);
+    }
+});
+
+// Table filtering functions (keep your existing functions here)
+function filterTable() {
+    const search = document.getElementById('searchInput').value.toLowerCase();
+    const status = document.getElementById('statusFilter').value;
+    const errorCat = document.getElementById('errorCategoryFilter').value;
+    const minAmt = parseFloat(document.getElementById('minAmount').value) || 0;
+    const maxAmt = parseFloat(document.getElementById('maxAmount').value) || Infinity;
+    const hasCode = document.getElementById('hasCodeFilter').checked;
+
+    const rows = document.querySelectorAll('.transaction-row');
+    let visible = 0;
+    rows.forEach(row => {
+        const phone = row.dataset.phone.toLowerCase();
+        const checkout = row.dataset.checkout.toLowerCase();
+        const mpesa = row.dataset.mpesa.toLowerCase();
+        const amount = parseFloat(row.dataset.amount);
+        const rowStatus = row.dataset.status;
+        const rowError = row.dataset.error;
+
+        let match = true;
+        if (search && !(phone.includes(search) || checkout.includes(search) || mpesa.includes(search))) match = false;
+        if (status && rowStatus !== status) match = false;
+        if (errorCat && rowError !== errorCat) match = false;
+        if (amount < minAmt || amount > maxAmt) match = false;
+        if (hasCode && !mpesa) match = false;
+
+        row.style.display = match ? '' : 'none';
+        if (match) visible++;
+    });
+    document.getElementById('filterStats').innerText = `Showing ${visible} of ${rows.length} transactions`;
+    updateSelectedCount();
+}
+
+function updateSelectedCount() {
+    const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+    document.getElementById('selectedCount').innerText = checkboxes.length + ' selected';
+    const allCheckboxes = document.querySelectorAll('.row-checkbox');
+    const allChecked = allCheckboxes.length && [...allCheckboxes].every(cb => cb.checked);
+    document.getElementById('selectAllRows').checked = allChecked;
+}
+
+window.showTransactionModal = function(t) {
+    document.getElementById('modal_checkout').innerText = t.checkout_id || '—';
+    document.getElementById('modal_order').innerText = t.order_id || '—';
+    document.getElementById('modal_phone').innerText = t.phone_number || '—';
+    document.getElementById('modal_amount').innerText = 'KES ' + (t.amount || 0);
+    
+    const statusBadge = document.getElementById('modal_status_badge');
+    statusBadge.innerText = t.status || '—';
+    statusBadge.className = 'badge ';
+    if (t.status === 'Success') statusBadge.classList.add('bg-success');
+    else if (t.status === 'Pending') statusBadge.classList.add('bg-warning', 'text-dark');
+    else if (t.status === 'Processing') statusBadge.classList.add('bg-info', 'text-dark');
+    else if (t.status === 'Failed') statusBadge.classList.add('bg-danger');
+    else statusBadge.classList.add('bg-secondary');
+
+    document.getElementById('modal_mpesa').innerText = t.mpesa_code || '—';
+    document.getElementById('modal_timestamp').innerText = t.timestamp || '—';
+    document.getElementById('modal_completed').innerText = t.completed_at || '—';
+    
+    document.getElementById('timeline_created').innerText = t.timestamp || '';
+    document.getElementById('timeline_initiated').innerText = t.mpesa_code ? 'Processed' : 'Pending';
+    document.getElementById('timeline_final').innerText = t.completed_at || t.status || '';
+
+    if (t.status === 'Failed' && t.result_code) {
+        document.getElementById('modal_error_section').style.display = 'block';
+        document.getElementById('modal_resultcode').innerText = t.result_code;
+        document.getElementById('modal_resultdesc').innerText = t.result_desc || '—';
+        let cat = t.error_category || '';
+        cat = cat.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        document.getElementById('modal_errorcat').innerText = cat;
+        document.getElementById('modal_useraction').innerText = t.user_action || 'Contact support';
+    } else {
+        document.getElementById('modal_error_section').style.display = 'none';
+    }
+
+    var myModal = new bootstrap.Modal(document.getElementById('transactionModal'));
+    myModal.show();
+};
+
+window.printReceipt = function(t) {
+    alert('Print receipt for ' + t.checkout_id);
+};
+
+window.resetFilters = function() {
+    document.getElementById('searchInput').value = '';
+    document.getElementById('statusFilter').value = '';
+    document.getElementById('errorCategoryFilter').value = '';
+    document.getElementById('minAmount').value = '';
+    document.getElementById('maxAmount').value = '';
+    document.getElementById('hasCodeFilter').checked = false;
+    filterTable();
+};
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Filter listeners
+    document.getElementById('searchInput').addEventListener('keyup', filterTable);
+    document.getElementById('statusFilter').addEventListener('change', filterTable);
+    document.getElementById('errorCategoryFilter').addEventListener('change', filterTable);
+    document.getElementById('minAmount').addEventListener('input', filterTable);
+    document.getElementById('maxAmount').addEventListener('input', filterTable);
+    document.getElementById('hasCodeFilter').addEventListener('change', filterTable);
+
+    // Master checkbox
+    document.getElementById('selectAll').addEventListener('change', function(e) {
+        document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = e.target.checked);
+        updateSelectedCount();
+    });
+
+    document.getElementById('selectAllRows').addEventListener('change', function(e) {
+        document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = e.target.checked);
+        updateSelectedCount();
+    });
+
+    // Individual checkboxes
+    document.querySelectorAll('.row-checkbox').forEach(cb => {
+        cb.addEventListener('change', updateSelectedCount);
+    });
+
+    // Export selected
+    document.getElementById('exportSelected').addEventListener('click', function() {
+        const selected = [...document.querySelectorAll('.row-checkbox:checked')].map(cb => cb.value);
+        if (selected.length) {
+            window.location.href = "{% url 'useradmin:export_transactions' %}?ids=" + selected.join(',');
+        } else {
+            alert('No transactions selected');
+        }
+    });
+
+    // Retry selected (placeholder)
+    document.getElementById('retrySelected').addEventListener('click', function() {
+        const selected = [...document.querySelectorAll('.row-checkbox:checked')].map(cb => cb.value);
+        if (selected.length) {
+            if (confirm('Retry ' + selected.length + ' failed transactions?')) {
+                alert('Demo: retry not implemented');
+            }
+        } else {
+            alert('No transactions selected');
+        }
+    });
+
+    // Print receipt from modal
+    document.getElementById('printReceiptBtn').addEventListener('click', function() {
+        alert('Print receipt feature');
+    });
+
+    filterTable();
+});
+</script>
+
+</body>
+</html>

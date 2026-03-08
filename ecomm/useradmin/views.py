@@ -1,8 +1,7 @@
-from django.shortcuts import render, get_object_or_404,redirect
+from django.shortcuts import render,redirect, get_object_or_404,redirect
 from django.urls import reverse
 import os
 # Create your views here.
-from django.shortcuts import render, redirect
 from django.db.models import Sum
 from django.db import transaction
 from django.views.decorators.csrf import csrf_exempt
@@ -23,7 +22,7 @@ import uuid
 from django.core.files.storage import FileSystemStorage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.db.models import Count, Avg, Q, Sum
+from django.db.models import Count, Avg, Q, Sum,F, Case, When, Value, CharField, FloatField
 from datetime import datetime, timedelta, date, time
 
 import datetime
@@ -37,8 +36,12 @@ from django.contrib import messages as django_messages
 from django.contrib.auth.decorators import user_passes_test
 from core.utils.email_utils import ReturnEmailService
 import calendar
-
+from django.db.models.functions import TruncDate, ExtractHour, ExtractWeekDay
 from corporate.models import UniqueVisit
+from payments.models import Transaction
+import decimal
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 
 
@@ -49,6 +52,395 @@ def admin_required(view_func):
             return view_func(request, *args, **kwargs)
         return redirect('login')
     return wrapper
+
+
+class DecimalEncoder(DjangoJSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, decimal.Decimal):
+            return float(obj)  # Convert Decimal to float
+        return super().default(obj)
+
+@admin_required
+def transactions_dashboard(request):
+    # Get date range from request (default to last 30 days)
+    date_range = request.GET.get('range', '30')
+    end_date = timezone.now()
+    
+    if date_range == '7':
+        start_date = end_date - timedelta(days=7)
+    elif date_range == '30':
+        start_date = end_date - timedelta(days=30)
+    elif date_range == '90':
+        start_date = end_date - timedelta(days=90)
+    elif date_range == 'all':
+        start_date = timezone.now() - timedelta(days=365*5)  # 5 years
+    else:
+        start_date = end_date - timedelta(days=30)
+        date_range = '30'
+    
+    # Base queryset with date filtering
+    transactions = Transaction.objects.filter(timestamp__date__gte=start_date.date())
+    
+    # -----------------------
+    # KEY METRICS
+    # -----------------------
+    transaction_count = transactions.count()
+    success_count = transactions.filter(status="Success").count()
+    failed_count = transactions.filter(status="Failed").count()
+    pending_count = transactions.filter(status="Pending").count()
+    processing_count = transactions.filter(status="Processing").count()
+    cancelled_expired = transactions.filter(status__in=['Cancelled', 'Expired']).count()
+    
+    total_revenue = transactions.filter(
+        status="Success"
+    ).aggregate(total=Sum("amount"))["total"] or 0
+    
+    # Success rate
+    success_rate = 0
+    if transaction_count > 0:
+        success_rate = round((success_count / transaction_count) * 100, 2)
+    
+    # Average order value
+    avg_order_value = 0
+    if success_count > 0:
+        avg_order_value = round(total_revenue / success_count, 2)
+    
+    # M-Pesa success metrics
+    mpesa_success = transactions.filter(
+        status="Success",
+        mpesa_code__isnull=False
+    ).count()
+    
+    mpesa_success_rate = 0
+    if transaction_count > 0:
+        mpesa_success_rate = round((mpesa_success / transaction_count) * 100, 2)
+    
+    # -----------------------
+    # AVG COMPLETION TIME
+    # -----------------------
+    completed = transactions.filter(completed_at__isnull=False)
+    avg_completion = completed.aggregate(
+        avg_time=Avg(F("completed_at") - F("timestamp"))
+    )["avg_time"]
+    
+    # Format avg completion time
+    if avg_completion:
+        total_seconds = int(avg_completion.total_seconds())
+        if total_seconds < 60:
+            avg_completion_time = f"{total_seconds} sec"
+        elif total_seconds < 3600:
+            minutes = total_seconds // 60
+            seconds = total_seconds % 60
+            avg_completion_time = f"{minutes} min {seconds} sec"
+        else:
+            hours = total_seconds // 3600
+            minutes = (total_seconds % 3600) // 60
+            avg_completion_time = f"{hours} hr {minutes} min"
+    else:
+        avg_completion_time = "N/A"
+    
+    # -----------------------
+    # GROWTH CALCULATIONS (compare with previous period)
+    # -----------------------
+    previous_start = start_date - timedelta(days=30)
+    previous_end = start_date
+    previous_transactions = Transaction.objects.filter(
+        timestamp__date__gte=previous_start.date(),
+        timestamp__date__lt=previous_end.date()
+    )
+    
+    previous_revenue = previous_transactions.filter(
+        status="Success"
+    ).aggregate(total=Sum("amount"))["total"] or 0
+    
+    growth_percentage = 0
+    growth_absolute = 0
+    if previous_revenue > 0:
+        growth_percentage = round(((total_revenue - previous_revenue) / previous_revenue) * 100, 1)
+        growth_absolute = abs(growth_percentage)
+    
+    # -----------------------
+    # TODAY SNAPSHOT
+    # -----------------------
+    today = timezone.now().date()
+    today_transactions = Transaction.objects.filter(timestamp__date=today)
+    
+    today_count = today_transactions.count()
+    today_success = today_transactions.filter(status="Success").count()
+    today_failed = today_transactions.filter(status="Failed").count()
+    today_pending = today_transactions.filter(status="Pending").count()
+    today_revenue = today_transactions.filter(
+        status="Success"
+    ).aggregate(total=Sum("amount"))["total"] or 0
+    
+    # -----------------------
+    # REVENUE TREND (Last 30 days)
+    # -----------------------
+    revenue_trend_data = list(
+        Transaction.objects.filter(
+            status="Success",
+            timestamp__date__gte=start_date.date()
+        )
+        .annotate(day=TruncDate("timestamp"))
+        .values("day")
+        .annotate(total=Sum("amount"))
+        .order_by("day")
+    )
+    
+    # Convert Decimal values to float for JSON serialization
+    for item in revenue_trend_data:
+        if 'total' in item and isinstance(item['total'], decimal.Decimal):
+            item['total'] = float(item['total'])
+    
+    # -----------------------
+    # STATUS DISTRIBUTION
+    # -----------------------
+    status_counts_data = list(
+        transactions.values("status")
+        .annotate(count=Count("id"))
+        .order_by("status")
+    )
+    
+    # -----------------------
+    # ERROR ANALYSIS
+    # -----------------------
+    error_counts_data = list(
+        transactions.filter(status="Failed")
+        .values("error_category")
+        .annotate(count=Count("id"))
+        .exclude(error_category__isnull=True)
+        .order_by("-count")
+    )
+    
+    # Get result code breakdown
+    result_code_breakdown = list(
+        transactions.filter(status="Failed")
+        .values("result_code")
+        .annotate(count=Count("id"))
+        .exclude(result_code__isnull=True)
+        .order_by("-count")[:5]
+    )
+    
+    # -----------------------
+    # HOURLY VOLUME
+    # -----------------------
+    hourly_data = list(
+        transactions.annotate(hour=ExtractHour("timestamp"))
+        .values("hour")
+        .annotate(count=Count("id"))
+        .order_by("hour")
+    )
+    
+    # -----------------------
+    # WEEKDAY ANALYSIS
+    # -----------------------
+    weekday_data = list(
+        transactions.filter(status="Success")
+        .annotate(weekday=ExtractWeekDay("timestamp"))
+        .values("weekday")
+        .annotate(revenue=Sum("amount"))
+        .order_by("weekday")
+    )
+    
+    # Format weekday data with day names and convert Decimal
+    weekday_names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    for item in weekday_data:
+        if 'revenue' in item and isinstance(item['revenue'], decimal.Decimal):
+            item['revenue'] = float(item['revenue'])
+        if item['weekday']:
+            item['day'] = weekday_names[item['weekday'] - 1]
+    
+    # -----------------------
+    # TOP CUSTOMERS
+    # -----------------------
+    top_customers_data = list(
+        transactions.filter(status="Success")
+        .values("phone_number")
+        .annotate(
+            transaction_count=Count("id"),
+            total_spent=Sum("amount")
+        )
+        .order_by("-total_spent")[:5]
+    )
+    
+    # Convert Decimal total_spent to float
+    for item in top_customers_data:
+        if 'total_spent' in item and isinstance(item['total_spent'], decimal.Decimal):
+            item['total_spent'] = float(item['total_spent'])
+    
+    # -----------------------
+    # NETWORK SUCCESS RATES
+    # -----------------------
+    # Safaricom (07**)
+    safaricom_count = transactions.filter(phone_number__startswith='2547').count()
+    safaricom_success = transactions.filter(phone_number__startswith='2547', status='Success').count()
+    saf_completion_rate = round((safaricom_success / safaricom_count * 100), 1) if safaricom_count > 0 else 0
+    
+    # Airtel (01**)
+    airtel_count = transactions.filter(phone_number__startswith='01').count()
+    airtel_success = transactions.filter(phone_number__startswith='01', status='Success').count()
+    airtel_completion_rate = round((airtel_success / airtel_count * 100), 1) if airtel_count > 0 else 0
+    
+    # Telkom (05**)
+    telkom_count = transactions.filter(phone_number__startswith='05').count()
+    telkom_success = transactions.filter(phone_number__startswith='05', status='Success').count()
+    telkom_completion_rate = round((telkom_success / telkom_count * 100), 1) if telkom_count > 0 else 0
+    
+    # -----------------------
+    # ERROR PATTERN ANALYSIS
+    # -----------------------
+    user_error_count = transactions.filter(status='Failed', error_category='user_error').count()
+    balance_error_count = transactions.filter(status='Failed', error_category='balance_error').count()
+    limit_error_count = transactions.filter(status='Failed', error_category='limit_error').count()
+    system_error_count = transactions.filter(status='Failed', error_category='system_error').count()
+    timeout_error_count = transactions.filter(status='Failed', error_category='timeout_error').count()
+    
+    user_error_percent = round((user_error_count / failed_count * 100), 1) if failed_count > 0 else 0
+    balance_error_percent = round((balance_error_count / failed_count * 100), 1) if failed_count > 0 else 0
+    limit_error_percent = round((limit_error_count / failed_count * 100), 1) if failed_count > 0 else 0
+    system_error_percent = round((system_error_count / failed_count * 100), 1) if failed_count > 0 else 0
+    timeout_error_percent = round((timeout_error_count / failed_count * 100), 1) if failed_count > 0 else 0
+    
+    # -----------------------
+    # ALERTS
+    # -----------------------
+    # Stuck transactions (Processing for > 30 mins)
+    stuck_threshold = timezone.now() - timedelta(minutes=30)
+    stuck_transactions = transactions.filter(
+        status="Processing",
+        timestamp__lte=stuck_threshold
+    ).count()
+    
+    # High failure rate alert (> 10% in last hour)
+    last_hour = timezone.now() - timedelta(hours=1)
+    hour_transactions = transactions.filter(timestamp__gte=last_hour)
+    hour_total = hour_transactions.count()
+    hour_failed = hour_transactions.filter(status="Failed").count()
+    
+    high_failure_alert = False
+    if hour_total > 10 and (hour_failed / hour_total) > 0.1:
+        high_failure_alert = True
+    
+    # -----------------------
+    # RECENT TRANSACTIONS (for table)
+    # -----------------------
+    recent_transactions = transactions.order_by("-timestamp")[:50]
+    
+    # Prepare context with all data
+    context = {
+        # Date range
+        'date_range': date_range,
+        'start_date': start_date.date(),
+        'end_date': end_date.date(),
+        
+        # Key metrics
+        "transaction_count": transaction_count,
+        "success_count": success_count,
+        "failed_count": failed_count,
+        "pending_count": pending_count,
+        "processing_count": processing_count,
+        "cancelled_expired_count": cancelled_expired,
+        "success_rate": success_rate,
+        "total_revenue": float(total_revenue) if isinstance(total_revenue, decimal.Decimal) else total_revenue,
+        "avg_order_value": float(avg_order_value) if isinstance(avg_order_value, decimal.Decimal) else avg_order_value,
+        "mpesa_success_rate": mpesa_success_rate,
+        "avg_completion_time": avg_completion_time,
+        "growth_percentage": growth_percentage,
+        "growth_absolute": growth_absolute,
+        
+        # Today snapshot
+        "today_count": today_count,
+        "today_success": today_success,
+        "today_failed": today_failed,
+        "today_pending": today_pending,
+        "today_revenue": float(today_revenue) if isinstance(today_revenue, decimal.Decimal) else today_revenue,
+        
+        # Charts data (JSON serialized with proper encoder)
+        "revenue_trend": json.dumps(revenue_trend_data, cls=DjangoJSONEncoder),
+        "status_counts": json.dumps(status_counts_data),
+        "error_counts": json.dumps(error_counts_data),
+        "hourly_data": json.dumps(hourly_data),
+        "weekday_data": json.dumps(weekday_data, cls=DjangoJSONEncoder),
+        
+        # Advanced analytics
+        "result_code_breakdown": result_code_breakdown,
+        "top_customers": top_customers_data,
+        
+        # Network success rates
+        "saf_completion_rate": saf_completion_rate,
+        "airtel_completion_rate": airtel_completion_rate,
+        "telkom_completion_rate": telkom_completion_rate,
+        
+        # Error pattern analysis
+        "user_error_count": user_error_count,
+        "balance_error_count": balance_error_count,
+        "limit_error_count": limit_error_count,
+        "system_error_count": system_error_count,
+        "timeout_error_count": timeout_error_count,
+        "user_error_percent": user_error_percent,
+        "balance_error_percent": balance_error_percent,
+        "limit_error_percent": limit_error_percent,
+        "system_error_percent": system_error_percent,
+        "timeout_error_percent": timeout_error_percent,
+        
+        # Alerts
+        "stuck_transactions": stuck_transactions,
+        "high_failure_alert": high_failure_alert,
+        
+        # Table
+        "transactions": recent_transactions,
+    }
+    
+    return render(request, "useradmin/transactions_dashboard.html", context)
+
+
+def export_transactions(request):
+    """Export transactions as CSV"""
+    response = HttpResponse(content_type="text/csv")
+    response["Content-Disposition"] = "attachment; filename=transactions.csv"
+    
+    writer = csv.writer(response)
+    writer.writerow([
+        "checkout_id",
+        "order_id",
+        "phone_number",
+        "amount",
+        "status",
+        "mpesa_code",
+        "timestamp",
+        "completed_at",
+        "error_category",
+        "result_code",
+        "result_desc",
+        "user_action"
+    ])
+    
+    # Check if specific IDs were requested
+    ids = request.GET.get('ids')
+    if ids:
+        id_list = ids.split(',')
+        transactions = Transaction.objects.filter(checkout_id__in=id_list)
+    else:
+        transactions = Transaction.objects.all()
+    
+    for t in transactions:
+        writer.writerow([
+            t.checkout_id,
+            t.order_id,
+            t.phone_number,
+            float(t.amount) if t.amount else 0,
+            t.status,
+            t.mpesa_code,
+            t.timestamp,
+            t.completed_at,
+            t.error_category,
+            t.result_code,
+            t.result_desc,
+            t.user_action
+        ])
+    
+    return response
+
 
 # unique visit tracking view 
 def visitor_dashboard(request):
