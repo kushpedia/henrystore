@@ -36,7 +36,7 @@ from django.contrib import messages as django_messages
 from django.contrib.auth.decorators import user_passes_test
 from core.utils.email_utils import ReturnEmailService
 import calendar
-from django.db.models.functions import TruncDate, ExtractHour, ExtractWeekDay
+from django.db.models.functions import TruncDate, ExtractHour, ExtractWeekDay, TruncMonth
 from corporate.models import UniqueVisit
 from payments.models import Transaction
 import decimal
@@ -1361,23 +1361,36 @@ def mark_and_view_message(request, message_id):
 @admin_required
 def admin_return_list(request):
     """
-    Admin view to list all return requests
+    Admin view to list all return requests with graphical analytics
     """
     # Get filter parameters
     status_filter = request.GET.get('status', '')
     search_query = request.GET.get('search', '')
+    date_range = request.GET.get('date_range', '30')  # Default 30 days
     
-    # Base queryset
-    returns = ReturnRequest.objects.select_related(
+    # Base queryset for ALL returns (for stats and charts)
+    all_returns = ReturnRequest.objects.select_related(
         'order', 'user', 'order_item'
     ).prefetch_related('logs').all()
     
-    # Apply filters
+    # Apply date range filter for the main list and charts
+    try:
+        days = int(date_range)
+        start_date = timezone.now() - timedelta(days=days)
+        # Filter returns within the date range
+        filtered_returns = all_returns.filter(created_at__gte=start_date)
+    except (ValueError, TypeError):
+        # If date_range is invalid, use all returns
+        filtered_returns = all_returns
+        days = 30  # Default for display
+        start_date = timezone.now() - timedelta(days=30)
+    
+    # Apply additional filters (status, search) to the filtered queryset
     if status_filter:
-        returns = returns.filter(status=status_filter)
+        filtered_returns = filtered_returns.filter(status=status_filter)
     
     if search_query:
-        returns = returns.filter(
+        filtered_returns = filtered_returns.filter(
             Q(rma_number__icontains=search_query) |
             Q(order__oid__icontains=search_query) |
             Q(user__email__icontains=search_query) |
@@ -1385,24 +1398,351 @@ def admin_return_list(request):
         )
     
     # Order by most recent
-    returns = returns.order_by('-created_at')
+    filtered_returns = filtered_returns.order_by('-created_at')
     
     # Pagination
-    paginator = Paginator(returns, 20)
+    paginator = Paginator(filtered_returns, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    # Statistics
+    # Statistics (based on filtered data for consistency)
     stats = {
-        'total': ReturnRequest.objects.count(),
-        'pending': ReturnRequest.objects.filter(status='pending').count(),
-        'approved': ReturnRequest.objects.filter(status='approved').count(),
-        'received': ReturnRequest.objects.filter(status='received').count(),
-        'completed': ReturnRequest.objects.filter(status='completed').count(),
-        'total_refund': ReturnRequest.objects.filter(
+        'total': filtered_returns.count(),
+        'pending': filtered_returns.filter(status='pending').count(),
+        'approved': filtered_returns.filter(status='approved').count(),
+        'received': filtered_returns.filter(status='received').count(),
+        'completed': filtered_returns.filter(status='completed').count(),
+        'rejected': filtered_returns.filter(status='rejected').count(),
+        'cancelled': filtered_returns.filter(status='cancelled').count(),
+        'total_refund': filtered_returns.filter(
             status='completed'
         ).aggregate(total=Sum('refund_amount'))['total'] or 0,
     }
+    
+    # Chart 1: Return Status Distribution (Pie Chart) - based on filtered data
+    status_distribution = {
+        'labels': ['Pending', 'Approved', 'Received', 'Completed', 'Rejected', 'Cancelled'],
+        'data': [
+            stats['pending'],
+            stats['approved'],
+            stats['received'],
+            stats['completed'],
+            stats['rejected'],
+            stats['cancelled']
+        ],
+        'colors': ['#ffc107', '#17a2b8', '#007bff', '#28a745', '#dc3545', '#6c757d']
+    }
+    
+    # Chart 2: Returns Over Time (Line Chart) - based on filtered date range
+    # Use the same date range for daily breakdown
+    daily_returns = filtered_returns.annotate(
+        date=TruncDate('created_at')
+    ).values('date').annotate(
+        count=Count('id'),
+        refund_total=Sum('refund_amount')
+    ).order_by('date')
+    
+    daily_labels = []
+    daily_counts = []
+    daily_refunds = []
+    
+    # Create a date range to ensure all dates are shown (even with zero returns)
+    current_date = start_date.date()
+    end_date = timezone.now().date()
+    
+    # Create a dictionary of existing data
+    daily_data_dict = {}
+    for item in daily_returns:
+        if item['date']:
+            daily_data_dict[item['date']] = {
+                'count': item['count'],
+                'refund': float(item['refund_total'] or 0)
+            }
+    
+    # Fill in all dates in the range
+    current = current_date
+    while current <= end_date:
+        daily_labels.append(current.strftime('%Y-%m-%d'))
+        if current in daily_data_dict:
+            daily_counts.append(daily_data_dict[current]['count'])
+            daily_refunds.append(daily_data_dict[current]['refund'])
+        else:
+            daily_counts.append(0)
+            daily_refunds.append(0)
+        current += timedelta(days=1)
+    
+    # Chart 3: Return Reasons Analysis (Bar Chart) - based on filtered data
+    reason_counts = filtered_returns.values('reason').annotate(
+        count=Count('id')
+    ).order_by('-count')[:10]
+    
+    reason_labels = []
+    reason_data = []
+    for item in reason_counts:
+        # Truncate long reason text
+        label = item['reason'][:30] + '...' if len(item['reason']) > 30 else item['reason']
+        reason_labels.append(label)
+        reason_data.append(item['count'])
+    
+    # Chart 4: Monthly Trends - based on filtered data (or last 6 months if filtered range is small)
+    six_months_ago = timezone.now() - timedelta(days=180)
+    monthly_returns = filtered_returns.filter(
+        created_at__gte=six_months_ago
+    ).annotate(
+        month=TruncMonth('created_at')
+    ).values('month').annotate(
+        count=Count('id'),
+        avg_refund=Avg('refund_amount')
+    ).order_by('month')
+    
+    monthly_labels = []
+    monthly_counts = []
+    for item in monthly_returns:
+        if item['month']:
+            monthly_labels.append(item['month'].strftime('%B %Y'))
+            monthly_counts.append(item['count'])
+    
+    # Chart 5: Return Type Distribution - Properly group by return_type
+    # Initialize with all possible return types set to 0
+    return_type_data = {
+        'refund': 0,
+        'store_credit': 0,
+        'exchange': 0
+    }
+    
+    # Get the actual counts from the database
+    return_type_counts = filtered_returns.values('return_type').annotate(
+        count=Count('id')
+    )
+    
+    # Update the counts
+    for item in return_type_counts:
+        return_type = item['return_type']
+        if return_type in return_type_data:
+            return_type_data[return_type] = item['count']
+    
+    # Prepare data for chart
+    type_labels_display = {
+        'refund': 'Refund',
+        'store_credit': 'Store Credit',
+        'exchange': 'Exchange'
+    }
+    
+    type_names = [type_labels_display[rt] for rt in return_type_data.keys()]
+    type_data = list(return_type_data.values())
+    
+    # Chart 6: Item Condition Analysis - Properly group by condition
+    # Initialize with all possible conditions set to 0
+    condition_data = {
+        'new': 0,
+        'opened': 0,
+        'used': 0,
+        'defective': 0
+    }
+    
+    # Get the actual counts from the database (only for returns with condition set)
+    condition_counts = filtered_returns.filter(
+        item_condition__isnull=False
+    ).values('item_condition').annotate(
+        count=Count('id')
+    )
+    
+    # Update the counts
+    for item in condition_counts:
+        condition = item['item_condition']
+        if condition in condition_data:
+            condition_data[condition] = item['count']
+    
+    # Prepare data for chart
+    condition_labels_display = {
+        'new': 'New/Unopened',
+        'opened': 'Opened/Like New',
+        'used': 'Used',
+        'defective': 'Defective/Damaged'
+    }
+    
+    condition_labels = [condition_labels_display[cond] for cond in condition_data.keys()]
+    condition_values = list(condition_data.values())
+    condition_colors = ['#28a745', '#17a2b8', '#ffc107', '#dc3545']
+    
+    # ========== DYNAMIC METRICS CALCULATIONS ==========
+    
+    # Calculate average processing time (for completed returns in current period)
+    completed_returns = filtered_returns.filter(status='completed')
+    total_processing_days = 0
+    processed_count = 0
+    for ret in completed_returns:
+        if ret.completed_at and ret.created_at:
+            days_diff = (ret.completed_at - ret.created_at).days
+            total_processing_days += days_diff
+            processed_count += 1
+    
+    avg_processing_days = round(total_processing_days / processed_count, 1) if processed_count > 0 else 0
+    
+    # Calculate average processing time for previous period (for comparison)
+    previous_start_date = start_date - timedelta(days=days)
+    previous_end_date = start_date - timedelta(days=1)
+    
+    previous_returns = ReturnRequest.objects.filter(
+        created_at__gte=previous_start_date,
+        created_at__lte=previous_end_date,
+        status='completed',
+        completed_at__isnull=False
+    )
+    
+    prev_total_days = 0
+    prev_count = 0
+    for ret in previous_returns:
+        if ret.completed_at and ret.created_at:
+            days_diff = (ret.completed_at - ret.created_at).days
+            prev_total_days += days_diff
+            prev_count += 1
+    
+    prev_avg_processing_days = round(prev_total_days / prev_count, 1) if prev_count > 0 else 0
+    
+    # Calculate processing time trend
+    if prev_avg_processing_days > 0:
+        processing_diff = avg_processing_days - prev_avg_processing_days
+        if processing_diff < 0:
+            processing_trend = f"↓ {abs(processing_diff)} days"
+            processing_trend_class = "text-success"
+        elif processing_diff > 0:
+            processing_trend = f"↑ {processing_diff} days"
+            processing_trend_class = "text-danger"
+        else:
+            processing_trend = "No change"
+            processing_trend_class = "text-muted"
+    else:
+        processing_trend = "Insufficient data"
+        processing_trend_class = "text-muted"
+    
+    # Calculate Return Rate (returns vs total orders)
+    from core.models import CartOrder
+    
+    # Current period orders
+    current_orders = CartOrder.objects.filter(order_date__gte=start_date).count()
+    return_rate = (stats['total'] / current_orders * 100) if current_orders > 0 else 0
+    
+    # Previous period orders and returns
+    previous_orders = CartOrder.objects.filter(
+        order_date__gte=previous_start_date,
+        order_date__lte=previous_end_date
+    ).count()
+    
+    previous_returns_count = ReturnRequest.objects.filter(
+        created_at__gte=previous_start_date,
+        created_at__lte=previous_end_date
+    ).count()
+    
+    prev_return_rate = (previous_returns_count / previous_orders * 100) if previous_orders > 0 else 0
+    
+    # Calculate return rate trend
+    if prev_return_rate > 0:
+        rate_diff = return_rate - prev_return_rate
+        if rate_diff < 0:
+            rate_trend = f"↓ {abs(rate_diff):.1f}%"
+            rate_trend_class = "text-success"  # Lower return rate is good
+        elif rate_diff > 0:
+            rate_trend = f"↑ {rate_diff:.1f}%"
+            rate_trend_class = "text-warning"  # Higher return rate might be concerning
+        else:
+            rate_trend = "No change"
+            rate_trend_class = "text-muted"
+    else:
+        rate_trend = "Insufficient data"
+        rate_trend_class = "text-muted"
+    
+    # Calculate Average Refund Amount
+    completed_refunds = filtered_returns.filter(status='completed')
+    total_refund_amount = completed_refunds.aggregate(total=Sum('refund_amount'))['total'] or 0
+    avg_refund_amount = total_refund_amount / completed_refunds.count() if completed_refunds.count() > 0 else 0
+    
+    # Previous period average refund
+    previous_completed = ReturnRequest.objects.filter(
+        created_at__gte=previous_start_date,
+        created_at__lte=previous_end_date,
+        status='completed'
+    )
+    prev_total_refund = previous_completed.aggregate(total=Sum('refund_amount'))['total'] or 0
+    prev_avg_refund = prev_total_refund / previous_completed.count() if previous_completed.count() > 0 else 0
+    
+    # Refund amount trend
+    if prev_avg_refund > 0:
+        refund_diff = avg_refund_amount - prev_avg_refund
+        if refund_diff < 0:
+            refund_trend = f"↓ KSh {abs(refund_diff):,.0f}"
+            refund_trend_class = "text-success"
+        elif refund_diff > 0:
+            refund_trend = f"↑ KSh {refund_diff:,.0f}"
+            refund_trend_class = "text-danger"
+        else:
+            refund_trend = "No change"
+            refund_trend_class = "text-muted"
+    else:
+        refund_trend = "Insufficient data"
+        refund_trend_class = "text-muted"
+    
+    # Calculate Success Rate (completed vs total)
+    success_rate = (stats['completed'] / stats['total'] * 100) if stats['total'] > 0 else 0
+    
+    # Previous period success rate
+    previous_total = ReturnRequest.objects.filter(
+        created_at__gte=previous_start_date,
+        created_at__lte=previous_end_date
+    ).count()
+    
+    previous_completed_count = ReturnRequest.objects.filter(
+        created_at__gte=previous_start_date,
+        created_at__lte=previous_end_date,
+        status='completed'
+    ).count()
+    
+    prev_success_rate = (previous_completed_count / previous_total * 100) if previous_total > 0 else 0
+    
+    # Success rate trend
+    if prev_success_rate > 0:
+        success_diff = success_rate - prev_success_rate
+        if success_diff < 0:
+            success_trend = f"↓ {abs(success_diff):.1f}%"
+            success_trend_class = "text-danger"
+        elif success_diff > 0:
+            success_trend = f"↑ {success_diff:.1f}%"
+            success_trend_class = "text-success"
+        else:
+            success_trend = "No change"
+            success_trend_class = "text-muted"
+    else:
+        success_trend = "Insufficient data"
+        success_trend_class = "text-muted"
+    
+    # ===== FIX: Define total_returns_all_time =====
+    total_returns_all_time = ReturnRequest.objects.count()
+    
+    # Convert data to JSON for JavaScript
+    chart_data = {
+        'status_distribution': json.dumps(status_distribution),
+        'daily_labels': json.dumps(daily_labels),
+        'daily_counts': json.dumps(daily_counts),
+        'daily_refunds': json.dumps(daily_refunds),
+        'reason_labels': json.dumps(reason_labels),
+        'reason_data': json.dumps(reason_data),
+        'monthly_labels': json.dumps(monthly_labels),
+        'monthly_counts': json.dumps(monthly_counts),
+        'type_names': json.dumps(type_names),
+        'type_data': json.dumps(type_data),
+        'condition_labels': json.dumps(condition_labels),
+        'condition_data': json.dumps(condition_values),
+        'condition_colors': json.dumps(condition_colors),
+    }
+    
+    # Date range display text
+    date_range_text = {
+        '7': 'Last 7 Days',
+        '30': 'Last 30 Days',
+        '90': 'Last 90 Days',
+        '180': 'Last 6 Months',
+        '365': 'Last Year',
+    }.get(date_range, 'Custom Range')
     
     context = {
         'page_obj': page_obj,
@@ -1410,9 +1750,36 @@ def admin_return_list(request):
         'current_status': status_filter,
         'search_query': search_query,
         'status_choices': ReturnRequest.ReturnStatus.choices,
+        'chart_data': chart_data,
+        'date_range': date_range,
+        'date_range_text': date_range_text,
+        
+        # Dynamic metrics
+        'avg_processing_days': avg_processing_days,
+        'processing_trend': processing_trend,
+        'processing_trend_class': processing_trend_class,
+        
+        'return_rate': round(return_rate, 1),
+        'rate_trend': rate_trend,
+        'rate_trend_class': rate_trend_class,
+        
+        'avg_refund_amount': round(avg_refund_amount),
+        'refund_trend': refund_trend,
+        'refund_trend_class': refund_trend_class,
+        
+        'success_rate': round(success_rate, 1),
+        'success_trend': success_trend,
+        'success_trend_class': success_trend_class,
+        
+        # FIX: Added this variable
+        'total_returns_all_time': total_returns_all_time,
+        
+        'filtered_count': filtered_returns.count(),
+        'start_date': start_date.strftime('%B %d, %Y'),
+        'end_date': timezone.now().strftime('%B %d, %Y'),
     }
+    
     return render(request, 'useradmin/return_list.html', context)
-
 
 @admin_required
 def admin_return_detail(request, pk):

@@ -2,56 +2,292 @@
 {% load static %}
 {% load humanize %}
 
+{% block extra_css %}
+<style>
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .stat-card {
+        transition: transform 0.3s;
+        cursor: pointer;
+    }
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .summary-badge {
+        font-size: 0.9rem;
+        padding: 5px 10px;
+    }
+    .filter-section {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid py-4">
-    <!-- Header -->
+    <!-- Header with Date Range Filter -->
     <div class="row mb-4">
-        <div class="col">
-            <h2>Return Requests Management</h2>
+        <div class="col-md-8">
+            <h2>Return Requests Analytics Dashboard</h2>
+            <p class="text-muted">Comprehensive overview of return requests and trends</p>
         </div>
-    </div>
-
-    <!-- Statistics Cards -->
-    <div class="row mb-4">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card border-0 shadow-sm">
                 <div class="card-body">
-                    <h6 class="text-muted mb-2">Total Returns</h6>
-                    <h3>{{ stats.total }}</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <h6 class="text-muted mb-2">Pending</h6>
-                    <h3 class="text-warning">{{ stats.pending }}</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <h6 class="text-muted mb-2">Approved</h6>
-                    <h3 class="text-info">{{ stats.approved }}</h3>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card border-0 shadow-sm">
-                <div class="card-body">
-                    <h6 class="text-muted mb-2">Completed</h6>
-                    <h3 class="text-success">{{ stats.completed }}</h3>
+                    <form method="get" class="row g-2">
+                        <div class="col-8">
+                            <label class="form-label small">Date Range</label>
+                            <select name="date_range" class="form-select form-select-sm" onchange="this.form.submit()">
+                                <option value="7" {% if date_range == '7' %}selected{% endif %}>Last 7 Days</option>
+                                <option value="30" {% if date_range == '30' or not date_range %}selected{% endif %}>Last 30 Days</option>
+                                <option value="90" {% if date_range == '90' %}selected{% endif %}>Last 90 Days</option>
+                                <option value="180" {% if date_range == '180' %}selected{% endif %}>Last 6 Months</option>
+                                <option value="365" {% if date_range == '365' %}selected{% endif %}>Last 1 Year</option>
+                            </select>
+                        </div>
+                        <div class="col-4 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary btn-sm w-100">
+                                <i class="fi-rs-filter me-1"></i>Apply
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Filters -->
+    <!-- Key Metrics Cards with Progress -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm stat-card" onclick="filterByStatus('')">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">Total Returns</h6>
+                            <h3>{{ stats.total }}</h3>
+                            <small class="text-success">
+                                <i class="fi-rs-arrow-up"></i> {{ stats.completed|default:0 }} completed
+                            </small>
+                        </div>
+                        <div class="bg-primary bg-opacity-10 p-3 rounded">
+                            <i class="fi-rs-shopping-bag fa-2x text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="progress mt-3" style="height: 5px;">
+                        <div class="progress-bar bg-success" style="width: {% widthratio stats.completed stats.total|default:1 100 %}%"></div>
+                        <div class="progress-bar bg-warning" style="width: {% widthratio stats.pending stats.total|default:1 100 %}%"></div>
+                        <div class="progress-bar bg-info" style="width: {% widthratio stats.approved stats.total|default:1 100 %}%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm stat-card" onclick="filterByStatus('pending')">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">Pending Approval</h6>
+                            <h3 class="text-warning">{{ stats.pending }}</h3>
+                            <small class="text-muted">{{ stats.pending|default:0 }} awaiting review</small>
+                        </div>
+                        <div class="bg-warning bg-opacity-10 p-3 rounded">
+                            <i class="fi-rs-time-clock fa-2x text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm stat-card" onclick="filterByStatus('approved')">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">Approved</h6>
+                            <h3 class="text-info">{{ stats.approved }}</h3>
+                            <small class="text-muted">Awaiting shipment</small>
+                        </div>
+                        <div class="bg-info bg-opacity-10 p-3 rounded">
+                            <i class="fi-rs-check fa-2x text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm stat-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="text-muted mb-2">Total Refunded</h6>
+                            <h3>KSh {{ stats.total_refund|floatformat:0|intcomma }}</h3>
+                            <small class="text-success">+{{ stats.completed }} completed</small>
+                        </div>
+                        <div class="bg-success bg-opacity-10 p-3 rounded">
+                            <i class="fi-rs-money fa-2x text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Active Filters Banner -->
+    <div class="row mb-3">
+        <div class="col-12">
+            <div class="alert-info d-flex justify-content-between align-items-center" role="alert">
+                <div>
+                    <i class="fi-rs-calendar me-2"></i>
+                    <strong>Showing data for:</strong> {{ date_range_text }} 
+                    ({{ start_date }} - {{ end_date }})
+                    {% if current_status or search_query %}
+                        <span class="mx-2">|</span>
+                        <strong>Additional filters applied:</strong>
+                        {% if current_status %}
+                            <span class="badge bg-primary ms-2">Status: {{ current_status|title }}</span>
+                        {% endif %}
+                        {% if search_query %}
+                            <span class="badge bg-secondary ms-2">Search: "{{ search_query }}"</span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <small class="text-muted">{{ filtered_count }} returns found</small>
+            </div>
+        </div>
+    </div>
+    <!-- Charts Row 1 -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 pt-3">
+                    <h5 class="mb-0">Return Status Distribution</h5>
+                    <small class="text-muted">Current breakdown by status</small>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="statusPieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 pt-3">
+                    <h5 class="mb-0">Return Type Distribution</h5>
+                    <small class="text-muted">Refund vs Store Credit vs Exchange</small>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="returnTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pt-3">
+                    <h5 class="mb-0">Returns Over Time</h5>
+                    <small class="text-muted">Daily return requests and refund amounts</small>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="dailyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white border-0 pt-3">
+                    <h5 class="mb-0">Item Condition</h5>
+                    <small class="text-muted">Condition of received items</small>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="conditionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 3 -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pt-3">
+                    <h5 class="mb-0">Top Return Reasons</h5>
+                    <small class="text-muted">Most common reasons for returns</small>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="reasonsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pt-3">
+                    <h5 class="mb-0">Monthly Trends</h5>
+                    <small class="text-muted">6-month return request trend</small>
+                </div>
+                <div class="card-body">
+                    <div class="chart-container" style="height: 350px;">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary Stats Row -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <h6 class="text-muted">Avg. Processing Time</h6>
+                            <h4>{{ avg_processing_days }} days</h4>
+                            <small class="{{ processing_trend_class }}">{{ processing_trend }}</small>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h6 class="text-muted">Return Rate</h6>
+                            <h4>{{ return_rate }}%</h4>
+                            <small class="{{ rate_trend_class }}">{{ rate_trend }}</small>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h6 class="text-muted">Avg. Refund Amount</h6>
+                            <h4>KSh {{ avg_refund_amount|floatformat:0|intcomma }}</h4>
+                            <small class="{{ refund_trend_class }}">{{ refund_trend }}</small>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h6 class="text-muted">Success Rate</h6>
+                            <h4>{{ success_rate }}%</h4>
+                            <small class="{{ success_trend_class }}">{{ success_trend }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters (Your existing filters) -->
     <div class="card border-0 shadow-sm mb-4">
         <div class="card-body">
             <form method="get" class="row g-3">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label class="form-label">Status</label>
                     <select name="status" class="form-select">
                         <option value="">All Statuses</option>
@@ -62,7 +298,7 @@
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <label class="form-label">Search</label>
                     <input type="text" name="search" class="form-control" 
                            placeholder="Search by RMA, Order ID, Email, or Item" 
@@ -77,7 +313,7 @@
         </div>
     </div>
 
-    <!-- Returns List -->
+    <!-- Returns List (Your existing table) -->
     <div class="card border-0 shadow-sm">
         <div class="card-body">
             <div class="table-responsive">
@@ -122,7 +358,7 @@
                                 </div>
                             </td>
                             <td>{{ return.quantity }} of {{ return.order_item.qty }}</td>
-                            <td>{{ return.refund_amount|floatformat:0|intcomma }}</td>
+                            <td>KSh {{ return.refund_amount|floatformat:0|intcomma }}</td>
                             <td>
                                 {% if return.status == 'pending' %}
                                     <span class="badge bg-warning text-dark">Pending</span>
@@ -134,6 +370,8 @@
                                     <span class="badge bg-success">Completed</span>
                                 {% elif return.status == 'rejected' %}
                                     <span class="badge bg-danger">Rejected</span>
+                                {% elif return.status == 'cancelled' %}
+                                    <span class="badge bg-secondary">Cancelled</span>
                                 {% endif %}
                             </td>
                             <td>
@@ -160,7 +398,7 @@
                 <ul class="pagination justify-content-center">
                     {% if page_obj.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}{% if date_range %}&date_range={{ date_range }}{% endif %}">
                             Previous
                         </a>
                     </li>
@@ -168,7 +406,7 @@
                     
                     {% for num in page_obj.paginator.page_range %}
                     <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                        <a class="page-link" href="?page={{ num }}{% if current_status %}&status={{ current_status }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">
+                        <a class="page-link" href="?page={{ num }}{% if current_status %}&status={{ current_status }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}{% if date_range %}&date_range={{ date_range }}{% endif %}">
                             {{ num }}
                         </a>
                     </li>
@@ -176,7 +414,7 @@
                     
                     {% if page_obj.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if current_status %}&status={{ current_status }}{% endif %}{% if search_query %}&search={{ search_query }}{% endif %}{% if date_range %}&date_range={{ date_range }}{% endif %}">
                             Next
                         </a>
                     </li>
@@ -187,4 +425,231 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Parse the chart data from Django
+const chartData = {
+    statusDistribution: {{ chart_data.status_distribution|safe }},
+    dailyLabels: {{ chart_data.daily_labels|safe }},
+    dailyCounts: {{ chart_data.daily_counts|safe }},
+    dailyRefunds: {{ chart_data.daily_refunds|safe }},
+    reasonLabels: {{ chart_data.reason_labels|safe }},
+    reasonData: {{ chart_data.reason_data|safe }},
+    monthlyLabels: {{ chart_data.monthly_labels|safe }},
+    monthlyCounts: {{ chart_data.monthly_counts|safe }},
+    typeNames: {{ chart_data.type_names|safe }},
+    typeData: {{ chart_data.type_data|safe }},
+    conditionLabels: {{ chart_data.condition_labels|safe }},
+    conditionData: {{ chart_data.condition_data|safe }},
+    conditionColors: {{ chart_data.condition_colors|safe }}
+};
+
+// Status Distribution Pie Chart
+new Chart(document.getElementById('statusPieChart'), {
+    type: 'pie',
+    data: {
+        labels: chartData.statusDistribution.labels,
+        datasets: [{
+            data: chartData.statusDistribution.data,
+            backgroundColor: chartData.statusDistribution.colors,
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+// Return Type Chart
+new Chart(document.getElementById('returnTypeChart'), {
+    type: 'doughnut',
+    data: {
+        labels: chartData.typeNames,
+        datasets: [{
+            data: chartData.typeData,
+            backgroundColor: ['#28a745', '#ffc107', '#17a2b8'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+// Daily Returns Line Chart
+new Chart(document.getElementById('dailyChart'), {
+    type: 'line',
+    data: {
+        labels: chartData.dailyLabels,
+        datasets: [
+            {
+                label: 'Number of Returns',
+                data: chartData.dailyCounts,
+                borderColor: '#007bff',
+                backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                tension: 0.4,
+                fill: true,
+                yAxisID: 'y'
+            },
+            {
+                label: 'Refund Amount (KSh)',
+                data: chartData.dailyRefunds,
+                borderColor: '#28a745',
+                backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                tension: 0.4,
+                fill: true,
+                yAxisID: 'y1'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+            mode: 'index',
+            intersect: false
+        },
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        },
+        scales: {
+            y: {
+                type: 'linear',
+                display: true,
+                position: 'left',
+                title: {
+                    display: true,
+                    text: 'Number of Returns'
+                }
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                title: {
+                    display: true,
+                    text: 'Refund Amount (KSh)'
+                },
+                grid: {
+                    drawOnChartArea: false
+                }
+            }
+        }
+    }
+});
+
+// Item Condition Chart
+new Chart(document.getElementById('conditionChart'), {
+    type: 'polarArea',
+    data: {
+        labels: chartData.conditionLabels,
+        datasets: [{
+            data: chartData.conditionData,
+            backgroundColor: chartData.conditionColors,
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+// Top Reasons Bar Chart
+new Chart(document.getElementById('reasonsChart'), {
+    type: 'bar',
+    data: {
+        labels: chartData.reasonLabels,
+        datasets: [{
+            label: 'Number of Returns',
+            data: chartData.reasonData,
+            backgroundColor: 'rgba(255, 193, 7, 0.8)',
+            borderColor: '#ffc107',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            x: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Number of Returns'
+                }
+            }
+        }
+    }
+});
+
+// Monthly Trends Line Chart
+new Chart(document.getElementById('monthlyChart'), {
+    type: 'line',
+    data: {
+        labels: chartData.monthlyLabels,
+        datasets: [{
+            label: 'Monthly Returns',
+            data: chartData.monthlyCounts,
+            borderColor: '#6610f2',
+            backgroundColor: 'rgba(102, 16, 242, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Number of Returns'
+                }
+            }
+        }
+    }
+});
+
+// Function to filter by status
+function filterByStatus(status) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('status', status);
+    window.location.href = url.toString();
+}
+</script>
 {% endblock %}
+
+
+
