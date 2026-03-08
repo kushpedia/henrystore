@@ -921,8 +921,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		const variationKey = `${selectedColorIdValue || 'none'}_${selectedSizeIdValue || 'none'}`;
 		const variation = availableVariations[variationKey];
 		
-		console.log('Variation key:', variationKey);
-		console.log('Variation found:', variation);
+		// console.log('Variation key:', variationKey);
+		// console.log('Variation found:', variation);
 		
 		if (variation) {
 			// Show variation details
@@ -983,7 +983,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 		} else {
 			// Variation not available
-			console.log('Variation not found for key:', variationKey);
+			// console.log('Variation not found for key:', variationKey);
 			
 			if (selectedColorIdValue || selectedSizeIdValue) {
 				variationDetails.style.display = 'block';
@@ -1115,14 +1115,14 @@ document.addEventListener('DOMContentLoaded', function() {
 			selectedSizeName = selectedSizeElement.getAttribute('data-size-name');
 		}
 		
-		console.log("=== ADD TO CART DATA ===");
-		console.log("Product ID:", productId);
-		console.log("Variation ID:", variationId);
-		console.log("Color Name:", selectedColorName);
-		console.log("Size Name:", selectedSizeName);
-		console.log("Quantity:", quantity);
-		console.log("Price:", productPrice);
-		console.log("========================");
+		// console.log("=== ADD TO CART DATA ===");
+		// console.log("Product ID:", productId);
+		// console.log("Variation ID:", variationId);
+		// console.log("Color Name:", selectedColorName);
+		// console.log("Size Name:", selectedSizeName);
+		// console.log("Quantity:", quantity);
+		// console.log("Price:", productPrice);
+		// console.log("========================");
 		
 		// Create unique cart key with variation info
 		let cartKey = productId;
@@ -1157,7 +1157,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				addToCartButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adding...';
 			},
 			success: function(response) {
-				console.log("Add to cart response:", response);
+				// console.log("Add to cart response:", response);
 				addToCartButton.innerHTML = '<i class="fas fa-check-circle"></i> Added';
 				setTimeout(() => {
 					addToCartButton.disabled = false;

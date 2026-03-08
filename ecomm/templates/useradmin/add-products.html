@@ -797,7 +797,7 @@ $(document).ready(function() {
             const previewImg = $(`#imagePreview_${uniqueId}`);
             const thumbnailLabel = $(`#thumbnailLabel_${uniqueId}`);
             
-            console.log(`Image changed for variation ${uniqueId}:`, file);
+            // console.log(`Image changed for variation ${uniqueId}:`, file);
             
             if (file) {
                 if (!file.type.match('image.*')) {
@@ -867,7 +867,7 @@ $(document).ready(function() {
             has_image: false
         });
         
-        console.log(`Added variation ${variationCounter} with unique ID: ${uniqueId}`);
+        // console.log(`Added variation ${variationCounter} with unique ID: ${uniqueId}`);
     }
     
     // Function to update variation data
@@ -940,7 +940,7 @@ $(document).ready(function() {
             if (imageInput && hasImage) {
                 const newName = `variation_image_${variationIndex}`;
                 imageInput.name = newName;
-                console.log(`Renamed image input from ${imageInput.name} to ${newName}`);
+                // console.log(`Renamed image input from ${imageInput.name} to ${newName}`);
             }
             
             // Prepare variation data for submission
@@ -973,14 +973,14 @@ $(document).ready(function() {
         $('#variationsData').val(JSON.stringify(variationsArray));
         
         // Debug: Log all image inputs before submission
-        console.log('All variation images before submission:', 
-            Array.from($('.variation-image-input')).map((input, idx) => ({
-                index: idx,
-                id: input.id,
-                name: input.name,
-                hasFile: input.files && input.files.length > 0
-            }))
-        );
+        // console.log('All variation images before submission:', 
+        //     Array.from($('.variation-image-input')).map((input, idx) => ({
+        //         index: idx,
+        //         id: input.id,
+        //         name: input.name,
+        //         hasFile: input.files && input.files.length > 0
+        //     }))
+        // );
     }
     
     return true;

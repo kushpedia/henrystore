@@ -31,7 +31,7 @@ def initiate_stk_push(request):
         order_id = data.get('order_id')
         
         # Debug logging
-        print(f"Received request: phone={phone_number}, amount={amount}, order={order_id}")
+        # print(f"Received request: phone={phone_number}, amount={amount}, order={order_id}")
         
         if not phone_number:
             return JsonResponse({
@@ -77,7 +77,7 @@ def initiate_stk_push(request):
                 }, status=500)
                 
         except Exception as e:
-            print(f"Access token error: {str(e)}")
+            # print(f"Access token error: {str(e)}")
             return JsonResponse({
                 'success': False,
                 'error': f'Access token error: {str(e)}'
@@ -93,7 +93,7 @@ def initiate_stk_push(request):
             elif len(phone_number) == 9:
                 phone_number = '254' + phone_number
         
-        print(f"Formatted phone: {phone_number}")
+        # print(f"Formatted phone: {phone_number}")
         
         # M-Pesa API configuration
         process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
@@ -126,7 +126,7 @@ def initiate_stk_push(request):
             'TransactionDesc': f'Payment for order {order_id}'
         }
         
-        print(f"Payload: {json.dumps(payload, indent=2)}")
+        # print(f"Payload: {json.dumps(payload, indent=2)}")
         
         # Make STK Push request
         try:
@@ -134,7 +134,7 @@ def initiate_stk_push(request):
             response.raise_for_status()
             response_data = response.json()
             
-            print(f"M-Pesa Response: {json.dumps(response_data, indent=2)}")
+            # print(f"M-Pesa Response: {json.dumps(response_data, indent=2)}")
             
             checkout_request_id = response_data.get('CheckoutRequestID')
             response_code = response_data.get('ResponseCode')
@@ -162,27 +162,27 @@ def initiate_stk_push(request):
                 })
             else:
                 error_msg = error_message or 'STK Push failed'
-                print(f"STK Push failed: {error_msg}")
+                # print(f"STK Push failed: {error_msg}")
                 return JsonResponse({
                     'success': False,
                     'error': error_msg
                 })
                 
         except requests.exceptions.RequestException as e:
-            print(f"Request error: {str(e)}")
+            # print(f"Request error: {str(e)}")
             return JsonResponse({
                 'success': False,
                 'error': f'Network error: {str(e)}'
             })
         except Exception as e:
-            print(f"Unexpected error: {str(e)}")
+            # print(f"Unexpected error: {str(e)}")
             return JsonResponse({
                 'success': False,
                 'error': f'Unexpected error: {str(e)}'
             })
             
     except Exception as e:
-        print(f"Global error in initiate_stk_push: {str(e)}")
+        # print(f"Global error in initiate_stk_push: {str(e)}")s
         import traceback
         traceback.print_exc()
         

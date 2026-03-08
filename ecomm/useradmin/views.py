@@ -271,11 +271,15 @@ def transactions_dashboard(request):
     # -----------------------
     # NETWORK SUCCESS RATES
     # -----------------------
-    # Safaricom (07**)
-    safaricom_count = transactions.filter(phone_number__startswith='2547').count()
-    safaricom_success = transactions.filter(phone_number__startswith='2547', status='Success').count()
+    # Safaricom (07**)  
+    safaricom_count = transactions.filter(
+    Q(phone_number__startswith='2541') | Q(phone_number__startswith='2547')
+    ).count()
+    safaricom_success = transactions.filter(
+        (Q(phone_number__startswith='2541') | Q(phone_number__startswith='2547')) & 
+        Q(status='Success')
+    ).count()
     saf_completion_rate = round((safaricom_success / safaricom_count * 100), 1) if safaricom_count > 0 else 0
-    
     # Airtel (01**)
     airtel_count = transactions.filter(phone_number__startswith='01').count()
     airtel_success = transactions.filter(phone_number__startswith='01', status='Success').count()

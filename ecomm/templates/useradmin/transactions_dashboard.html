@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M-Pesa Professional Dashboard</title>
+    <title>Payment Transaction Dashboard</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -16,6 +16,8 @@
         body {
             background: #f4f7fc;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin-right: 100px;
+            margin-left: 100px;
         }
         .dashboard-card {
             border: none;
@@ -482,9 +484,7 @@
             <button class="btn btn-sm btn-outline-primary" id="exportSelected">
                 <i class="fas fa-download me-1"></i>Export selected
             </button>
-            <button class="btn btn-sm btn-outline-warning" id="retrySelected">
-                <i class="fas fa-redo me-1"></i>Retry selected
-            </button>
+        
         </div>
         <span class="ms-auto text-muted" id="selectedCount">0 selected</span>
     </div>
@@ -535,7 +535,58 @@
         </div>
         <div class="mt-2 text-muted small" id="filterStats"></div>
     </div>
-
+    <!-- Transaction Detail Modal -->
+    <div class="modal fade" id="transactionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light">
+                    <h5 class="modal-title"><i class="fas fa-receipt me-2"></i>Transaction Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-sm">
+                                <tr><th>Checkout ID</th><td id="modal_checkout">—</td></tr>
+                                <tr><th>Order ID</th><td id="modal_order">—</td></tr>
+                                <tr><th>Phone</th><td id="modal_phone">—</td></tr>
+                                <tr><th>Amount</th><td id="modal_amount">—</td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-sm">
+                                <tr><th>Status</th><td><span id="modal_status_badge" class="badge"></span></td></tr>
+                                <tr><th>M-Pesa Code</th><td id="modal_mpesa">—</td></tr>
+                                <tr><th>Created</th><td id="modal_timestamp">—</td></tr>
+                                <tr><th>Completed</th><td id="modal_completed">—</td></tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card border-danger mt-3" id="modal_error_section" style="display:none;">
+                        <div class="card-header bg-danger text-white">Error Details</div>
+                        <div class="card-body">
+                            <p><strong>Result Code:</strong> <code id="modal_resultcode"></code></p>
+                            <p><strong>Description:</strong> <span id="modal_resultdesc"></span></p>
+                            <p><strong>Category:</strong> <span id="modal_errorcat" class="badge bg-warning text-dark"></span></p>
+                            <p><strong>Recommended:</strong> <span id="modal_useraction"></span></p>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <h6>Timeline</h6>
+                        <div class="timeline-item">Checkout created <span class="ms-auto text-muted" id="timeline_created"></span></div>
+                        <div class="timeline-item">Payment initiated <span class="ms-auto text-muted" id="timeline_initiated"></span></div>
+                        <div class="timeline-item">Completed/Failed <span class="ms-auto text-muted" id="timeline_final"></span></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="printReceiptBtn">
+                        <i class="fas fa-print me-1"></i>Print Receipt
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Transactions Table -->
     <div class="dashboard-card p-0">
         <div class="table-responsive">
@@ -593,7 +644,20 @@
                             <div class="dropdown">
                                 <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">⋯</button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#" onclick='showTransactionModal({{ t|safe }})'>
+                                    <li><a class="dropdown-item" href="#" 
+                                        data-checkout="{{ t.checkout_id }}"
+                                        data-order="{{ t.order_id|default:'' }}"
+                                        data-phone="{{ t.phone_number }}"
+                                        data-amount="{{ t.amount }}"
+                                        data-status="{{ t.status }}"
+                                        data-mpesa="{{ t.mpesa_code|default:'' }}"
+                                        data-timestamp="{{ t.timestamp }}"
+                                        data-completed="{{ t.completed_at|default:'' }}"
+                                        data-resultcode="{{ t.result_code|default:'' }}"
+                                        data-resultdesc="{{ t.result_desc|default:'' }}"
+                                        data-errorcat="{{ t.error_category|default:'' }}"
+                                        data-useraction="{{ t.user_action|default:'' }}"
+                                        onclick='showTransactionModal(this.dataset)'>
                                         <i class="far fa-eye me-2"></i>View details
                                     </a></li>
                                     {% if t.status == 'Failed' and t.user_action == 'retry' %}
@@ -619,58 +683,7 @@
         </div>
     </div>
 
-    <!-- Transaction Detail Modal -->
-    <div class="modal fade" id="transactionModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-light">
-                    <h5 class="modal-title"><i class="fas fa-receipt me-2"></i>Transaction Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <table class="table table-sm">
-                                <tr><th>Checkout ID</th><td id="modal_checkout">—</td></tr>
-                                <tr><th>Order ID</th><td id="modal_order">—</td></tr>
-                                <tr><th>Phone</th><td id="modal_phone">—</td></tr>
-                                <tr><th>Amount</th><td id="modal_amount">—</td></tr>
-                            </table>
-                        </div>
-                        <div class="col-md-6">
-                            <table class="table table-sm">
-                                <tr><th>Status</th><td><span id="modal_status_badge" class="badge"></span></td></tr>
-                                <tr><th>M-Pesa Code</th><td id="modal_mpesa">—</td></tr>
-                                <tr><th>Created</th><td id="modal_timestamp">—</td></tr>
-                                <tr><th>Completed</th><td id="modal_completed">—</td></tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card border-danger mt-3" id="modal_error_section" style="display:none;">
-                        <div class="card-header bg-danger text-white">Error Details</div>
-                        <div class="card-body">
-                            <p><strong>Result Code:</strong> <code id="modal_resultcode"></code></p>
-                            <p><strong>Description:</strong> <span id="modal_resultdesc"></span></p>
-                            <p><strong>Category:</strong> <span id="modal_errorcat" class="badge bg-warning text-dark"></span></p>
-                            <p><strong>Recommended:</strong> <span id="modal_useraction"></span></p>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <h6>Timeline</h6>
-                        <div class="timeline-item">Checkout created <span class="ms-auto text-muted" id="timeline_created"></span></div>
-                        <div class="timeline-item">Payment initiated <span class="ms-auto text-muted" id="timeline_initiated"></span></div>
-                        <div class="timeline-item">Completed/Failed <span class="ms-auto text-muted" id="timeline_final"></span></div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="printReceiptBtn">
-                        <i class="fas fa-print me-1"></i>Print Receipt
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 <!-- Bootstrap JS -->
@@ -933,37 +946,39 @@ function updateSelectedCount() {
     document.getElementById('selectAllRows').checked = allChecked;
 }
 
-window.showTransactionModal = function(t) {
-    document.getElementById('modal_checkout').innerText = t.checkout_id || '—';
-    document.getElementById('modal_order').innerText = t.order_id || '—';
-    document.getElementById('modal_phone').innerText = t.phone_number || '—';
-    document.getElementById('modal_amount').innerText = 'KES ' + (t.amount || 0);
+window.showTransactionModal = function(data) {
     
+    // Now set the values
+    document.getElementById('modal_checkout').innerText = data.checkout || '—';
+    document.getElementById('modal_order').innerText = data.order || '—';
+    document.getElementById('modal_phone').innerText = data.phone || '—';
+    document.getElementById('modal_amount').innerText = 'KES ' + (data.amount || 0);
+
     const statusBadge = document.getElementById('modal_status_badge');
-    statusBadge.innerText = t.status || '—';
+    statusBadge.innerText = data.status || '—';
     statusBadge.className = 'badge ';
-    if (t.status === 'Success') statusBadge.classList.add('bg-success');
-    else if (t.status === 'Pending') statusBadge.classList.add('bg-warning', 'text-dark');
-    else if (t.status === 'Processing') statusBadge.classList.add('bg-info', 'text-dark');
-    else if (t.status === 'Failed') statusBadge.classList.add('bg-danger');
+    if (data.status === 'Success') statusBadge.classList.add('bg-success');
+    else if (data.status === 'Pending') statusBadge.classList.add('bg-warning', 'text-dark');
+    else if (data.status === 'Processing') statusBadge.classList.add('bg-info', 'text-dark');
+    else if (data.status === 'Failed') statusBadge.classList.add('bg-danger');
     else statusBadge.classList.add('bg-secondary');
 
-    document.getElementById('modal_mpesa').innerText = t.mpesa_code || '—';
-    document.getElementById('modal_timestamp').innerText = t.timestamp || '—';
-    document.getElementById('modal_completed').innerText = t.completed_at || '—';
+    document.getElementById('modal_mpesa').innerText = data.mpesa || '—';
+    document.getElementById('modal_timestamp').innerText = data.timestamp || '—';
+    document.getElementById('modal_completed').innerText = data.completed || '—';
     
-    document.getElementById('timeline_created').innerText = t.timestamp || '';
-    document.getElementById('timeline_initiated').innerText = t.mpesa_code ? 'Processed' : 'Pending';
-    document.getElementById('timeline_final').innerText = t.completed_at || t.status || '';
+    document.getElementById('timeline_created').innerText = data.timestamp || '';
+    document.getElementById('timeline_initiated').innerText = data.mpesa ? 'Processed' : 'Pending';
+    document.getElementById('timeline_final').innerText = data.completed || data.status || '';
 
-    if (t.status === 'Failed' && t.result_code) {
+    if (data.status === 'Failed' && data.result_code) {
         document.getElementById('modal_error_section').style.display = 'block';
-        document.getElementById('modal_resultcode').innerText = t.result_code;
-        document.getElementById('modal_resultdesc').innerText = t.result_desc || '—';
-        let cat = t.error_category || '';
+        document.getElementById('modal_resultcode').innerText = data.result_code;
+        document.getElementById('modal_resultdesc').innerText = data.result_desc || '—';
+        let cat = data.error_category || '';
         cat = cat.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
         document.getElementById('modal_errorcat').innerText = cat;
-        document.getElementById('modal_useraction').innerText = t.user_action || 'Contact support';
+        document.getElementById('modal_useraction').innerText = data.user_action || 'Contact support';
     } else {
         document.getElementById('modal_error_section').style.display = 'none';
     }
@@ -971,6 +986,7 @@ window.showTransactionModal = function(t) {
     var myModal = new bootstrap.Modal(document.getElementById('transactionModal'));
     myModal.show();
 };
+
 
 window.printReceipt = function(t) {
     alert('Print receipt for ' + t.checkout_id);
@@ -1036,12 +1052,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Print receipt from modal
     document.getElementById('printReceiptBtn').addEventListener('click', function() {
-        alert('Print receipt feature');
+        alert('Printing disabled');
     });
 
     filterTable();
 });
 </script>
-
+<footer class="main-footer font-xs">
+    <div class="row pb-30 pt-15">
+        <div class="col-sm-6">
+            
+            KStores &copy; 
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+        </div>
+        <div class="col-sm-6">
+            <div class="text-sm-end">All rights reserved</div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

@@ -105,7 +105,7 @@
 
                     <li class="menu-item {% if '/useradmin/transactions-dashboard/' in request.path %}active{% endif %}">
                         <a class="menu-link" href="{% url 'useradmin:transactions_dashboard' %}" >
-                            <i class="fa-solid fa-chart-column" style="color: rgb(159, 168, 183);"></i>
+                            <i class="fa-solid fa-money-check" style="color: rgb(159, 168, 183);"></i>
                             <span> &nbsp;&nbsp;&nbsp; Payments Transactions</span>
                             
                         </a>
@@ -196,7 +196,7 @@
                 <div class="row pb-30 pt-15">
                     <div class="col-sm-6">
                         
-                        K-Stores &copy; 
+                        KStores &copy; 
                         <script>
                             document.write(new Date().getFullYear());
                         </script>
@@ -239,13 +239,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const hourlyData = JSON.parse(dataDiv.dataset.hourly || '[]');
         const weekdayData = JSON.parse(dataDiv.dataset.weekday || '[]');
         
-        console.log('Data loaded:', {
-            revenue: revenueData.length,
-            status: statusData.length,
-            error: errorData.length,
-            hourly: hourlyData.length,
-            weekday: weekdayData.length
-        });
+        // console.log('Data loaded:', {
+        //     revenue: revenueData.length,
+        //     status: statusData.length,
+        //     error: errorData.length,
+        //     hourly: hourlyData.length,
+        //     weekday: weekdayData.length
+        // });
 
         // 1. Revenue Chart
         const revenueCtx = document.getElementById('revenueChart')?.getContext('2d');

@@ -29,8 +29,8 @@ $("#commentForm").submit(function (e) {
         url: $(this).attr("action"),
         dataType: "json",
         success: function (res, status, xhr) {
-            console.log("AJAX success response:", res);
-            console.log("Status:", status);
+            // console.log("AJAX success response:", res);
+            // console.log("Status:", status);
             
             if (res.bool == true) {
                 $("#review-res").html(res.message || "Review added successfully.")
@@ -74,7 +74,7 @@ $("#commentForm").submit(function (e) {
                 
             } else {
                 // Show error message
-                console.log("Error from server:", res.error);
+                // console.log("Error from server:", res.error);
                 $("#review-res").html(res.error || "Error submitting review.")
                     .removeClass('text-success')
                     .addClass('text-danger');
@@ -135,7 +135,7 @@ $(document).ready(function () {
             })
         })
         
-        console.log("Filter Object is: ", filter_object);
+        // console.log("Filter Object is: ", filter_object);
         
         $.ajax({
             url: '/filter-products',
@@ -155,7 +155,7 @@ $(document).ready(function () {
                 let productCount = $(response.data).find('.product-cart-wrap').length;
                 $(".totall-product p").html(`We found <strong class="text-brand">${productCount}</strong> items for you!`);
                 
-                console.log(`Loaded ${productCount} products`);
+                // console.log(`Loaded ${productCount} products`);
             },
             error: function (xhr, status, error) {
                 console.error("Filter error:", error);
@@ -182,7 +182,7 @@ $(document).ready(function () {
         let product_image = $("#quickViewModal .product-image-input").val();
         let product_sku = $("#quickViewModal .product-sku-input").val();
         
-        console.log("Adding from modal:", productId, product_title);
+        console.log("Adding from modal:");
         
         // Reuse the same AJAX call
         $.ajax({
@@ -273,7 +273,7 @@ $('head').append(`
         let product_key = $(this).attr("data-product")  // This is now the unique key
         let this_val = $(this)
     
-        console.log("Product Key:", product_key);
+        // console.log("Product Key:", product_key);
     
         $.ajax({
             url: "/delete-from-cart",
@@ -304,8 +304,8 @@ $('head').append(`
         let this_val = $(this)
         let product_quantity = $(".product-qty-" + product_key).val()
     
-        console.log("Product Key:", product_key);
-        console.log("Product QTY:", product_quantity);
+        // console.log("Product Key:", product_key);
+        // console.log("Product QTY:", product_quantity);
     
         $.ajax({
             url: "/update-cart",
