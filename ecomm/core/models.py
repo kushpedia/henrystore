@@ -570,12 +570,7 @@ class Coupon(models.Model):
     def __str__(self):
         return f"{self.code}"
     
-
-
 # procedd returns
-
-
-
 
 class ReturnRequest(models.Model):
     """Main return request model - for a single item return"""

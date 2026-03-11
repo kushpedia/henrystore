@@ -7,7 +7,7 @@ from .genrateMpesaAcesstoken import get_access_token
 from .models import Transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpRequest
-
+from core.models import CartOrder  # Adjust this import based on your actual Order model location
 @csrf_exempt
 def initiate_stk_push(request):
     if request.method != 'POST':
@@ -51,6 +51,24 @@ def initiate_stk_push(request):
                 'error': 'Order ID is required'
             }, status=400)
         
+        try:
+            # Assuming you have an Order model - adjust this based on your actual model
+            order = CartOrder.objects.get(oid=order_id)
+            
+            # Check if order is already paid - adjust the field name as needed
+            # Common field names: 'paid', 'is_paid', 'payment_status', etc.
+            if order.paid_status:  # or order.is_paid or order.payment_status == 'paid'
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Order is already paid for. Contact support for the Order processing.'
+                }, status=400)
+                
+        except CartOrder.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'error': 'Order not found'
+            }, status=404)
+
         # Get access token
         try:
             # Create a mock request for get_access_token if needed
@@ -97,7 +115,7 @@ def initiate_stk_push(request):
         
         # M-Pesa API configuration
         process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
-        callback_url = 'https://124e-102-0-17-166.ngrok-free.app/payments/callback/'  # Update if needed
+        callback_url = 'https://b898-196-96-121-245.ngrok-free.app/payments/callback/'  # Update if needed
         passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
         business_short_code = '174379'
         

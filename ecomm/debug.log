@@ -1,0 +1,842 @@
+Not Found: /favicon.ico
+Failed to send admin order notification: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+Failed to send admin order notification: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+Failed to send admin order notification: [WinError 10053] An established connection was aborted by the software in your host machine
+Admin notified for Order: 94195273
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"7541-400c-92a5-84c89cc4b16615564","CheckoutRequestID":"ws_CO_09032026153240989703443827","ResultCode":1,"ResultDesc":"The balance is insufficient for the transaction."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "7541-400c-92a5-84c89cc4b16615564",
+      "CheckoutRequestID": "ws_CO_09032026153240989703443827",
+      "ResultCode": 1,
+      "ResultDesc": "The balance is insufficient for the transaction."
+    }
+  }
+}
+Callback details - Code: 1, Desc: The balance is insufficient for the transaction., CheckoutID: ws_CO_09032026153240989703443827
+Found transaction: 31
+Payment failed - Code: 1, Desc: The balance is insufficient for the transaction., Action: check_balance
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+Admin notified for Order: 59534101
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"abb0-4b4c-8ca1-b66123edd18433364","CheckoutRequestID":"ws_CO_09032026153804630711973332","ResultCode":1037,"ResultDesc":"DS timeout user cannot be reached."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "abb0-4b4c-8ca1-b66123edd18433364",
+      "CheckoutRequestID": "ws_CO_09032026153804630711973332",
+      "ResultCode": 1037,
+      "ResultDesc": "DS timeout user cannot be reached."
+    }
+  }
+}
+Callback details - Code: 1037, Desc: DS timeout user cannot be reached., CheckoutID: ws_CO_09032026153804630711973332
+Found transaction: 32
+Payment failed - Code: 1037, Desc: DS timeout user cannot be reached., Action: retry
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"7541-400c-92a5-84c89cc4b16615670","CheckoutRequestID":"ws_CO_09032026153931322119733324","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":12},{"Name":"MpesaReceiptNumber","Value":"UC9IO8YMJC"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260309153940},{"Name":"PhoneNumber","Value":254119733324}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "7541-400c-92a5-84c89cc4b16615670",
+      "CheckoutRequestID": "ws_CO_09032026153931322119733324",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 12
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UC9IO8YMJC"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260309153940
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254119733324
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_09032026153931322119733324
+Found transaction: 33
+Success: Amount=12, Code=UC9IO8YMJC, Phone=254119733324
+Order 59534101 updated to paid
+Not Found: /favicon.ico
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Admin notified for Order: 57448300
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Admin notified for Order: 46262538
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"abb0-4b4c-8ca1-b66123edd18433574","CheckoutRequestID":"ws_CO_09032026155214506119733324","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":1},{"Name":"MpesaReceiptNumber","Value":"UC9IO8YO51"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260309155221},{"Name":"PhoneNumber","Value":254119733324}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "abb0-4b4c-8ca1-b66123edd18433574",
+      "CheckoutRequestID": "ws_CO_09032026155214506119733324",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 1
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UC9IO8YO51"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260309155221
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254119733324
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_09032026155214506119733324
+Found transaction: 34
+Success: Amount=1, Code=UC9IO8YO51, Phone=254119733324
+Order 46262538 updated to paid
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\paymentCompletionCheck.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\mpesaPayCallback.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\mpesaPayCallback.py changed, reloading.
+Watching for file changes with StatReloader
+Admin notified for Order: 11423634
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"7541-400c-92a5-84c89cc4b16615991","CheckoutRequestID":"ws_CO_09032026155943256119733324","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":6},{"Name":"MpesaReceiptNumber","Value":"UC9IO8YMVZ"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260309155949},{"Name":"PhoneNumber","Value":254119733324}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "7541-400c-92a5-84c89cc4b16615991",
+      "CheckoutRequestID": "ws_CO_09032026155943256119733324",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 6
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UC9IO8YMVZ"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260309155949
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254119733324
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_09032026155943256119733324
+Found transaction: 35
+Success: Amount=6, Code=UC9IO8YMVZ, Phone=254119733324
+Error in success callback: type object 'datetime.timezone' has no attribute 'now'
+Traceback (most recent call last):
+  File "D:\ecommerce\ecomm\payments\mpesaPayCallback.py", line 132, in handle_success_callback
+    transaction.completed_at = timezone.now()
+                               ^^^^^^^^^^^^
+AttributeError: type object 'datetime.timezone' has no attribute 'now'
+
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"abb0-4b4c-8ca1-b66123edd18433749","CheckoutRequestID":"ws_CO_09032026160115840119733324","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":6},{"Name":"MpesaReceiptNumber","Value":"UC9IO8YSMY"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260309160122},{"Name":"PhoneNumber","Value":254119733324}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "abb0-4b4c-8ca1-b66123edd18433749",
+      "CheckoutRequestID": "ws_CO_09032026160115840119733324",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 6
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UC9IO8YSMY"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260309160122
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254119733324
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_09032026160115840119733324
+Found transaction: 36
+Success: Amount=6, Code=UC9IO8YSMY, Phone=254119733324
+Error in success callback: type object 'datetime.timezone' has no attribute 'now'
+Traceback (most recent call last):
+  File "D:\ecommerce\ecomm\payments\mpesaPayCallback.py", line 132, in handle_success_callback
+    transaction.completed_at = timezone.now()
+                               ^^^^^^^^^^^^
+AttributeError: type object 'datetime.timezone' has no attribute 'now'
+
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\mpesaPayCallback.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"abb0-4b4c-8ca1-b66123edd18433815","CheckoutRequestID":"ws_CO_09032026160359843119733324","ResultCode":1032,"ResultDesc":"Request Cancelled by user."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "abb0-4b4c-8ca1-b66123edd18433815",
+      "CheckoutRequestID": "ws_CO_09032026160359843119733324",
+      "ResultCode": 1032,
+      "ResultDesc": "Request Cancelled by user."
+    }
+  }
+}
+Callback details - Code: 1032, Desc: Request Cancelled by user., CheckoutID: ws_CO_09032026160359843119733324
+Found transaction: 37
+Payment failed - Code: 1032, Desc: Request Cancelled by user., Action: retry
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"35e1-4357-954d-d6ebb179619e23","CheckoutRequestID":"ws_CO_09032026160733246119733324","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":6},{"Name":"MpesaReceiptNumber","Value":"UC9IO8YRAH"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260309160741},{"Name":"PhoneNumber","Value":254119733324}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "35e1-4357-954d-d6ebb179619e23",
+      "CheckoutRequestID": "ws_CO_09032026160733246119733324",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 6
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UC9IO8YRAH"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260309160741
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254119733324
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_09032026160733246119733324
+Found transaction: 38
+Success: Amount=6, Code=UC9IO8YRAH, Phone=254119733324
+Order 11423634 updated to paid
+Admin notified for Order: 32672326
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"35e1-4357-954d-d6ebb179619e83","CheckoutRequestID":"ws_CO_09032026161110479119733324","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":6},{"Name":"MpesaReceiptNumber","Value":"UC9IO8YPY3"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260309161117},{"Name":"PhoneNumber","Value":254119733324}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "35e1-4357-954d-d6ebb179619e83",
+      "CheckoutRequestID": "ws_CO_09032026161110479119733324",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 6
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UC9IO8YPY3"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260309161117
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254119733324
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_09032026161110479119733324
+Found transaction: 39
+Success: Amount=6, Code=UC9IO8YPY3, Phone=254119733324
+Order 32672326 updated to paid
+Admin notified for Order: 15460468
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"7541-400c-92a5-84c89cc4b16616350","CheckoutRequestID":"ws_CO_09032026162146290119733324","ResultCode":1032,"ResultDesc":"Request Cancelled by user."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "7541-400c-92a5-84c89cc4b16616350",
+      "CheckoutRequestID": "ws_CO_09032026162146290119733324",
+      "ResultCode": 1032,
+      "ResultDesc": "Request Cancelled by user."
+    }
+  }
+}
+Callback details - Code: 1032, Desc: Request Cancelled by user., CheckoutID: ws_CO_09032026162146290119733324
+Found transaction: 40
+Payment failed - Code: 1032, Desc: Request Cancelled by user., Action: retry
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"35e1-4357-954d-d6ebb179619e269","CheckoutRequestID":"ws_CO_09032026162317326119733324","ResultCode":1032,"ResultDesc":"Request Cancelled by user."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "35e1-4357-954d-d6ebb179619e269",
+      "CheckoutRequestID": "ws_CO_09032026162317326119733324",
+      "ResultCode": 1032,
+      "ResultDesc": "Request Cancelled by user."
+    }
+  }
+}
+Callback details - Code: 1032, Desc: Request Cancelled by user., CheckoutID: ws_CO_09032026162317326119733324
+Found transaction: 41
+Payment failed - Code: 1032, Desc: Request Cancelled by user., Action: retry
+Not Found: /favicon.ico
+Admin notified for Order: 29432109
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"35e1-4357-954d-d6ebb179619e441","CheckoutRequestID":"ws_CO_09032026163458194119733324","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":21},{"Name":"MpesaReceiptNumber","Value":"UC9IO8YT8Y"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260309163511},{"Name":"PhoneNumber","Value":254119733324}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "35e1-4357-954d-d6ebb179619e441",
+      "CheckoutRequestID": "ws_CO_09032026163458194119733324",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 21
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UC9IO8YT8Y"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260309163511
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254119733324
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_09032026163458194119733324
+Found transaction: 42
+Success: Amount=21, Code=UC9IO8YT8Y, Phone=254119733324
+Order 29432109 updated to paid
+Watching for file changes with StatReloader
+Not Found: /favicon.ico
+Failed to send admin order notification: [WinError 10053] An established connection was aborted by the software in your host machine
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\ecomm\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Admin notified for Order: 70405661
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"9695-4446-b3d7-e48e6713280e1128","CheckoutRequestID":"ws_CO_11032026094035029703443827","ResultCode":1,"ResultDesc":"The balance is insufficient for the transaction."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "9695-4446-b3d7-e48e6713280e1128",
+      "CheckoutRequestID": "ws_CO_11032026094035029703443827",
+      "ResultCode": 1,
+      "ResultDesc": "The balance is insufficient for the transaction."
+    }
+  }
+}
+Callback details - Code: 1, Desc: The balance is insufficient for the transaction., CheckoutID: ws_CO_11032026094035029703443827
+Found transaction: 44
+Payment failed - Code: 1, Desc: The balance is insufficient for the transaction., Action: check_balance
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"318f-40d0-8166-36881ce4a12b5030","CheckoutRequestID":"ws_CO_11032026094358124703443827","ResultCode":1037,"ResultDesc":"No response from user."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "318f-40d0-8166-36881ce4a12b5030",
+      "CheckoutRequestID": "ws_CO_11032026094358124703443827",
+      "ResultCode": 1037,
+      "ResultDesc": "No response from user."
+    }
+  }
+}
+Callback details - Code: 1037, Desc: No response from user., CheckoutID: ws_CO_11032026094358124703443827
+Found transaction: 45
+Payment failed - Code: 1037, Desc: No response from user., Action: retry
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"318f-40d0-8166-36881ce4a12b5059","CheckoutRequestID":"ws_CO_11032026094516968703443827","ResultCode":1,"ResultDesc":"The balance is insufficient for the transaction."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "318f-40d0-8166-36881ce4a12b5059",
+      "CheckoutRequestID": "ws_CO_11032026094516968703443827",
+      "ResultCode": 1,
+      "ResultDesc": "The balance is insufficient for the transaction."
+    }
+  }
+}
+Callback details - Code: 1, Desc: The balance is insufficient for the transaction., CheckoutID: ws_CO_11032026094516968703443827
+Found transaction: 46
+Payment failed - Code: 1, Desc: The balance is insufficient for the transaction., Action: check_balance
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /payments/initiate/
+Not Found: /payments/initiate/
+D:\ecommerce\ecomm\core\models.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /payments/initiate/
+Watching for file changes with StatReloader
+Admin notified for Order: 15546079
+Not Found: /payments/initiate/
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /payments/initiate/
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Not Found: /favicon.ico
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"318f-40d0-8166-36881ce4a12b6126","CheckoutRequestID":"ws_CO_11032026103514658703443827","ResultCode":1037,"ResultDesc":"DS timeout user cannot be reached."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "318f-40d0-8166-36881ce4a12b6126",
+      "CheckoutRequestID": "ws_CO_11032026103514658703443827",
+      "ResultCode": 1037,
+      "ResultDesc": "DS timeout user cannot be reached."
+    }
+  }
+}
+Callback details - Code: 1037, Desc: DS timeout user cannot be reached., CheckoutID: ws_CO_11032026103514658703443827
+Found transaction: 47
+Payment failed - Code: 1037, Desc: DS timeout user cannot be reached., Action: retry
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"9695-4446-b3d7-e48e6713280e2413","CheckoutRequestID":"ws_CO_11032026103602999703443827","ResultCode":1,"ResultDesc":"The balance is insufficient for the transaction."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "9695-4446-b3d7-e48e6713280e2413",
+      "CheckoutRequestID": "ws_CO_11032026103602999703443827",
+      "ResultCode": 1,
+      "ResultDesc": "The balance is insufficient for the transaction."
+    }
+  }
+}
+Callback details - Code: 1, Desc: The balance is insufficient for the transaction., CheckoutID: ws_CO_11032026103602999703443827
+Found transaction: 48
+Payment failed - Code: 1, Desc: The balance is insufficient for the transaction., Action: check_balance
+Bad Request: /payments/initiate/
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Watching for file changes with StatReloader
+Bad Request: /payments/initiate/
+Not Found: /favicon.ico
+Admin notified for Order: 81296845
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"9695-4446-b3d7-e48e6713280e2692","CheckoutRequestID":"ws_CO_11032026104825390703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":6},{"Name":"MpesaReceiptNumber","Value":"UCBC08VW65"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260311104836},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "9695-4446-b3d7-e48e6713280e2692",
+      "CheckoutRequestID": "ws_CO_11032026104825390703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 6
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCBC08VW65"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260311104836
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_11032026104825390703443827
+Found transaction: 49
+Success: Amount=6, Code=UCBC08VW65, Phone=254703443827
+Order 81296845 updated to paid
+Return approved email sent for RMA: RMAAD672514
+Not Found: /api/reviews/9/toggle-status/
+Not Found: /api/reviews/9/toggle-status/
+Internal Server Error: /add-to-cart/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 850, in add_to_cart
+    total_items = sum(item['qty'] for item in cart_data.values())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Internal Server Error: /product/4251cfeh51/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
+    raise self.model.DoesNotExist(
+corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
+DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-11) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
+    UniqueVisit.objects.get_or_create(
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
+    return self.create(**params), True
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
+    self.save_base(
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
+DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-11) already exists.
+
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Internal Server Error: /product/4251cfeh51/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
+    raise self.model.DoesNotExist(
+corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
+DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-11) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
+    UniqueVisit.objects.get_or_create(
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
+    return self.create(**params), True
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
+    self.save_base(
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
+DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-11) already exists.
+
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Admin notified for Order: 10954038
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"9695-4446-b3d7-e48e6713280e3055","CheckoutRequestID":"ws_CO_11032026110225465703443827","ResultCode":1032,"ResultDesc":"Request Cancelled by user."}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "9695-4446-b3d7-e48e6713280e3055",
+      "CheckoutRequestID": "ws_CO_11032026110225465703443827",
+      "ResultCode": 1032,
+      "ResultDesc": "Request Cancelled by user."
+    }
+  }
+}
+Callback details - Code: 1032, Desc: Request Cancelled by user., CheckoutID: ws_CO_11032026110225465703443827
+Found transaction: 50
+Payment failed - Code: 1032, Desc: Request Cancelled by user., Action: retry
+Not Found: /favicon.ico
+Not Found: /favicon.ico

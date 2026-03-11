@@ -1,4 +1,5 @@
 # mpesaPayCallback.py - Update with better error logging
+from django.utils import timezone
 import json
 import logging
 from django.http import JsonResponse, HttpResponseBadRequest
@@ -128,6 +129,7 @@ def handle_success_callback(stk_callback, transaction):
         transaction.mpesa_code = mpesa_code
         transaction.phone_number = phone
         transaction.status = "Success"
+        transaction.completed_at = timezone.now()
         transaction.save()
         
         # Update order if exists
