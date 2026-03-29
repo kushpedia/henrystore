@@ -34,12 +34,25 @@ class UniqueVisitMiddleware:
         # Only track if not in admin (optional)
         if not request.path.startswith('/admin/'):
             # Get or create a unique visit for today
-            UniqueVisit.objects.get_or_create(
-                user=request.user if request.user.is_authenticated else None,
-                ip_address=self.get_client_ip(request),
-                user_agent=request.META.get('HTTP_USER_AGENT', '')[:255],
-                visit_date=timezone.now().date()
-            )
+            user = request.user if request.user.is_authenticated else None
+            ip_address = self.get_client_ip(request)
+            visit_date = timezone.now().date()
+            
+            # First try to find existing record
+            try:
+                UniqueVisit.objects.get(
+                    user=user,
+                    ip_address=ip_address,
+                    visit_date=visit_date
+                )
+            except UniqueVisit.DoesNotExist:
+                # If not found, create it
+                UniqueVisit.objects.create(
+                    user=user,
+                    ip_address=ip_address,
+                    user_agent=request.META.get('HTTP_USER_AGENT', '')[:255],
+                    visit_date=visit_date
+                )
         
         response = self.get_response(request)
         return response
