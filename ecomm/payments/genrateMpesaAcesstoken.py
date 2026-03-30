@@ -3,7 +3,11 @@ from django.http import JsonResponse
 from ecomm import settings
 from django.views.decorators.csrf import csrf_exempt
 
+<<<<<<< HEAD
 @csrf_exempt
+=======
+
+>>>>>>> dac478dc76ef33a94fd14994bdb3529a5b2a865a
 def get_access_token(request):
     consumer_key = settings.MPESA_CONSUMER_KEY
     consumer_secret = settings.MPESA_CONSUMER_SECRET
