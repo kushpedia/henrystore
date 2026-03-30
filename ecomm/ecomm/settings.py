@@ -34,13 +34,10 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
-<<<<<<< HEAD
+
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 SITE_DOMAIN = env.str("SITE_DOMAIN", default="http://localhost:8080")
-=======
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
->>>>>>> dac478dc76ef33a94fd14994bdb3529a5b2a865a
 # Application definition
 
 INSTALLED_APPS = [
@@ -106,11 +103,7 @@ WSGI_APPLICATION = 'ecomm.wsgi.application'
 
 DATABASES = {
     'default': {
-<<<<<<< HEAD
-        'ENGINE': 'django.db.backends.postgresql',
-=======
-        'ENGINE': 'django.db.backends.mysql',
->>>>>>> dac478dc76ef33a94fd14994bdb3529a5b2a865a
+        'ENGINE': 'django.db.backends.postgresql',       
         'NAME': env.str("DB_NAME"),
         'USER': env.str("DB_USER"),
         'PASSWORD': env.str("DB_PASSWORD"),
