@@ -8,7 +8,7 @@ from .genrateMpesaAcesstoken import get_access_token
 from django.views.decorators.csrf import csrf_exempt
 
 
-@csrf_exempt
+
 def query_stk_status(request):
     access_token_response = get_access_token(request)
     if isinstance(access_token_response, JsonResponse):

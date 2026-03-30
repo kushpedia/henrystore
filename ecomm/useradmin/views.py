@@ -29,8 +29,6 @@ import datetime
 from django.utils import timezone
 from userauths.models import ContactUs
 
-from django.views.decorators.csrf import csrf_exempt
-
 import csv
 from django.contrib import messages as django_messages
 from django.contrib.auth.decorators import user_passes_test
@@ -729,7 +727,7 @@ def add_product(request):
 
 
 # AJAX view for getting available colors/sizes
-@csrf_exempt
+
 def get_variation_options(request):
     """Get colors and sizes for variation creation"""
     if request.method == 'GET':
@@ -948,7 +946,7 @@ def order_detail(request, id):
     return render(request, "useradmin/order_detail.html", context)
 
 
-@csrf_exempt
+
 @admin_required
 def change_order_status(request, oid):
     order = CartOrder.objects.get(oid=oid)
@@ -1129,7 +1127,7 @@ def contact_messages(request):
     return render(request, "useradmin/contact_messages.html", context)
 
 # API VIEWS
-@csrf_exempt
+
 @admin_required
 def api_contact_detail(request, message_id):
     """Get detailed message information"""
@@ -1154,7 +1152,7 @@ def api_contact_detail(request, message_id):
     except ContactUs.DoesNotExist:
         return JsonResponse({'error': 'Message not found'}, status=404)
 
-@csrf_exempt
+
 @admin_required
 def api_mark_as_read(request, message_id):
     """Mark a message as read"""
@@ -1169,7 +1167,7 @@ def api_mark_as_read(request, message_id):
     except ContactUs.DoesNotExist:
         return JsonResponse({'error': 'Message not found'}, status=404)
 
-@csrf_exempt
+
 @admin_required
 def api_mark_all_read(request):
     """Mark all unread messages as read"""
@@ -1186,7 +1184,7 @@ def api_mark_all_read(request):
         return JsonResponse({'success': True, 'count': count})
     return JsonResponse({'error': 'Invalid method'}, status=400)
 
-@csrf_exempt
+
 @admin_required
 def api_toggle_read(request, message_id):
     """Toggle read/unread status"""
@@ -1204,7 +1202,7 @@ def api_toggle_read(request, message_id):
     except ContactUs.DoesNotExist:
         return JsonResponse({'error': 'Message not found'}, status=404)
 
-@csrf_exempt
+
 @admin_required
 def api_send_reply(request, message_id):
     """Send reply to a message"""
@@ -1237,7 +1235,7 @@ def api_send_reply(request, message_id):
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
     return JsonResponse({'error': 'Invalid method'}, status=400)
 
-@csrf_exempt
+
 @admin_required
 def api_delete_message(request, message_id):
     """Delete a message"""
@@ -1250,7 +1248,7 @@ def api_delete_message(request, message_id):
             return JsonResponse({'error': 'Message not found'}, status=404)
     return JsonResponse({'error': 'Invalid method'}, status=400)
 
-@csrf_exempt
+
 @admin_required
 def api_delete_all_read(request):
     """Delete all read messages"""

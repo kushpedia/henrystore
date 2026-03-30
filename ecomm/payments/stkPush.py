@@ -8,7 +8,7 @@ from .models import Transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpRequest
 from core.models import CartOrder  # Adjust this import based on your actual Order model location
-@csrf_exempt
+
 def initiate_stk_push(request):
     if request.method != 'POST':
         return JsonResponse({

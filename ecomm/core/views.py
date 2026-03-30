@@ -509,7 +509,7 @@ def tag_list(request, tag_slug=None):
 
 
 
-@csrf_exempt
+
 def ajax_add_review(request, pid):
     
     
@@ -744,7 +744,7 @@ def filter_product(request):
     return JsonResponse({"data": data})
 
 # add to cart
-@csrf_exempt
+
 def add_to_cart(request):
     
     # Use request.POST since JavaScript sends POST
@@ -938,7 +938,7 @@ def update_cart(request):
 
 
 
-@csrf_exempt
+
 @login_required
 def newCheckout(request, oid):
     order = CartOrder.objects.get(oid=oid)
@@ -991,7 +991,7 @@ def newCheckout(request, oid):
     return render(request, "core/new_checkout.html", context)
 
 
-@csrf_exempt
+
 @login_required
 def save_checkout_info(request):
     cart_total_amount = 0
@@ -1177,7 +1177,7 @@ def make_address_default(request):
 
 
 
-@csrf_exempt
+
 def order_detail(request, id):
     order = CartOrder.objects.get(user=request.user, id=id)
     order_items = CartOrderItems.objects.filter(order=order)
@@ -1191,7 +1191,7 @@ def order_detail(request, id):
 
 
 # wishlist view
-@csrf_exempt
+
 @login_required
 def wishlist_view(request):
     wishlist = wishlist_model.objects.filter(user=request.user)
@@ -1205,7 +1205,7 @@ def wishlist_view(request):
     # add to wishlist
 
 
-@csrf_exempt
+
 @login_required
 def add_to_wishlist(request):
     product_id = request.GET['id']
@@ -1234,7 +1234,7 @@ def add_to_wishlist(request):
 
 
 # remove from wishlist
-@csrf_exempt
+
 def remove_wishlist(request):
     pid = request.GET['id']
     wishlist = wishlist_model.objects.filter(user=request.user)
@@ -1533,7 +1533,7 @@ def add_return_tracking(request, id):
 def contact(request):
     return render(request, "core/contact.html")
 
-@csrf_exempt
+
 def ajax_contact_form(request):
     full_name = request.GET['full_name']
     email = request.GET['email']

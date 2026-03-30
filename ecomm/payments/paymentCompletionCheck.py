@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 logger = logging.getLogger(__name__)
 
-@csrf_exempt
+
 def check_payment_status(request, order_id):
     """Check payment status with error details"""
     try:
