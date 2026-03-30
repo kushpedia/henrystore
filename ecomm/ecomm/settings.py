@@ -30,20 +30,23 @@ EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
 MPESA_CONSUMER_KEY = env.str("MPESA_CONSUMER_KEY")
 MPESA_CONSUMER_SECRET = env.str("MPESA_CONSUMER_SECRET")
 MPESA_PASS_KEY = env.str("MPESA_PASS_KEY")
+MPESA_ACCESS_TOKEN_URL = env.str("MPESA_ACCESS_TOKEN_URL")
+MPESA_CALLBACK_URL = env.str("MPESA_CALLBACK_URL")
+MPESA_SHORT_CODE = env.str("MPESA_SHORT_CODE")
+MPESA_PROCESS_REQUEST_URL = env.str("MPESA_PROCESS_REQUEST_URL")
 
-# Quick-start development settings - unsuitable for production
+
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mfvte4i@l!m)ly9#%rqo^j7d8*0*z#tjw)qd^+(7220z#7mbwi'
-
+SECRET_KEY = env.str("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["3c7d-102-0-17-166.ngrok-free.app",'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+SITE_DOMAIN = env.str("SITE_DOMAIN", default="http://localhost:8080")
 # Application definition
 
 INSTALLED_APPS = [
@@ -110,11 +113,11 @@ WSGI_APPLICATION = 'ecomm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': "ecoms_db",
-        'USER': "postgres",
-        'PASSWORD': "Kushpedia12",
-        'HOST': "localhost",
-        'PORT': 5432,
+        'NAME': env.str("DB_NAME"),
+        'USER': env.str("DB_USER"),
+        'PASSWORD': env.str("DB_PASSWORD"),
+        'HOST': env.str("DB_HOST", default="localhost"),
+        'PORT': env.str("DB_PORT", default="5432"),
     }
 }
 
@@ -189,7 +192,7 @@ LOGGING = {
     },
 
     'root': {   # ✅ This captures EVERYTHING
-        'handlers': ['console', 'file'],
+        'handlers': ['file'],
         'level': 'DEBUG',
     },
 }

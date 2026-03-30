@@ -1,3 +1,215 @@
+Watching for file changes with StatReloader
+Admin notified for Order: 13162118
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"15f8-41b2-b322-07e1b7e3a75e4873","CheckoutRequestID":"ws_CO_30032026132625998703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":1},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVFOY"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330132632},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "15f8-41b2-b322-07e1b7e3a75e4873",
+      "CheckoutRequestID": "ws_CO_30032026132625998703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 1
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVFOY"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330132632
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026132625998703443827
+Found transaction: 67
+Success: Amount=1, Code=UCUC0AVFOY, Phone=254703443827
+Order 13162118 updated to paid
+Error in success callback: CartOrder matching query does not exist.
+Traceback (most recent call last):
+  File "D:\ecommerce\ecomm\payments\mpesaPayCallback.py", line 138, in handle_success_callback
+    order = CartOrder.objects.get(id=transaction.order_id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
+    raise self.model.DoesNotExist(
+core.models.CartOrder.DoesNotExist: CartOrder matching query does not exist.
+
+D:\ecommerce\ecomm\payments\mpesaPayCallback.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Admin notified for Order: 90542448
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"b826-4584-b47b-9514cf38d70b1549","CheckoutRequestID":"ws_CO_30032026132943483703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":2},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVBO2"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330132955},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "b826-4584-b47b-9514cf38d70b1549",
+      "CheckoutRequestID": "ws_CO_30032026132943483703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 2
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVBO2"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330132955
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026132943483703443827
+Found transaction: 68
+Success: Amount=2, Code=UCUC0AVBO2, Phone=254703443827
+Order 90542448 updated to paid
+Failed to send admin order notification: 'str' object has no attribute 'oid'
+D:\ecommerce\ecomm\payments\mpesaPayCallback.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\payments\mpesaPayCallback.py changed, reloading.
+Watching for file changes with StatReloader
+Admin notified for Order: 06852365
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"b826-4584-b47b-9514cf38d70b1628","CheckoutRequestID":"ws_CO_30032026133321023703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":3},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVA7L"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330133327},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "b826-4584-b47b-9514cf38d70b1628",
+      "CheckoutRequestID": "ws_CO_30032026133321023703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 3
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVA7L"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330133327
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026133321023703443827
+Found transaction: 69
+Success: Amount=3, Code=UCUC0AVA7L, Phone=254703443827
+Order 06852365 updated to paid
+Failed to send admin order notification: 'str' object has no attribute 'oid'
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Accessing checkout for order Order #73786464 - admin by user admin
+Accessing checkout for order Order #99359969 - admin by user admin
+Accessing checkout for order Order #41481497 - admin by user admin
+Failed to send admin order notification: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+Failed to send admin order notification: [WinError 10060] A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+Failed to send admin order notification: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"74f3-4250-824c-4806764131b44164","CheckoutRequestID":"ws_CO_30032026133729949703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":1},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVGSS"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330133736},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "74f3-4250-824c-4806764131b44164",
+      "CheckoutRequestID": "ws_CO_30032026133729949703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 1
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVGSS"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330133736
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026133729949703443827
+Found transaction: 70
+Success: Amount=1, Code=UCUC0AVGSS, Phone=254703443827
+Order 41481497 updated to paid
+Failed to send admin order notification: 'str' object has no attribute 'oid'
 D:\ecommerce\ecomm\core\views.py changed, reloading.
 Watching for file changes with StatReloader
 D:\ecommerce\ecomm\core\views.py changed, reloading.
@@ -5,497 +217,287 @@ Watching for file changes with StatReloader
 D:\ecommerce\ecomm\core\views.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
-D:\ecommerce\ecomm\ecomm\settings.py changed, reloading.
+Admin notified for Order: 98546389
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"15f8-41b2-b322-07e1b7e3a75e5229","CheckoutRequestID":"ws_CO_30032026134245664703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":3},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVDDA"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330134253},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "15f8-41b2-b322-07e1b7e3a75e5229",
+      "CheckoutRequestID": "ws_CO_30032026134245664703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 3
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVDDA"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330134253
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026134245664703443827
+Found transaction: 71
+Success: Amount=3, Code=UCUC0AVDDA, Phone=254703443827
+Order 98546389 updated to paid
+Failed to send admin order notification: 'str' object has no attribute 'oid'
 Watching for file changes with StatReloader
-D:\ecommerce\ecomm\payments\stkPush.py changed, reloading.
+Admin notified for Order: 97750161
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"b826-4584-b47b-9514cf38d70b1890","CheckoutRequestID":"ws_CO_30032026134633072703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":6},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVI97"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330134641},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "b826-4584-b47b-9514cf38d70b1890",
+      "CheckoutRequestID": "ws_CO_30032026134633072703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 6
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVI97"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330134641
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026134633072703443827
+Found transaction: 72
+Success: Amount=6, Code=UCUC0AVI97, Phone=254703443827
+Order 97750161 updated to paid
+Admin notified for Order: 97750161
 Watching for file changes with StatReloader
-Internal Server Error: /
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
-    return self.get(**kwargs), False
-           ^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
-    raise self.model.DoesNotExist(
-corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
-    UniqueVisit.objects.get_or_create(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
-    return self.create(**params), True
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
-    obj.save(force_insert=True, using=self.db)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
-    self.save_base(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
-    updated = self._save_table(
-              ^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
-    results = self._do_insert(
-              ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
-    return manager._insert(
-           ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
-    return query.get_compiler(using=using).execute_sql(returning_fields)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
-    cursor.execute(sql, params)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
-    return super().execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
-    return self._execute_with_wrappers(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
-    return executor(sql, params, many, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
-    with self.db.wrap_database_errors:
-  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-Internal Server Error: /favicon.ico
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
-    return self.get(**kwargs), False
-           ^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
-    raise self.model.DoesNotExist(
-corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-
-The above exception was the direct cause of the following exception:
-
+Admin notified for Order: 47754734
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"15f8-41b2-b322-07e1b7e3a75e5436","CheckoutRequestID":"ws_CO_30032026135413006703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":2},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVEWF"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330135421},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "15f8-41b2-b322-07e1b7e3a75e5436",
+      "CheckoutRequestID": "ws_CO_30032026135413006703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 2
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVEWF"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330135421
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026135413006703443827
+Found transaction: 73
+Success: Amount=2, Code=UCUC0AVEWF, Phone=254703443827
+Order 47754734 updated to paid
+Admin notified for Order: 47754734
+Not Found: /favicon.ico
+Admin notified for Order: 78895485
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"3832-4f31-8db6-f2441b109f9880","CheckoutRequestID":"ws_CO_30032026140628146703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":5},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVK4W"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330140642},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "3832-4f31-8db6-f2441b109f9880",
+      "CheckoutRequestID": "ws_CO_30032026140628146703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 5
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVK4W"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330140642
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026140628146703443827
+Found transaction: 74
+Success: Amount=5, Code=UCUC0AVK4W, Phone=254703443827
+Order 78895485 updated to paid
+Admin notified for Order: 78895485
+Admin notified for Order: 75070872
+Admin notified for Order: 51922133
+Internal Server Error: /useradmin/order_detail/51922133/
 Traceback (most recent call last):
   File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
     response = get_response(request)
                ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
-    UniqueVisit.objects.get_or_create(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
-    return self.create(**params), True
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
-    obj.save(force_insert=True, using=self.db)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
-    self.save_base(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
-    updated = self._save_table(
-              ^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
-    results = self._do_insert(
-              ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
-    return manager._insert(
-           ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
-    return query.get_compiler(using=using).execute_sql(returning_fields)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
-    cursor.execute(sql, params)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
-    return super().execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
-    return self._execute_with_wrappers(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
-    return executor(sql, params, many, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
-    with self.db.wrap_database_errors:
-  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-Internal Server Error: /
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
-    return self.get(**kwargs), False
-           ^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
-    raise self.model.DoesNotExist(
-corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
-    UniqueVisit.objects.get_or_create(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
-    return self.create(**params), True
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
-    obj.save(force_insert=True, using=self.db)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
-    self.save_base(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
-    updated = self._save_table(
-              ^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
-    results = self._do_insert(
-              ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
-    return manager._insert(
-           ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
-    return query.get_compiler(using=using).execute_sql(returning_fields)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
-    cursor.execute(sql, params)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
-    return super().execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
-    return self._execute_with_wrappers(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
-    return executor(sql, params, many, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
-    with self.db.wrap_database_errors:
-  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-Internal Server Error: /favicon.ico
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
-    return self.get(**kwargs), False
-           ^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
-    raise self.model.DoesNotExist(
-corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
-    UniqueVisit.objects.get_or_create(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
-    return self.create(**params), True
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
-    obj.save(force_insert=True, using=self.db)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
-    self.save_base(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
-    updated = self._save_table(
-              ^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
-    results = self._do_insert(
-              ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
-    return manager._insert(
-           ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
-    return query.get_compiler(using=using).execute_sql(returning_fields)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
-    cursor.execute(sql, params)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
-    return super().execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
-    return self._execute_with_wrappers(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
-    return executor(sql, params, many, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
-    with self.db.wrap_database_errors:
-  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-Internal Server Error: /users/sign-in/
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
-    return self.get(**kwargs), False
-           ^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
-    raise self.model.DoesNotExist(
-corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
-    UniqueVisit.objects.get_or_create(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
-    return self.create(**params), True
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
-    obj.save(force_insert=True, using=self.db)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
-    self.save_base(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
-    updated = self._save_table(
-              ^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
-    results = self._do_insert(
-              ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
-    return manager._insert(
-           ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
-    return query.get_compiler(using=using).execute_sql(returning_fields)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
-    cursor.execute(sql, params)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
-    return super().execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
-    return self._execute_with_wrappers(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
-    return executor(sql, params, many, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
-    with self.db.wrap_database_errors:
-  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-Internal Server Error: /favicon.ico
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 946, in get_or_create
-    return self.get(**kwargs), False
-           ^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 633, in get
-    raise self.model.DoesNotExist(
-corporate.models.UniqueVisit.DoesNotExist: UniqueVisit matching query does not exist.
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
-    response = get_response(request)
-               ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\ecomm\core\middleware.py", line 37, in __call__
-    UniqueVisit.objects.get_or_create(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 953, in get_or_create
-    return self.create(**params), True
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 663, in create
-    obj.save(force_insert=True, using=self.db)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 902, in save
-    self.save_base(
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1008, in save_base
-    updated = self._save_table(
-              ^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1169, in _save_table
-    results = self._do_insert(
-              ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\base.py", line 1210, in _do_insert
-    return manager._insert(
-           ^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
-    return getattr(self.get_queryset(), name)(*args, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\query.py", line 1868, in _insert
-    return query.get_compiler(using=using).execute_sql(returning_fields)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1882, in execute_sql
-    cursor.execute(sql, params)
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
-    return super().execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
-    return self._execute_with_wrappers(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
-    return executor(sql, params, many, context)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
-    with self.db.wrap_database_errors:
-  File "D:\ecommerce\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
-    raise dj_exc_value.with_traceback(traceback) from exc_value
-  File "D:\ecommerce\env\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
-    return self.cursor.execute(sql, params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-django.db.utils.IntegrityError: duplicate key value violates unique constraint "corporate_uniquevisit_user_id_ip_address_visit_58ddcc65_uniq"
-DETAIL:  Key (user_id, ip_address, visit_date)=(1, 127.0.0.1, 2026-03-29) already exists.
-
-D:\ecommerce\ecomm\core\middleware.py changed, reloading.
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 53, in wrapper
+    return redirect('login')
+           ^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is not a valid view function or pattern name.
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
 Watching for file changes with StatReloader
-Importing AvifImagePlugin
-Importing BlpImagePlugin
-Importing BmpImagePlugin
-Importing BufrStubImagePlugin
-Importing CurImagePlugin
-Importing DcxImagePlugin
-Importing DdsImagePlugin
-Importing EpsImagePlugin
-Importing FitsImagePlugin
-Importing FliImagePlugin
-Importing FpxImagePlugin
-Image: failed to import FpxImagePlugin: No module named 'olefile'
-Importing FtexImagePlugin
-Importing GbrImagePlugin
-Importing GifImagePlugin
-Importing GribStubImagePlugin
-Importing Hdf5StubImagePlugin
-Importing IcnsImagePlugin
-Importing IcoImagePlugin
-Importing ImImagePlugin
-Importing ImtImagePlugin
-Importing IptcImagePlugin
-Importing JpegImagePlugin
-Importing Jpeg2KImagePlugin
-Importing McIdasImagePlugin
-Importing MicImagePlugin
-Image: failed to import MicImagePlugin: No module named 'olefile'
-Importing MpegImagePlugin
-Importing MpoImagePlugin
-Importing MspImagePlugin
-Importing PalmImagePlugin
-Importing PcdImagePlugin
-Importing PcxImagePlugin
-Importing PdfImagePlugin
-Importing PixarImagePlugin
-Importing PngImagePlugin
-Importing PpmImagePlugin
-Importing PsdImagePlugin
-Importing QoiImagePlugin
-Importing SgiImagePlugin
-Importing SpiderImagePlugin
-Importing SunImagePlugin
-Importing TgaImagePlugin
-Importing TiffImagePlugin
-Importing WebPImagePlugin
-Importing WmfImagePlugin
-Importing XbmImagePlugin
-Importing XpmImagePlugin
-Importing XVThumbImagePlugin
+Admin notified for Order: 69761171
+Internal Server Error: /useradmin/order_detail/69761171/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\useradmin\views.py", line 53, in wrapper
+    return redirect('core:login')
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'login' not found. 'login' is not a valid view function or pattern name.
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
 Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\useradmin\views.py changed, reloading.
+Watching for file changes with StatReloader
+Admin notified for Order: 72645175
+Admin notified for Order: 10229595
+Admin notified for Order: 74503124
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "GET /oauth/v1/generate?grant_type=client_credentials HTTP/1.1" 200 None
+Starting new HTTPS connection (1): sandbox.safaricom.co.ke:443
+https://sandbox.safaricom.co.ke:443 "POST /mpesa/stkpush/v1/processrequest HTTP/1.1" 200 None
+Raw callback received: {"Body":{"stkCallback":{"MerchantRequestID":"6c35-4e88-b9de-90f8f5395cfe2987","CheckoutRequestID":"ws_CO_30032026152212932703443827","ResultCode":0,"ResultDesc":"The service request is processed successfully.","CallbackMetadata":{"Item":[{"Name":"Amount","Value":3},{"Name":"MpesaReceiptNumber","Value":"UCUC0AVUT4"},{"Name":"Balance"},{"Name":"TransactionDate","Value":20260330152221},{"Name":"PhoneNumber","Value":254703443827}]}}}}
+Parsed callback data: {
+  "Body": {
+    "stkCallback": {
+      "MerchantRequestID": "6c35-4e88-b9de-90f8f5395cfe2987",
+      "CheckoutRequestID": "ws_CO_30032026152212932703443827",
+      "ResultCode": 0,
+      "ResultDesc": "The service request is processed successfully.",
+      "CallbackMetadata": {
+        "Item": [
+          {
+            "Name": "Amount",
+            "Value": 3
+          },
+          {
+            "Name": "MpesaReceiptNumber",
+            "Value": "UCUC0AVUT4"
+          },
+          {
+            "Name": "Balance"
+          },
+          {
+            "Name": "TransactionDate",
+            "Value": 20260330152221
+          },
+          {
+            "Name": "PhoneNumber",
+            "Value": 254703443827
+          }
+        ]
+      }
+    }
+  }
+}
+Callback details - Code: 0, Desc: The service request is processed successfully., CheckoutID: ws_CO_30032026152212932703443827
+Found transaction: 75
+Success: Amount=3, Code=UCUC0AVUT4, Phone=254703443827
+Order 74503124 updated to paid
+Admin notified for Order: 74503124

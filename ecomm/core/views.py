@@ -942,16 +942,11 @@ def update_cart(request):
 @login_required
 def newCheckout(request, oid):
     order = CartOrder.objects.get(oid=oid)
-    order_items = CartOrderItems.objects.filter(order=order)
-
+    order_items = CartOrderItems.objects.filter(order=order)    
     if not order.checkout_email_sent:
         ReturnEmailService.send_new_order_admin_notification(order)
         order.checkout_email_sent = True
         order.save()
-
-
-
-
 
     if request.method == "POST":
         code = request.POST.get("code")
@@ -963,25 +958,14 @@ def newCheckout(request, oid):
                 return redirect("core:new_checkout", order.oid)
             else:
                 discount = order.price * coupon.discount / 100 
-
                 order.coupons.add(coupon)
                 order.price -= discount
                 order.saved += discount
                 order.save()
-
                 messages.success(request, "Coupon Activated")
-
-
-
-
-
-
-
                 return redirect("core:new_checkout", order.oid)
         else:
             messages.warning(request, "Coupon Does Not Exist")
-
-        
 
     context = {
         "order": order,

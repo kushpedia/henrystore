@@ -6,7 +6,7 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from .models import Transaction
 from core.models import CartOrder
-
+from core.utils.email_utils import ReturnEmailService
 logger = logging.getLogger(__name__)
 
 
@@ -135,6 +135,9 @@ def handle_success_callback(stk_callback, transaction):
         # Update order if exists
         if transaction.order_id:
             update_order_status(transaction.order_id, "paid", mpesa_code)
+        order = CartOrder.objects.get(oid=transaction.order_id)
+        # send order payment confirmation email        
+        ReturnEmailService.send_paid_order_admin_notification(order)
         
         return JsonResponse({
             "ResultCode": 0,

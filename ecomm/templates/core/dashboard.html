@@ -155,7 +155,19 @@
 
 															{% endif %}
 															<td>Ksh {{o.price|floatformat:2|intcomma}}</td>
-															<td><a href="{% url 'core:order-detail' o.id %}" class="btn-small d-block">View</a></td>
+															<td>
+																
+
+															{% if o.paid_status == True %}
+															<a href="{% url 'core:order-detail' o.id %}" class="btn-small d-block" style="background-color: #28a745; color: white; border: none; padding: 5px 12px; border-radius: 4px; text-decoration: none; display: inline-block;">
+																<i class="fas fa-eye"></i> View
+															</a>
+														{% else %}
+															<a href="{% url 'core:new_checkout' o.oid %}" class="btn-small d-block" style="background-color: #ffc107; color: #333; border: none; padding: 5px 12px; border-radius: 4px; text-decoration: none; display: inline-block;">
+																<i class="fas fa-credit-card"></i> Pay
+															</a>
+															{% endif %}
+															</td>
 														</tr>
 														{% endfor %}
 													</tbody>

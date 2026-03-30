@@ -1,4 +1,5 @@
 import requests
+from ecomm import settings
 from datetime import datetime
 import json
 import base64
@@ -114,10 +115,10 @@ def initiate_stk_push(request):
         # print(f"Formatted phone: {phone_number}")
         
         # M-Pesa API configuration
-        process_request_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest'
-        callback_url = 'https://3c7d-102-0-17-166.ngrok-free.app/payments/callback/'  # Update if needed
-        passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
-        business_short_code = '174379'
+        process_request_url = settings.MPESA_PROCESS_REQUEST_URL
+        callback_url = settings.MPESA_CALLBACK_URL
+        passkey = settings.MPESA_PASS_KEY
+        business_short_code = settings.MPESA_SHORT_CODE
         
         # Generate timestamp and password
         timestamp = datetime.now().strftime('%Y%m%d%H%M%S')

@@ -2,74 +2,184 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>New Order Notification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order Alert - #{{ order.oid }}</title>
 </head>
-<body style="margin:0; padding:20px; font-family: Arial, sans-serif; background:#f4f6f9;">
+<body style="margin:0; padding:0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background:#f4f6f9; line-height:1.6;">
 
-<h2 style="color:#111827;">🛒 New Order Created</h2>
-
-<hr>
-
-<h3>Order Details</h3>
-<p><strong>Order Number:</strong> #{{ order.oid }}</p>
-<p><strong>Total Amount:</strong> KES {{ order.price }}</p>
-<p><strong>Date:</strong> {{ order.date }}</p>
-
-<hr>
-
-<h3>Customer Details</h3>
-<p><strong>Name:</strong> {{ customer.username }}</p>
-<p><strong>Email:</strong> {{ customer.email }}</p>
-
-{% if order.phone %}
-<p><strong>Phone:</strong> {{ order.phone }}</p>
-{% endif %}
-
-<hr>
-
-<h3>Ordered Items</h3>
-
-<table width="100%" cellpadding="10" cellspacing="0" border="1" style="border-collapse: collapse; background:white;">
-    <thead style="background:#e5e7eb;">
-        <tr>
-            <th>Image</th>
-            <th>Product</th>
-            <th>Qty</th>
-            <th>Price</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in order_items %}
-        <tr>
-            <td align="center">
-                {% if item.image %}
-                <img src="{{ domain }}{{ item.image }}" width="60" height="60" style="object-fit:cover;">
-                {{ domain }}{{ item.image }}
-                {% else %}
-                No Image
-                {% endif %}
-            </td>
-            <td>{{ item.original_title }}</td>
-            <td align="center">{{ item.qty }}</td>
-            <td align="right">KES {{ item.price }}</td>
-            <td align="right">KES {{ item.total }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<!-- Main Container -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f4f6f9; padding:40px 20px;">
+    <tr>
+        <td align="center">
+            <!-- Email Container -->
+            <table width="100%" max-width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%; background:#ffffff; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.05); overflow:hidden;">
+                
+                <!-- Header - Alert Style for Staff -->
+                <tr>
+                    <td style="background:#096c23; padding:30px 40px; text-align:center;">
+                        <div style="display:inline-block; background:rgba(255,255,255,0.2); padding:10px; border-radius:50%; margin-bottom:15px;">
+                            <span style="font-size:32px;">🛒</span>
+                        </div>
+                        <h1 style="margin:0; color:#e8d4d4; font-size:24px; font-weight:700;">New Unpaid Order Alert</h1>
+                        <p style="margin:10px 0 0; color:#fca5a5; font-size:14px;">Action Required: New order needs processing</p>
+                    </td>
+                </tr>
+                
+                <!-- Priority Badge -->
+                <tr>
+                    <td style="padding:30px 40px 0 40px; text-align:center;">
+                        <div style="display:inline-block; background:#7bf283; color:#dc2626; padding:6px 14px; border-radius:50px; font-size:13px; font-weight:600;">
+                            ⚡ NEW ORDER • PRIORITY
+                        </div>
+                    </td>
+                </tr>
+                
+                <!-- Main Content -->
+                <tr>
+                    <td style="padding:20px 40px 40px 40px;">
+                        
+                        <!-- Admin Action Card -->
+                        <div style="background:#fef2f2; border-left:4px solid #dc2626; padding:15px 20px; border-radius:8px; margin-bottom:30px;">
+                            <p style="margin:0; color:#991b1b; font-size:14px;">
+                                <strong>📢 Action Required:</strong> A new order has been placed and requires your attention. 
+                                Please review and process this order as soon as possible.
+                            </p>
+                        </div>
+                        
+                        <!-- Order Summary Card -->
+                        <div style="background:#f8f9fa; border-left:4px solid #1a1a2e; padding:20px; border-radius:8px; margin-bottom:30px;">
+                            <h3 style="margin:0 0 15px 0; color:#1a1a2e; font-size:16px; font-weight:600;">📋 Order Summary</h3>
+                            <table width="100%" cellpadding="8" cellspacing="0" border="0">
+                                <tr>
+                                    <td style="color:#4b5563; font-size:14px;"><strong>Order Number:</strong></td>
+                                    <td style="color:#1a1a2e; font-size:14px; font-weight:600;">#{{ order.oid }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#4b5563; font-size:14px;"><strong>Order Date:</strong></td>
+                                    <td style="color:#1a1a2e; font-size:14px;">{{ order.date|default:"Just now" }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#4b5563; font-size:14px;"><strong>Total Amount:</strong></td>
+                                    <td style="color:#dc2626; font-size:18px; font-weight:700;">KES {{ order.price|floatformat:2 }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <!-- Customer Information -->
+                        <div style="margin-bottom:30px;">
+                            <h3 style="margin:0 0 15px 0; color:#1a1a2e; font-size:16px; font-weight:600;">👤 Customer Information</h3>
+                            <div style="background:#f8f9fa; padding:20px; border-radius:8px;">
+                                <table width="100%" cellpadding="8" cellspacing="0" border="0">
+                                    <tr>
+                                        <td width="100" style="color:#4b5563; font-size:14px;"><strong>Name:</strong></td>
+                                        <td style="color:#1a1a2e; font-size:14px; font-weight:500;">{{ customer.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="color:#4b5563; font-size:14px;"><strong>Email:</strong></td>
+                                        <td style="color:#1a1a2e; font-size:14px;">
+                                            <a href="mailto:{{ customer.email }}" style="color:#3b82f6; text-decoration:none;">{{ customer.email }}</a>
+                                        </td>
+                                    </tr>
+                                    {% if order.phone %}
+                                    <tr>
+                                        <td style="color:#4b5563; font-size:14px;"><strong>Phone:</strong></td>
+                                        <td style="color:#1a1a2e; font-size:14px;">
+                                            <a href="tel:{{ order.phone }}" style="color:#3b82f6; text-decoration:none;">{{ order.phone }}</a>
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <!-- Order Items with Images -->
+                        <div style="margin-bottom:30px;">
+                            <h3 style="margin:0 0 15px 0; color:#1a1a2e; font-size:16px; font-weight:600;">🛍️ Ordered Items</h3>
+                            
+                            <table width="100%" cellpadding="12" cellspacing="0" style="border-collapse:collapse; background:#ffffff; border-radius:8px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                                <thead>
+                                    <tr style="background:#f1f5f9; border-bottom:2px solid #e2e8f0;">
+                                        <th align="center" style="padding:12px; font-size:13px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">Image</th>
+                                        <th align="left" style="padding:12px; font-size:13px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">Product</th>
+                                        <th align="center" style="padding:12px; font-size:13px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">Qty</th>
+                                        <th align="right" style="padding:12px; font-size:13px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">Price</th>
+                                        <th align="right" style="padding:12px; font-size:13px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.5px;">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in order_items %}
+                                    <tr style="border-bottom:1px solid #e2e8f0;">
+                                        <td align="center" style="padding:12px;">
+                                            {% if item.image %}
+                                            <img src="{{ domain }}{{ item.image }}" width="50" height="50" style="border-radius:6px; object-fit:cover; display:block;" alt="{{ item.original_title }}">
+                                            {% else %}
+                                            <div style="width:50px; height:50px; background:#f1f5f9; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:11px; color:#64748b;">No img</div>
+                                            {% endif %}
+                                        </td>
+                                        <td align="left" style="padding:12px; color:#1e293b; font-size:14px; font-weight:500;">{{ item.original_title }}</td>
+                                        <td align="center" style="padding:12px; color:#1e293b; font-size:14px;">
+                                            <span style="display:inline-block; background:#f1f5f9; padding:4px 10px; border-radius:20px;">{{ item.qty }}</span>
+                                        </td>
+                                        <td align="right" style="padding:12px; color:#1e293b; font-size:14px;">KES {{ item.price|floatformat:2 }}</td>
+                                        <td align="right" style="padding:12px; color:#1e293b; font-size:14px; font-weight:500;">KES {{ item.total|floatformat:2 }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr style="background:#f8fafc; border-top:2px solid #e2e8f0;">
+                                        <td colspan="4" align="right" style="padding:15px 12px; font-size:16px; font-weight:600; color:#1e293b;">Grand Total:</td>
+                                        <td align="right" style="padding:15px 12px; font-size:18px; font-weight:700; color:#dc2626;">KES {{ order.price|floatformat:2 }}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        
+                        <!-- Quick Action Buttons -->
+                        <div style="margin-bottom:30px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td align="center" style="padding:0 10px;">
+                                        <a href="{{ domain }}/useradmin/order_detail/{{ order.oid }}/" style="display:inline-block; background:#1a1a2e; color:#ffffff; padding:12px 30px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:600; margin:0 5px;">📋 View Order</a>
+                                        <a href="{{ domain }}/useradmin/order_detail/{{ order.oid }}/" style="display:inline-block; background:#10b981; color:#ffffff; padding:12px 30px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:600; margin:0 5px;">✅ Process Order</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <!-- Staff Notes -->
+                        <div style="background:#eff6ff; border-left:4px solid #3b82f6; padding:15px 20px; border-radius:8px;">
+                            <p style="margin:0 0 8px 0; color:#1e40af; font-size:13px; font-weight:600;">📝 Staff Notes:</p>
+                            <ul style="margin:0; padding-left:20px; color:#1e40af; font-size:13px;">
+                                <li>contact customer for payment before processing</li>
+                                <li>Check stock availability for all items</li>
+                                <li>Confirm shipping address with customer</li>
+                                <li>Update order status within 24 hours</li>
+                            </ul>
+                        </div>
+                        
+                    </td>
+                </tr>
+                
+                <!-- Footer -->
+                <tr>
+                    <td style="background:#f8f9fa; padding:30px 40px; text-align:center; border-top:1px solid #e5e7eb;">
+                        <p style="margin:0 0 10px 0; color:#6b7280; font-size:13px;">
+                            This is an automated notification from Kstores Admin System
+                        </p>
+                        <p style="margin:0; color:#9ca3af; font-size:12px;">
+                            <a href="{{ domain }}/useradmin/" style="color:#3b82f6; text-decoration:none;">Go to Admin Dashboard</a> | 
+                            <a href="{{ domain }}/useradmin" style="color:#3b82f6; text-decoration:none;">Manage Notifications</a>
+                        </p>
+                        <p style="margin:10px 0 0 0; color:#9ca3af; font-size:11px;">
+                            © {% now "Y" %} Kstores. All rights reserved.
+                        </p>
+                    </td>
+                </tr>
+                
+            </table>
+        </td>
+    </tr>
 </table>
-
-<br>
-
-<p style="font-weight:bold; font-size:16px;">
-Grand Total: KES {{ order.price }}
-</p>
-
-<hr>
-
-<p style="font-size:13px; color:#6b7280;">
-This email was automatically generated from Kstores system.
-</p>
 
 </body>
 </html>
