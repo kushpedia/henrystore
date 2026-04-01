@@ -132,7 +132,7 @@ def product_list_view(request):
     products = Product.objects.filter(product_status="published").order_by("-id")
     # Pagination
     page = request.GET.get('page', 1)
-    per_page = request.GET.get('per_page', 10)
+    per_page = request.GET.get('per_page', 20)
         
     paginator = Paginator(products, per_page)
 
@@ -196,7 +196,7 @@ def category_product_list__view(request, cid):
 
         # Pagination
         page = request.GET.get('page', 1)
-        per_page = request.GET.get('per_page', 2)
+        per_page = request.GET.get('per_page', 12)
         
         paginator = Paginator(products, per_page)
         
@@ -255,7 +255,7 @@ def sub_category_product_list_view(request, cid):
 
         # Pagination
         page = request.GET.get('page', 1)
-        per_page = request.GET.get('per_page', 2)
+        per_page = request.GET.get('per_page', 12)
         
         paginator = Paginator(products, per_page)
         
@@ -314,7 +314,7 @@ def mini_category_product_list_view(request, cid):
 
         # Pagination
         page = request.GET.get('page', 1)
-        per_page = request.GET.get('per_page', 2)
+        per_page = request.GET.get('per_page', 12)
         
         paginator = Paginator(products, per_page)
         
@@ -668,7 +668,7 @@ def search_view(request):
     ).distinct().order_by("-date")
 
     page = request.GET.get('page', 1)
-    per_page = request.GET.get('per_page', 6)
+    per_page = request.GET.get('per_page', 20)
     paginator = Paginator(products, per_page)
 
     try:
@@ -716,7 +716,7 @@ def filter_product(request):
     max_price = request.GET['max_price']
 
     page = request.GET.get('page', 1)
-    per_page = request.GET.get('per_page', 2)
+    per_page = request.GET.get('per_page', 20)
 
     products = Product.objects.filter(product_status="published").order_by("-id").distinct()
 

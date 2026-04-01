@@ -2711,3 +2711,523 @@ Not Found: /media/category/fashion.jpg
 Not Found: /media/category/electronics_Z21KR7M.jpg
 Not Found: /media/category/1_34.jpg
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\utils\deprecation.py", line 119, in __call__
+    response = self.process_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\middleware\common.py", line 48, in process_request
+    host = request.get_host()
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\http\request.py", line 202, in get_host
+    raise DisallowedHost(msg)
+django.core.exceptions.DisallowedHost: Invalid HTTP_HOST header: '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app'. You may need to add '4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app' to ALLOWED_HOSTS.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /favicon.ico
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /.well-known/appspecific/com.chrome.devtools.json
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /favicon.ico
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/variation-images/4_9.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/variation-images/8mUgEpdmx.png
+Not Found: /media/variation-images/8mUgEpdmx.png
+Not Found: /media/variation-images/4_9.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/beauty.jpg
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /products/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 140, in product_list_view
+    page_obj = paginator.page(page)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\paginator.py", line 89, in page
+    number = self.validate_number(number)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\paginator.py", line 70, in validate_number
+    if number > self.num_pages:
+                ^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\paginator.py", line 119, in num_pages
+    return ceil(hits / self.per_page)
+                ~~~~~^~~~~~~~~~~~~~~
+ZeroDivisionError: division by zero
+Not Found: /favicon.ico
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/variation-images/17031905870118bacad0dfcc64cd7a43a3b68796f5795.webp
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/variation-images/3_18.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/variation-images/17031905870118bacad0dfcc64cd7a43a3b68796f5795.webp
+Not Found: /media/variation-images/3_18.jpg
+Forbidden (Origin checking failed - https://4931-2c0f-fe38-224d-6cff-142d-4c4e-f367-7bc1.ngrok-free.app does not match any trusted origins.): /add-to-cart/
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg

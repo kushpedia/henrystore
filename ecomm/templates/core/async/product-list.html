@@ -3,9 +3,19 @@
 
 {% if products %}
     {% for p in products %}
-    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6 product-item" data-product-id="{{ p.id }}">
-        <div class="product-cart-wrap mb-30">
-            <div class="product-img-action-wrap">
+    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6 product-item" data-product-id="{{ p.id }}" style="
+    padding-left: 4px;
+    padding-right: 4px;
+    background-color: rgb(242, 247, 241);
+
+    ">
+        <div class="product-cart-wrap mb-30" style="background-color: rgb(242, 247, 241);">
+            <div class="product-img-action-wrap" style="
+            padding-top: 4px;
+            padding-left: 4px;
+            padding-right: 4px;
+            background-color: rgb(242, 247, 241);
+        ">
                 <div class="product-img product-img-zoom">
                     <a href="{% url 'core:product-detail' p.pid %}">
                         <img class="default-img" src="{{ p.image.url }}" alt="{{ p.title }}" />

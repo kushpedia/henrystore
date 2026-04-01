@@ -622,7 +622,13 @@
 											{% for p in related_products %}
 											<div class="related-item" style="min-width: 280px; max-width: 280px; margin-right: 20px; display: inline-block; white-space: normal;">
 												<div class="product-cart-wrap mb-30 h-100">
-													<div class="product-img-action-wrap">
+													<div class="product-img-action-wrap"
+														style="
+															padding-top: 4px;
+															padding-left: 4px;
+															padding-right: 4px;
+															background-color: rgb(242, 247, 241);
+														">
 														<div class="product-img product-img-zoom">
 															<a href="{% url 'core:product-detail' p.pid %}">
 																<img class="default-img" src="{{ p.image.url }}" alt="" style="height: 280px; width: 100%; object-fit: cover;" />
