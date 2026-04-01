@@ -89,9 +89,18 @@
                             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                                 <div class="row product-grid-4">
                                     {% for p in products|slice:":10" %}
-                                    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
+                                    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6" 
+                                    style="
+                                    padding-left: 2px;
+                                    padding-right: 2px;
+                                    "
+                                    >
                                         <div class="product-cart-wrap mb-30">
-                                            <div class="product-img-action-wrap">
+                                            <div class="product-img-action-wrap" style="
+                                            padding-top: 4px;
+                                            padding-left: 4px;
+                                            padding-right: 4px;
+                                        ">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="{% url 'core:product-detail' p.pid %}">
                                                         <img class="default-img" src="{{ p.image.url }}" alt="" />
@@ -230,9 +239,18 @@
                         <div class="row product-grid-4" style="margin-bottom: 4px;">
                             
                             {% for p in top_rated_products|slice:":5" %}
-                            <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
+                            <div class="col-lg-1-5 col-md-4 col-6 col-sm-6"
+                            style="
+                                    padding-left: 2px;
+                                    padding-right: 2px;
+                                    "
+                            >
                                 <div class="product-cart-wrap mb-4">
-                                    <div class="product-img-action-wrap">
+                                    <div class="product-img-action-wrap" style="
+                                    padding-top: 4px;
+                                    padding-left: 4px;
+                                    padding-right: 4px;
+                                ">
                                         <div class="product-img product-img-zoom">
                                             <a href="{% url 'core:product-detail' p.pid %}">
                                                 <img class="default-img" src="{{ p.image.url }}" alt="" />
@@ -297,9 +315,16 @@
                         <div class="row product-grid-4" style="margin-bottom: 4px;">
                             
                             {% for p in top_sold_products %}
-                            <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
+                            <div class="col-lg-1-5 col-md-4 col-6 col-sm-6" style="
+                            padding-left: 2px;
+                            padding-right: 2px;
+                            ">
                                 <div class="product-cart-wrap mb-4">
-                                    <div class="product-img-action-wrap">
+                                    <div class="product-img-action-wrap" style="
+                                    padding-top: 4px;
+                                    padding-left: 4px;
+                                    padding-right: 4px;
+                                ">
                                         <div class="product-img product-img-zoom">
                                             <a href="{% url 'core:product-detail' p.pid %}">
                                                 <img class="default-img" src="{{ p.image.url }}" alt="" />
@@ -368,9 +393,16 @@
                                     {% if c.title == "Home & Living"%}
                                     
                                     {% for p in c.get_published_products|slice:":5" %}
-                                    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6">
+                                    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6" style="
+                                    padding-left: 2px;
+                                    padding-right: 2px;
+                                    ">
                                         <div class="product-cart-wrap mb-4">
-                                            <div class="product-img-action-wrap">
+                                            <div class="product-img-action-wrap" style="
+                                            padding-top: 4px;
+                                            padding-left: 4px;
+                                            padding-right: 4px;
+                                        ">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="{% url 'core:product-detail' p.pid %}">
                                                         <img class="default-img" src="{{ p.image.url }}" alt="" />
