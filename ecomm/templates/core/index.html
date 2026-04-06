@@ -167,7 +167,10 @@
 
                                 
                                     {% if c.title == "Electronics" %}
-                                    <h6>{{c.title}}</h6>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h6>{{c.title}}</h6>
+                                        <a href="{% url 'core:category-product-list' c.cid %}" style="font-weight: bold; color: black;">View All</a>
+                                    </div>
                                     {% for p in c.get_published_products %}
                                     {% include 'partials/product_card.html' %}
 
@@ -190,7 +193,10 @@
 
                                 
                                     {% if c.title == "Home & Living" %}
-                                    <h6>{{c.title}}</h6>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h6>{{c.title}}</h6>
+                                        <a href="{% url 'core:category-product-list' c.cid %}" style="font-weight: bold; color: black;">View All</a>
+                                    </div>
                                     {% for p in c.get_published_products %}
                                     {% include 'partials/product_card.html' %}
 
@@ -213,7 +219,10 @@
 
                                 
                                     {% if c.title == "Fashion" %}
-                                    <h6>{{c.title}}</h6>
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <h6>{{c.title}}</h6>
+                                        <a href="{% url 'core:category-product-list' c.cid %}" style="font-weight: bold; color: black;">View All</a>
+                                    </div>
                                     {% for p in c.get_published_products %}
                                     {% include 'partials/product_card.html' %}
                                     {% endfor %}
@@ -234,12 +243,20 @@
                     <!--Products Tabs-->
                     <section class="section-padding mb-8" style="background-color: #bce3c9; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
                         {% if top_rated_products %}
-                        <h2 class="d-none d-lg-block mb-3"></i> <div class="product-rate d-inline-block">
-                            <div class="product-rating" style="width: 90%"></div>
-                        </div>Top Rated Products  <div class="product-rate d-inline-block">
-                            <div class="product-rating" style="width: 90%"></div>
-                        </div> </h2>
-                        <h4 class="d-block d-lg-none mb-3"></i>Top Rated Products  <i class="bi bi-star-fill text-warning me-2"></i> </h4>
+                        <h2 class="d-none d-lg-block mb-3 text-center p-1 rounded-lg" 
+                        style="margin-right: -12px; margin-left: -12px; margin-top: -10px; 
+                        border-top-right-radius: 10px;border-top-left-radius: 10px;
+                        background-color: rgb(5, 55, 18);
+                        color: white; font-family:'Montserrat', sans-serif ;
+                        "> 
+                        <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>  Top Rated Products  <i class="bi bi-star-fill"></i> <i class="bi bi-star-fill"></i>  </h2>
+                        <h4 class="d-block d-lg-none mb-3 text-center p-1 rounded-lg"
+                        style="margin-right: -12px; margin-left: -12px; margin-top: -20px; 
+                        border-top-right-radius: 10px;border-top-left-radius: 10px;
+                        background-color: rgb(5, 55, 18);
+                        color: white; font-family:'Montserrat', sans-serif ;
+                        "  
+                        > <i class="bi bi-cash-stack"></i>  Top Rated Products  <i class="bi bi-cash-stack"></i>  </h4>
                         <div class="row product-grid-4" style="margin-bottom: 4px;">
                             
                             {% for p in top_rated_products|slice:":5" %}
@@ -310,12 +327,24 @@
                         </div>
                         {% endif %}
                     </section>
-
+                    
 
                     <section class="section-padding mb-8" style="background-color: #bce3c9; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 8px;">
                         {% if top_sold_products %}
-                        <h2 class="d-none d-lg-block mb-3"></i>Top Selling Products  <i class="bi bi-currency-dollar"></i></i> </h2>
-                        <h4 class="d-block d-lg-none mb-3"></i>Top Selling Products <i class="bi bi-currency-dollar"></i> </i> </h4>
+                        <h2 class="d-none d-lg-block mb-3 text-center p-1 rounded-lg" 
+                        style="margin-right: -12px; margin-left: -12px; margin-top: -10px; 
+                        border-top-right-radius: 10px;border-top-left-radius: 10px;
+                        background-color: rgb(241, 25, 25);
+                        color: white; font-family:'Montserrat', sans-serif ;
+                        "> 
+                        <i class="bi bi-cash-stack"></i> <i class="bi bi-cash-stack"></i>  Top Selling Products  <i class="bi bi-cash-stack"></i> <i class="bi bi-cash-stack"></i>  </h2>
+                        <h4 class="d-block d-lg-none mb-3 text-center p-1 rounded-lg"
+                        style="margin-right: -12px; margin-left: -12px; margin-top: -20px; 
+                        border-top-right-radius: 10px;border-top-left-radius: 10px;
+                        background-color: rgb(228, 14, 14);
+                        color: white; font-family:'Montserrat', sans-serif ;
+                        "  
+                        > <i class="bi bi-cash-stack"></i>  Top Selling Products  <i class="bi bi-cash-stack"></i>  </h4>
                         <div class="row product-grid-4" style="margin-bottom: 4px;">
                             
                             {% for p in top_sold_products %}
@@ -386,8 +415,20 @@
                     </section>
                     <section class="section-padding mb-8" style="background-color: #bce3c9; padding-left: 12px; padding-right: 12px; border-top-left-radius: 10px; border-top-right-radius: 10px; margin-top: 8px;">
                         
-                        <h2 class="d-none d-lg-block mb-3">Home, Kitchen and Small Appliances  </h2>
-                        <h4 class="d-block d-lg-none mb-3">Home, Kitchen and Small Appliances  </h4>
+                        <h2 class="d-none d-lg-block mb-3 text-center p-1 rounded-lg" 
+                        style="margin-right: -12px; margin-left: -12px; margin-top: -10px; 
+                        border-top-right-radius: 10px;border-top-left-radius: 10px;
+                        background-color: rgb(4, 133, 24);
+                        color: rgb(41, 38, 38); font-family:'Montserrat', sans-serif ;
+                        "> 
+                        Home, Kitchen and Small Appliances </h2>
+                        <h5 class="d-block d-lg-none mb-3 text-center p-1 rounded-lg"
+                        style="margin-right: -12px; margin-left: -12px; margin-top: -20px; 
+                        border-top-right-radius: 10px;border-top-left-radius: 10px;
+                        background-color: rgb(4, 133, 24);
+                        color: rgb(41, 38, 38); font-family:'Montserrat', sans-serif ;
+                        "  
+                        >  Home, Kitchen and Small Appliances </h5>
                         {% if categories %}
                                     
                                 <div class="row product-grid-4">
@@ -396,7 +437,7 @@
                                 
                                     {% if c.title == "Home & Living"%}
                                     
-                                    {% for p in c.get_published_products|slice:":5" %}
+                                    {% for p in c.get_published_products|slice:"-8:" %}
                                     <div class="col-lg-1-5 col-md-4 col-6 col-sm-6" style="
                                     padding-left: 2px;
                                     padding-right: 2px;

@@ -68,7 +68,7 @@ class Category(models.Model):
         return Product.objects.filter(
             mini_subcategory__subcategory__category=self,
             product_status="published"
-        )[:limit]
+        ).order_by("-id")[:limit]
     
     def __str__(self):
         return self.title
