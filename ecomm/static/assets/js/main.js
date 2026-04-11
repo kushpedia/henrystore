@@ -749,7 +749,7 @@
 
 // Simplified WhatsApp inquiry function
 function sendWhatsAppInquiry(title, pid, price, url) {
-    const yourNumber = "254703443827"; // Your WhatsApp number
+    const yourNumber = "254707485760"; // Your WhatsApp number
     
     // Get selected variations if they exist
     const selectedColor = document.querySelector('.color-option.active')?.getAttribute('data-color-name') || '';
@@ -758,17 +758,15 @@ function sendWhatsAppInquiry(title, pid, price, url) {
     
     // Build clean message
     let message = `🛍️*Product Inquiry*\n\n`;
-    message += `👋 *Hi, I saw this on your website and would like to know if it's available:* \n\n`;
-    message += `📦 *Product:* ${title}\n`;
-    message += `🔗 * Product Link:* ${url}\n`;    
-    message += `💰 *Price:* Ksh ${price}\n`;
+    message += `👋 Hi, I would like to know if This is available. \n\n`;
+    message += `📦 *Product:* ${title}\n`;      
+    message += `💰 *Price per Item:* Ksh ${price}\n`;
     message += `🔢 *Quantity:* ${quantity}\n`;
-    
     if (selectedColor) message += `🎨 *Color:* ${selectedColor}\n`;
     if (selectedSize) message += `📏 *Size:* ${selectedSize}\n`;
-    
+    message += `🔗 *:* ${url}\n`;  
     message += `\n🙏 *Thank you:*\n`;
-    
+    // console.log(message)
     // Open WhatsApp
     window.open(`https://wa.me/${yourNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
