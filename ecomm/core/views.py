@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+import urllib.parse
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 import stripe
@@ -847,8 +848,12 @@ def add_to_cart(request):
     request.session['cart_data_obj'] = cart_data
     
     # Calculate total items count
-    total_items = sum(item['qty'] for item in cart_data.values())
-    
+    total_items = 0
+    for item in cart_data.values():
+        try:
+            total_items += int(item.get('qty', 0))
+        except (ValueError, TypeError):
+            continue
     return JsonResponse({
         "status": "success",
         "data": cart_data,
@@ -857,7 +862,7 @@ def add_to_cart(request):
     })
 
 
-@login_required
+
 def cart_view(request):
     cart_total_amount = 0
     
@@ -896,6 +901,84 @@ def cart_view(request):
         messages.warning(request, "Your cart is empty")
         return redirect("core:index")
 
+
+
+
+def whatsapp_checkout(request):
+    if 'cart_data_obj' not in request.session:
+        return redirect("core:index")
+
+    cart_data = request.session['cart_data_obj']
+    base_url = "https://kstores.co.ke"
+    # Header
+    message = "🛍️ *KStores Order Request*\n"
+    message += "━━━━━━━━━━━━━━━\n\n"
+    message += f"🌐 {base_url}\n\n"
+
+
+    total = 0
+    item_count = 0
+    total_items = 0
+    for item in cart_data.values():
+        try:
+            total_items += int(item.get('qty', 0))
+        except (ValueError, TypeError):
+            continue
+
+    for index, (product_id, item) in enumerate(cart_data.items(), start=1):
+        title = item.get('original_title') or item.get('title')
+        qty = int(item.get('qty', 1))
+        price = float(str(item.get('price')).replace('Ksh', '').replace(',', '').strip())
+
+        subtotal = price * qty
+        total += subtotal
+        item_count += qty
+
+        color = item.get('color')
+        size = item.get('size')
+
+        # Product block
+        message += f"*{index}. {title}*\n"
+        message += f"   🧮 Qty: {qty}\n"
+
+        if color and color != "none":
+            message += f"   🎨 Color: {color}\n"
+
+        if size and size != "none":
+            message += f"   📏 Size: {size}\n"
+
+        message += f"   💵 Subtotal: *Ksh {subtotal:,.0f}*\n"
+        message += "   ───────────────\n\n"
+
+    # Summary
+    message += "🧾 *ORDER SUMMARY*\n"
+    message += "━━━━━━━━━━━━━━━\n"
+    message += f"🛒 Items: {item_count}\n"
+    message += f"💰 Total: *Ksh {total:,.0f}*\n\n"
+
+    # Customer info (optional but powerful)
+    if request.user.is_authenticated:
+        message += "👤 *Customer Details*\n"
+        message += f"Name: {request.user.username}\n"
+        message += f"Email: {request.user.email}\n\n"
+
+    # CTA / Closing
+    message += "📍 *Delivery Details*\n"
+    message += "Kindly share your:\n"
+    message += "• Location / Address\n"
+    message += "• Preferred delivery time\n\n"
+
+    message += "⚡ *Fast confirmation via WhatsApp*\n"
+    message += "Thank you for shopping with us kstores.co.ke! 🙌"
+
+    # Encode message
+    encoded_message = urllib.parse.quote(message)
+
+    phone_number = "254707485760"
+
+    whatsapp_url = f"https://wa.me/{phone_number}?text={encoded_message}"
+
+    return redirect(whatsapp_url)
 
 
 def delete_item_from_cart(request):

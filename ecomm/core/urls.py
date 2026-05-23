@@ -67,7 +67,7 @@ urlpatterns = [
 
 	path("save_checkout_info/", views.save_checkout_info, name="save_checkout_info"),
 	path('about/', views.about_us, name='about'),
-
+	path('whatsapp-checkout/', views.whatsapp_checkout, name='whatsapp-checkout'),
 	
 
     ]

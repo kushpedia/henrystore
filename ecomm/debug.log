@@ -1,0 +1,412 @@
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /favicon.ico
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /favicon.ico
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Internal Server Error: /whatsapp-checkout/
+Traceback (most recent call last):
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\ecomm\core\views.py", line 944, in whatsapp_checkout
+    return redirect("core:whatsapp_url")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 51, in redirect
+    resolve_url(to, *args, **kwargs),
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\shortcuts.py", line 184, in resolve_url
+    return reverse(to, args=args, kwargs=kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\base.py", line 98, in reverse
+    resolved_url = resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ecommerce\env\Lib\site-packages\django\urls\resolvers.py", line 831, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'whatsapp_url' not found. 'whatsapp_url' is not a valid view function or pattern name.
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /favicon.ico
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/product-images/3_23.jpg
+Not Found: /media/product-images/2_22.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/product-images/3_23.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/product-images/2_22.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/product-images/3_23.jpg
+Not Found: /media/product-images/2_22.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/product-images/2_22.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/product-images/3_23.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/1_34.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/product-images/5_5.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/variation-images/iQp3WOYu.png
+Not Found: /media/variation-images/3_19.jpg
+Not Found: /media/variation-images/airpods4.png
+Not Found: /media/variation-images/1703190601277a6861d3636bf4efe87e613dbd285d838.webp
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/variation-images/iQp3WOYu.png
+Not Found: /media/product-images/5_5.jpg
+Not Found: /media/variation-images/3_19.jpg
+Not Found: /media/variation-images/1703190601277a6861d3636bf4efe87e613dbd285d838.webp
+Not Found: /media/variation-images/airpods4.png
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/variation-images/iQp3WOYu.png
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/variation-images/airpods4.png
+Not Found: /media/variation-images/1703190601277a6861d3636bf4efe87e613dbd285d838.webp
+Not Found: /media/variation-images/3_19.jpg
+Not Found: /media/product-images/5_5.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/user_1/1_29.jpg
+Not Found: /media/user_1/LNRS_Provider-Circle_png_dDPOUk5.png
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+D:\ecommerce\ecomm\core\views.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /media/user_1/1_29.jpg
+Watching for file changes with StatReloader
+Not Found: /new-arrivals/
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/fashion.jpg
+Not Found: /media/category/1_34.jpg
+Not Found: /media/category/home_and_living.jpg
+Not Found: /media/category/beauty.jpg
+Not Found: /media/category/electronics_Z21KR7M.jpg
