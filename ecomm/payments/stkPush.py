@@ -116,7 +116,7 @@ def initiate_stk_push(request):
         
         # M-Pesa API configuration
         process_request_url = settings.MPESA_PROCESS_REQUEST_URL
-        callback_url = settings.MPESA_CALLBACK_URL
+        callback_url = 'https://9bf5-2c0f-fe38-220e-d3e7-784a-ba67-59a7-2254.ngrok-free.app/payments/callback/'
         passkey = settings.MPESA_PASS_KEY
         business_short_code = settings.MPESA_SHORT_CODE
         

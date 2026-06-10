@@ -6,12 +6,12 @@
     <meta charset="utf-8" />
     <title>Henry Online Stores</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="description" content="" />
+    <meta name="description" content="Kenya's trusted online marketplace" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta property="og:title" content="" />
-    <meta property="og:type" content="" />
-    <meta property="og:url" content="" />
-    <meta property="og:image" content="" />
+    <meta property="og:title" content="Henry Online Stores" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kstores.co.ke" />
+    <meta property="og:image" content="{% static 'assets/imgs/page/social-preview.jpg' %}" />
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/imgs/page/Flogo.png' %}" />
     <!-- Template CSS -->
@@ -139,9 +139,147 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
+<!-- Mobile Bottom Tab Bar Styles -->
+<style>
+    .mobile-bottom-tab-bar {
+        display: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+        border-radius: 20px 20px 0 0;
+        z-index: 1050;
+        padding: 8px 16px 12px;
+    }
+
+    .tab-bar-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: #0a361e;
+        font-size: 12px;
+        transition: all 0.2s ease;
+        padding: 6px 0 4px;
+        flex: 1;
+        border-radius: 10px;
+        gap: 4px;
+    }
+
+    .tab-item i {
+        font-size: 22px;
+        margin-bottom: 2px;
+    }
+
+    .tab-item span {
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .tab-item.active {
+        color: #711705;
+        background: rgba(89, 22, 8, 0.08);
+    }
+
+    .tab-cart-badge {
+        position: relative;
+    }
+
+    .cart-badge-count {
+        position: absolute;
+        top: -6px;
+        right: -12px;
+        background-color: #09a316;
+        color: white;
+        border-radius: 50%;
+        font-size: 10px;
+        font-weight: bold;
+        min-width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 4px;
+    }
+
+    @media (max-width: 991.98px) {
+        body {
+            padding-bottom: 68px !important;
+        }
+        .mobile-bottom-tab-bar {
+            display: block;
+        }
+    }
+</style>
+<!-- Mobile Bottom Tab Bar scripts -->
+<script>
+    function updateMobileCartBadge() {
+        const cartBadge = document.querySelector('.mobile-cart-badge-count');
+        const originalCartCount = document.querySelector('.cart-items-count');
+        if (cartBadge && originalCartCount) {
+            let count = originalCartCount.innerText || '0';
+            cartBadge.innerText = count;
+            cartBadge.style.display = count === '0' ? 'none' : 'flex';
+        }
+    }
+    
+    function setActiveMobileTab() {
+        const currentPath = window.location.pathname;
+        const tabs = document.querySelectorAll('.tab-item');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        
+        if (currentPath === '/' || currentPath === '') {
+            document.querySelector('.tab-item[href*="index"]')?.classList.add('active');
+        } else if (currentPath.includes('products') || currentPath.includes('shop')) {
+            document.querySelector('.tab-item[href*="products"]')?.classList.add('active');
+        } else if (currentPath.includes('cart')) {
+            document.querySelector('.tab-item[href*="cart"]')?.classList.add('active');
+        } else if (currentPath.includes('category')) {
+            document.querySelector('.tab-item[href*="category"]')?.classList.add('active');
+        } else if (currentPath.includes('dashboard')) {
+            document.querySelector('.tab-item[href*="dashboard"]')?.classList.add('active');
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        updateMobileCartBadge();
+        setActiveMobileTab();
+        
+        const cartCountElement = document.querySelector('.cart-items-count');
+        if (cartCountElement) {
+            const observer = new MutationObserver(function() {
+                updateMobileCartBadge();
+            });
+            observer.observe(cartCountElement, { childList: true, characterData: true, subtree: true });
+        }
+    });
+</script>
+
+
+
 
 <meta name="google-site-verification" content="UqQQORHSfZXBRdyYnk40qO7xlXkD8qChq-FktJ_QIMo" />
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ3D4WGTWQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RQ3D4WGTWQ');
+</script>
 
 <body>
     <!-- Quick view -->
@@ -177,10 +315,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                             <h3 class="title-detail">
                                 <a href="#" class="text-heading" id="modal-title"></a>
-                            </h3>
-
-                            
-                            </div>
+                            </h3>                            
+                        </div>
 
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
@@ -237,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
                                     <li>100% Secure delivery without contacting the courier</li>
-                                    <li>Supper Value Deals - Save more with coupons</li>
+                                    <li>Super Value Deals - Save more with coupons</li>
                                     <li>Pay on delivery around Nairobi</li>
                                 </ul>
                             </div>
@@ -268,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="search-style-2">
                             <form action="{% url 'core:search' %}" method="GET">
                                 
-                                <input type="text" placeholder="Search for items..." name="q" />
+                                <input type="text" placeholder="Search for products, brands, and categories..." name="q" />
                                 <button class="material-symbols-outlined" type="submit"><span class="material-symbols-outlined">search</span></button>
 
                             </form>
@@ -279,14 +415,14 @@ document.addEventListener('DOMContentLoaded', function() {
                                 
                                 <div class="header-action-icon-2">
                                     <a href="{% url 'core:wishlist' %}">
-                                        <img class="svgInject" alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-heart.svg' %}" />
+                                        <img class="svgInject" alt="kstores" src="{% static 'assets/imgs/theme/icons/icon-heart.svg' %}" />
                                         <span class="pro-count blue">{{wishlist.count}}</span>
                                     </a>
                                     <a href="{% url 'core:wishlist' %}"><span class="lable">Wishlist</span></a>
                                 </div>
                                 <div class="header-action-icon-2">
                                     <a class="mini-cart-icon" href="{% url 'core:cart' %}">
-                                        <img alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}" />
+                                        <img alt="kstores" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}" />
                                         <span class="pro-count blue cart-items-count">{{ request.session.cart_data_obj|length }}</span>
                                     </a>
                                     <a href="{% url 'core:cart' %}"><span class="lable">Cart</span></a>
@@ -346,7 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <ul>
                                         {% for c in categories %}
                                         <li>
-                                            <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{ c.image.url }}" alt="" />{{ c.title }}</a>
+                                            <a href="{% url 'core:category-product-list' c.cid %}"> <img loading="lazy" src="{{ c.image.url }}" alt="Henry Online Stores Logo" />{{ c.title }}</a>
                                         </li>
                                             {% endfor %}
                                         
@@ -379,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
                                 <ul>
-                                    
+                                    <li>
                                         <a class="active" href="{% url 'core:index' %}">Home </a>
                                         
                                     </li>
@@ -485,13 +621,13 @@ document.addEventListener('DOMContentLoaded', function() {
                             <div class="header-action-icon-2">
                                 <a href="{% url 'core:wishlist' %}">
                                 
-                                    <img alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-heart.svg' %}" />
+                                    <img alt="kstores" src="{% static 'assets/imgs/theme/icons/icon-heart.svg' %}" />
                                     <span class="pro-count white">{{wishlist.count}}</span>
                                 </a>
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="{% url 'core:cart' %}">
-                                    <img alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}" />
+                                    <img alt="kstores" src="{% static 'assets/imgs/theme/icons/icon-cart.svg' %}" />
                                     <span class="pro-count white cart-items-count">{{ request.session.cart_data_obj|length }}</span>
                                 </a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
@@ -717,7 +853,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <a href="{% url 'core:product-detail' product.pid %}" class="recent-product-link">
                             <div class="product-image-container">
                                 {% if product.image %}
-                                <img src="{{ product.image.url }}" alt="{{ product.title }}" class="recent-product-img">
+                                <img loading="lazy" src="{{ product.image.url }}" alt="{{ product.title }}" class="recent-product-img">
                                 {% if product.old_price and product.old_price > product.price %}
                                 <span class="discount-badge">
                                     {{ product.get_precentage }}% OFF
@@ -782,9 +918,9 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <h2 class="mb-20">
                                     Get your daily <br /> needs from our shop
                                 </h2>
-                                <p class="mb-45">Start You'r Daily Shopping with <span class="text-brand">Henry Online Stores</span></p>
+                                <p class="mb-45">Start Your Daily Shopping with <span class="text-brand">Henry Online Stores</span></p>
                                 <form class="form-subcriber d-flex">
-                                    <input type="email" placeholder="Your emaill address" />
+                                    <input type="email" placeholder="Your email address" />
                                     <button class="btn" type="submit">Subscribe</button>
                                 </form>
                             </div>
@@ -906,7 +1042,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <li><a href="#">Delivery Information</a></li>
                             <li><a href="{% url 'corporate:privacy-policy' %}">Privacy Policy</a></li>
                             <li><a href="{% url 'corporate:terms-conditions' %}">Terms &amp; Conditions</a></li>
-                            <li><a href="{% url 'corporate:return-policy' %}">Return Policy</a></li>
+                            <li><a href="{% url 'corporate:return-policy' %}">Return & refund Policy</a></li>
                             
                             <li><a href="{% url 'core:contact' %}">Contact Us</a></li>                        
                             
@@ -1054,6 +1190,41 @@ document.addEventListener('DOMContentLoaded', function() {
         // Insert it into the element with id "current-year"
         document.getElementById('current-year').textContent = currentYear;
     </script>
+
+
+
+<!-- Mobile Bottom Tab Bar -->
+<div class="mobile-bottom-tab-bar">
+    <div class="tab-bar-container">
+        <a href="{% url 'core:index' %}" class="tab-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        
+        <a href="{% url 'core:product-list' %}" class="tab-item">
+            <i class="fas fa-store"></i>
+            <span>Products</span>
+        </a>
+        
+        <a href="{% url 'core:cart' %}" class="tab-item tab-cart-badge">
+            <div style="position: relative;">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge-count mobile-cart-badge-count" style="display: none;">0</span>
+            </div>
+            <span>Cart</span>
+        </a>
+        
+        <a href="{% url 'core:category-list' %}" class="tab-item">
+            <i class="fas fa-th-large"></i>
+            <span>categories</span>
+        </a>
+        
+        <a href="{% url 'core:dashboard' %}" class="tab-item">
+            <i class="fas fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</div>
 </body>
 
 </html>

@@ -11,19 +11,17 @@
                         <div class="home-slide-cover mt-30">
                             <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
                                 
-                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/slider21.png' %})">
+                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/Kstores.jpg' %})">
                                     
                                 </div>
                                 
-                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/slider17.png' %})">
-                                    <div class="slider-content">
-                                        <h1 class="display-2 mb-40 text-red-100">
-                                            Don’t miss <br /> Amazing Deals
-                                        </h1>
-                                        
-                                    </div>
+                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/Kstores3.jpg' %})">
+                                    <div class="slider-content"></div>
                                 </div>
-                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/deals.png' %})">
+                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/Kstores5.jpg' %})">
+                                    <div class="slider-content"></div>
+                                </div>
+                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/Kstores4.jpg' %})">
                                     
                                 </div>
                                 
@@ -37,28 +35,29 @@
                         <div class="slider">
                             <div class="slides">
                                 <div class="slide">
-                                <img src="{% static 'assets/imgs/slider/mobile1.png' %}" alt="Slide 1">
+                                <img src="{% static 'assets/imgs/slider/mobile4.png' %}" alt="Slide 1">
                                 </div>
                                 <div class="slide">
-                                <img src="{% static 'assets/imgs/slider/mobile2.png' %}" alt="Slide 2">
+                                <img src="{% static 'assets/imgs/slider/mobile5.png' %}" alt="Slide 2">
                                 </div>
                                 <div class="slide">
-                                    <img src="{% static 'assets/imgs/slider/del2.png' %}" alt="Slide 1">
+                                    <img src="{% static 'assets/imgs/slider/mobile7.png' %}" alt="Slide 1">
                                 </div>
                                 <div class="slide">
-                                    <img src="{% static 'assets/imgs/slider/mobile3.png' %}" alt="Slide 2">
-                                    </div>
-                                
+                                    <img src="{% static 'assets/imgs/slider/mobile6.png' %}" alt="Slide 2">
+                                </div>
+                                <div class="slide">
+                                    <img src="{% static 'assets/imgs/slider/mobile8.png' %}" alt="Slide 2">
+                                </div>                                
                             </div>
                             </div>
-                        
                         <!-- Horizontal Items -->
                         <h5 class="d-block d-lg-none" style="margin-left: 64px; margin-bottom: 4px; margin-top: 8px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Top Selling Products</h5>
 
                             <div class="item-scroll">
                                 {% for product in top_sold_products %}
                             <a href="{% url 'core:product-detail' product.pid %}" class="item">
-                                <img src="{{product.image.url}}" alt="{{product.title}}">
+                                <img loading= "lazy" src="{{product.image.url}}" alt="{{product.title}}">
                                 <p>{{product.title|truncatechars:20}}</p>
                             </a>
                             {% endfor %}
@@ -93,7 +92,7 @@
                             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                                 <div class="row product-grid-4">
                                     {% for p in products|slice:":10" %}
-                                    <div class="col-lg-1-5 col-md-4 col-6 col-sm-6" 
+                                    <div class="col-lg-1-4 col-md-4 col-6 col-sm-6" 
                                     style="
                                     padding-left: 2px;
                                     padding-right: 2px;
@@ -107,8 +106,8 @@
                                         ">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="{% url 'core:product-detail' p.pid %}">
-                                                        <img class="default-img" src="{{ p.image.url }}" alt="" />
-                                                        <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                                        <img loading= "lazy" class="default-img" src="{{ p.image.url }}" alt="" />
+                                                        <img loading= "lazy" class="hover-img" src="{{ p.image.url }}" alt="" />
                                                     </a>
                                                 </div>
                                                 <div class="product-action-1">                                                    
@@ -274,8 +273,8 @@
                                 ">
                                         <div class="product-img product-img-zoom">
                                             <a href="{% url 'core:product-detail' p.pid %}">
-                                                <img class="default-img" src="{{ p.image.url }}" alt="" />
-                                                <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                                <img loading= "lazy" class="default-img" src="{{ p.image.url }}" alt="" />
+                                                <img loading= "lazy" class="hover-img" src="{{ p.image.url }}" alt="" />
                                             </a>
                                         </div>
                                         
@@ -360,8 +359,8 @@
                                 ">
                                         <div class="product-img product-img-zoom">
                                             <a href="{% url 'core:product-detail' p.pid %}">
-                                                <img class="default-img" src="{{ p.image.url }}" alt="" />
-                                                <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                                <img loading= "lazy" class="default-img" src="{{ p.image.url }}" alt="" />
+                                                <img loading= "lazy" class="hover-img" src="{{ p.image.url }}" alt="" />
                                             </a>
                                         </div>
                                         
@@ -450,8 +449,8 @@
                                         ">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="{% url 'core:product-detail' p.pid %}">
-                                                        <img class="default-img" src="{{ p.image.url }}" alt="" />
-                                                        <img class="hover-img" src="{{ p.image.url }}" alt="" />
+                                                        <img loading= "lazy" class="default-img" src="{{ p.image.url }}" alt="" />
+                                                        <img loading= "lazy" class="hover-img" src="{{ p.image.url }}" alt="" />
                                                     </a>
                                                 </div>
                                                 
@@ -524,7 +523,7 @@
                         <ul>
                             {% for c in categories %}
                             <li>
-                                <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.product_count}}</span>
+                                <a href="{% url 'core:category-product-list' c.cid %}"> <img loading="lazy" src="{{c.image.url}}" alt="" />{{c.title}}</a><span class="count">{{c.product_count}}</span>
                             </li>
                             {% endfor %}
                         </ul>
@@ -537,7 +536,7 @@
                         {% for p in new_products %}
                         <div class="single-post clearfix">
                             <div class="image">
-                                <img src="{{p.image.url}}" alt="#" />
+                                <img loading= "lazy" src="{{p.image.url}}" alt="#" />
                             </div>
                             <div class="content pt-10">
                                 <h5><a href="{% url 'core:product-detail' p.pid %}">{{p.title|truncatechars:20}}</a></h5>
@@ -565,7 +564,7 @@
     {% for product in top_sold_products %}
                                 <article class="row align-items-center hover-up">
                                     <figure class="col-md-4 mb-0">
-                                        <a href="{% url 'core:product-detail' product.pid %}"><img src="{{ product.image.url }}" alt="" /></a>
+                                        <a href="{% url 'core:product-detail' product.pid %}"><img loading="lazy" src="{{ product.image.url }}" alt="" /></a>
                                     </figure>
     
                                     <div class="col-md-8 mb-0">
@@ -624,7 +623,7 @@
                                 {% for p in top_rated_products%}
                                 <article class="row align-items-center hover-up">
                                     <figure class="col-md-4 mb-0">
-                                        <a href="{% url 'core:product-detail' p.pid %}"><img src="{{ p.image.url }}" alt="" /></a>
+                                        <a href="{% url 'core:product-detail' p.pid %}"><img loading= "lazy" src="{{ p.image.url }}" alt="" /></a>
                                     </figure>
                                     <div class="col-md-8 mb-0">
                                         <h6>
@@ -683,7 +682,7 @@
                                     <div class="mobile-product-item">
                                         <a href="{% url 'core:product-detail' product.pid %}" class="row g-2 align-items-center">
                                             <div class="col-4">
-                                                <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.title }}">
+                                                <img loading= "lazy" src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.title }}">
                                             </div>
                                             <div class="col-8">
                                                 <h6 class="mb-1 text-truncate">{{ product.title|truncatechars:20 }}</h6>
@@ -728,7 +727,7 @@
                                     <div class="mobile-product-item">
                                         <a href="{% url 'core:product-detail' p.pid %}" class="row g-2 align-items-center">
                                             <div class="col-4">
-                                                <img src="{{ p.image.url }}" class="img-fluid rounded" alt="{{ p.title }}">
+                                                <img loading= "lazy" src="{{ p.image.url }}" class="img-fluid rounded" alt="{{ p.title }}">
                                             </div>
                                             <div class="col-8">
                                                 <h6 class="mb-1 text-truncate">{{ p.title|truncatechars:20 }}</h6>
@@ -773,7 +772,7 @@
                                     <div class="mobile-product-item">
                                         <a href="{% url 'core:product-detail' p.pid %}" class="row g-2 align-items-center">
                                             <div class="col-4">
-                                                <img src="{{ p.image.url }}" class="img-fluid rounded" alt="{{ p.title }}">
+                                                <img loading= "lazy" src="{{ p.image.url }}" class="img-fluid rounded" alt="{{ p.title }}">
                                             </div>
                                             <div class="col-8">
                                                 <h6 class="mb-1 text-truncate">{{ p.title|truncatechars:20 }}</h6>
