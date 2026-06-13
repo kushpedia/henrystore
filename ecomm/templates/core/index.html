@@ -2,7 +2,139 @@
 {% load humanize %}
 {% load static %}
 {% block content %}
-	
+
+<style>
+    .oraimo-section {
+        margin: 16px 0;
+        padding: 8px;
+    }
+
+    .section-header-link {
+        text-decoration: none;
+        display: block;
+        margin-left: 64px;
+        margin-bottom: 8px;
+        margin-top: 12px;
+    }
+
+    .brand-title {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, #2e7d32, #1b5e20);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        display: inline-block;
+        letter-spacing: 1px;
+    }
+
+    .brand-title::before {
+        content: "⚡";
+        margin-right: 6px;
+        background: none;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+        color: #f9a825;
+    }
+
+    .product-scroll-container {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 16px 20px;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        cursor: grab;
+    }
+
+    .product-scroll-container::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .product-scroll-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .product-scroll-container::-webkit-scrollbar-thumb {
+        background: linear-gradient(90deg, #2e7d32, #66bb6a);
+        border-radius: 10px;
+    }
+
+    .product-card {
+        flex: 0 0 auto;
+        width: 180px;
+        text-decoration: none;
+        background: white;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(46, 125, 50, 0.1);
+    }
+
+    .product-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(46, 125, 50, 0.2);
+        border-color: #2e7d32;
+    }
+
+    .product-image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 180px;
+        overflow: hidden;
+        background: #f9f9f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img {
+        transform: scale(1.05);
+    }
+
+    .product-badge {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+        display: inline-block;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #2e7d32, #1b5e20);
+        padding: 5px 12px;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(2px);
+    }
+
+    .product-info {
+        padding: 12px;
+        text-align: center;
+    }
+
+    .product-title {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin: 0;
+        line-height: 1.4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
     <main class="main">
         <div class="container mb-30">
             <div class="row flex-row-reverse">
@@ -63,6 +195,27 @@
                             {% endfor %}
                             
                             </div>
+
+                            <div class="oraimo-section">
+                                <a href="#" class="section-header-link d-block d-lg-none">
+                                    <h3 class="brand-title">Oraimo Products</h3>
+                                </a>
+                            
+                                <div class="product-scroll-container">
+                                    {% for product in oraimo_products %}
+                                    <a href="{% url 'core:product-detail' product.pid %}" class="product-card">
+                                        <div class="product-image-wrapper">
+                                            <img loading="lazy" src="{{ product.image.url }}" alt="{{ product.title }}" class="product-img">
+                                            <span class="product-badge">Oraimo</span>
+                                        </div>
+                                        <div class="product-info">
+                                            <p class="product-title">{{ product.title|truncatechars:25 }}</p>
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
                         
                         </section>
                     
@@ -91,7 +244,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                                 <div class="row product-grid-4">
-                                    {% for p in products|slice:":10" %}
+                                    {% for p in products|slice:":12" %}
                                     <div class="col-lg-1-4 col-md-4 col-6 col-sm-6" 
                                     style="
                                     padding-left: 2px;

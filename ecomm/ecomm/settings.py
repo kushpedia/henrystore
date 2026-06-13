@@ -36,7 +36,7 @@ DEBUG = True
 # DEBUG = env.bool("DEBUG", default=False)
 
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
+ALLOWED_HOSTS = ['localhost','99bc-2c0f-fe38-21a1-b4ab-781c-c2a5-4152-822b.ngrok-free.app','127.0.0.1']
 SITE_DOMAIN = env.str("SITE_DOMAIN", default="http://localhost:8080")
 
 # Application definition

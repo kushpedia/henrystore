@@ -11,6 +11,7 @@ def default(request):
     categories = Category.objects.annotate(
         product_count=Count('subcategories__mini_subcategories__products')
     ).all()
+    oraimo_products = Product.objects.filter(type='Oraimo').order_by("-id")[:6]
     vendors = Vendor.objects.all()
     new_products = Product.objects.all().order_by("-id")[:6]
     try:
@@ -51,6 +52,7 @@ def default(request):
         'min_max_price':min_max_price,
         'new_products':new_products,
         'deals_products':deals_products,
+        'oraimo_products':oraimo_products,
     }
 
 def cart_context(request):
