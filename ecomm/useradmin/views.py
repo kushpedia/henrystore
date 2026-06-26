@@ -1085,7 +1085,7 @@ def contact_messages(request):
     
     # Pagination
     page = request.GET.get('page', 1)
-    paginator = Paginator(messages, 2)
+    paginator = Paginator(messages, 20)
     
     try:
         page_obj = paginator.page(page)

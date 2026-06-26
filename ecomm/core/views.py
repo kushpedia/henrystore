@@ -31,7 +31,7 @@ from decimal import Decimal
 from django.template.loader import render_to_string
 from .utils.email_utils import ReturnEmailService
 import logging
-
+from django.core.mail import EmailMessage, send_mail
 
 
 logger = logging.getLogger(__name__)
@@ -1620,6 +1620,13 @@ def ajax_contact_form(request):
         "bool": True,
         "message": "Message Sent Successfully, We will get back to you soon."
     }
+
+    subject = "Website Customer Enquiry"
+    message = f"Hello! \n Customer Name: {full_name} !! \nHas Sent an Enquiry via website\n. Login to contact messages page and revert to the customer\n\nThanking You"        
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to_list = ["kstoreske@gmail.com"]
+
+    send_mail(subject, message, from_email, to_list, fail_silently=True) 
 
     return JsonResponse({"data":data})
 
